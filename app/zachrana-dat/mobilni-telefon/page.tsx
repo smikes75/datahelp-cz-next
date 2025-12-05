@@ -3,14 +3,14 @@ import { MobilePhoneRecoveryClient } from './MobilePhoneRecoveryClient';
 
 export const metadata: Metadata = {
   title: 'Záchrana dat z mobilu | Bezpečná obnova | Android | DataHelp',
-  description: 'Profesionální záchrana dat z Android telefonů a tabletů. Speciální technologie pro dekryptaci a obnovu dat. Bezplatná diagnostika.',
+  description: 'Záchrana dat z mobilu – Android telefony i tablety. Speciální dekryptace, obnova po poškození. Ztracená data? Zachráníme je. Volejte odborníky 24/7!',
   alternates: {
     canonical: '/zachrana-dat/mobilni-telefon',
   },
   keywords: 'záchrana dat mobil, obnova dat android, záchrana dat telefon, obnova android zařízení',
   openGraph: {
     title: 'Záchrana dat z mobilu | DataHelp.cz',
-    description: 'Profesionální záchrana dat z Android telefonů a tabletů. Speciální technologie pro dekryptaci a obnovu dat.',
+    description: 'Záchrana dat z mobilu – Android telefony i tablety. Speciální dekryptace, obnova po poškození. Ztracená data? Zachráníme je.',
     url: 'https://www.datahelp.cz/zachrana-dat/mobilni-telefon',
     siteName: 'DataHelp.cz',
     locale: 'cs_CZ',

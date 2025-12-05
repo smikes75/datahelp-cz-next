@@ -8,13 +8,13 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Profesionální záchrana dat | DataHelp.cz',
-  description: 'Záchrana dat z HDD, SSD, RAID a mobilních zařízení. Více než 25 let zkušeností, úspěšnost 95%. Bezplatná diagnostika a svoz po celé ČR.',
+  description: 'Záchrana dat z HDD, SSD, RAID – úspěšnost 95%, 25+ let zkušeností. Bezplatná diagnostika i svoz po celé ČR. Zachráníme vaše data. Volejte 24/7!',
   alternates: {
     canonical: 'https://www.datahelp.cz/',
   },
   openGraph: {
     title: 'Profesionální záchrana dat | DataHelp.cz',
-    description: 'Záchrana dat z HDD, SSD, RAID a mobilních zařízení. Více než 25 let zkušeností, úspěšnost 95%.',
+    description: 'Záchrana dat z HDD, SSD, RAID – úspěšnost 95%, 25+ let zkušeností. Bezplatná diagnostika i svoz po celé ČR.',
     url: 'https://www.datahelp.cz/',
     siteName: 'DataHelp.cz',
     locale: 'cs_CZ',

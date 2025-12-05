@@ -16,13 +16,13 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Magazín | DataHelp.cz',
-  description: 'Odborné články, novinky a tipy ze světa záchrany dat. Zálohování, první pomoc, technologie.',
+  description: 'Blog o záchraně dat – jak zálohovat, první pomoc při ztrátě dat, technologie HDD/SSD/RAID. Tipy od expertů s 25+ lety zkušeností. Čtěte a chraňte svá data!',
   alternates: {
     canonical: 'https://www.datahelp.cz/clanky',
   },
   openGraph: {
     title: 'Magazín | DataHelp.cz',
-    description: 'Odborné články, novinky a tipy ze světa záchrany dat. Zálohování, první pomoc, technologie.',
+    description: 'Blog o záchraně dat – jak zálohovat, první pomoc při ztrátě dat, technologie HDD/SSD/RAID. Tipy od expertů s 25+ lety zkušeností.',
     url: 'https://www.datahelp.cz/clanky',
     siteName: 'DataHelp.cz',
     locale: 'cs_CZ',

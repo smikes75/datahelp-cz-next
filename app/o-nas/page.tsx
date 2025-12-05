@@ -3,13 +3,13 @@ import { AboutUsClient } from './AboutUsClient';
 
 export const metadata: Metadata = {
   title: 'O nás | DataHelp.cz',
-  description: 'Více než 25 let zkušeností v záchraně dat. Specializujeme se na obnovu HDD, SSD, RAID a mobilních zařízení.',
+  description: 'O DataHelp – 25+ let zkušeností, úspěšnost 95%. Odborníci na HDD, SSD, RAID, mobily. Věříme nám tisíce firem i jednotlivců. Zachráníme vaše data!',
   alternates: {
     canonical: 'https://www.datahelp.cz/o-nas',
   },
   openGraph: {
     title: 'O nás | DataHelp.cz',
-    description: 'Více než 25 let zkušeností v záchraně dat. Specializujeme se na obnovu HDD, SSD, RAID a mobilních zařízení.',
+    description: 'O DataHelp – 25+ let zkušeností, úspěšnost 95%. Odborníci na HDD, SSD, RAID, mobily. Věříme nám tisíce firem i jednotlivců.',
     url: 'https://www.datahelp.cz/o-nas',
     siteName: 'DataHelp.cz',
     locale: 'cs_CZ',
