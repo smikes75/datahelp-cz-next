@@ -176,7 +176,7 @@ export default function OrderDiagnosticsPage() {
     phone: '',
     email: '',
     description: '',
-    deliveryMethod: '' as '' | 'personal' | 'shipping' | 'courier',
+    deliveryMethod: 'personal' as '' | 'personal' | 'shipping' | 'courier',
     pickupAddress: '',
     pickupCity: '',
     pickupZip: ''
@@ -488,17 +488,12 @@ export default function OrderDiagnosticsPage() {
             </h2>
 
             <div className="space-y-4">
-              {/* Shipping Option - HLAVNÍ CTA */}
-              <div id="delivery-shipping" className={`border-2 rounded-lg transition-all relative ${
+              {/* Shipping Option */}
+              <div id="delivery-shipping" className={`border-2 rounded-lg transition-all ${
                 formData.deliveryMethod === 'shipping'
                   ? 'border-primary bg-gray-50'
-                  : 'border-primary bg-blue-50/30'
+                  : 'border-primary'
               }`}>
-                <div className="absolute top-3 right-3">
-                  <span className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">
-                    DOPORUČENO
-                  </span>
-                </div>
                 <button
                   type="button"
                   onClick={() => handleDeliveryChange(formData.deliveryMethod === 'shipping' ? '' : 'shipping')}
@@ -506,12 +501,12 @@ export default function OrderDiagnosticsPage() {
                 >
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
-                      <Truck className="h-7 w-7 text-accent" />
-                      <h3 className="text-xl font-bold text-primary">
+                      <Truck className="h-6 w-6 text-accent" />
+                      <h3 className="text-lg font-semibold text-primary">
                         {t('delivery.shipping.title')}
                       </h3>
                     </div>
-                    <p className="text-gray-700 text-sm font-medium">
+                    <p className="text-gray-600 text-sm">
                       {t('delivery.shipping.description')}
                     </p>
                   </div>
@@ -688,7 +683,7 @@ export default function OrderDiagnosticsPage() {
               {/* Personal Option */}
               <div id="delivery-personal" className={`border-2 rounded-lg transition-all ${
                 formData.deliveryMethod === 'personal'
-                  ? 'border-primary bg-gray-50'
+                  ? 'border-gray-200 bg-gray-50'
                   : 'border-gray-200'
               }`}>
                 <button
@@ -720,14 +715,6 @@ export default function OrderDiagnosticsPage() {
 
                           <h4 className="font-semibold text-primary mt-4">Otevírací doba</h4>
                           <p className="text-gray-700">{t('delivery.personal.hours')}</p>
-
-                          <h4 className="font-semibold text-primary mt-4">{t('delivery.personal.phoneLabel')}</h4>
-                          <a
-                            href={`tel:${t('delivery.personal.phone')}`}
-                            className="text-accent hover:text-accent/80 font-semibold"
-                          >
-                            {t('delivery.personal.phone')}
-                          </a>
                         </div>
 
                         {/* Map */}
@@ -760,16 +747,6 @@ export default function OrderDiagnosticsPage() {
           </div>
         </div>
 
-        {/* Nonstop Hotline Button - Desktop only */}
-        <div className="hidden md:flex mt-6 justify-center">
-          <a
-            href="tel:+420775220440"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent ring-2 ring-primary text-white font-bold text-base rounded-lg transition-all shadow-md hover:scale-105"
-          >
-            <Phone className="h-5 w-5" />
-            <span>{t('nonstopHotline')}</span>
-          </a>
-        </div>
       </div>
     </div>
   );
