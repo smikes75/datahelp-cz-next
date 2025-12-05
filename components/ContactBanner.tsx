@@ -50,7 +50,7 @@ export function ContactBanner() {
         <div className="md:hidden h-10 flex items-center justify-center text-white text-sm">
           <a
             href="tel:+420775220440"
-            className="font-semibold hover:text-gray-200 transition-colors leading-none p-0 m-0"
+            className="font-semibold hover:text-gray-200 transition-colors"
           >
             {t('hotline')}
           </a>
