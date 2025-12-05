@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { Clock, User, ArrowLeft } from 'lucide-react';
 import { getBlogPost, getBlogPosts } from '@/lib/utils/blog';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import { Metadata } from 'next';
 
 // ISR - revalidace každou hodinu (3600 sekund)
@@ -92,6 +93,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ArticleSchema
+        title={post.title}
+        description={post.excerpt}
+        datePublished={post.date}
+        author={post.author}
+        image={post.coverImage}
+        url={`https://www.datahelp.cz/clanky/${post.slug}`}
+      />
       <Breadcrumbs customItems={breadcrumbs} />
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         <Link
