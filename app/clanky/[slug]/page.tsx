@@ -14,10 +14,10 @@ import { Metadata } from 'next';
 export const revalidate = 3600;
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
     locale: string;
-  };
+  }>;
 }
 
 // Generovat statické cesty pro články při buildu
@@ -33,7 +33,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const post = await getBlogPost(params.slug, params.locale);
+  const resolvedParams = await params;
+  const post = await getBlogPost(resolvedParams.slug, resolvedParams.locale);
 
   if (!post) {
     return {
@@ -57,14 +58,15 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getBlogPost(params.slug, params.locale);
+  const resolvedParams = await params;
+  const post = await getBlogPost(resolvedParams.slug, resolvedParams.locale);
 
   if (!post) {
     notFound();
   }
 
   // Formátovat datum
-  const formattedDate = new Date(post.date).toLocaleDateString(params.locale, {
+  const formattedDate = new Date(post.date).toLocaleDateString(resolvedParams.locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

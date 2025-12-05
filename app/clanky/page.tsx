@@ -12,25 +12,27 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 export const revalidate = 3600;
 
 interface BlogPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
     category?: string;
-  };
-  params: {
+  }>;
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export default async function BlogPage({ searchParams, params }: BlogPageProps) {
-  const currentPage = parseInt(searchParams.page || '1');
-  const category = searchParams.category;
+  const resolvedSearchParams = await searchParams;
+  const resolvedParams = await params;
+  const currentPage = parseInt(resolvedSearchParams.page || '1');
+  const category = resolvedSearchParams.category;
   const articlesPerPage = 6;
 
   const result = await getPaginatedBlogPosts({
     category: category && category !== 'all' ? category : undefined,
     page: currentPage,
     limit: articlesPerPage,
-    locale: params.locale
+    locale: resolvedParams.locale
   });
 
   const categories = [
@@ -88,7 +90,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
                     excerpt={article.excerpt}
                     imageUrl={article.coverImage}
                     slug={article.slug}
-                    locale={params.locale}
+                    locale={resolvedParams.locale}
                   />
                 ))}
               </div>
