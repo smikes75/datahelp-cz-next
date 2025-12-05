@@ -75,8 +75,8 @@ export function HomeContact() {
           </div>
         </div>
 
-        {/* Nonstop Hotline Button - Mobile only */}
-        <div className="md:hidden mt-6 flex justify-center">
+        {/* Nonstop Hotline Button - Hidden */}
+        <div className="hidden">
           <a
             href="tel:+420775220440"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent ring-2 ring-primary text-white font-bold text-base rounded-lg transition-all shadow-md hover:scale-105"

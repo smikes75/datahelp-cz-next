@@ -107,11 +107,12 @@
       "facebook": "Facebook"
     }
   },
-  "banner": {
-    "noPayment": "Šťastný nový rok 2025",
-    "freeConsultation": "Happy New Year 2025",
-    "secureRecovery": "Frohes neues Jahr 2025",
-    "certified": "Felice Anno Nuovo 2025"
+  "contactBanner": {
+    "hours": "Po–Čt: 9:00–17:00, Pá: 8:00–15:30",
+    "hotline": "HOTLINE +420 775 220 440"
+  },
+  "announcementBanner": {
+    "message": "Šťastný nový rok 2025 • Happy New Year 2025 • Frohes neues Jahr 2025 • Felice Anno Nuovo 2025"
   },
   "hero": {
     "title": "Obnova dat\npro firmy i jednotlivce",
