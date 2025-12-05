@@ -84,7 +84,8 @@ function AboutGallery() {
           <p className="text-gray-600 max-w-2xl mx-auto">{t('aboutDescription')}</p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
+        {/* Desktop slideshow */}
+        <div className="hidden md:block relative max-w-5xl mx-auto">
           <div className="relative aspect-video overflow-hidden rounded-xl shadow-2xl">
             {images.map((image, index) => (
               <div
@@ -115,6 +116,37 @@ function AboutGallery() {
                     : 'w-1.5 bg-gray-300 hover:bg-gray-400'
                 }`}
                 aria-label={`Přejít na obrázek ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile swipe carousel */}
+        <div className="md:hidden overflow-hidden">
+          <div
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {images.map((image, index) => (
+              <div key={index} className="flex-shrink-0 w-[85vw] snap-center">
+                <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="85vw"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center gap-1.5 mt-4">
+            {images.map((_, index) => (
+              <div
+                key={index}
+                className="h-1.5 w-1.5 rounded-full bg-gray-300"
               />
             ))}
           </div>
