@@ -3,6 +3,7 @@ import { Footer } from '@/components/Footer';
 import { CookieConsentWrapper } from '@/components/CookieConsentWrapper';
 import { TranslationsProvider } from '@/contexts/TranslationsContext';
 import { ToastProvider } from '@/contexts/ToastContext';
+import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import './globals.css';
 
 export const metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body>
+        <LocalBusinessSchema />
         <TranslationsProvider>
           <ToastProvider>
             <CookieConsentWrapper>
