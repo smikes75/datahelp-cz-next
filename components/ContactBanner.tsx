@@ -13,7 +13,7 @@ export function ContactBanner() {
   const t = useTranslations('contactBanner');
 
   return (
-    <div className="bg-blue-900 py-3">
+    <div className="bg-blue-900 py-3 md:py-3">
       <div className="container mx-auto px-4">
         {/* Desktop Version - Aligned with page content */}
         <div className="hidden md:grid md:grid-cols-3 items-center gap-4 text-white">
@@ -47,10 +47,10 @@ export function ContactBanner() {
         </div>
 
         {/* Mobile Version - Only Hotline */}
-        <div className="md:hidden flex items-center justify-center text-white">
+        <div className="md:hidden py-1.5 flex items-center justify-center text-white">
           <a
             href="tel:+420775220440"
-            className="hover:text-gray-200 transition-colors"
+            className="font-semibold hover:text-gray-200 transition-colors"
           >
             {t('hotline')}
           </a>
