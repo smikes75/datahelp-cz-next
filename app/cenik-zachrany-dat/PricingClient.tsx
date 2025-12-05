@@ -343,13 +343,20 @@ export function PricingClient() {
             Výsledná cena závisí na typu poškození a komplexnosti případu. Kliknutím na kartu zobrazíte detailní rozpis cen.
           </p>
 
+          {/* Anchor aliases for redirects */}
+          <div id="nas" className="absolute -mt-24"></div>
+          <div id="flash" className="absolute -mt-24"></div>
+
           <div className="grid gap-4 max-w-4xl mx-auto">
             {deviceCards.map((card, index) => {
               const isExpanded = expandedCards.includes(index);
+              // Map device types to anchor IDs for URL redirects
+              const anchorId = card.deviceType === 'mobile' ? 'mobil' : card.deviceType;
 
               return (
                 <button
                   key={index}
+                  id={anchorId}
                   ref={(el) => { cardRefs.current[index] = el; }}
                   onClick={() => toggleCard(index)}
                   className={`p-6 rounded-lg border-2 transition-all text-left ${
