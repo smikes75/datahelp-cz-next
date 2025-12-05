@@ -4,6 +4,7 @@
  */
 
 import { Metadata } from 'next';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
@@ -31,6 +32,8 @@ export default function PrivacyPage() {
           <p className="text-lg md:text-xl">Informace o zpracování údajů dle GDPR</p>
         </div>
       </div>
+
+      <Breadcrumbs />
 
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="bg-white rounded-lg shadow-lg p-8 prose prose-lg max-w-none">

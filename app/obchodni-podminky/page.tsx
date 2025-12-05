@@ -4,6 +4,7 @@
  */
 
 import { Metadata } from 'next';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Obchodní podmínky | DataHelp.cz',
@@ -23,9 +24,19 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Obchodní podmínky</h1>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-primary text-white py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">Obchodní podmínky</h1>
+          <p className="text-lg md:text-xl">Všeobecné obchodní podmínky poskytování služeb</p>
+        </div>
+      </div>
+
+      <Breadcrumbs />
+
+      <div className="container mx-auto px-4 py-16 max-w-4xl">
+        <div className="bg-white rounded-lg shadow-lg p-8 prose prose-lg max-w-none">
 
         <div className="text-sm text-gray-800 space-y-4 leading-relaxed">
           {/* I. ÚVODNÍ USTANOVENÍ */}
@@ -283,6 +294,7 @@ export default function TermsPage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
