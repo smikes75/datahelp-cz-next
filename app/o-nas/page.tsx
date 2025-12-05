@@ -84,7 +84,7 @@ function AboutGallery() {
           <p className="text-gray-600 max-w-2xl mx-auto">{t('aboutDescription')}</p>
         </div>
 
-        <div className="hidden md:block relative max-w-5xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
           <div className="relative aspect-video overflow-hidden rounded-xl shadow-2xl">
             {images.map((image, index) => (
               <div
@@ -206,6 +206,43 @@ export default function AboutUsPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="md:hidden overflow-hidden">
+            <div
+              className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {teamMembers.map((member, index) => (
+                <div key={index} className="flex-shrink-0 w-[80vw] snap-center">
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+                    <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center relative">
+                      <Image
+                        src={`/images/team/member-${index + 1}.webp`}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        sizes="80vw"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-primary mb-3">{member.name}</h3>
+                      <p className="text-sm font-semibold text-gray-700 mb-2">{member.specialization}</p>
+                      <p className="text-sm text-gray-600">{member.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-center gap-1.5 mt-4">
+              {teamMembers.map((_, index) => (
+                <div
+                  key={index}
+                  className="h-1.5 w-1.5 rounded-full bg-gray-300"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
