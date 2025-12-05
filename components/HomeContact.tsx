@@ -7,6 +7,7 @@
 
 import { useTranslations, useLocale } from '@/contexts/TranslationsContext';
 import { Phone } from 'lucide-react';
+import { Contact } from './Contact';
 
 export function HomeContact() {
   const t = useTranslations('contact');
@@ -23,34 +24,7 @@ export function HomeContact() {
               <h2 className="text-2xl font-bold text-primary mb-6">
                 {t('form.leaveMessage')}
               </h2>
-              <div className="space-y-4">
-                <input
-                  type="text"
-                  placeholder={t('form.name')}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <input
-                  type="email"
-                  placeholder={t('form.email')}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <input
-                  type="tel"
-                  placeholder={t('form.phone')}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <textarea
-                  placeholder={t('form.message')}
-                  rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                ></textarea>
-                <button
-                  type="button"
-                  className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
-                >
-                  {t('form.send')}
-                </button>
-              </div>
+              <Contact />
             </div>
 
             {/* Map - pouze CS */}
