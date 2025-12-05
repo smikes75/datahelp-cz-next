@@ -24,7 +24,7 @@ export function ReferenceClient() {
     {
       title: t('featuredStories.checkCzechFashion.title'),
       slug: t('featuredStories.checkCzechFashion.slug'),
-      image: 'https://images.unsplash.com/photo-1445620466293-8f9322e8fac8?w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
     },
     {
       title: t('featuredStories.michalPavlicek.title'),
