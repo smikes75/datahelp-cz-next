@@ -17,8 +17,8 @@ export function Hero() {
 
   return (
     <div className="relative">
-      {/* Background image - pouze na desktop */}
-      <div className="absolute inset-0 z-0 hidden md:block overflow-hidden">
+      {/* Background image - mobile i desktop */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
           src={backgroundImages.home}
           alt=""
@@ -36,9 +36,6 @@ export function Hero() {
           }}
         ></div>
       </div>
-
-      {/* Fallback bg pro mobil */}
-      <div className="absolute inset-0 bg-primary md:hidden z-0"></div>
 
       {/* Obsah */}
       <div className="relative z-10 text-white py-8 md:py-16">
