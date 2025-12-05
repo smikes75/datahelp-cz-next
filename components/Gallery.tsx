@@ -12,13 +12,7 @@ import Image from 'next/image';
 
 export function Gallery() {
   const t = useTranslations('gallery');
-  const [isLoading, setIsLoading] = React.useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 600);
-    return () => clearTimeout(timer);
-  }, []);
 
   const images = [
     {
@@ -39,21 +33,6 @@ export function Gallery() {
     }
   ];
 
-  if (isLoading) {
-    return (
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="animate-pulse bg-gray-200 h-8 w-48 mx-auto rounded mb-12" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="aspect-square bg-gray-200 rounded-lg" />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -71,6 +50,7 @@ export function Gallery() {
                 fill
                 className="object-cover transform transition duration-300 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                priority={index < 2}
               />
             </div>
           ))}
@@ -92,6 +72,7 @@ export function Gallery() {
                 fill
                 className="object-cover"
                 sizes="85vw"
+                priority={index === 0}
               />
             </div>
           ))}

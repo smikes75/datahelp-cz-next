@@ -14,32 +14,6 @@ import { backgroundImages } from '@/lib/utils/imageUtils';
 
 export function Hero() {
   const t = useTranslations('hero');
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Loading skeleton
-  if (isLoading) {
-    return (
-      <div className="relative bg-primary">
-        <div className="relative z-10 text-white py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl space-y-6">
-              <div className="animate-pulse bg-white/20 h-12 w-3/4 rounded" />
-              <div className="animate-pulse bg-white/20 h-6 w-2/3 rounded" />
-              <div className="flex gap-4">
-                <div className="animate-pulse bg-white/20 h-12 w-48 rounded-lg" />
-                <div className="animate-pulse bg-white/20 h-12 w-32 rounded-lg" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="relative">
