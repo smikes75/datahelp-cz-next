@@ -3,7 +3,6 @@
  */
 
 import { Metadata } from 'next';
-import { Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
@@ -25,13 +24,10 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-primary text-white py-16">
+      <div className="bg-primary text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-4 mb-4">
-            <Shield className="h-12 w-12" />
-            <h1 className="text-4xl font-bold">Ochrana osobních údajů</h1>
-          </div>
-          <p className="text-xl">Informace o zpracování údajů dle GDPR</p>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">Ochrana osobních údajů</h1>
+          <p className="text-lg md:text-xl">Informace o zpracování údajů dle GDPR</p>
         </div>
       </div>
 
