@@ -18,7 +18,15 @@ export const metadata: Metadata = {
   title: 'Magazín | DataHelp.cz',
   description: 'Odborné články, novinky a tipy ze světa záchrany dat. Zálohování, první pomoc, technologie.',
   alternates: {
-    canonical: '/clanky',
+    canonical: 'https://www.datahelp.cz/clanky',
+  },
+  openGraph: {
+    title: 'Magazín | DataHelp.cz',
+    description: 'Odborné články, novinky a tipy ze světa záchrany dat. Zálohování, první pomoc, technologie.',
+    url: 'https://www.datahelp.cz/clanky',
+    siteName: 'DataHelp.cz',
+    locale: 'cs_CZ',
+    type: 'website',
   },
 };
 

@@ -9,7 +9,15 @@ export const metadata: Metadata = {
   title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
   description: 'Informace o zpracování osobních údajů v souladu s GDPR.',
   alternates: {
-    canonical: '/ochrana-osobnich-udaju',
+    canonical: 'https://www.datahelp.cz/ochrana-osobnich-udaju',
+  },
+  openGraph: {
+    title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
+    description: 'Informace o zpracování osobních údajů v souladu s GDPR.',
+    url: 'https://www.datahelp.cz/ochrana-osobnich-udaju',
+    siteName: 'DataHelp.cz',
+    locale: 'cs_CZ',
+    type: 'website',
   },
 };
 

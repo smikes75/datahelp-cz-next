@@ -1,0 +1,647 @@
+'use client';
+
+import { useState } from 'react';
+import { useTranslations } from '@/contexts/TranslationsContext';
+import { useToast } from '@/contexts/ToastContext';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Home, Truck, Package, Phone } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+
+// PageHeader component
+function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
+  return (
+    <div className="relative">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={`/images/backgrounds/${backgroundImage}`}
+          alt={title}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(27, 56, 122, 1) 50%, rgba(27, 56, 122, 0) 100%)'
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 text-white py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
+          {subtitle && <p className="text-lg md:text-xl">{subtitle}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Main Page Component
+export default function OrderDiagnosticsPage() {
+  const t = useTranslations('orderDiagnostics');
+  const toast = useToast();
+  const [termsLinkClicked, setTermsLinkClicked] = useState(false);
+  const [formData, setFormData] = useState({
+    customerType: 'individual' as 'individual' | 'company',
+    companyName: '',
+    contactPerson: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    description: '',
+    deliveryMethod: '' as '' | 'personal' | 'shipping' | 'courier',
+    pickupAddress: '',
+    pickupCity: '',
+    pickupZip: ''
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+  const handleTermsLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (termsLinkClicked) {
+      // Druhé kliknutí - otevřít odkaz
+      window.open('/obchodni-podminky', '_blank');
+      setTermsLinkClicked(false);
+    } else {
+      // První kliknutí - jen označit a pulzovat
+      setTermsLinkClicked(true);
+      // Reset po 3 sekundách
+      setTimeout(() => setTermsLinkClicked(false), 3000);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleDeliveryChange = (method: '' | 'personal' | 'shipping' | 'courier') => {
+    setFormData(prev => ({
+      ...prev,
+      deliveryMethod: method
+    }));
+
+    if (method) {
+      setTimeout(() => {
+        const element = document.getElementById(`delivery-${method}`);
+        if (element) {
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - 120;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.deliveryMethod) {
+      toast.error(t('form.errors.deliveryMethod'));
+      return;
+    }
+
+    if (!agreedToTerms) {
+      toast.error(t('form.errors.terms'));
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const supabase = createClient();
+      const { error } = await supabase
+        .from('diagnostic_orders')
+        .insert([
+          {
+            customer_type: formData.customerType,
+            company_name: formData.customerType === 'company' ? formData.companyName : null,
+            contact_person: formData.customerType === 'company' ? formData.contactPerson : null,
+            first_name: formData.customerType === 'individual' ? formData.firstName : null,
+            last_name: formData.customerType === 'individual' ? formData.lastName : null,
+            phone: formData.phone,
+            email: formData.email,
+            description: formData.description,
+            is_partner: false,
+            delivery_method: formData.deliveryMethod,
+            pickup_address: formData.deliveryMethod === 'shipping' ? formData.pickupAddress : null,
+            pickup_city: formData.deliveryMethod === 'shipping' ? formData.pickupCity : null,
+            pickup_zip: formData.deliveryMethod === 'shipping' ? formData.pickupZip : null,
+            language: 'cs'
+          }
+        ]);
+
+      if (error) throw error;
+
+      toast.success(t('form.success'));
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setFormData({
+        customerType: 'individual',
+        companyName: '',
+        contactPerson: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        description: '',
+        deliveryMethod: '',
+        pickupAddress: '',
+        pickupCity: '',
+        pickupZip: ''
+      });
+      setAgreedToTerms(false);
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      toast.error(t('form.error'));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const renderCustomerTypeSelector = () => (
+    <div className="mb-6">
+      <label className="block text-sm font-medium text-gray-700 mb-3">
+        {t('form.customerType')}
+      </label>
+      <div className="flex gap-4">
+        <label className="flex items-center">
+          <input
+            type="radio"
+            name="customerType"
+            value="individual"
+            checked={formData.customerType === 'individual'}
+            onChange={handleInputChange}
+            className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+          />
+          <span className="ml-2 text-gray-700">
+            {t('form.individual')}
+          </span>
+        </label>
+        <label className="flex items-center">
+          <input
+            type="radio"
+            name="customerType"
+            value="company"
+            checked={formData.customerType === 'company'}
+            onChange={handleInputChange}
+            className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+          />
+          <span className="ml-2 text-gray-700">
+            {t('form.company')}
+          </span>
+        </label>
+      </div>
+    </div>
+  );
+
+  const renderNameFields = () => {
+    return (
+      <>
+        {formData.customerType === 'company' && (
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">
+                {t('form.companyName')}
+              </label>
+              <input
+                type="text"
+                id="companyName"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label htmlFor="contactPerson" className="block text-sm font-medium text-gray-700 mb-2">
+                {t('form.contactPerson')}
+              </label>
+              <input
+                type="text"
+                id="contactPerson"
+                name="contactPerson"
+                value={formData.contactPerson}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+          </div>
+        )}
+
+        {formData.customerType === 'individual' && (
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                {t('form.firstName')}
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                {t('form.lastName')}
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+          </div>
+        )}
+      </>
+    );
+  };
+
+  const renderContactForm = () => (
+    <div className="space-y-6">
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+            {t('form.phone')}
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            {t('form.email')}
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+          {t('form.description')}
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          placeholder={t('form.descriptionPlaceholder')}
+          required
+          rows={5}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none placeholder:text-gray-400"
+        />
+      </div>
+
+      <div>
+        <Link
+          href="/ochrana-osobnich-udaju"
+          className="text-accent hover:text-accent/80 text-sm"
+        >
+          {t('form.privacyLink')}
+        </Link>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        title={t('title')}
+        subtitle={t('subtitle')}
+        backgroundImage="services-bg.webp"
+      />
+
+      <Breadcrumbs />
+
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-bold text-primary mb-6">
+              {t('sections.delivery')}
+            </h2>
+
+            <div className="space-y-4">
+              {/* Shipping Option */}
+              <div id="delivery-shipping" className={`border-2 rounded-lg transition-all ${
+                formData.deliveryMethod === 'shipping'
+                  ? 'border-primary bg-gray-50'
+                  : 'border-gray-200'
+              }`}>
+                <button
+                  type="button"
+                  onClick={() => handleDeliveryChange(formData.deliveryMethod === 'shipping' ? '' : 'shipping')}
+                  className="w-full flex items-start p-6 text-left"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Truck className="h-6 w-6 text-accent" />
+                      <h3 className="text-lg font-semibold text-primary">
+                        {t('delivery.shipping.title')}
+                      </h3>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {t('delivery.shipping.description')}
+                    </p>
+                  </div>
+                </button>
+
+                {formData.deliveryMethod === 'shipping' && (
+                  <div className="px-6 pb-6">
+                    <div className="border-t border-gray-200 pt-6">
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        {renderCustomerTypeSelector()}
+                        {renderNameFields()}
+
+                        {/* Pickup Address Fields */}
+                        <h4 className="font-semibold text-primary mb-4">
+                          {t('form.pickupAddress')}
+                        </h4>
+                        <div className="space-y-4 mb-6">
+                          <div>
+                            <label htmlFor="pickupAddress" className="block text-sm font-medium text-gray-700 mb-2">
+                              {t('form.street')}
+                            </label>
+                            <input
+                              type="text"
+                              id="pickupAddress"
+                              name="pickupAddress"
+                              value={formData.pickupAddress}
+                              onChange={handleInputChange}
+                              required
+                              placeholder={t('form.streetPlaceholder')}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            />
+                          </div>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label htmlFor="pickupCity" className="block text-sm font-medium text-gray-700 mb-2">
+                                {t('form.city')}
+                              </label>
+                              <input
+                                type="text"
+                                id="pickupCity"
+                                name="pickupCity"
+                                value={formData.pickupCity}
+                                onChange={handleInputChange}
+                                required
+                                placeholder={t('form.cityPlaceholder')}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                              />
+                            </div>
+                            <div>
+                              <label htmlFor="pickupZip" className="block text-sm font-medium text-gray-700 mb-2">
+                                {t('form.zip')}
+                              </label>
+                              <input
+                                type="text"
+                                id="pickupZip"
+                                name="pickupZip"
+                                value={formData.pickupZip}
+                                onChange={handleInputChange}
+                                required
+                                placeholder={t('form.zipPlaceholder')}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {renderContactForm()}
+
+                        {/* Terms and Submit inside card */}
+                        <div className="border-t border-gray-200 pt-6">
+                          <label className="flex items-start mb-6 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={agreedToTerms}
+                              onChange={(e) => setAgreedToTerms(e.target.checked)}
+                              className="w-6 h-6 text-primary focus:ring-primary border-gray-300 rounded mt-0.5 flex-shrink-0 cursor-pointer"
+                              required
+                            />
+                            <span className="ml-3 text-gray-700 text-base">
+                              {t('form.terms.text')}{' '}
+                              <a
+                                href="/obchodni-podminky"
+                                onClick={handleTermsLinkClick}
+                                className={`text-accent hover:text-accent/80 font-semibold underline ${termsLinkClicked ? 'animate-pulse' : ''}`}
+                              >
+                                {t('form.terms.link')}
+                              </a>
+                            </span>
+                          </label>
+
+                          <button
+                            type="submit"
+                            disabled={isSubmitting || !agreedToTerms}
+                            className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isSubmitting ? t('form.submitting') : t('form.submit')}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Courier Option */}
+              <div id="delivery-courier" className={`border-2 rounded-lg transition-all ${
+                formData.deliveryMethod === 'courier'
+                  ? 'border-primary bg-gray-50'
+                  : 'border-gray-200'
+              }`}>
+                <button
+                  type="button"
+                  onClick={() => handleDeliveryChange(formData.deliveryMethod === 'courier' ? '' : 'courier')}
+                  className="w-full flex items-start p-6 text-left"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Package className="h-6 w-6 text-accent" />
+                      <h3 className="text-lg font-semibold text-primary">
+                        {t('delivery.courier.title')}
+                      </h3>
+                    </div>
+                    <p
+                      className="text-gray-600 text-sm"
+                      dangerouslySetInnerHTML={{ __html: t('delivery.courier.description') }}
+                    />
+                  </div>
+                </button>
+
+                {formData.deliveryMethod === 'courier' && (
+                  <div className="px-6 pb-6">
+                    <div className="border-t border-gray-200 pt-6">
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        {renderCustomerTypeSelector()}
+                        {renderNameFields()}
+                        {renderContactForm()}
+
+                        {/* Terms and Submit inside card */}
+                        <div className="border-t border-gray-200 pt-6">
+                          <label className="flex items-start mb-6 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={agreedToTerms}
+                              onChange={(e) => setAgreedToTerms(e.target.checked)}
+                              className="w-6 h-6 text-primary focus:ring-primary border-gray-300 rounded mt-0.5 flex-shrink-0 cursor-pointer"
+                              required
+                            />
+                            <span className="ml-3 text-gray-700 text-base">
+                              {t('form.terms.text')}{' '}
+                              <a
+                                href="/obchodni-podminky"
+                                onClick={handleTermsLinkClick}
+                                className={`text-accent hover:text-accent/80 font-semibold underline ${termsLinkClicked ? 'animate-pulse' : ''}`}
+                              >
+                                {t('form.terms.link')}
+                              </a>
+                            </span>
+                          </label>
+
+                          <button
+                            type="submit"
+                            disabled={isSubmitting || !agreedToTerms}
+                            className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isSubmitting ? t('form.submitting') : t('form.submit')}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Personal Option */}
+              <div id="delivery-personal" className={`border-2 rounded-lg transition-all ${
+                formData.deliveryMethod === 'personal'
+                  ? 'border-primary bg-gray-50'
+                  : 'border-gray-200'
+              }`}>
+                <button
+                  type="button"
+                  onClick={() => handleDeliveryChange(formData.deliveryMethod === 'personal' ? '' : 'personal')}
+                  className="w-full flex items-start p-6 text-left"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Home className="h-6 w-6 text-accent" />
+                      <h3 className="text-lg font-semibold text-primary">
+                        {t('delivery.personal.title')}
+                      </h3>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {t('delivery.personal.address')}
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      {t('delivery.personal.hours')}
+                    </p>
+                  </div>
+                </button>
+
+                {formData.deliveryMethod === 'personal' && (
+                  <div className="px-6 pb-6">
+                    <div className="border-t border-gray-200 pt-6">
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        {renderCustomerTypeSelector()}
+                        {renderNameFields()}
+                        {renderContactForm()}
+
+                        {/* Terms and Submit inside card */}
+                        <div className="border-t border-gray-200 pt-6">
+                          <label className="flex items-start mb-6 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={agreedToTerms}
+                              onChange={(e) => setAgreedToTerms(e.target.checked)}
+                              className="w-6 h-6 text-primary focus:ring-primary border-gray-300 rounded mt-0.5 flex-shrink-0 cursor-pointer"
+                              required
+                            />
+                            <span className="ml-3 text-gray-700 text-base">
+                              {t('form.terms.text')}{' '}
+                              <a
+                                href="/obchodni-podminky"
+                                onClick={handleTermsLinkClick}
+                                className={`text-accent hover:text-accent/80 font-semibold underline ${termsLinkClicked ? 'animate-pulse' : ''}`}
+                              >
+                                {t('form.terms.link')}
+                              </a>
+                            </span>
+                          </label>
+
+                          <button
+                            type="submit"
+                            disabled={isSubmitting || !agreedToTerms}
+                            className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isSubmitting ? t('form.submitting') : t('form.submit')}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Nonstop Hotline Button - Mobile only */}
+        <div className="md:hidden mt-6 flex justify-center">
+          <a
+            href="tel:+420775220440"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent ring-2 ring-primary text-white font-bold text-base rounded-lg transition-all shadow-md hover:scale-105"
+          >
+            <Phone className="h-5 w-5" />
+            <span>{t('nonstopHotline')}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}

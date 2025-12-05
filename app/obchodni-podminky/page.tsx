@@ -9,7 +9,15 @@ export const metadata: Metadata = {
   title: 'Obchodní podmínky | DataHelp.cz',
   description: 'Všeobecné obchodní podmínky poskytování služeb záchrany dat.',
   alternates: {
-    canonical: '/obchodni-podminky',
+    canonical: 'https://www.datahelp.cz/obchodni-podminky',
+  },
+  openGraph: {
+    title: 'Obchodní podmínky | DataHelp.cz',
+    description: 'Všeobecné obchodní podmínky poskytování služeb záchrany dat.',
+    url: 'https://www.datahelp.cz/obchodni-podminky',
+    siteName: 'DataHelp.cz',
+    locale: 'cs_CZ',
+    type: 'website',
   },
 };
 
