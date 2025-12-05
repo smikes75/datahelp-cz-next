@@ -79,6 +79,22 @@ export const getBlogPost = async (slug: string, locale: string): Promise<BlogPos
 
     const tags = await getPostTags(data.id, locale);
 
+    // Get categories for this post
+    const { data: postCategories } = await supabase
+      .from('blog_post_categories')
+      .select('category_id')
+      .eq('post_id', data.id);
+
+    let categories: any[] = [];
+    if (postCategories && postCategories.length > 0) {
+      const categoryIds = postCategories.map(pc => pc.category_id);
+      const { data: categoriesData } = await supabase
+        .from('blog_categories')
+        .select('*')
+        .in('id', categoryIds);
+      categories = categoriesData || [];
+    }
+
     return {
       slug: data.slug,
       title: data[`title_${locale}`] || data.title_en,
@@ -92,7 +108,8 @@ export const getBlogPost = async (slug: string, locale: string): Promise<BlogPos
       locale: locale,
       readingTime: data.reading_time_minutes,
       sourceName: data.source_name,
-      sourceUrl: data.source_url
+      sourceUrl: data.source_url,
+      categories
     };
   } catch (error) {
     console.error('Error fetching blog post:', error);

@@ -73,7 +73,8 @@ export function Breadcrumbs({ children, customItems }: BreadcrumbsProps) {
           name = t('orderDiagnostics.title');
           break;
         case 'blog':
-          name = 'Blog';
+        case 'clanky':
+          name = 'Magazín';
           break;
         case 'technologie':
           name = t('nav.technology');

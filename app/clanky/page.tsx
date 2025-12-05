@@ -47,6 +47,21 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
 
   const activeCategory = category || 'all';
 
+  // Custom breadcrumbs pro kategorie
+  const getBreadcrumbs = () => {
+    const baseBreadcrumbs = [
+      { name: 'Domů', path: '/' },
+      { name: 'Magazín', path: '/clanky' }
+    ];
+
+    if (category && category !== 'all') {
+      const categoryName = categories.find(c => c.id === category)?.name || category;
+      baseBreadcrumbs.push({ name: categoryName, path: `/clanky?category=${category}` });
+    }
+
+    return baseBreadcrumbs;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
@@ -54,7 +69,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
         subtitle="Odborné články, průvodce a novinky z oblasti záchrany dat"
         backgroundImage="services-bg.webp"
       />
-      <Breadcrumbs />
+      <Breadcrumbs customItems={getBreadcrumbs()} />
 
       {/* Main Content */}
       <main className="py-8">

@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, User, ArrowLeft } from 'lucide-react';
 import { getBlogPost, getBlogPosts } from '@/lib/utils/blog';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Metadata } from 'next';
 
 // ISR - revalidace každou hodinu (3600 sekund)
@@ -72,8 +73,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     day: 'numeric',
   });
 
+  // Build breadcrumbs based on categories
+  const breadcrumbs = [
+    { name: 'Domů', path: '/' },
+    { name: 'Magazín', path: '/clanky' }
+  ];
+
+  // Check if post is in "novinky" category
+  const isNews = post.categories?.some(cat => cat.slug === 'novinky');
+  if (isNews) {
+    breadcrumbs.push({ name: 'Novinky', path: '/clanky?category=novinky' });
+  }
+
+  breadcrumbs.push({ name: post.title, path: `/clanky/${post.slug}` });
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <Breadcrumbs customItems={breadcrumbs} />
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         <Link
           href="/clanky"
