@@ -16,6 +16,26 @@ const nextConfig = {
       },
     ],
   },
+
+  async headers() {
+    const allowIndexing = process.env.ALLOW_INDEXING === 'true';
+
+    if (!allowIndexing) {
+      return [
+        {
+          source: '/:path*',
+          headers: [
+            {
+              key: 'X-Robots-Tag',
+              value: 'noindex, nofollow',
+            },
+          ],
+        },
+      ];
+    }
+
+    return [];
+  },
 };
 
 export default nextConfig;
