@@ -117,3 +117,19 @@ pá  5. prosince 2025 14:53:40 CET
 - Commit: 9f43769
 - Notes: 100% metadata coverage achieved, all pages SEO-ready
 
+## [2025-12-05 16:30:00] Fáze 6: Navigace (PRIORITNÍ)
+- Status: ✅ PASS
+- Changes: Header.tsx, Footer.tsx, messages/cs.json
+- Navigation additions:
+  1. Header (desktop + mobile):
+     - Added "Reference" link between "Blog" and "FAQ"
+     - Position: Home | About | Pricing | Blog | Reference | FAQ | Contact
+  2. Footer services section:
+     - Added "Mobilní telefon" service link after RAID
+     - Position: HDD | SSD | RAID | Mobile Phone
+  3. Translation keys:
+     - Added "nav.references": "Reference" to cs.json
+- Build: PASS (130 pages, all static/SSG)
+- Commit: 59795eb
+- Notes: New pages now accessible via main navigation
+
