@@ -4,6 +4,7 @@
  */
 
 import { ArticleCard } from '@/components/ArticleCard';
+import { NewsCard } from '@/components/NewsCard';
 import { PageHeader } from '@/components/PageHeader';
 import { getPaginatedBlogPosts } from '@/lib/utils/blog';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
@@ -84,14 +85,24 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
               {/* Articles Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {result.posts.map((article) => (
-                  <ArticleCard
-                    key={article.slug}
-                    title={article.title}
-                    excerpt={article.excerpt}
-                    imageUrl={article.coverImage}
-                    slug={article.slug}
-                    locale={resolvedParams.locale}
-                  />
+                  category === 'novinky' ? (
+                    <NewsCard
+                      key={article.slug}
+                      title={article.title}
+                      excerpt={article.excerpt}
+                      slug={article.slug}
+                      date={article.date}
+                    />
+                  ) : (
+                    <ArticleCard
+                      key={article.slug}
+                      title={article.title}
+                      excerpt={article.excerpt}
+                      imageUrl={article.coverImage}
+                      slug={article.slug}
+                      locale={resolvedParams.locale}
+                    />
+                  )
                 ))}
               </div>
 
