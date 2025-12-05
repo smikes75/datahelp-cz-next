@@ -58,7 +58,7 @@ export function CookieSettings() {
           <p className="text-gray-700 mb-6 leading-relaxed">
             {t('description')}{' '}
             <Link
-              href="/cookies"
+              href="/informace-o-cookies"
               onClick={closeSettings}
               className="text-accent hover:text-accent/80 underline font-semibold"
             >

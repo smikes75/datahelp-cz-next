@@ -44,7 +44,7 @@ export function Services() {
       icon: <HardDrive className="h-16 w-16 text-accent" />,
       title: t('hdd.title'),
       description: t('hdd.desc'),
-      link: '/sluzby/hdd',
+      link: '/zachrana-dat/hdd',
       features: [
         t('hdd.features.mechanical'),
         t('hdd.features.electronic'),
@@ -55,7 +55,7 @@ export function Services() {
       icon: <Smartphone className="h-16 w-16 text-accent" />,
       title: t('ssd.title'),
       description: t('ssd.desc'),
-      link: '/sluzby/ssd',
+      link: '/zachrana-dat/ssd',
       features: [
         t('ssd.features.controller'),
         t('ssd.features.firmware'),
@@ -66,7 +66,7 @@ export function Services() {
       icon: <Database className="h-16 w-16 text-accent" />,
       title: t('raid.title'),
       description: t('raid.desc'),
-      link: '/sluzby/raid',
+      link: '/zachrana-dat/raid',
       features: [
         t('raid.features.hardware'),
         t('raid.features.software'),
@@ -77,7 +77,7 @@ export function Services() {
       icon: <Handshake className="h-16 w-16 text-accent" />,
       title: t('business.title'),
       description: t('business.desc'),
-      link: '/sluzby/business-solutions',
+      link: '/zachrana-dat/business-solutions',
       features: [
         t('business.features.support'),
         t('business.features.security'),

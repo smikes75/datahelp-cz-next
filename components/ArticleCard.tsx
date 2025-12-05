@@ -44,7 +44,7 @@ export function ArticleCard({
         </p>
 
         <Link
-          href={`/blog/${slug}`}
+          href={`/clanky/${slug}`}
           className="inline-flex items-center gap-2 text-primary hover:text-accent font-medium transition-colors"
         >
           Zjistit více

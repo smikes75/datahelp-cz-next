@@ -22,7 +22,7 @@ export function CookieConsent() {
             <p className="text-gray-700 text-xs md:text-sm leading-relaxed">
               {t('description')}{' '}
               <Link
-                href="/cookies"
+                href="/informace-o-cookies"
                 className="text-accent hover:text-accent/80 underline font-semibold"
               >
                 {t('learnMore')}

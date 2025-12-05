@@ -61,7 +61,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
             {categories.map((cat) => (
               <a
                 key={cat.id}
-                href={`/${params.locale}/blog${cat.id !== 'all' ? `?category=${cat.id}` : ''}`}
+                href={`/clanky${cat.id !== 'all' ? `?category=${cat.id}` : ''}`}
                 className={`px-6 py-2 rounded-lg border-2 transition-all ${
                   activeCategory === cat.id
                     ? 'bg-primary text-white border-primary'
@@ -98,7 +98,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
                 <div className="flex justify-center gap-2 mt-12">
                   {currentPage > 1 && (
                     <a
-                      href={`/${params.locale}/blog?page=${currentPage - 1}${category ? `&category=${category}` : ''}`}
+                      href={`/clanky?page=${currentPage - 1}${category ? `&category=${category}` : ''}`}
                       className="px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-primary/5 transition-colors"
                     >
                       Předchozí
@@ -109,7 +109,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
                     {Array.from({ length: result.totalPages }, (_, i) => i + 1).map((page) => (
                       <a
                         key={page}
-                        href={`/${params.locale}/blog?page=${page}${category ? `&category=${category}` : ''}`}
+                        href={`/clanky?page=${page}${category ? `&category=${category}` : ''}`}
                         className={`px-4 py-2 rounded-lg border-2 transition-colors ${
                           currentPage === page
                             ? 'bg-primary text-white border-primary'
@@ -123,7 +123,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
 
                   {currentPage < result.totalPages && (
                     <a
-                      href={`/${params.locale}/blog?page=${currentPage + 1}${category ? `&category=${category}` : ''}`}
+                      href={`/clanky?page=${currentPage + 1}${category ? `&category=${category}` : ''}`}
                       className="px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-primary/5 transition-colors"
                     >
                       Další

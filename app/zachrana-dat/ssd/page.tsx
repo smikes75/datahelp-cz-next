@@ -128,7 +128,7 @@ export default function SSDRecoveryPage() {
         </div>
 
         <Link
-          href="/sluzby/ssd/pripady"
+          href="/zachrana-dat/ssd/pripady"
           className="block bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow mb-8"
         >
           <div className="flex items-center justify-between">
@@ -142,7 +142,7 @@ export default function SSDRecoveryPage() {
 
         <div className="text-center">
           <Link
-            href="/objednat-diagnostiku"
+            href="/poptavka-zachrany-dat"
             className="inline-flex items-center space-x-2 accent-background text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl transition-shadow"
           >
             <span>{t('hero.orderDiagnostics')}</span>

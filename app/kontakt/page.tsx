@@ -256,7 +256,7 @@ function FreePickupPanel() {
       </div>
       <div className="flex justify-center">
         <Link
-          href="/objednat-diagnostiku"
+          href="/poptavka-zachrany-dat"
           className="inline-block bg-white text-accent px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-md"
         >
           Objednat diagnostiku

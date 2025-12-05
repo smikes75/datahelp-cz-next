@@ -74,7 +74,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <div className="min-h-screen bg-gray-50">
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         <Link
-          href={`/${params.locale}/blog`}
+          href="/clanky"
           className="inline-flex items-center text-primary hover:text-accent mb-8 transition-colors font-medium"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />

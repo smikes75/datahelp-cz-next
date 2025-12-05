@@ -338,7 +338,7 @@ export default function OrderDiagnosticsPage() {
 
       <div>
         <Link
-          href="/gdpr"
+          href="/ochrana-osobnich-udaju"
           className="text-accent hover:text-accent/80 text-sm"
         >
           {t('form.privacyLink')}

@@ -424,7 +424,7 @@ export default function PricingPage() {
                       {/* CTA Button */}
                       <div className="mt-6 pt-4 border-t border-gray-200">
                         <Link
-                          href="/objednat-diagnostiku"
+                          href="/poptavka-zachrany-dat"
                           className="block bg-white border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-200 flex items-center justify-center space-x-2"
                         >
                           <ClipboardList className="h-5 w-5" />

@@ -78,13 +78,13 @@ export function Hero() {
             </p>
             <div className="flex flex-wrap gap-4 mt-8 md:mt-8">
               <Link
-                href="/cenik"
+                href="/cenik-zachrany-dat"
                 className="accent-background text-white text-lg px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center"
               >
                 Ceník
               </Link>
               <Link
-                href="/objednat-diagnostiku"
+                href="/poptavka-zachrany-dat"
                 className="bg-white text-primary text-lg px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100 transition-colors"
               >
                 {t('orderDiagnostics')}
