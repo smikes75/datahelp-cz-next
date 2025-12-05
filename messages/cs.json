@@ -681,6 +681,36 @@
       "description": "Máme síť certifikovaných partnerů po celé České republice"
     }
   },
+  "reference": {
+    "title": "Reference",
+    "subtitle": "Nejlepší referencí jsou spokojení zákazníci",
+    "intro": "Naše reference mluví za nás. Pomohli jsme stovkám klientů, od soukromých osob až po velké korporace, obnovit jejich cenná data.",
+    "googleReviews": {
+      "title": "Hodnocení zákazníků",
+      "subtitle": "Co o nás říkají naši klienti na Google"
+    },
+    "featuredStories": {
+      "title": "Vybrané příběhy úspěšné záchrany",
+      "ondrejPycha": {
+        "title": "Jak jsme zachraňovali milionové fotografie Ondřeje Pýchy",
+        "slug": "jak-jsme-zachranovali-milionove-fotografie-ondreje-pychy"
+      },
+      "checkCzechFashion": {
+        "title": "Jak jsme zachraňovali cenná data Check Czech Fashion",
+        "slug": "jak-jsme-zachranovali-cenna-data-check-czech-fashion"
+      },
+      "michalPavlicek": {
+        "title": "Vykouzlili jsme úsměv na tváři mága rockové kytary Michala Pavlíčka",
+        "slug": "vykouzlili-jsme-usmev-na-tvari-maga-rockove-kytary-michala-pavlicka"
+      },
+      "readMore": "Číst příběh"
+    },
+    "cta": {
+      "title": "Máte podobný problém?",
+      "description": "Kontaktujte nás pro nezávaznou konzultaci a bezplatnou diagnostiku",
+      "button": "Objednat diagnostiku"
+    }
+  },
   "techPage": {
     "title": "Naše technologie",
     "subtitle": "Využíváme nejen špičkové technologie třetích stran, ale máme i vlastní vývoj nástrojů a SW pro záchranu dat.",
