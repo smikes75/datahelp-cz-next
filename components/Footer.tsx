@@ -21,7 +21,7 @@ export function Footer() {
             </h3>
             <div className="space-y-1.5 md:space-y-3 text-xs md:text-base">
               <Link
-                href="/gdpr"
+                href="/ochrana-osobnich-udaju"
                 className="block hover:text-accent transition-colors"
               >
                 {t('footer.privacy')}
@@ -33,7 +33,7 @@ export function Footer() {
                 {t('footer.terms')}
               </Link>
               <Link
-                href="/cookies"
+                href="/informace-o-cookies"
                 className="block hover:text-accent transition-colors"
               >
                 {t('footer.cookies')}
@@ -54,19 +54,19 @@ export function Footer() {
             </h3>
             <div className="space-y-1.5 md:space-y-3 text-xs md:text-base">
               <Link
-                href="/sluzby/hdd"
+                href="/zachrana-dat/hdd"
                 className="block hover:text-accent transition-colors"
               >
                 {t('services.hdd.title')}
               </Link>
               <Link
-                href="/sluzby/ssd"
+                href="/zachrana-dat/ssd"
                 className="block hover:text-accent transition-colors"
               >
                 {t('services.ssd.title')}
               </Link>
               <Link
-                href="/sluzby/raid"
+                href="/zachrana-dat/raid"
                 className="block hover:text-accent transition-colors"
               >
                 {t('services.raid.title')}

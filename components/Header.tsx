@@ -66,13 +66,13 @@ export function Header() {
             <Link href="/o-nas" className={`${isActive("/o-nas")} header-nav-link`}>
               {t('nav.about')}
             </Link>
-            <Link href="/cenik" className={`${isActive("/cenik")} header-nav-link`}>
+            <Link href="/cenik-zachrany-dat" className={`${isActive("/cenik-zachrany-dat")} header-nav-link`}>
               {t('nav.pricing')}
             </Link>
-            <Link href="/blog" className={`${isActive("/blog")} header-nav-link`}>
+            <Link href="/clanky" className={`${isActive("/clanky")} header-nav-link`}>
               Blog
             </Link>
-            <Link href="/faq" className={`${isActive("/faq")} header-nav-link`}>
+            <Link href="/caste-dotazy" className={`${isActive("/caste-dotazy")} header-nav-link`}>
               FAQ
             </Link>
             <Link href="/kontakt" className={`${isActive("/kontakt")} header-nav-link`}>
@@ -101,13 +101,13 @@ export function Header() {
             <Link href="/o-nas" className={`block font-bold ${isActive("/o-nas")} header-nav-link`}>
               {t('nav.about')}
             </Link>
-            <Link href="/cenik" className={`block font-bold ${isActive("/cenik")} header-nav-link`}>
+            <Link href="/cenik-zachrany-dat" className={`block font-bold ${isActive("/cenik-zachrany-dat")} header-nav-link`}>
               {t('nav.pricing')}
             </Link>
-            <Link href="/blog" className={`block font-bold ${isActive("/blog")} header-nav-link`}>
+            <Link href="/clanky" className={`block font-bold ${isActive("/clanky")} header-nav-link`}>
               Blog
             </Link>
-            <Link href="/faq" className={`block font-bold ${isActive("/faq")} header-nav-link`}>
+            <Link href="/caste-dotazy" className={`block font-bold ${isActive("/caste-dotazy")} header-nav-link`}>
               FAQ
             </Link>
             <Link href="/kontakt" className={`block font-bold ${isActive("/kontakt")} header-nav-link`}>
