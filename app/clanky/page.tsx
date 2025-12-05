@@ -8,6 +8,7 @@ import { NewsCard } from '@/components/NewsCard';
 import { PageHeader } from '@/components/PageHeader';
 import { getPaginatedBlogPosts } from '@/lib/utils/blog';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Pagination } from '@/components/Pagination';
 
 // ISR - revalidace každou hodinu
 export const revalidate = 3600;
@@ -123,41 +124,11 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
 
               {/* Pagination */}
               {result.totalPages > 1 && (
-                <div className="flex justify-center gap-2 mt-12">
-                  {currentPage > 1 && (
-                    <a
-                      href={`/clanky?page=${currentPage - 1}${category ? `&category=${category}` : ''}`}
-                      className="px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-primary/5 transition-colors"
-                    >
-                      Předchozí
-                    </a>
-                  )}
-
-                  <div className="flex gap-2">
-                    {Array.from({ length: result.totalPages }, (_, i) => i + 1).map((page) => (
-                      <a
-                        key={page}
-                        href={`/clanky?page=${page}${category ? `&category=${category}` : ''}`}
-                        className={`px-4 py-2 rounded-lg border-2 transition-colors ${
-                          currentPage === page
-                            ? 'bg-primary text-white border-primary'
-                            : 'border-primary text-primary hover:bg-primary/5'
-                        }`}
-                      >
-                        {page}
-                      </a>
-                    ))}
-                  </div>
-
-                  {currentPage < result.totalPages && (
-                    <a
-                      href={`/clanky?page=${currentPage + 1}${category ? `&category=${category}` : ''}`}
-                      className="px-4 py-2 rounded-lg border-2 border-primary text-primary hover:bg-primary/5 transition-colors"
-                    >
-                      Další
-                    </a>
-                  )}
-                </div>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={result.totalPages}
+                  baseUrl={category ? `/clanky?category=${category}` : '/clanky'}
+                />
               )}
             </>
           )}
