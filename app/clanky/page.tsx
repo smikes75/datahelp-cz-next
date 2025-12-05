@@ -9,9 +9,18 @@ import { PageHeader } from '@/components/PageHeader';
 import { getPaginatedBlogPosts } from '@/lib/utils/blog';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Pagination } from '@/components/Pagination';
+import { Metadata } from 'next';
 
 // ISR - revalidace každou hodinu
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: 'Magazín | DataHelp.cz',
+  description: 'Odborné články, novinky a tipy ze světa záchrany dat. Zálohování, první pomoc, technologie.',
+  alternates: {
+    canonical: '/clanky',
+  },
+};
 
 interface BlogPageProps {
   searchParams: Promise<{

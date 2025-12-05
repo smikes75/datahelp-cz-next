@@ -6,8 +6,20 @@ import { ToastProvider } from '@/contexts/ToastContext';
 import './globals.css';
 
 export const metadata = {
+  metadataBase: new URL('https://www.datahelp.cz'),
   title: 'DataHelp.cz - Profesionální záchrana dat',
   description: 'Profesionální služby záchrany dat s více než 25 lety zkušeností. Specializujeme se na obnovu HDD, SSD a RAID systémů.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'DataHelp.cz - Profesionální záchrana dat',
+    description: 'Profesionální služby záchrany dat s více než 25 lety zkušeností.',
+    url: 'https://www.datahelp.cz',
+    siteName: 'DataHelp.cz',
+    locale: 'cs_CZ',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

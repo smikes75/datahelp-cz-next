@@ -8,6 +8,9 @@ import { Shield } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
   description: 'Informace o zpracování osobních údajů v souladu s GDPR.',
+  alternates: {
+    canonical: '/ochrana-osobnich-udaju',
+  },
 };
 
 export default function PrivacyPage() {

@@ -8,6 +8,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Obchodní podmínky | DataHelp.cz',
   description: 'Všeobecné obchodní podmínky poskytování služeb záchrany dat.',
+  alternates: {
+    canonical: '/obchodni-podminky',
+  },
 };
 
 export default function TermsPage() {

@@ -47,6 +47,9 @@ export async function generateMetadata({
     title: `${post.title} | DataHelp.cz Blog`,
     description: post.excerpt,
     keywords: post.tags?.join(', '),
+    alternates: {
+      canonical: `/clanky/${resolvedParams.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
