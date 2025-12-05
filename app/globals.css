@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1B387A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #142960;
+}
+
+/* Focus styles for better accessibility */
+/* Default focus styles for form elements and buttons */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus:not(.header-element):not(.faq-button) {
+  outline: none;
+  border-radius: 8px;
+}
+
+/* Remove orange outline from header navigation elements */
+.header-element:focus {
+  outline: none;
+}
+
+/* Subtle focus indicator for header navigation links */
+.header-nav-link:focus {
+  outline: none;
+  background-color: rgba(244, 158, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(244, 158, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* Remove focus outline from logo */
+.header-logo:focus {
+  outline: none;
+}
+
+/* Standardized orange accent elements */
+.accent-border {
+  border: 2px solid #F49E00;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(244, 158, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.accent-border:hover {
+  border-color: #FFB52E;
+  box-shadow: 0 4px 12px rgba(244, 158, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+.accent-background {
+  background-color: #F49E00;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(244, 158, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.accent-background:hover {
+  background-color: #FFB52E;
+  box-shadow: 0 4px 12px rgba(244, 158, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.accent-text {
+  color: #F49E00;
+  transition: color 0.2s ease;
+}
+
+.accent-text:hover {
+  color: #FFB52E;
+}
+
+/* Orange warning/alert boxes */
+.orange-alert {
+  background-color: rgba(244, 158, 0, 0.08);
+  border: 1px solid rgba(244, 158, 0, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(244, 158, 0, 0.1);
+}
+
+/* FAQ specific styling - no orange outlines or borders */
+.faq-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Subtle focus indicator for FAQ buttons (accessibility) */
+.faq-button:focus-visible {
+  background-color: #f9fafb !important;
+}
+.orange-alert-border {
+  border-left: 4px solid #F49E00;
+  background-color: rgba(244, 158, 0, 0.05);
+  border-radius: 0 8px 8px 0;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(244, 158, 0, 0.1);
+}
+/* Improved touch targets for mobile */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Responsive font size boost for better mobile readability */
+/* Small phones: significant increase for better readability */
+@media (max-width: 640px) {
+  /* Běžný text tučnější pro lepší čitelnost */
+  p, span, div, li {
+    font-weight: 450;
+  }
+
+  .text-sm {
+    font-size: 1rem !important; /* 16px instead of 14px (+14%) */
+    line-height: 1.6rem !important;
+    font-weight: 500 !important; /* medium */
+  }
+
+  .text-xs {
+    font-size: 0.875rem !important; /* 14px instead of 12px (+17%) */
+    line-height: 1.35rem !important;
+    font-weight: 500 !important;
+  }
+
+  /* Also boost base text slightly */
+  .text-base {
+    font-size: 1.0625rem !important; /* 17px instead of 16px */
+    line-height: 1.65rem !important;
+  }
+}
+
+/* Tablets and medium phones: moderate increase */
+@media (min-width: 641px) and (max-width: 768px) {
+  .text-sm {
+    font-size: 0.9375rem !important; /* 15px instead of 14px */
+    line-height: 1.5rem !important;
+  }
+
+  .text-xs {
+    font-size: 0.8125rem !important; /* 13px instead of 12px */
+    line-height: 1.25rem !important;
+  }
+}
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

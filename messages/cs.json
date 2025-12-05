@@ -1,0 +1,1371 @@
+{
+  "caseStudies": {
+    "title": "Případové studie",
+    "description": "Reálné příklady úspěšné záchrany dat z poškozených zařízení",
+    "problem": "Problém:",
+    "solution": "Řešení:",
+    "result": "Výsledek:",
+    "duration": "Doba řešení:",
+    "recoveryRate": "Úspěšnost:",
+    "documentation": "Kompletní dokumentace",
+    "contactUs": "Máte podobný problém?",
+    "hdd": [
+      {
+        "title": "Mechanické poškození plotny Western Digital",
+        "problem": "Disk po pádu vykazoval hlasité zvuky a nebyl detekován systémem. Klient potřeboval obnovit důležité firemní dokumenty a účetnictví.",
+        "solution": "V čistém prostředí jsme provedli výměnu poškozených hlav a rekonstrukci servisní zóny. Následně jsme použili specializovaný hardware pro obnovu dat.",
+        "result": "Úspěšně jsme obnovili 98% dat včetně všech kritických dokumentů. Cena 520 EUR",
+        "duration": "5 dní",
+        "recoveryRate": "98%",
+        "image": "https://images.unsplash.com/photo-1601737487795-dab272f52420"
+      },
+      {
+        "title": "Selhání elektroniky Seagate Barracuda",
+        "problem": "Disk se nerozběhl kvůli vadě elektroniky. Obsahoval kritická výrobní data průmyslového podniku.",
+        "solution": "Diagnostikovali jsme závadu na PCB a provedli vyčtení a rekonstrukci FW. Poté jsme pomocí PC-3000 obnovili přístup k datům.",
+        "result": "Kompletní obnova všech dat. Cena 380 EUR",
+        "duration": "3 dny",
+        "recoveryRate": "100%",
+        "image": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea"
+      },
+      {
+        "title": "Poškození firmware Toshiba",
+        "problem": "Disk byl poškozen po výpadku proudu, firmware byl částečně přepsán. Obsahoval rodinné fotografie za posledních 10 let.",
+        "solution": "Pomocí specializovaného vybavení jsme obnovili původní firmware a následně provedli rekonstrukci systémové oblasti.",
+        "result": "Zachránili jsme všechny fotografie a osobní dokumenty.",
+        "duration": "4 dny",
+        "recoveryRate": "99%",
+        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
+      }
+    ],
+    "ssd": [
+      {
+        "title": "Poškozený řadič Samsung NVMe SSD",
+        "problem": "SSD disk přestal být detekován po aktualizaci firmware. Obsahoval kritická data vývojářského týmu včetně zdrojových kódů.",
+        "solution": "Provedli jsme bypass poškozeného řadiče a přímé čtení NAND čipů. Data byla následně rekonstruována pomocí specializovaného softwaru.",
+        "result": "Obnovení kompletní adresářové struktury a všech zdrojových kódů.",
+        "duration": "4 dny",
+        "recoveryRate": "100%",
+        "image": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea"
+      },
+      {
+        "title": "Selhání flash paměti USB disku",
+        "problem": "USB flash disk vykazoval pouze část své kapacity a soubory byly poškozené. Obsahoval důležité pracovní prezentace.",
+        "solution": "Pomocí PC-3000 Flash jsme analyzovali poškozené bloky a provedli rekonstrukci souborového systému.",
+        "result": "Záchrana všech prezentací a dokumentů v původní kvalitě.",
+        "duration": "2 dny",
+        "recoveryRate": "95%",
+        "image": "https://images.unsplash.com/photo-1601737487795-dab272f52420"
+      },
+      {
+        "title": "Zašifrovaný firemní SSD Kingston",
+        "problem": "SSD disk byl zašifrovaný a po hardwarovém selhání nebylo možné získat přístup k datům. Obsahoval účetní databázi.",
+        "solution": "Opravili jsme fyzické poškození a pomocí specializovaných nástrojů obnovili přístup k zašifrovaným datům.",
+        "result": "Úspěšná obnova celé účetní databáze včetně všech transakcí.",
+        "duration": "6 dní",
+        "recoveryRate": "99%",
+        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
+      }
+    ],
+    "raid": [
+      {
+        "title": "Havárie RAID 5 serveru s účetními daty",
+        "problem": "Selhání dvou disků v RAID 5 poli současně. Server obsahoval kompletní účetnictví a ERP systém střední výrobní firmy.",
+        "solution": "Specializovanou diagnostikou jsme identifikovali příčinu selhání a obnovili data z poškozených disků. Následně jsme rekonstruovali RAID pole a obnovili přístup k datům.",
+        "result": "Kompletní obnova účetnictví a ERP dat bez ztráty transakcí.",
+        "duration": "7 dní",
+        "recoveryRate": "100%",
+        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
+      },
+      {
+        "title": "Ztráta konfigurace QNAP NAS",
+        "problem": "Po aktualizaci firmware došlo ke ztrátě konfigurace RAID. NAS obsahoval 8 disků v RAID 6 s kritickými projektovými daty.",
+        "solution": "Provedli jsme analýzu původní konfigurace a pomocí specializovaného software rekonstruovali RAID pole včetně všech parametrů.",
+        "result": "Úspěšná obnova všech projektových dat a dokumentace.",
+        "duration": "5 dní",
+        "recoveryRate": "99%",
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa"
+      },
+      {
+        "title": "Ransomware na Synology NAS",
+        "problem": "Firemní NAS byl zasažen ransomwarem, který zašifroval kritická data. Zálohy byly neúplné.",
+        "solution": "Pomocí forenzní analýzy jsme identifikovali a obnovili původní data ze snapshots a žurnálových souborů.",
+        "result": "Záchrana 95% dat bez nutnosti platit výkupné.",
+        "duration": "6 dní",
+        "recoveryRate": "95%",
+        "image": "https://images.unsplash.com/photo-1588508065123-287b28e013da"
+      }
+    ]
+  },
+  "accessibility": {
+    "skipToMain": "Přeskočit na hlavní obsah",
+    "backToTop": "Zpět nahoru",
+    "selectLanguage": "Vybrat jazyk",
+    "toggleMenu": "Otevřít/zavřít menu",
+    "socialMedia": {
+      "instagram": "Instagram",
+      "facebook": "Facebook"
+    }
+  },
+  "banner": {
+    "noPayment": "Šťastný nový rok 2025",
+    "freeConsultation": "Happy New Year 2025",
+    "secureRecovery": "Frohes neues Jahr 2025",
+    "certified": "Felice Anno Nuovo 2025"
+  },
+  "hero": {
+    "title": "Obnova dat\npro firmy i jednotlivce",
+    "subtitle": "Specializujeme se na záchranu dat z poškozených médií již více než 25 let. Platíte pouze za úspěšně zachráněná data.",
+    "consultation": "Bezplatná konzultace",
+    "getPrice": "Zjistit cenu",
+    "orderDiagnostics": "Objednat diagnostiku",
+    "ourServices": "Služby",
+    "security": "Diagnostika a svoz zdarma",
+    "securityDesc": "Bez závazků",
+    "technology": "Moderní technologie",
+    "technologyDesc": "Profesionální vybavení",
+    "experience": "25+ let zkušeností",
+    "experienceDesc": "Více jak 55.000 vyřešených zakázek",
+    "pricing": "Ceník"
+  },
+  "about": {
+    "title": "O nás",
+    "subtitle": "Jsme česká firma s dlouholetou tradicí.",
+    "description": "",
+    "experience": {
+      "title": "Roky zkušeností",
+      "description": "Více než 25 let se specializujeme na obnovu dat"
+    },
+    "team": {
+      "title": "Expertní tým",
+      "description": "Certifikovaní profesionálové s rozsáhlými znalostmi"
+    },
+    "availability": {
+      "title": "Služby 24/7",
+      "description": "Vždy k dispozici pro nouzové případy"
+    },
+    "security": {
+      "title": "Bezpečnost dat",
+      "description": "Garantujeme maximální bezpečnost během celého procesu obnovy"
+    },
+    "mission": {
+      "title": "Naše mise",
+      "description": "Poskytovat špičkové profesionální služby obnovy a záchrany dat."
+    },
+    "timeline": {
+      "title": "Historie společnosti",
+      "subtitle": "Již více než 25 let zkušeností v oboru záchrany dat",
+      "items": [
+        {
+          "year": "1998",
+          "title": "Začátek v oboru",
+          "description": "První kroky v oblasti záchrany dat"
+        },
+        {
+          "year": "2005",
+          "title": "Rozšíření služeb",
+          "description": "Profesionalizace a růst v oboru obnovy dat"
+        },
+        {
+          "year": "2007",
+          "title": "První PC-3K recovery systém",
+          "description": "3 zaměstnanci, první profesionální stanice"
+        },
+        {
+          "year": "2010",
+          "title": "Rozšíření laboratoře",
+          "description": "5 zaměstnanců, větší prostory"
+        },
+        {
+          "year": "2017",
+          "title": "15 PC-3K stanic",
+          "description": "11 zaměstnanců, expanze do zahraničí"
+        },
+        {
+          "year": "2020",
+          "title": "35,000+ zakázek",
+          "description": "Více než 35 tisíc úspěšně vyřešených případů"
+        },
+        {
+          "year": "2024",
+          "title": "Založení DataHelp s.r.o.",
+          "description": "Nová kapitola s více jak 55 tisíc úspěšně vyřešených zakázek"
+        }
+      ]
+    },
+    "teamSection": {
+      "title": "Jsme tým zkušených odborníků na záchranu dat",
+      "subtitle": "Specialisté s dlouholetou praxí a hlubokou odborností",
+      "members": [
+        {
+          "name": "Ondra",
+          "role": "Senior Specialista",
+          "specialization": "Western Digital, Toshiba, Hitachi",
+          "description": "Expert na obnovu dat z disků WD, Toshiba a Hitachi"
+        },
+        {
+          "name": "Alex",
+          "role": "Senior Specialista",
+          "specialization": "Seagate, IBM",
+          "description": "Specialista na disky Seagate a IBM"
+        },
+        {
+          "name": "Eduard",
+          "role": "RAID/NAS & Unix Specialista",
+          "specialization": "RAID/NAS systémy, Unix-like OS",
+          "description": "Expert na složité RAID/NAS konfigurace a Unix systémy"
+        },
+        {
+          "name": "Martin",
+          "role": "SSD Specialista",
+          "specialization": "SSD a Flash technologie",
+          "description": "Specialista na moderní flash paměti a SSD disky"
+        },
+        {
+          "name": "Pavel",
+          "role": "Forensic Expert",
+          "specialization": "Souborové systémy",
+          "description": "Expert na obnovu rozpadlých souborových systémů"
+        },
+        {
+          "name": "Štěpán",
+          "role": "Zakladatel společnosti",
+          "specialization": "SW vývoj, návrhy CAD",
+          "description": "Jeden ze zakladatelů společnosti, software developer a CAD specialista"
+        }
+      ]
+    }
+  },
+  "services": {
+    "title": "Naše služby",
+    "subtitle": "Komplexní řešení pro obnovu a záchranu dat",
+    "hdd": {
+      "title": "Záchrana dat HDD",
+      "desc": "Z poškozených nebo nefunkčních disků.",
+      "keywords": {
+        "recovery": "záchrana dat hdd, obnova dat pevný disk, oprava pevného disku"
+      },
+      "features": {
+        "mechanical": "Mechanické poškození",
+        "mechanicalDesc": "Závady čtecích hlav, poškození ploten",
+        "electronic": "Elektronické závady",
+        "electronicDesc": "Zničené PCB, poškození přepětím",
+        "logical": "Selhání souborového systému",
+        "logicalDesc": "Obnova smazaných dat, oprava systémů"
+      },
+      "supported": {
+        "title": "Podporované technologie",
+        "devices": "Typy zařízení",
+        "manufacturers": "Výrobci",
+        "sata": "SATA HDD",
+        "ide": "IDE/PATA HDD",
+        "scsi": "SCSI/SAS HDD",
+        "external": "Externí disky"
+      }
+    },
+    "ssd": {
+      "title": "Záchrana dat SSD",
+      "desc": "Specializovaná obnova dat z flash pamětí a SSD disků.",
+      "keywords": {
+        "recovery": "záchrana dat ssd, obnova dat ssd disk, oprava ssd disku"
+      },
+      "features": {
+        "controller": "Poruchy řadiče",
+        "controllerDesc": "Obnova dat v případě poškozeného řadiče",
+        "firmware": "Rekonstrukce firmwaru",
+        "firmwareDesc": "Záchrana dat v případě selhání firmwaru",
+        "flash": "Poškození flash čipů",
+        "flashDesc": "Obnova dat z poškozených paměťových čipů"
+      },
+      "supported": {
+        "title": "Podporovaná zařízení",
+        "devices": "Typy zařízení",
+        "manufacturers": "Výrobci",
+        "sata": "SATA SSD",
+        "nvme": "NVMe SSD",
+        "usb": "USB Flash disky",
+        "cards": "Paměťové karty"
+      }
+    },
+    "raid": {
+      "title": "Záchrana dat RAID/NAS",
+      "desc": "Obnova dat ze všech typů RAID polí a NAS serverů.",
+      "keywords": {
+        "recovery": "záchrana dat raid, obnova dat raid systémy, oprava raid pole, záchrana dat nas, obnova nas serveru"
+      },
+      "features": {
+        "hardware": "Hardwarové RAID/NAS",
+        "hardwareDesc": "Obnova dat při selhání nadkritického množství disků",
+        "software": "Softwarové RAID/NAS",
+        "softwareDesc": "Rekonstrukce RAID/NAS při ztrátě konfigurace",
+        "virtual": "Virtuální systémy",
+        "virtualDesc": "Obnova dat při poškození virtuálních strojů"
+      },
+      "supported": {
+        "title": "Podporované systémy",
+        "configurations": "Konfigurace",
+        "nas": "NAS systémy",
+        "san": "SAN systémy",
+        "controllers": "Výrobci"
+      },
+      "security": {
+        "title": "Bezpečnost dat",
+        "description": "Garantujeme maximální bezpečnost a důvěrnost vašich dat během celého procesu obnovy"
+      }
+    },
+    "business": {
+      "title": "Partnerský program",
+      "desc": "Nabízíme spolupráci IT firmám a servisům",
+      "keywords": {
+        "recovery": "firemní záchrana dat, služby pro firmy, partnerský program datahelp"
+      },
+      "contact": {
+        "salesTeam": "Pro více informací kontaktujte naše obchodníky:",
+        "leaveMessage": "Nebo nám zanechte zprávu:"
+      },
+      "features": {
+        "support": "Technická podpora",
+        "supportDesc": "Obchodní a technická podpora, možnost zaškolení",
+        "security": "Individuální ceník",
+        "securityDesc": "Získejte lepší ceny a splatnost faktur",
+        "priority": "Prioritní zpracování",
+        "priorityDesc": "Přednostní zpracování požadavků našich partnerů"
+      },
+      "sla": {
+        "title": "SLA podmínky",
+        "response": {
+          "title": "Garantovaná doba odezvy",
+          "description": "Rychlá reakce na vaše požadavky"
+        },
+        "onsite": {
+          "title": "Servis na místě",
+          "description": "Možnost řešení přímo u zákazníka"
+        },
+        "reporting": {
+          "title": "Pravidelné reporty",
+          "description": "Detailní přehledy a statistiky"
+        }
+      },
+      "industries": {
+        "title": "Průmyslová odvětví",
+        "finance": "Finance",
+        "financeDesc": "Banky a finanční instituce",
+        "healthcare": "Zdravotnictví",
+        "healthcareDesc": "Nemocnice a zdravotnická zařízení",
+        "manufacturing": "Výroba",
+        "manufacturingDesc": "Výrobní společnosti",
+        "it": "IT",
+        "itDesc": "IT společnosti a poskytovatelé služeb"
+      }
+    },
+    "whyChooseUs": "Proč si vybrat nás",
+    "benefits": {
+      "expertise": "Zkušenosti",
+      "expertiseDesc": "20 let zkušeností, 55.000+ úspěšných případů",
+      "speed": "Rychlost",
+      "speedDesc": "Efektivní řešení problémů",
+      "security": "Bezpečnost",
+      "securityDesc": "Maximální ochrana vašich dat"
+    },
+    "comparison": {
+      "title": "Porovnání našich služeb",
+      "subtitle": "Najděte správné řešení pro vaše potřeby",
+      "featureLabel": "Funkce",
+      "features": {
+        "recoveryTime": "Typická doba obnovy",
+        "successRate": "Míra úspěšnosti",
+        "complexity": "Úroveň složitosti",
+        "startingPrice": "Cena od",
+        "commonIssues": "Časté problémy",
+        "dataTypes": "Typy dat"
+      },
+      "values": {
+        "hdd": {
+          "recoveryTime": "2-5 dní",
+          "successRate": "95%",
+          "complexity": "Střední",
+          "startingPrice": "8 750 Kč",
+          "commonIssues": "Mechanické selhání, havárie hlav, vadné sektory",
+          "dataTypes": "Dokumenty, fotky, videa, databáze"
+        },
+        "ssd": {
+          "recoveryTime": "3-7 dní",
+          "successRate": "85%",
+          "complexity": "Vysoká",
+          "startingPrice": "6 250 Kč",
+          "commonIssues": "Selhání řadiče, korupce firmwaru, opotřebení flash",
+          "dataTypes": "Systémové soubory, aplikace, osobní data"
+        },
+        "raid": {
+          "recoveryTime": "5-10 dní",
+          "successRate": "90%",
+          "complexity": "Velmi vysoká",
+          "startingPrice": "12 500 Kč",
+          "commonIssues": "Selhání více disků, degradace RAID/NAS, ztráta konfigurace",
+          "dataTypes": "Firemní data, databáze, virtuální stroje"
+        }
+      }
+    },
+    "card": {
+      "successRate": "Míra úspěšnosti:",
+      "avgTime": "Průměrná doba:",
+      "from": "Cena od:",
+      "learnMore": "Zjistit více",
+      "individualApproach": "Individuální přístup"
+    },
+    "timeline": {
+      "title": "Časová osa procesu záchraný",
+      "subtitle": "Od poškozeného zařízení k obnoveným datům",
+      "steps": {
+        "before": {
+          "title": "Přijetí média",
+          "description": "Zařízení dorazí do naší laboratoře"
+        },
+        "diagnosis": {
+          "title": "Bezplatná diagnostika",
+          "description": "24-48 hodin",
+          "details": "Naši specialisté identifikují problém a poskytnou detailní plán obnovy"
+        },
+        "approval": {
+          "title": "Vaše schválení",
+          "description": "Rozhodujete vy",
+          "details": "Pošleme vám cenovou nabídku a pravděpodobnost úspěchu obnovy"
+        },
+        "recovery": {
+          "title": "Obnova dat",
+          "description": "2-10 dní",
+          "details": "Náš tým pracuje na obnově vašich dat pomocí specializovaných nástrojů"
+        },
+        "verification": {
+          "title": "Ověření",
+          "description": "24 hodin",
+          "details": "Ověřujeme integritu dat a poskytneme vám seznam souborů"
+        },
+        "after": {
+          "title": "Předání dat",
+          "description": "Vaše data jsou zpět"
+        }
+      }
+    }
+  },
+  "reviews": {
+    "title": "Napsali jste o nás",
+    "review1": "Profesionální přístup a rychlé řešení. Obnovili kritická data z našich serverů.",
+    "review2": "Vynikající komunikace a perfektní výsledky. Doporučujeme pro všechny firmy.",
+    "review3": "Obnovili naši databázi po ransomware útoku. Skvělá práce!"
+  },
+  "pricing": {
+    "title": "Ceník",
+    "subtitle": "Ceny bez skrytých poplatků. Platíte pouze za úspěšně zachráněná data.",
+    "description": "Záchrana dat je vysoce specializovaný proces, ke každému případu přistupujeme s individuální péčí.",
+    "getQuote": "Nezávazná konzultace",
+    "calculatePrice": "Spočítat cenu",
+    "caseStudies": {
+      "title": "Případové studie",
+      "detail": "Detail",
+      "moreCases": "Další případy",
+      "price": "Cena:"
+    },
+    "serviceList": {
+      "title": "Položkový ceník",
+      "subtitle": "Detailní ceník našich služeb",
+      "description": "Kompletní přehled všech našich služeb a jejich cen",
+      "accordionTitle": "Detailní položkový ceník",
+      "accordionSubtitle": "Pro firmy a IT specialisty",
+      "sections": {
+        "diagnostics": {
+          "title": "Diagnostika",
+          "items": {
+            "basic": "Základní diagnostika",
+            "detailed": "Diagnostika s protokolem"
+          }
+        },
+        "software": {
+          "title": "Softwarové závady",
+          "items": {
+            "deleted": "Obnova smazaných dat",
+            "filesystem": "Oprava souborového systému",
+            "compressed": "Obnova komprimovaných dat",
+            "raid": "Rekonstrukce RAID/NAS",
+            "database": "Obnova databází"
+          }
+        },
+        "hardware": {
+          "title": "Hardwarové chyby ",
+          "items": {
+            "electronics": "Závada elektroniky",
+            "heads": "Výměna hlav",
+            "mechanics": "Závada mechaniky",
+            "bga": "BGA přepájení",
+            "rom": "ROM emulátor",
+            "service": "Servisní zóna"
+          }
+        },
+        "specialized": {
+          "title": "Specializované služby",
+          "items": {
+            "pc3000": "Práce s PC-3000",
+            "nand": "Rekonstrukce NAND",
+            "security": "Bezpečnostní čipy",
+            "mcmt": "MCMT tabulky",
+            "firmware": "Analýza firmware",
+            "reverse": "Reverzní inženýrství",
+            "damaged": "Poškozená servisní zóna"
+          }
+        },
+        "express": {
+          "title": "Expresní služby",
+          "items": {
+            "h24": "Bez ohledu na pracovní dobu, Nonstop",
+            "overtime": "Přednostní řešení"
+          }
+        },
+        "additional": {
+          "title": "Doplňkové služby",
+          "items": {
+            "consulting": "Konzultace",
+            "backup": "Záloha dat",
+            "encryption": "Šifrování dat"
+          }
+        }
+      },
+      "pricing": {
+        "note": "Záchrana dat je vysoce specializovaný proces, ke každému případu přistupujeme s individuální péčí."
+      }
+    },
+    "mobile": {
+      "title": "Záchrana dat mobil",
+      "description": "Mobilní telefony, tablety a chytré zařízení",
+      "price": "Od 5 000 Kč",
+      "noSuccess": "Platíte jen za úspěšnou záchranu",
+      "features": {
+        "diagnosis": "Bezplatná vstupní diagnostika",
+        "recovery": "Podpora všech typů mobilních zařízení",
+        "warranty": "Specializované vybavení pro mobily",
+        "support": "Rychlé zpracování do 3 dnů"
+      }
+    },
+    "ssd": {
+      "title": "Záchrana dat SSD",
+      "description": "SSD disky, USB flash paměti a memory karty",
+      "price": "Od 6 500 Kč",
+      "noSuccess": "Platíte jen za úspěšnou záchranu",
+      "features": {
+        "diagnosis": "Bezplatná vstupní diagnostika",
+        "recovery": "Podpora všech flash technologií",
+        "warranty": "Více než 20 let zkušeností",
+        "support": "Tým školených techniků"
+      }
+    },
+    "hdd": {
+      "title": "Záchrana dat HDD",
+      "description": "Mechanicky poškozené nebo nefunkční pevné disky",
+      "price": "Od 9 000 Kč",
+      "noSuccess": "Platíte jen za úspěšnou záchranu",
+      "features": {
+        "diagnosis": "Bezplatná vstupní diagnostika",
+        "recovery": "Podpora všech výrobců",
+        "warranty": "Rozsáhlý sklad dílů",
+        "support": "Možnost Expresního zpracování"
+      }
+    },
+    "raid": {
+      "title": "RAID, NAS Systémy",
+      "description": "Pro RAID, NAS a serverové systémy",
+      "price": "Cena\nna míru",
+      "noSuccess": "Cena dle rozsahu poškození",
+      "features": {
+        "diagnosis": "Komplexní analýza",
+        "recovery": "Rekonstrukce RAID i bez původního serveru",
+        "warranty": "Podpora všech souborových systémů",
+        "support": "Možnost expresního řešení 24/7"
+      }
+    },
+    "business": {
+      "title": "Možnost spolupráce",
+      "description": "Hledáme partnery pro spolupráci",
+      "price": "Partnerský\nprogram",
+      "noSuccess": "Dle specifických požadavků",
+      "features": {
+        "priority": "Prioritní zpracování",
+        "sla": "Individuální SLA",
+        "support": "Odborná podpora",
+        "onsite": "Individuální ceny"
+      }
+    },
+    "faq": {
+      "title": "Časté otázky k cenám",
+      "items": [
+        {
+          "question": "Jak se stanovuje konečná cena?",
+          "answer": "Konečná cena se stanoví po bezplatné diagnostice, kdy přesně určíme typ a rozsah poškození. Cena zahrnuje veškeré práce potřebné k záchraně dat."
+        },
+        {
+          "question": "Co zahrnuje bezplatná diagnostika?",
+          "answer": "Bezplatná diagnostika zahrnuje prvotní posouzení média – určíme typ a rozsah poškození a na základě toho vám sdělíme, zda je záchrana dat možná a kolik bude stát. Celý proces je nezávazný a nic neplatíte."
+        },
+        {
+          "question": "Jak dlouho trvá záchrana dat?",
+          "answer": "Standardní doba je 5-10 pracovních dnů. Pro urgentní případy nabízíme expresní službu (24-48 hodin) s příplatkem."
+        }
+      ]
+    },
+    "stickyCta": {
+      "call": "Volat",
+      "consultation": "Bezplatná konzultace"
+    }
+  },
+  "faq": {
+    "title": "Časté dotazy",
+    "subtitle": "Odpovědi na nejčastější otázky o záchraně dat",
+    "questions": {
+      "q1": "Jak se počítá konečná cena?",
+      "a1": "Konečná cena závisí na typu a rozsahu poškození, potřebných dílech a složitosti obnovy.",
+      "q2": "Nabízíte garanci \"Bez dat, bez platby\"?",
+      "a2": "Ano, pokud se nám nepodaří vaše data obnovit, neplatíte za službu obnovy.",
+      "q3": "Jak dlouho trvá proces obnovy?",
+      "a3": "Standardní obnova trvá 5-10 pracovních dnů. Pro urgentní případy je k dispozici expresní služba.",
+      "q4": "Jaké platební metody přijímáte?",
+      "a4": "Přijímáme všechny hlavní platební karty, bankovní převody a firemní objednávky.",
+      "q5": "Kdo jste a proč vám můžeme věřit?",
+      "a5": "Jsme česká firma s více než 20 lety zkušeností v oboru záchrany dat. Máme vlastní specializovanou laboratoř v Praze a certifikované techniky.",
+      "q6": "Kam posíláte disky k opravě?",
+      "a6": "Nikam. Veškeré opravy a záchranu dat provádíme výhradně v naší vlastní laboratoři v Praze. Data nikdy neopouští naše zabezpečené prostory.",
+      "q7": "Jak je zajištěna bezpečnost dat?",
+      "a7": "Pracujeme v zabezpečené laboratoři s kontrolovaným přístupem. Všechna data jsou šifrována a po úspěšné záchraně a bezpečně smazána. Dodržujeme přísné bezpečnostní protokoly a jsme vázáni mlčenlivostí.",
+      "q8": "Provádíte opravy HDD nebo SSD?",
+      "a8": "Ne. Pevné disky nejsou konstruovány jako opravitelné – jde o přesnou mechaniku s tolerancemi v nanometrech, kde i mikroskopická nečistota může způsobit nevratné poškození. U SSD je situace podobná – data jsou uložena v paměťových čipech, které při poruše řadiče nebo elektroniky nelze jednoduše opravit, pouze z nich lze data zachránit. V obou případech proto data přenášíme na nové, spolehlivé médium.",
+      "q9": "Jaké jsou vaše úspěšnosti?",
+      "a9": "Naše úspěšnost záchrany dat přesahuje 95%. Díky vlastní laboratoři a špičkovému vybavení dokážeme řešit i velmi složité případy.",
+      "q10": "Co zahrnuje bezplatná diagnostika?",
+      "a10": "Bezplatná diagnostika zahrnuje prvotní posouzení média – určíme typ a rozsah poškození a na základě toho vám sdělíme, zda je záchrana dat možná a kolik bude stát. Celý proces je nezávazný a nic neplatíte.",
+      "q11": "Proč chcete vědět, jaká data jsou důležitá?",
+      "a11": "Informace o důležitosti dat nám pomáhají urychlit proces záchrany a optimalizovat náklady. Zaměříme se prioritně na ta nejdůležitější data a nebudeme zbytečně obnovovat části, které máte zálohované nebo již nepotřebujete. Díky tomu můžeme proces urychlit a často i zlevnit."
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Jsme tu pro vás 24/7",
+    "form": {
+      "title": "Napište nám",
+      "leaveMessage": "Zanechte nám zprávu",
+      "name": "Jméno a příjmení",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "message": "Zpráva",
+      "send": "Odeslat zprávu",
+      "sending": "Odesílání...",
+      "success": "Zpráva byla úspěšně odeslána",
+      "error": "Došlo k chybě. Zkuste to prosím později.",
+      "rateLimit": "Příliš mnoho požadavků. Zkuste to znovu za {seconds} sekund.",
+      "tooManyRequests": "Příliš mnoho požadavků. Zkuste to prosím později.",
+      "errors": {
+        "name": "Jméno je povinné",
+        "email": "E-mail je povinný",
+        "emailFormat": "Neplatný formát e-mailu",
+        "emailOrPhone": "Vyplňte prosím e-mail nebo telefon",
+        "phone": "Neplatný formát telefonu",
+        "message": "Zpráva je povinná"
+      }
+    },
+    "info": {
+      "title": "Kontaktní informace",
+      "address": "Jirsíkova 541/1\n186 00 Praha 8 ",
+      "hours": "Otevírací doba:\nPo-Pá: 9:00 - 18:00\nPohotovost: 24/7",
+      "phone": "+420 775 220 440",
+      "email": "info@datahelp.cz",
+      "emergency": "24/7 Pohotovostní služba pro firemní klienty"
+    },
+    "partners": {
+      "title": "Nebo kontaktujte naše partnery",
+      "description": "Máme síť certifikovaných partnerů po celé České republice"
+    }
+  },
+  "techPage": {
+    "title": "Naše technologie",
+    "subtitle": "Využíváme nejen špičkové technologie třetích stran, ale máme i vlastní vývoj nástrojů a SW pro záchranu dat.",
+    "learnMore": "Zjistit více",
+    "cleanRoom": {
+      "title": "Bezprašné prostředí",
+      "description": "Všechny pracoviště jsou vybaveny laboratorními boxy třídy 100 pro bezpečnou manipulaci s citlivými komponenty"
+    },
+    "tools": {
+      "title": "Specializované nástroje",
+      "description": "Nejmodernější hardwarové a softwarové nástroje pro obnovu dat"
+    },
+    "diagnostics": {
+      "title": "Pokročilá diagnostika",
+      "description": "Komplexní diagnostické systémy pro přesnou identifikaci problémů"
+    },
+    "equipment": {
+      "title": "Profesionální vybavení",
+      "pc3000udma": {
+        "description": "Profesionální systém pro obnovu dat z HDD",
+        "features": {
+          "manufacturers": "Podpora všech výrobců HDD",
+          "firmware": "Opravy firmware",
+          "recovery": "Pokročilá obnova dat"
+        }
+      },
+      "pc3000flash": {
+        "description": "Specializovaný systém pro flash paměti",
+        "features": {
+          "monolithic": "Monolitické čipy",
+          "usb": "USB flash disky",
+          "ssd": "SSD disky"
+        }
+      },
+      "pc3000ssd": {
+        "description": "Systém pro SSD disky",
+        "features": {
+          "nvme": "NVMe disky",
+          "sata": "SATA SSD",
+          "controller": "Opravy řadičů"
+        }
+      },
+      "rusolut": {
+        "description": "Pokročilý systém pro výměnu a kalibraci hlaviček HDD",
+        "features": {
+          "precision": "Přesné zarovnání hlaviček",
+          "calibration": "Automatická kalibrace",
+          "compatibility": "Podpora všech typů HDD"
+        }
+      },
+      "nandreconstructor": {
+        "description": "Profesionální nástroj pro rekonstrukci NAND čipů",
+        "features": {
+          "chips": "Čtení NAND čipů",
+          "reconstruction": "Rekonstrukce dat",
+          "formats": "Podpora všech typů čipů"
+        }
+      },
+      "bgarework": {
+        "description": "BGA přepracovací stanice pro opravu čipů",
+        "features": {
+          "precision": "Přesné řízení teploty",
+          "profiles": "Více teplotních profilů",
+          "safety": "Bezpečná manipulace s komponentami"
+        }
+      },
+      "partswarehouse": {
+        "description": "Rozsáhlý sklad náhradních dílů pro všechny typy úložných zařízení",
+        "features": {
+          "inventory": "Tisíce originálních náhradních dílů",
+          "availability": "Okamžitá dostupnost komponent",
+          "compatibility": "Díly pro všechny výrobce a modely"
+        }
+      }
+    },
+    "security": {
+      "title": "Bezpečnostní protokoly",
+      "protocols": {
+        "title": "Bezpečnost dat",
+        "description": "Přísné bezpečnostní protokoly pro ochranu vašich dat"
+      },
+      "specialists": {
+        "title": "Certifikovaní specialisté",
+        "description": "Tým vysoce kvalifikovaných odborníků s mnohaletými zkušenostmi"
+      }
+    },
+    "gallery": {
+      "title": "Naše laboratoř",
+      "cleanRoom": "Bezprašné prostředí",
+      "diagnostics": "Diagnostika",
+      "serverRoom": "Serverovna",
+      "dataCenter": "Datové centrum",
+      "partsWarehouse": "Sklad dílů"
+    }
+  },
+  "gallery": {
+    "title": "Naše firma",
+    "cleanRoom": "Čistá místnost",
+    "diagnostics": "Diagnostika",
+    "serverRoom": "Serverovna",
+    "dataCenter": "Datové centrum",
+    "aboutTitle": "DataHelp",
+    "aboutDescription": "Takto to u nás vypadá",
+    "aboutTeam": "To jsme my",
+    "aboutWorkspace": "Moderní pracoviště",
+    "aboutQuality": "Kontrola kvality",
+    "aboutPrecision": "Přesnost a detail",
+    "aboutTechnology": "Pokročilé technologie",
+    "aboutLab": "Laboratorní vybavení",
+    "aboutExpertise": "Měření a diagnostika",
+    "aboutInnovation": "Inovace a rozvoj",
+    "loadMore": "Zobrazit další"
+  },
+  "process": {
+    "title": "Postup záchrany dat",
+    "guarantee": "Platíte jen za úspěšnou záchranu",
+    "reception": {
+      "title": "Příjem média",
+      "desc": "Převezmeme vaše zařízení a vytvoříme detailní záznam o jeho stavu"
+    },
+    "diagnosis": {
+      "title": "Diagnostika",
+      "desc": "Provedeme analýzu a identifikujeme rozsah poškození"
+    },
+    "approval": {
+      "title": "Schválení postupu",
+      "desc": "Předložíme vám transparentní cenovou nabídku a plán záchrany"
+    },
+    "recovery": {
+      "title": "Záchrana dat",
+      "desc": "Provedeme obnovu dat s maximální péčí a precizností"
+    },
+    "verification": {
+      "title": "Kontrola",
+      "desc": "Zašleme přehledný seznam všech obnovených dat ke kontrole"
+    },
+    "delivery": {
+      "title": "Předání dat",
+      "desc": "Zachráněná data vám předáme dle dohody na zvoleném nosiči, nebo je šifrovaná poskytneme ke stažení"
+    }
+  },
+  "footer": {
+    "privacy": "Ochrana soukromí",
+    "terms": "Obchodní podmínky",
+    "cookies": "Informace o cookies",
+    "cookieSettings": "Nastavení cookies",
+    "legal": "Právní informace",
+    "legalInfo": "Právní informace",
+    "followUs": "Sledujte nás"
+  },
+  "privacy": {
+    "title": "Ochrana osobních údajů",
+    "subtitle": "Informace o zpracování a ochraně vašich osobních údajů",
+    "intro": {
+      "title": "Ochrana osobních údajů",
+      "content": "Ochrana vašich osobních údajů a dat je pro nás prioritou. Veškeré činnosti spojené se zpracováním dat provádíme v souladu s platnou legislativou a důrazem na bezpečnost a důvěrnost."
+    },
+    "legalFramework": {
+      "title": "Právní rámec",
+      "content": "Ochrana osobních údajů se řídí zákonem č. 110/2019 Sb., o zpracování osobních údajů, a Nařízením Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů a o zrušení směrnice 95/46/ES."
+    },
+    "dataCollection": {
+      "title": "Shromažďování osobních údajů",
+      "content": "Objednatel si je vědom toho, že po odeslání objednávky, případně po uzavření smlouvy o dílo budou zhotovitelem zpracovávány osobní údaje objednatele obsažené ve smlouvě o dílo (objednávce), a to zejména jméno a příjmení, adresa bydliště, adresa elektronické pošty, telefonní číslo (dále jen „osobní údaje\").",
+      "types": [
+        "Jméno a příjmení",
+        "Adresa bydliště",
+        "E-mailová adresa",
+        "Telefonní číslo"
+      ]
+    },
+    "processingPurposes": {
+      "title": "Účely zpracování",
+      "content": "Zhotovitel zpracovává osobní údaje objednatele za účelem:",
+      "purposes": [
+        {
+          "title": "Plnění smluvního vztahu",
+          "content": "Zejména za účelem uzavření smlouvy o dílo, plnění smlouvy o dílo, vyřizování reklamací, vyřizování objednávek, vystavování a zasílání faktur, vymáhání pohledávek, včetně uplatnění práv u soudů, pojišťoven apod."
+        },
+        {
+          "title": "Plnění právních povinností",
+          "content": "Plnění povinností stanovených obecně závaznými právními předpisy (zejména plnění daňových povinností, povinností v oblasti statistiky, povinností vůči orgánům činným v trestním řízení apod.)"
+        },
+        {
+          "title": "Marketingová komunikace",
+          "content": "Zasílání nabídek nových a stávajících produktů zhotovitele (obchodních sdělení zhotovitele), a to za podmínky udělení souhlasu objednatele se zasíláním těchto nabídek."
+        }
+      ]
+    },
+    "thirdParties": {
+      "title": "Zpracování třetími stranami",
+      "content": "Zpracováním osobních údajů objednatele může zhotovitel pověřit třetí osobu, jakožto zpracovatele."
+    },
+    "retention": {
+      "title": "Doba zpracování",
+      "content": "Výše uvedené osobní údaje budou zhotovitelem zpracovávány pouze po dobu nezbytnou pro daný účel jejich zpracování. Osobní údaje budou zpracovávány zejména v elektronické podobě automatizovaným způsobem nebo v tištěné podobě neautomatizovaným způsobem."
+    },
+    "rights": {
+      "title": "Vaše práva",
+      "intro": "Objednatel jako subjekt údajů má ohledně ochrany osobních údajů práva, která pro něj vyplývají z právních předpisů na ochranu osobních údajů a která je oprávněn uplatnit vůči zhotoviteli, a to:",
+      "items": [
+        {
+          "title": "Právo na přístup k osobním údajům",
+          "content": "V případě, že má objednatel zájem zjistit, jaké o něm zhotovitel zpracovává osobní údaje, má právo získat od zhotovitele informace o tom, jestli jsou jeho osobní údaje zpracovávány, a pokud tomu tak je, má současně právo získat k těmto osobním údajům přístup. V případě opakované žádosti objednatele je zhotovitel oprávněn za poskytnutí informace požadovat od objednatele přiměřený poplatek, a to formou zálohy, a pokud objednatel tuto zálohu neuhradí, nebude mu informace poskytnuta."
+        },
+        {
+          "title": "Právo na opravu nepřesných či nepravdivých osobních údajů",
+          "content": "V případě, že zhotovitel zpracovává o objednateli nepřesné či nepravdivé osobní údaje, má objednatel právo požadovat jejich opravu. Zhotovitel je povinen provést opravu osobních údajů bez zbytečného odkladu, avšak vždy s ohledem na jeho personální a technické možnosti."
+        },
+        {
+          "title": "Právo požadovat vysvětlení",
+          "content": "V případě, že by zpracováním osobních údajů objednatele zhotovitel narušoval ochranu jeho osobnosti či soukromí nebo by byly osobní údaje zpracovávány v rozporu s právními předpisy, je objednatel oprávněn požadovat po zhotoviteli vysvětlení."
+        },
+        {
+          "title": "Právo obrátit se na Úřad pro ochranu osobních údajů",
+          "content": "V případě, že bude objednatel přesvědčen o tom, že ze strany zhotovitele dochází k porušení práva objednatele na ochranu soukromí, má právo obrátit se na dozorový úřad, kterým je Úřad pro ochranu osobních údajů, IČ: 70837627, se sídlem Pplk. Sochora 27, 170 00 Praha 7."
+        },
+        {
+          "title": "Právo na výmaz osobních údajů",
+          "content": "V případě, že osobní údaje objednatele již nejsou potřebné pro účely, pro které byly zpracovávány, anebo jsou zhotovitelem zpracovávány neoprávněně, má objednatel právo požadovat jejich výmaz."
+        },
+        {
+          "title": "Právo na omezení zpracování osobních údajů",
+          "content": "V případě, že objednatel nemá zájem o výmaz jeho osobních údajů, ale pouze na dočasném omezení rozsahu zpracování jeho osobních údajů, má právo požadovat po zhotoviteli omezení zpracování těchto osobních údajů."
+        },
+        {
+          "title": "Právo na přenositelnost osobních údajů",
+          "content": "V případě, že má objednatel zájem na tom, aby zhotovitel předal jeho osobní údaje dalšímu subjektu, má právo na přenositelnost údajů k tomuto subjektu. Pokud by však výkonem tohoto práva mohlo dojít k nepříznivému dotčení práv a svobod třetích osob, nevyhoví zhotovitel takové žádosti."
+        },
+        {
+          "title": "Právo vznést námitku",
+          "content": "Objednatel má právo kdykoliv vznést námitku proti zpracování osobních údajů, které jsou zpracovávány pro účely splnění úkolu prováděného ve veřejném zájmu nebo při výkonu veřejné moci nebo pro účely ochrany oprávněných zájmů zhotovitele. V případě, že zhotovitel neprokáže, že existuje závažný oprávněný důvod pro zpracování osobních údajů objednatele, který převažuje nad zájmy nebo právy a svobodami objednatele, je zhotovitel povinen zpracování osobních údajů na základě námitky objednatele ukončit bez zbytečného odkladu."
+        },
+        {
+          "title": "Právo na odvolání souhlasu se zpracováním osobních údajů",
+          "content": "V případě, že zhotovitel zpracovává osobní údaje na základě souhlasu uděleného objednatelem, je objednatel oprávněn tento souhlas kdykoliv odvolat."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Kontakt a uplatnění práv",
+      "content": "Při výkonu práv uvedených výše může objednatel kontaktovat zhotovitele písemně na adrese provozovny:",
+      "address": "DataHelp s.r.o., Jirsíkova 541/1, 186 00 Praha 8 - Karlín",
+      "email": "[email protected]",
+      "responseTime": "Na žádost objednatele bude zhotovitel reagovat nejpozději do 30 dnů ode dne obdržení žádosti. V případě nutnosti je zhotovitel oprávněn prodloužit lhůtu nejdéle o 2 měsíce. O prodloužení lhůty včetně důvodů pro její prodloužení je zhotovitel povinen informovat objednatele."
+    }
+  },
+  "terms": {
+    "title": "Obchodní podmínky",
+    "subtitle": "Všeobecné obchodní podmínky společnosti DataHelp",
+    "lastUpdated": "V Praze dne 25. září 2023",
+    "company": "DataHelp s.r.o.",
+    "representative": "Aleš Wagner - jednatel",
+    "sections": {
+      "introductory": {
+        "title": "I. ÚVODNÍ USTANOVENÍ A PŘEDMĚT DÍLA",
+        "items": [
+          "Tyto obchodní podmínky upravují vztahy mezi smluvními stranami smlouvy o dílo uzavírané mezi společností DataHelp s.r.o., IČO: 273 87 712, se sídlem U třetí baterie 1056/5, 162 00 Praha 6 ‑ Břevnov, adresa provozovny: Jirsíkova 541/1, 186 00 Praha 8 ‑ Karlín, zapsanou v obchodním rejstříku vedeném Městským soudem v Praze pod sp. zn.: C 115695, jako zhotovitelem, a objednatelem. Objednatelem se rozumí jakákoliv fyzická nebo právnická osoba, která uzavřela se zhotovitelem smlouvu o dílo dle ust. § 2586 a násl. zákona č. 89/2012 Sb., občanský zákoník a dle těchto obchodních podmínek. Objednatel a zhotovitel společně jsou dále v těchto obchodních podmínkách označeni také pouze jako „smluvní strany\".",
+          "Zhotovitel je podnikatelem zaměřeným na podnikání v oblasti záchrany dat, resp. zpřístupnění (obnovy) nepřístupných datových informací umístěných na datových nosičích, tj. na paměťových nosičích datových informací používajících k uchování dat nějaký fyzikální princip (zejména pevné a externí paměťové disky, raid pole, paměťové karty, SSD disky, NAS úložiště, USB flash disky, interní paměti zařízení se systémem Android, interní paměti zařízení se systémem iOS apod.) [dále jen „datový nosič\"].",
+          "Předmětem smlouvy o dílo je nejprve posouzení/prověření možnosti provedení záchrany dat, resp. zpřístupnění nepřístupných datových informací umístěných na datovém nosiči zhotovitelem pro objednatele (dále jen „posouzení\") a závazek objednatele zaplatit zhotoviteli cenu za toto posouzení dle aktuálního ceníku zhotovitele, který je nedílnou součástí těchto obchodních podmínek.",
+          "Na základě výsledku posouzení bude zhotovitelem objednateli zaslán návrh na uzavření smlouvy o dílo, jejímž předmětem bude samotné provedení záchrany dat, resp. zpřístupnění nepřístupných datových informací (dále jen „záchrana dat\"), nebo bude objednateli oznámeno, že záchranu dat nelze provést.",
+          "Aktuální ceník zhotovitele je umístěn na internetových stránkách zhotovitele pod odkazem https://www.datahelp.cz/cenik-zachrany-dat/."
+        ]
+      },
+      "contractFormation": {
+        "title": "II. UZAVŘENÍ SMLOUVY O DÍLO",
+        "items": [
+          "Smlouva o dílo je uzavírána písemně, elektronicky e-mailem či prostřednictvím formuláře umístěného na internetových stránkách zhotovitele (objednací formulář pro diagnostiku a svoz zdarma umístěný na internetových stránkách pod odkazem https://www.datahelp.cz/svoz-dat/) nebo konkludentně předáním datového nosiče zhotoviteli. V písemné formě je smlouva o dílo uzavřena podpisem příjmového protokolu objednatelem a zhotovitelem, resp. vystavením příjmového protokolu zhotovitelem objednateli.",
+          "V případě uzavření smlouvy o dílo dle odst. 3 článku I. těchto obchodních podmínek za pomoci prostředku komunikace na dálku objednatel zašle zhotoviteli objednávku elektronicky e-mailem či prostřednictvím formuláře umístěného na internetových stránkách zhotovitele. Objednatel je mimo jiné povinen zhotoviteli sdělit jeho identifikační údaje, tzn. v případě fyzické osoby zejména jméno, příjmení, datum narození a bydliště nebo v případě právnické osoby firmu, sídlo, identifikační číslo, a pokud je objednatel plátcem DPH uvede rovněž daňové identifikační číslo, případně uvede rovněž adresu pro doručování, pokud bude tato adresa odlišná od adresy bydliště či sídla, dále e-mailovou adresu a telefonní číslo. Po obdržení objednávky provede zhotovitel posouzení a na základě výsledku posouzení zašle zhotovitel objednateli návrh na uzavření smlouvy o dílo dle odst. 4 článku I. těchto obchodních podmínek elektronicky e-mailem a současně sdělí objednateli cenu díla (např. zasláním aktuálního ceníku zhotovitele), předpokládaný termín dokončení díla a zašle objednateli tyto obchodní podmínky, nebo objednateli sdělí, že záchranu dat nelze provést.",
+          "Smlouva o dílo je uzavřena: (1) V případě smluv o dílo dle odst. 3 článku I. těchto obchodních podmínek okamžikem obdržení objednávky zhotovitelem, nebo okamžikem podpisu příjmového protokolu smluvními stranami, resp. vystavením příjmového protokolu zhotovitelem (v případě písemně uzavřené smlouvy o dílo) nebo převzetím datového nosiče zhotovitelem k posouzení (v případě konkludentního uzavření smlouvy o dílo). (2) Smlouva o dílo dle odst. 4 článku I. těchto obchodních podmínek je uzavřena okamžikem přijetí návrhu zhotovitele na uzavření smlouvy o dílo objednatelem, tj. sdělením objednatele adresovaným zhotoviteli, že má záchranu dat provést.",
+          "Zhotovitel nepřijme návrh na uzavření smlouvy o dílo, případně je oprávněn od již uzavřené smlouvy o dílo odstoupit zejména v případě: (1) nedostatečných kapacit či nedostupnosti náhradních dílů v případě mechanického poškození datového nosiče; (2) nezaplacení zálohy, ceny díla či její části nebo nákladů na dopravu; (3) vyšší moci."
+        ]
+      },
+      "pricing": {
+        "title": "III. CENA DÍLA A PLATEBNÍ PODMÍNKY",
+        "items": [
+          "Cena díla je uvedena v aktuálním ceníku zhotovitele, který je součástí těchto obchodních podmínek, nebo je uvedena v návrhu na uzavření smlouvy o dílo dle odst. 4 článku I. těchto obchodních podmínek s tím, že k ceně díla budou připočteny náklady na dopravu, pokud nebude ujednáno něco jiného, a daň z přidané hodnoty.",
+          "Objednatel je povinen uhradit cenu díla nejpozději při předání díla, pokud se smluvní strany nedohodnou jinak.",
+          "Zhotovitel je oprávněn před započetím se zhotovením díla požadovat od objednatele zaplacení zálohy, ceny díla či její části nebo nákladů na dopravu, pokud nejde o dopravu, kterou zajišťuje zhotovitel pro objednatele na vlastní náklady."
+        ]
+      },
+      "withdrawal": {
+        "title": "IV. ODSTOUPENÍ OD SMLOUVY",
+        "items": [
+          "Žádná ze smluvních stran není oprávněna odstoupit od smlouvy o dílo, vypovědět ji, či ji jinak jednostranně ukončit z jiných než zákonných důvodů, nebo z důvodů výslovně uvedených v těchto obchodních podmínkách nebo ve smlouvě o dílo, přičemž smluvní strany výslovně vylučují použití ust. § 1977 až § 1979, § 1999, § 2000, § 2002 a § 2003 zákona č. 89/2012 Sb., občanský zákoník.",
+          "V případě, že dojde k odstoupení od smlouvy o dílo, je zhotovitel oprávněn vyúčtovat objednateli odměnu, na kterou mu v souvislosti s prováděním díla vzniklo právo do doby odstoupení, a to dle hodinové sazby uvedené v aktuálním ceníku zhotovitele, pokud se smluvní strany nedohodnou jinak. V případě odstoupení od smlouvy o dílo má zhotovitel rovněž právo na náhradu nákladů vynaložených v souvislosti s prováděním díla."
+        ]
+      },
+      "transport": {
+        "title": "V. PŘEPRAVA DATOVÉHO NOSIČE",
+        "items": [
+          "Na základě objednávky objednatele jako příkazce se může zhotovitel jako zasílatel zavázat obstarat pro objednatele vlastním jménem a na účet objednatele přepravu zásilky obsahující datový nosič z určitého místa do jiného určitého místa, případně i obstarat nebo provést úkony s přepravou související, a objednatel se zavazuje zaplatit zhotoviteli odměnu, pokud se smluvní strany nedohodnou jinak. Zhotovitel tak v případě přepravy datového nosiče vystupuje vždy jako zasílatel a nikoli jako dopravce, vlastník zboží či objednatel přepravy.",
+          "Před odesláním datového nosiče zhotoviteli, resp. před předáním datového nosiče dopravci k doručení zhotoviteli, je objednatel povinen datový nosič pečlivě zabalit, aby nedošlo k jeho dalšímu poškození, a to vždy alespoň do lepenkové krabice (nikoli pouze do obálky či bublinkové nebo jiné folie), přičemž minimální rozměr zásilky je 15 cm x 10 cm x 1 cm a maximální rozměr zásilky činí u nejdelší strany nejvýše 100 cm a obvodová délka nejvýše 250 cm (obvodová délka se počítá 2× šířka + 2× výška + délka) s tím, že hmotnost zásilky nesmí přesáhnout 20 kg.",
+          "Při vrácení datového nosiče objednateli, bude datový nosič dodán na adresu uvedenou objednatelem v objednávce obstarání přepravy či v objednávce, přičemž adresa uvedená v objednávce obstarání přepravy má přednost.",
+          "V případě objednávky obstarání přepravy ze strany objednatele splní zhotovitel svoji povinnost předat dílo či věc (zboží v případě koupě datového nosiče objednatelem) předáním datového nosiče prvnímu dopravci k přepravě na adresu uvedenou objednatelem. Nebezpečí škody na datovém nosiči v takovém případě přechází na objednatele jeho předáním prvnímu dopravci k přepravě na adresu uvedenou objednatelem.",
+          "V případě, že je obstarání zvláštního způsobu přepravy dohodnuto na základě zvláštního požadavku objednatele, nese objednatel riziko s tím spojené a případné dodatečné náklady spojené s tímto způsobem přepravy.",
+          "Objednatel je povinen převzít datový nosič na jím uvedené adrese. Pokud objednatel nepřevezme zboží na jím uvedené adrese, není zhotovitel v prodlení s předáním díla a objednatel ponese náklady spojené s případným opakovaným doručením datového nosiče či jeho vrácením zhotoviteli.",
+          "Při převzetí datového nosiče od dopravce je objednatel povinen zkontrolovat neporušenost obalů datového nosiče a v případě jakýchkoliv závad tyto závady okamžitě oznámit dopravci a poté rovněž zhotoviteli. V případě porušení obalu svědčícího o neoprávněném vniknutí do zásilky nemusí objednatel zásilku od dopravce převzít."
+        ]
+      },
+      "workCompletion": {
+        "title": "VI. PROVEDENÍ, PŘEDÁNÍ A JAKOST DÍLA A PRÁVA Z VADNÉHO PLNĚNÍ",
+        "items": [
+          "Dílo je provedeno, je-li dokončeno a předáno.",
+          "Dílo je dokončeno, je-li předvedena jeho způsobilost sloužit svému účelu. Pokud dochází k předání díla (datového nosiče obsahujícího zachráněné datové informace) v provozovně zhotovitele, předvede zhotovitel na základě žádosti objednatele zachráněné (zpřístupněné) datové informace objednateli. Dílo může být objednateli předáno rovněž zasláním odkazu na stažení zachráněných (zpřístupněných) datových informací. V případě většího množství datových informací nebo v případě, že objednatel nepožádal zhotovitele o předvedení zachráněných (zpřístupněných) datových informaci v provozovně při předání díla, nebo je-li datový nosič objednateli dopravován či předáván zasláním (odesláním) odkazu na stažení zachráněných (zpřístupněných) datových informací, je objednatel povinen zkontrolovat datové informace a jejich způsobilost sloužit svému účelu bez zbytečného odkladu po převzetí datového nosiče či odeslání odkazu na stažení datových informací, a to nejpozději do 5 dnů ode dne předání díla.",
+          "Dílo se považuje za předané buď předáním datového nosiče objednateli v provozovně zhotovitele, nebo zasláním (odesláním) odkazu na stažení zachráněných (zpřístupněných) datových informací objednateli na e-mailovou adresu sdělenou zhotoviteli, anebo předáním datového nosiče se zachráněnými (zpřístupněnými) datovými informacemi dopravci k doručení na adresu uvedenou objednatelem, a to podle toho, co nastane dříve. Při předání datového nosiče v provozovně zhotovitele je objednatel povinen předložit zhotoviteli doklad totožnosti (občanský průkaz či cestovní pas), jinak mu datový nosič nebude zhotovitelem předán. V takovém případě není zhotovitel v prodlení s provedením díla. O předání datového nosiče bude mezi objednatelem a zhotovitelem sepsán, resp. zhotovitelem vystaven výdejový protokol.",
+          "Dílo dle odst. 3 článku I. těchto obchodních podmínek je považováno za provedené sdělením výsledku posouzení objednateli.",
+          "Dílo dle odst. 4 článku I. těchto obchodních podmínek je považováno za bezvadné, pokud dosáhne úspěšnosti zachráněných (zpřístupněných) datových informací 95 % z celkového obsahu nepřístupných datových informací obsažených na datovém nosiči. Upozorní-li zhotovitel před započetím díla objednatele, že není schopen zaručit úspěšnost 95 % zachráněných (zpřístupněných) datových informací, bude dílo považováno za bezvadné, i pokud bude úspěšnost zachráněných (zpřístupněných) datových informací nižší než 95 %. Uvede-li objednatel konkrétní datové informace, jejichž záchranu (zpřístupnění) požaduje, může být zhotovitelem přikročeno k záchraně datových informací dle této specifikace s tím, že úspěšnost záchrany se v takovém případě posoudí jako poměr objemu zachráněných (zpřístupněných) datových informací k celkového objemu objednatelem konkrétně specifikovaných datových informací.",
+          "Zhotovitel neodpovídá za vady způsobené objednatelem.",
+          "Zhotovitel neposkytuje objednateli záruku za jakost.",
+          "Práva a povinnosti smluvních stran ohledně práv z vadného plnění se řídí příslušnými obecně závaznými právními předpisy, zejména zákonem č. 89/2012 Sb., občanský zákoník a těmito obchodními podmínkami a v případě datového nosiče (nikoli datových informací obsažených na datovém nosiči) dodaného zhotovitelem objednateli za účelem předání zachráněných (zpřístupněných) datových informací se na práva z vadného plnění použijí příslušná ustanovení zákona č. 89/2012 Sb., občanský zákoník, o kupní smlouvě a tyto obchodní podmínky.",
+          "Objednatel je povinen podle svých možností zkontrolovat co nejdříve po předání díla zachráněné (zpřístupněné) datové informace za účelem zjištění případných vad a vady je povinen oznámit zhotoviteli (reklamovat) nejpozději do 5 pracovních dnů od předání díla. Zachráněné datové informace jsou zejména pro případ vadného datového nosiče, ztráty či poškození datového nosiče při přepravě apod. vždy umístěny rovněž na datových nosičích zhotovitele, avšak nejdéle po dobu 10 dnů ode dne předání díla, a proto mohou být objednateli v této lhůtě znovu nahrány na jiný datový nosič, případně mu může být zhotovitelem zaslán odkaz pro jejich stažení.",
+          "Objednatel je oprávněn uplatnit práva z vadného plnění (reklamaci) zasláním e-mailové zprávy na e-mailovou adresu zhotovitele [email protected] nebo zasláním písemného sdělení na adresu provozovny zhotovitele: Jirsíkova 541/1, 186 00 Praha 8 ‑ Karlín.",
+          "Je-li datový nosič se zachráněnými (zpřístupněnými) datovými informacemi objednateli zasílán prostřednictvím dopravce či poskytovatele poštovních služeb a zásilka je zjevně poškozena, je objednatel povinen uplatnit reklamaci sepsáním protokolu o poškození zásilky v okamžiku jejího převzetí od dopravce či poskytovatele poštovních služeb, nebo odmítnout převzetí takto poškozené zásilky, v opačném případě nemá objednatel právo na uplatnění reklamace u zhotovitele.",
+          "Objednatelem zhotoviteli za účelem zhotovení díla předaný datový nosič se považuje za zničenou věc (odpad) a zhotovitel není povinen datový nosič objednateli po předání díla vrátit a je oprávněn jej nenávratně zlikvidovat, pokud se smluvní strany nedohodnou jinak. V případě, že bude objednatel požadovat vrácení datového nosiče, je povinen zhotoviteli tuto informaci sdělit nejpozději při přijetí návrhu na uzavření smlouvy o dílo týkající se záchrany dat. Vrácení datového nosiče provede zhotovitel na náklady a odpovědnost objednatele, přičemž za opětovné složení datového nosiče do původního stavu si zhotovitel účtuje odměnu dle aktuálního ceníku zhotovitele. Pokud je datový nosič vracen objednateli, bude zhotovitelem vždy složen do původního stavu, ve kterém byl zhotoviteli předán, aby nedošlo ke ztrátě či poškození jeho součástek. V případě neúspěšné záchrany dat nebo v případě, že dojde pouze k posouzení a záchrana dat již nebude zhotovitelem prováděna, bude datový nosič vždy vrácen objednateli, pokud se smluvní strany nedohodnou jinak. Objednatel je povinen datový nosič vyzvednout nejpozději do 14 dnů ode dne, kdy k tomu bude zhotovitelem vyzván. Nevyzvedne-li objednatel datový nosič ve lhůtě uvedené v předchozí větě, určí zhotovitel objednateli dodatečnou lhůtu k jeho vyzvednutí a nevyzvedne-li si objednatel datový nosič ani v této dodatečné lhůtě, je zhotovitel oprávněn datový nosič nenávratně zlikvidovat. V případě prodlení objednatele s vyzvednutím datového nosiče, je objednatel povinen uhradit zhotoviteli skladné a případné náklady na likvidaci datového nosiče ve výši dle aktuálního ceníku zhotovitele.",
+          "Pokud je objednatelem zhotoviteli předaný datový nosič zašifrovaný či zaheslovaný, je objednatel povinen tyto skutečnosti oznámit zhotoviteli již v objednávce a poskytnout veškeré nezbytné kódy a hesla. V případě, že objednatel zhotovitele na skutečnosti uvedené v tomto odstavci neupozornil v objednávce, je zhotovitel oprávněn objednateli navíc účtovat odměnu za dešifrování. V případě, že objednatel kódy a hesla zhotoviteli vůbec nepředá, nemůže zhotovitel provést dešifrování ani výstupní kontrolu zachráněných datových informací a objednateli předá pouze bitovou kopii a dešifrování a kontrolu dat bude muset provést objednatel. V takovém případě však bude dílo považováno za bezvadné, bude-li bitová kopie obsahovat alespoň 95 % z celkového množství kapacity datového nosiče.",
+          "Dohodnou-li se smluvní strany na záchraně dat metodou „RAW\", což představuje záchranu dat bez ohledu na souborový systém a označení či pojmenování souborů, je objednatel srozuměn s tím, že zachráněné (zpřístupněné) datové informace nemusí být označené či pojmenované a seřazené způsobem, jakým byly označeny či pojmenovány a seřazeny původně objednatelem, datové informace mohou být rovněž částečně nečitelné, neúplné, případně nemusí obsahovat objednatelem přímo specifikované datové informace. V případě použití metody „RAW\" bude dílo považováno za bezvadné, i pokud nedosáhne úspěšnosti zachráněných (zpřístupněných) datových informací 95 % z celkového obsahu nepřístupných datových informací obsažených na datovém nosiči.",
+          "V případě, že bude k provedení díla nezbytná součinnost objednatele a objednatel takovou součinnost zhotoviteli odmítne poskytnout nebo ji neposkytne ani v dodatečné lhůtě, je zhotovitel oprávněn od smlouvy o dílo odstoupit."
+        ]
+      },
+      "additionalRights": {
+        "title": "VII. DALŠÍ PRÁVA A POVINNOSTI SMLUVNÍCH STRAN",
+        "items": [
+          "Subjektem mimosoudního řešení spotřebitelských sporů je Česká obchodní inspekce s tím, že informace o řešení těchto sporů jsou k dispozici na internetových stránkách https://www.coi.cz, konkrétně pod odkazem https://www.coi.cz/informace-o-adr/. Spotřebitelem se rozumí každý člověk, který mimo rámec své podnikatelské činnosti nebo mimo rámec samostatného výkonu svého povolání uzavírá smlouvu o dílo se zhotovitelem nebo s ním jinak jedná.",
+          "Smluvní strany si pro smlouvu o dílo a právní vztahy z ní vyplývající a s ní související, které obsahují mezinárodní prvek, sjednávají jako rozhodné právo České republiky.",
+          "Smluvní strany si k řešení sporů sjednávají příslušnost soudů České republiky.",
+          "Smluvní strany prohlašují, že na sebe přebírají nebezpečí změny okolností a že jakákoliv změna okolností nezakládá žádné ze smluvních stran právo uplatňovat jakékoliv nároky s tím související, přičemž smluvní strany výslovně vylučují použití ust. § 1765 odst. 1, § 1766 a § 2000 zákona č. 89/2012 Sb., občanský zákoník. Smluvní strany se vzdávají jakéhokoliv práva na zrušení smlouvy o dílo a navrácení do původního stavu, pokud by byla vzájemná plnění dle této smlouvy o dílo v hrubém nepoměru, a výslovně vylučují použití ust. § 1793 až § 1796 zákona č. 89/2012 Sb., občanský zákoník.",
+          "Pokud je smluvní strana v prodlení se zaplacením peněžitého dluhu, pak je taková smluvní strana jako dlužník povinna zaplatit druhé smluvní straně jako věřiteli úrok z prodlení z dlužné částky ve výši dle platných právních předpisů. Věřitel má rovněž právo na náhradu škody vzniklé nesplněním peněžitého dluhu v plné výši, a to bez ohledu na to, zda je či není kryta úrokem z prodlení.",
+          "Není-li smlouva o dílo uzavírána se spotřebitelem, pak smluvní strany výslovně vylučují použití ust. § 1799, § 1800 a § 2158 až § 2174 zákona č. 89/2012 Sb., občanský zákoník.",
+          "Obchodní zvyklosti, ať už zachovávané obecně či v daném odvětví, nemají přednost před ustanoveními smlouvy o dílo, těchto obchodních podmínek nebo platných právních předpisů."
+        ]
+      },
+      "dataProtection": {
+        "title": "VIII. OCHRANA OSOBNÍCH ÚDAJŮ",
+        "intro": "Ochrana osobních údajů se řídí zákonem č. 110/2019 Sb., o zpracování osobních údajů, a Nařízením Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů a o zrušení směrnice 95/46/ES.",
+        "items": [
+          "Objednatel si je vědom toho, že po odeslání objednávky, případně po uzavření smlouvy o dílo budou zhotovitelem zpracovávány osobní údaje objednatele obsažené ve smlouvě o dílo (objednávce), a to zejména jméno a příjmení, adresa bydliště, adresa elektronické pošty, telefonní číslo (dále jen „osobní údaje\").",
+          "Zhotovitel zpracovává osobní údaje objednatele za účelem: (1) plnění smluvního vztahu (zejména za účelem uzavření smlouvy o dílo, plnění smlouvy o dílo, vyřizování reklamací, vyřizování objednávek, vystavování a zasílání faktur, vymáhání pohledávek, včetně uplatnění práv u soudů, pojišťoven apod.), (2) plnění povinností stanovených obecně závaznými právními předpisy (zejména plnění daňových povinností, povinností v oblasti statistiky, povinností vůči orgánům činným v trestním řízení apod.), (3) zasílání nabídek nových a stávajících produktů zhotovitele (obchodních sdělení zhotovitele), a to za podmínky udělení souhlasu objednatele se zasíláním těchto nabídek.",
+          "Zpracováním osobních údajů objednatele může zhotovitel pověřit třetí osobu, jakožto zpracovatele.",
+          "Výše uvedené osobní údaje budou zhotovitelem zpracovávány pouze po dobu nezbytnou pro daný účel jejich zpracování. Osobní údaje budou zpracovávány zejména v elektronické podobě automatizovaným způsobem nebo v tištěné podobě neautomatizovaným způsobem.",
+          "Podrobné informace o právech subjektů údajů a zpracování osobních údajů naleznete v samostatném dokumentu Ochrana osobních údajů na adrese https://www.datahelp.cz/ochrana-osobnich-udaju/.",
+          "Při výkonu práv uvedených v předchozím odstavci může objednatel kontaktovat zhotovitele písemně na adrese provozovny: DataHelp s.r.o., Jirsíkova 541/1, 186 00 Praha 8 ‑ Karlín nebo e-mailem na e-mailovou adresu zhotovitele [email protected].",
+          "Na žádost objednatele dle tohoto článku VIII. obchodních podmínek, bude zhotovitel reagovat nejpozději do 30 dnů ode dne obdržení žádosti. V případě nutnosti je zhotovitel oprávněn prodloužit lhůtu nejdéle o 2 měsíce. O prodloužení lhůty včetně důvodů pro její prodloužení je zhotovitel povinen informovat objednatele."
+        ],
+        "contact": {
+          "title": "Kontakt pro uplatnění práv",
+          "address": "DataHelp s.r.o., Jirsíkova 541/1, 186 00 Praha 8 ‑ Karlín",
+          "email": "[email protected]",
+          "responseTime": "Na žádost objednatele bude zhotovitel reagovat nejpozději do 30 dnů ode dne obdržení žádosti. V případě nutnosti je zhotovitel oprávněn prodloužit lhůtu nejdéle o 2 měsíce."
+        }
+      }
+    }
+  },
+  "cookies": {
+    "title": "Informace o cookies",
+    "subtitle": "Jak používáme cookies na našich webových stránkách",
+    "intro": {
+      "paragraph1": "Cookies jsou malé textové soubory, které mohou být používány webovými stránkami k rozšíření jejich funkčnosti.",
+      "paragraph2": "Ze zákona můžeme využívat pouze cookies, které jsou nezbytné k provozu webu. K použití ostatních cookies, např. za účelem sledování návštěvnosti webu nebo pro reklamní účely nám musíte dát svůj výslovný souhlas. Svůj souhlas můžete kdykoliv změnit nebo zrušit prostřednictvím cookies lišty na našich webových stránkách."
+    },
+    "sections": {
+      "functional": {
+        "title": "Funkční cookies",
+        "description": "Jsou nutné k zajištění funkčnosti webových stránek.",
+        "cookies": [
+          {
+            "name": "_nss",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k detekci CSRF útoku"
+          },
+          {
+            "name": "owcc",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k uchování informace o stavu souhlasů s cookies"
+          },
+          {
+            "name": "criticalCss",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k optimalizaci rychlosti načítání webové stránky"
+          },
+          {
+            "name": "wfont",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k optimalizaci rychlosti načítání webové stránky"
+          },
+          {
+            "name": "YSC",
+            "source": "youtube.com",
+            "description": "Registers a unique ID to keep statistics of what videos from YouTube the user has seen"
+          }
+        ]
+      },
+      "analytical": {
+        "title": "Analytické cookies",
+        "description": "Pomáhají majitelům webových stránek, aby porozuměli chování návštěvníků na jejich webových stránkách. Anonymně sbírají a sdělují informace.",
+        "cookies": [
+          {
+            "name": "owlid",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k analýze odeslaných kontaktních formulářů"
+          }
+        ]
+      },
+      "marketing": {
+        "title": "Marketingové cookies",
+        "description": "Jsou používány pro možnost zobrazení relevantních reklamních sdělení uživatelům na základě jejich chování na webových stránkách.",
+        "cookies": [
+          {
+            "name": "VISITOR_INFO1_LIVE",
+            "source": "youtube.com",
+            "service": "Youtube",
+            "description": "Tries to estimate the users' bandwidth on pages with integrated YouTube videos"
+          }
+        ]
+      },
+      "personalization": {
+        "title": "Personalizační cookies",
+        "description": "Umožňují webové stránce sběr anonymních informací o chování uživatele za účelem přizpůsobení obsahu stránky uživateli na míru.",
+        "cookies": []
+      }
+    }
+  },
+  "priceCalculator": {
+    "title": "Kalkulačka cen",
+    "subtitle": "Zjistěte orientační cenu záchrany vašich dat",
+    "description": "Zjistěte orientační cenu záchrany vašich dat. Rychlá kalkulačka pro HDD, SSD a RAID/NAS systémy.",
+    "keywords": "kalkulačka cen záchrana dat, cena obnova dat, orientační cena recovery",
+    "steps": {
+      "deviceType": "Vyberte typ zařízení",
+      "damageType": "Typ poškození",
+      "urgency": "Rychlost zpracování"
+    },
+    "deviceTypes": {
+      "hdd": "Mechanické disky, externí disky",
+      "ssd": "SSD disky, USB flash, paměťové karty",
+      "raid": "RAID pole, NAS servery"
+    },
+    "damageTypes": {
+      "hdd": {
+        "logical": "Softwarové poškození",
+        "logicalDesc": "Smazané soubory, formátování, poškozený souborový systém",
+        "platter": "Poškození ploten",
+        "platterDesc": "Poškrábaná plotna, vadné sektory, fyzické vady povrchu",
+        "head": "Závada čtecích hlav",
+        "headDesc": "Poškozené nebo utržené čtecí hlavy, klikání disku",
+        "motor": "Závada motoru",
+        "motorDesc": "Nefunkční motor, zadřené ložisko, disk se neroztočí",
+        "electronic": "Elektronické poškození",
+        "electronicDesc": "Poškozená PCB deska, přepětí, spálený konektor"
+      },
+      "ssd": {
+        "logical": "Softwarové poškození",
+        "logicalDesc": "Smazané soubory, formátování, poškozená alokační tabulka",
+        "controller": "Závady řadiče",
+        "controllerDesc": "Poškozený kontrolér, disk není rozpoznán systémem",
+        "flash": "Poškození flash paměti",
+        "flashDesc": "Opotřebené paměťové buňky, poškozené NAND čipy",
+        "encryption": "Problém se šifrováním",
+        "encryptionDesc": "Ztráta šifrovacího klíče, hardwarové šifrování",
+        "electronic": "Elektronické poškození",
+        "electronicDesc": "Poškozené čipy, přepětí, zkrat"
+      },
+      "raid": {
+        "logical": "Softwarové poškození",
+        "logicalDesc": "Poškozený souborový systém, ztracená data v poli",
+        "config": "Ztráta konfigurace",
+        "configDesc": "Ztracená nebo poškozená konfigurace RAID/NAS pole",
+        "multipleDisks": "Selhání více disků",
+        "multipleDisksDesc": "Současné selhání dvou nebo více disků v poli",
+        "controller": "Závada RAID/NAS kontéru",
+        "controllerDesc": "Poškozený hardware kontrolér, nefunkční NAS"
+      },
+      "mobile": {
+        "logical": "Softwarové poškození",
+        "logicalDesc": "Smazané soubory, reset na tovární nastavení",
+        "water": "Poškození vodou",
+        "waterDesc": "Namočení, koroze, vlhkost, zkrat",
+        "screen": "Rozbitý displej",
+        "screenDesc": "Nefunkční displej, nelze ovládat zařízení",
+        "encryption": "Problém se šifrováním",
+        "encryptionDesc": "Zapomenutý PIN/heslo, šifrovaná paměť",
+        "flash": "Poškození paměti",
+        "flashDesc": "Poškozené čipy paměti, fyzické poškození PCB"
+      }
+    },
+    "urgencyOptions": {
+      "standard": "Standardní (5-10 dní)",
+      "express": "Expresní (2-3 dny)",
+      "h24": "Do 24-48 hodin"
+    },
+    "from": "Od",
+    "calculateButton": "Vypočítat orientační cenu",
+    "result": {
+      "title": "Orientační cena",
+      "yourSelection": "Váš výběr:",
+      "deviceType": "Typ zařízení:",
+      "damageType": "Typ poškození:",
+      "processingSpeed": "Rychlost zpracování:",
+      "warning": {
+        "title": "Důležité upozornění:",
+        "estimate": "Toto je pouze orientační cena",
+        "finalPrice": "Konečná cena závisí na skutečném rozsahu poškození",
+        "diagnosis": "Přesnou cenu určíme po bezplatné diagnostice",
+        "noDataNoPayment": "Platíte pouze za úspěšně zachráněná data"
+      },
+      "freeConsultation": "Bezplatná konzultace",
+      "calculateAgain": "Vypočítat znovu",
+      "moreServices": "Více o službách"
+    },
+    "whyChoose": {
+      "title": "Proč si vybrat DataHelp.cz?",
+      "noDataNoPayment": {
+        "title": "Žádná data = žádná platba",
+        "description": "Platíte pouze za úspěšně zachráněná data"
+      },
+      "freeDiagnosis": {
+        "title": "Bezplatná diagnostika",
+        "description": "Vstupní diagnostika je vždy zdarma"
+      },
+      "experience": {
+        "title": "20+ let zkušeností",
+        "description": "Více než 55,000 úspěšných záchrán"
+      }
+    }
+  },
+  "orderDiagnostics": {
+    "title": "Bezplatné vyzvednutí a diagnostika",
+    "subtitle": "Svoz a diagnostika po celé ČR zdarma",
+    "description": "Objednejte si bezplatné vyzvednutí a diagnostiku vašeho úložného zařízení",
+    "sections": {
+      "delivery": "Vyberte způsob dopravy média",
+      "contact": "Kontaktní údaje a popis problému",
+      "submit": "Dokončit objednávku",
+      "contactForm": {
+        "title": "Napište nám",
+        "subtitle": "Zanechte nám zprávu, ozveme se zpět"
+      }
+    },
+    "form": {
+      "customerType": "Typ zákazníka",
+      "individual": "Fyzická osoba",
+      "company": "Objednávám na firmu",
+      "companyName": "* Název firmy",
+      "contactPerson": "* Kontaktní osoba",
+      "firstName": "* Jméno",
+      "lastName": "* Příjmení",
+      "phone": "* Telefon",
+      "email": "* E-mail",
+      "description": "* Stručný popis problému.",
+      "descriptionPlaceholder": "Například: Disk se nehlásí, vydává nestandardní zvuky, potřebujeme primárně složku Dokumenty",
+      "isPartner": "Jsem partnerem DataHelp",
+      "pickupAddress": "Adresa pro vyzvednutí",
+      "street": "* Ulice a číslo popisné",
+      "streetPlaceholder": "",
+      "city": "* Město",
+      "cityPlaceholder": "",
+      "zip": "* PSČ",
+      "zipPlaceholder": "",
+      "privacyLink": "Ochrana osobních údajů",
+      "terms": {
+        "text": "Souhlasím s",
+        "link": "obchodními podmínkami"
+      },
+      "submit": "ODESLAT",
+      "submitting": "Odesílám...",
+      "success": "Děkujeme! Vaše objednávka byla úspěšně odeslána. Brzy se vám ozveme.",
+      "error": "Došlo k chybě při odesílání formuláře. Zkuste to prosím znovu.",
+      "errors": {
+        "terms": "Musíte souhlasit s obchodními podmínkami.",
+        "deliveryMethod": "Vyberte prosím způsob dopravy."
+      }
+    },
+    "delivery": {
+      "personal": {
+        "title": "Osobně",
+        "address": "Jirsíkova 541/1, 186 00 Praha 8 ",
+        "hours": "Po - Čt: 9:00 - 17:00 | Pá: 8:00 - 15:30"
+      },
+      "shipping": {
+        "title": "Objednat svoz zdarma",
+        "description": "Médium vyzvedne přepravní služba DPD, po diagnostice vás budeme informovat"
+      },
+      "courier": {
+        "title": "Vlastní přepravou",
+        "description": "Zašlete médium vlastní přepravou na naši adresu:<br/>DataHelp s.r.o. Jirsíkova 1 Praha 8, 186 00"
+      }
+    },
+    "nonstopHotline": "Nonstop hotline"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Odborné články, průvodce a novinky z oblasti záchrany dat",
+    "readMore": "Číst více",
+    "backToBlog": "Zpět na blog",
+    "readingTime": "min čtení",
+    "author": "Autor",
+    "publishedOn": "Publikováno",
+    "relatedPosts": "Související články",
+    "noPostsFound": "Zatím nejsou dostupné žádné články",
+    "loadingPosts": "Načítání článků...",
+    "noPosts": "Zatím nejsou dostupné žádné články",
+    "hero": {
+      "latest": "Nejnovější články"
+    },
+    "categories": {
+      "all": "Všechny články",
+      "technical": "Technické průvodce",
+      "news": "Novinky",
+      "caseStudies": "Případové studie",
+      "tips": "Tipy a triky"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "DataHelp.cz - Profesionální záchrana dat | HDD, SSD, RAID/NAS obnova",
+      "description": "Profesionální služby záchrany dat s více než 20 lety zkušeností. Specializujeme se na obnovu HDD, SSD a RAID/NAS systémů. Garance: žádná data = žádná platba.",
+      "keywords": "záchrana dat, obnova dat, HDD recovery, SSD recovery, RAID recovery, NAS recovery, profesionální záchrana dat Praha, oprava pevného disku, obnova smazaných dat"
+    },
+    "about": {
+      "title": "O nás | 20+ let zkušeností v záchraně dat | DataHelp.cz",
+      "description": "Profesionální záchrana dat s více než 20 lety zkušeností. Specializovaná laboratoř, certifikovaní technici a nejmodernější technologie pro obnovu dat.",
+      "keywords": "o datahelp, zkušenosti obnova dat, expertní tým, laboratoř pro záchranu dat, certifikovaní specialisté, bezpečnost dat"
+    },
+    "services": {
+      "title": "Služby záchrany dat | HDD, SSD, RAID/NAS obnova | DataHelp.cz",
+      "description": "Komplexní služby záchrany dat pro HDD, SSD, RAID/NAS systémy a firemní řešení. Specializovaná laboratoř s více než 20 lety zkušeností. Bezplatná diagnostika.",
+      "keywords": "služby záchrany dat, hdd obnova, ssd recovery, raid systémy, nas recovery, raid/nas obnova, firemní řešení, laboratoř záchrany dat"
+    },
+    "contact": {
+      "title": "Kontakt | 24/7 pohotovost | Záchrana dat Praha | DataHelp.cz",
+      "description": "Kontaktujte naše experty na záchranu dat. Dostupná 24/7 pohotovostní služba. Profesionální laboratoř záchrany dat v Praze.",
+      "keywords": "kontakt datahelp, záchrana dat kontakt, pohotovost záchrana dat, laboratoř Praha"
+    },
+    "pricing": {
+      "title": "Ceník záchrany dat | Transparentní ceny | Žádná data = žádná platba",
+      "description": "Transparentní ceník služeb záchrany dat. Platíte pouze za úspěšnou záchranu. Bezplatná vstupní diagnostika. Ceny od 6 250 Kč pro SSD a 8 750 Kč pro HDD.",
+      "keywords": "ceník záchrana dat, cena obnova dat, hdd recovery cena, ssd recovery cena, raid recovery cena, diagnostika zdarma"
+    },
+    "faq": {
+      "title": "Často kladené otázky | FAQ záchrana dat | DataHelp.cz",
+      "description": "Odpovědi na nejčastější otázky o službách záchrany dat. Zjistěte více o našem procesu, cenách a bezpečnostních opatřeních.",
+      "keywords": "faq záchrana dat, otázky obnova dat, jak funguje záchrana dat, bezpečnost dat"
+    }
+  },
+  "nav": {
+    "home": "Domů",
+    "services": "Služby",
+    "priceCalculator": "Zjistit cenu",
+    "about": "O nás",
+    "technology": "Technologie",
+    "pricing": "Ceník",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "cookieConsent": {
+    "title": "Respektujeme vaše soukromí",
+    "description": "Používáme cookies k personalizaci obsahu a reklam, poskytování funkcí sociálních médií a analýze naší návštěvnosti.",
+    "learnMore": "Více informací",
+    "acceptAll": "Přijmout vše",
+    "settings": "Nastavení cookies"
+  },
+  "cookieSettings": {
+    "title": "Nastavení cookies",
+    "description": "Zde můžete upravit své preference týkající se cookies. Kliknutím na jednotlivé kategorie se dozvíte více informací.",
+    "moreInfo": "Více o cookies",
+    "acceptAll": "Přijmout vše",
+    "rejectAll": "Odmítnout vše",
+    "saveSettings": "Uložit nastavení",
+    "categories": {
+      "functional": {
+        "title": "Funkční",
+        "description": "Jsou nutné k zajištění funkčnosti webových stránek. Tyto cookies nelze vypnout."
+      },
+      "analytical": {
+        "title": "Analytické",
+        "description": "Pomáhají majitelům webových stránek, aby porozuměli chování návštěvníků na jejich webových stránkách. Anonymně sbírají a sdělují informace."
+      },
+      "marketing": {
+        "title": "Marketingové",
+        "description": "Jsou používány pro možnost zobrazení relevantních reklamních sdělení uživatelům na základě jejich chování na webových stránkách."
+      },
+      "personalization": {
+        "title": "Personalizační",
+        "description": "Umožňují webové stránce sběr anonymních informací o chování uživatele za účelem přizpůsobení obsahu stránky uživateli na míru."
+      }
+    }
+  }
+}

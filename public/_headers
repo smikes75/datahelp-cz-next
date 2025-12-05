@@ -1,0 +1,23 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https: *.unsplash.com; font-src 'self' data: https:; connect-src 'self' https:; frame-src 'self' https: *.google.com;
+  X-XSS-Protection: 1; mode=block
+
+# Cache static assets for 1 year
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/flags/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache HTML for shorter period
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate

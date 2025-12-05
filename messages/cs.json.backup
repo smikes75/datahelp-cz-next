@@ -1,0 +1,413 @@
+{
+  "nav": {
+    "home": "Domů",
+    "services": "Služby",
+    "priceCalculator": "Zjistit cenu",
+    "about": "O nás",
+    "technology": "Technologie",
+    "pricing": "Ceník",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "accessibility": {
+    "skipToMain": "Přeskočit na hlavní obsah",
+    "backToTop": "Zpět nahoru",
+    "selectLanguage": "Vybrat jazyk",
+    "toggleMenu": "Otevřít/zavřít menu",
+    "socialMedia": {
+      "instagram": "Instagram",
+      "facebook": "Facebook"
+    }
+  },
+  "banner": {
+    "noPayment": "Šťastný nový rok 2025",
+    "freeConsultation": "Happy New Year 2025",
+    "secureRecovery": "Frohes neues Jahr 2025",
+    "certified": "Felice Anno Nuovo 2025"
+  },
+  "hero": {
+    "title": "Obnova dat\npro firmy i jednotlivce",
+    "subtitle": "Specializujeme se na záchranu dat z poškozených médií již více než 25 let. Platíte pouze za úspěšně zachráněná data.",
+    "consultation": "Bezplatná konzultace",
+    "getPrice": "Zjistit cenu",
+    "orderDiagnostics": "Objednat diagnostiku",
+    "ourServices": "Služby",
+    "security": "Diagnostika a svoz zdarma",
+    "securityDesc": "Bez závazků",
+    "technology": "Moderní technologie",
+    "technologyDesc": "Profesionální vybavení",
+    "experience": "25+ let zkušeností",
+    "experienceDesc": "Více jak 55.000 vyřešených zakázek"
+  },
+  "about": {
+    "title": "O nás",
+    "subtitle": "Jsme česká firma s dlouholetou tradicí.",
+    "description": "",
+    "experience": {
+      "title": "Roky zkušeností",
+      "description": "Více než 25 let se specializujeme na obnovu dat"
+    },
+    "team": {
+      "title": "Expertní tým",
+      "description": "Certifikovaní profesionálové s rozsáhlými znalostmi"
+    },
+    "availability": {
+      "title": "Služby 24/7",
+      "description": "Vždy k dispozici pro nouzové případy"
+    },
+    "security": {
+      "title": "Bezpečnost dat",
+      "description": "Garantujeme maximální bezpečnost během celého procesu obnovy"
+    },
+    "mission": {
+      "title": "Naše mise",
+      "description": "Poskytovat špičkové profesionální služby obnovy a záchrany dat."
+    },
+    "timeline": {
+      "title": "Historie společnosti",
+      "subtitle": "Již více než 25 let zkušeností v oboru záchrany dat",
+      "items": [
+        {
+          "year": "1998",
+          "title": "Začátek v oboru",
+          "description": "První kroky v oblasti záchrany dat"
+        },
+        {
+          "year": "2005",
+          "title": "Rozšíření služeb",
+          "description": "Profesionalizace a růst v oboru obnovy dat"
+        },
+        {
+          "year": "2007",
+          "title": "První PC-3K recovery systém",
+          "description": "3 zaměstnanci, první profesionální stanice"
+        },
+        {
+          "year": "2010",
+          "title": "Rozšíření laboratoře",
+          "description": "5 zaměstnanců, větší prostory"
+        },
+        {
+          "year": "2017",
+          "title": "15 PC-3K stanic",
+          "description": "11 zaměstnanců, expanze do zahraničí"
+        },
+        {
+          "year": "2020",
+          "title": "35,000+ zakázek",
+          "description": "Více než 35 tisíc úspěšně vyřešených případů"
+        },
+        {
+          "year": "2024",
+          "title": "Založení DataHelp s.r.o.",
+          "description": "Nová kapitola s více jak 55 tisíc úspěšně vyřešených zakázek"
+        }
+      ]
+    },
+    "teamSection": {
+      "title": "Jsme tým zkušených odborníků na záchranu dat",
+      "subtitle": "Specialisté s dlouholetou praxí a hlubokou odborností",
+      "members": [
+        {
+          "name": "Ondra",
+          "role": "Senior Specialista",
+          "specialization": "Western Digital, Toshiba, Hitachi",
+          "description": "Expert na obnovu dat z disků WD, Toshiba a Hitachi"
+        },
+        {
+          "name": "Alex",
+          "role": "Senior Specialista",
+          "specialization": "Seagate, IBM",
+          "description": "Specialista na disky Seagate a IBM"
+        },
+        {
+          "name": "Eduard",
+          "role": "RAID/NAS & Unix Specialista",
+          "specialization": "RAID/NAS systémy, Unix-like OS",
+          "description": "Expert na složité RAID/NAS konfigurace a Unix systémy"
+        },
+        {
+          "name": "Martin",
+          "role": "SSD Specialista",
+          "specialization": "SSD a Flash technologie",
+          "description": "Specialista na moderní flash paměti a SSD disky"
+        },
+        {
+          "name": "Pavel",
+          "role": "Forensic Expert",
+          "specialization": "Souborové systémy",
+          "description": "Expert na obnovu rozpadlých souborových systémů"
+        },
+        {
+          "name": "Štěpán",
+          "role": "Zakladatel společnosti",
+          "specialization": "SW vývoj, návrhy CAD",
+          "description": "Jeden ze zakladatelů společnosti, software developer a CAD specialista"
+        }
+      ]
+    }
+  },
+  "reviews": {
+    "title": "Napsali jste o nás",
+    "review1": "Profesionální přístup a rychlé řešení. Obnovili kritická data z našich serverů.",
+    "review2": "Vynikající komunikace a perfektní výsledky. Doporučujeme pro všechny firmy.",
+    "review3": "Obnovili naši databázi po ransomware útoku. Skvělá práce!"
+  },
+  "techPage": {
+    "title": "Naše technologie",
+    "subtitle": "Využíváme nejen špičkové technologie třetích stran, ale máme i vlastní vývoj nástrojů a SW pro záchranu dat.",
+    "learnMore": "Zjistit více",
+    "cleanRoom": {
+      "title": "Bezprašné prostředí",
+      "description": "Všechny pracoviště jsou vybaveny laboratorními boxy třídy 100 pro bezpečnou manipulaci s citlivými komponenty"
+    },
+    "tools": {
+      "title": "Specializované nástroje",
+      "description": "Nejmodernější hardwarové a softwarové nástroje pro obnovu dat"
+    },
+    "diagnostics": {
+      "title": "Pokročilá diagnostika",
+      "description": "Komplexní diagnostické systémy pro přesnou identifikaci problémů"
+    },
+    "equipment": {
+      "title": "Profesionální vybavení",
+      "pc3000udma": {
+        "description": "Profesionální systém pro obnovu dat z HDD",
+        "features": {
+          "manufacturers": "Podpora všech výrobců HDD",
+          "firmware": "Opravy firmware",
+          "recovery": "Pokročilá obnova dat"
+        }
+      },
+      "pc3000flash": {
+        "description": "Specializovaný systém pro flash paměti",
+        "features": {
+          "monolithic": "Monolitické čipy",
+          "usb": "USB flash disky",
+          "ssd": "SSD disky"
+        }
+      },
+      "pc3000ssd": {
+        "description": "Systém pro SSD disky",
+        "features": {
+          "nvme": "NVMe disky",
+          "sata": "SATA SSD",
+          "controller": "Opravy řadičů"
+        }
+      },
+      "rusolut": {
+        "description": "Pokročilý systém pro výměnu a kalibraci hlaviček HDD",
+        "features": {
+          "precision": "Přesné zarovnání hlaviček",
+          "calibration": "Automatická kalibrace",
+          "compatibility": "Podpora všech typů HDD"
+        }
+      },
+      "nandreconstructor": {
+        "description": "Profesionální nástroj pro rekonstrukci NAND čipů",
+        "features": {
+          "chips": "Čtení NAND čipů",
+          "reconstruction": "Rekonstrukce dat",
+          "formats": "Podpora všech typů čipů"
+        }
+      },
+      "bgarework": {
+        "description": "BGA přepracovací stanice pro opravu čipů",
+        "features": {
+          "precision": "Přesné řízení teploty",
+          "profiles": "Více teplotních profilů",
+          "safety": "Bezpečná manipulace s komponentami"
+        }
+      },
+      "partswarehouse": {
+        "description": "Rozsáhlý sklad náhradních dílů pro všechny typy úložných zařízení",
+        "features": {
+          "inventory": "Tisíce originálních náhradních dílů",
+          "availability": "Okamžitá dostupnost komponent",
+          "compatibility": "Díly pro všechny výrobce a modely"
+        }
+      }
+    },
+    "security": {
+      "title": "Bezpečnostní protokoly",
+      "protocols": {
+        "title": "Bezpečnost dat",
+        "description": "Přísné bezpečnostní protokoly pro ochranu vašich dat"
+      },
+      "specialists": {
+        "title": "Certifikovaní specialisté",
+        "description": "Tým vysoce kvalifikovaných odborníků s mnohaletými zkušenostmi"
+      }
+    },
+    "gallery": {
+      "title": "Naše laboratoř",
+      "cleanRoom": "Bezprašné prostředí",
+      "diagnostics": "Diagnostika",
+      "serverRoom": "Serverovna",
+      "dataCenter": "Datové centrum",
+      "partsWarehouse": "Sklad dílů"
+    }
+  },
+  "gallery": {
+    "title": "Naše firma",
+    "cleanRoom": "Čistá místnost",
+    "diagnostics": "Diagnostika",
+    "serverRoom": "Serverovna",
+    "dataCenter": "Datové centrum",
+    "aboutTitle": "DataHelp",
+    "aboutDescription": "Takto to u nás vypadá",
+    "aboutTeam": "To jsme my",
+    "aboutWorkspace": "Moderní pracoviště",
+    "aboutQuality": "Kontrola kvality",
+    "aboutPrecision": "Přesnost a detail",
+    "aboutTechnology": "Pokročilé technologie",
+    "aboutLab": "Laboratorní vybavení",
+    "aboutExpertise": "Měření a diagnostika",
+    "aboutInnovation": "Inovace a rozvoj",
+    "loadMore": "Zobrazit další"
+  },
+  "process": {
+    "title": "Postup záchrany dat",
+    "guarantee": "Platíte jen za úspěšnou záchranu",
+    "reception": {
+      "title": "Příjem média",
+      "desc": "Převezmeme vaše zařízení a vytvoříme detailní záznam o jeho stavu"
+    },
+    "diagnosis": {
+      "title": "Diagnostika",
+      "desc": "Provedeme analýzu a identifikujeme rozsah poškození"
+    },
+    "approval": {
+      "title": "Schválení postupu",
+      "desc": "Předložíme vám transparentní cenovou nabídku a plán záchrany"
+    },
+    "recovery": {
+      "title": "Záchrana dat",
+      "desc": "Provedeme obnovu dat s maximální péčí a precizností"
+    },
+    "verification": {
+      "title": "Kontrola",
+      "desc": "Zašleme přehledný seznam všech obnovených dat ke kontrole"
+    },
+    "delivery": {
+      "title": "Předání dat",
+      "desc": "Zachráněná data vám předáme dle dohody na zvoleném nosiči, nebo je šifrovaná poskytneme ke stažení"
+    }
+  },
+  "footer": {
+    "privacy": "Ochrana soukromí",
+    "terms": "Obchodní podmínky",
+    "cookies": "Informace o cookies",
+    "cookieSettings": "Nastavení cookies",
+    "legal": "Právní informace",
+    "legalInfo": "Právní informace",
+    "followUs": "Sledujte nás"
+  },
+  "cookies": {
+    "title": "Informace o cookies",
+    "subtitle": "Jak používáme cookies na našich webových stránkách",
+    "intro": {
+      "paragraph1": "Cookies jsou malé textové soubory, které mohou být používány webovými stránkami k rozšíření jejich funkčnosti.",
+      "paragraph2": "Ze zákona můžeme využívat pouze cookies, které jsou nezbytné k provozu webu. K použití ostatních cookies, např. za účelem sledování návštěvnosti webu nebo pro reklamní účely nám musíte dát svůj výslovný souhlas. Svůj souhlas můžete kdykoliv změnit nebo zrušit prostřednictvím cookies lišty na našich webových stránkách."
+    },
+    "sections": {
+      "functional": {
+        "title": "Funkční cookies",
+        "description": "Jsou nutné k zajištění funkčnosti webových stránek.",
+        "cookies": [
+          {
+            "name": "_nss",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k detekci CSRF útoku"
+          },
+          {
+            "name": "owcc",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k uchování informace o stavu souhlasů s cookies"
+          },
+          {
+            "name": "criticalCss",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k optimalizaci rychlosti načítání webové stránky"
+          },
+          {
+            "name": "wfont",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k optimalizaci rychlosti načítání webové stránky"
+          },
+          {
+            "name": "YSC",
+            "source": "youtube.com",
+            "description": "Registers a unique ID to keep statistics of what videos from YouTube the user has seen"
+          }
+        ]
+      },
+      "analytical": {
+        "title": "Analytické cookies",
+        "description": "Pomáhají majitelům webových stránek, aby porozuměli chování návštěvníků na jejich webových stránkách. Anonymně sbírají a sdělují informace.",
+        "cookies": [
+          {
+            "name": "owlid",
+            "source": "datahelp.cz",
+            "description": "1st party cookie používaná k analýze odeslaných kontaktních formulářů"
+          }
+        ]
+      },
+      "marketing": {
+        "title": "Marketingové cookies",
+        "description": "Jsou používány pro možnost zobrazení relevantních reklamních sdělení uživatelům na základě jejich chování na webových stránkách.",
+        "cookies": [
+          {
+            "name": "VISITOR_INFO1_LIVE",
+            "source": "youtube.com",
+            "service": "Youtube",
+            "description": "Tries to estimate the users\" bandwidth on pages with integrated YouTube videos"
+          }
+        ]
+      },
+      "personalization": {
+        "title": "Personalizační cookies",
+        "description": "Umožňují webové stránce sběr anonymních informací o chování uživatele za účelem přizpůsobení obsahu stránky uživateli na míru.",
+        "cookies": []
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Odborné články, průvodce a novinky z oblasti záchrany dat",
+    "readMore": "Číst více",
+    "backToBlog": "Zpět na blog",
+    "readingTime": "min čtení",
+    "author": "Autor",
+    "publishedOn": "Publikováno",
+    "relatedPosts": "Související články",
+    "noPostsFound": "Zatím nejsou dostupné žádné články",
+    "loadingPosts": "Načítání článků...",
+    "noPosts": "Zatím nejsou dostupné žádné články",
+    "hero": {
+      "latest": "Nejnovější články"
+    },
+    "categories": {
+      "all": "Všechny články",
+      "technical": "Technické průvodce",
+      "news": "Novinky",
+      "caseStudies": "Případové studie",
+      "tips": "Tipy a triky"
+    }
+  },
+  "caseStudies": {
+    "title": "Případové studie",
+    "description": "Reálné příklady úspěšné záchrany dat z poškozených zařízení",
+    "problem": "Problém:",
+    "solution": "Řešení:",
+    "result": "Výsledek:",
+    "duration": "Doba řešení:",
+    "recoveryRate": "Úspěšnost:",
+    "documentation": "Kompletní dokumentace",
+    "contactUs": "Máte podobný problém?"
+  },
+  "stickyCta": {
+    "call": "Volat",
+    "consultation": "Bezplatná konzultace"
+  }
+}

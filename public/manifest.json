@@ -1,0 +1,35 @@
+{
+  "name": "DataHelp.cz - Profesionální záchrana dat",
+  "short_name": "DataHelp.cz",
+  "description": "Profesionální záchrana dat z HDD, SSD a RAID systémů. Více než 20 let zkušeností.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1B387A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/DataHelp.cz.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "cs",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
