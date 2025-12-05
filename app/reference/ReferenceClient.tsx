@@ -12,6 +12,36 @@ interface FeaturedStory {
   image: string;
 }
 
+// PageHeader komponenta
+function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
+  return (
+    <div className="relative">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={`/images/backgrounds/${backgroundImage}`}
+          alt={title}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(27, 56, 122, 1) 50%, rgba(27, 56, 122, 0) 100%)'
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 text-white py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
+          {subtitle && <p className="text-lg md:text-xl">{subtitle}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ReferenceClient() {
   const t = useTranslations('reference');
 
@@ -35,24 +65,12 @@ export function ReferenceClient() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <PageHeader
+        title={t('title')}
+        subtitle={t('subtitle')}
+        backgroundImage="reference-bg.webp"
+      />
       <Breadcrumbs />
-
-      {/* Hero Section */}
-      <section className="py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-              {t('title')}
-            </h1>
-            <p className="text-xl text-gray-600 mb-4">
-              {t('subtitle')}
-            </p>
-            <p className="text-lg text-gray-500">
-              {t('intro')}
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Google Reviews Section */}
       <section className="py-12 bg-white">
