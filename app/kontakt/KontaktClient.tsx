@@ -8,9 +8,12 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, ChevronDown, ChevronUp, Truck, MessageSquare } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
+import { useToast } from '@/contexts/ToastContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { createClient } from '@/lib/supabase/client';
+import { validateEmail, validatePhone, sanitizeInput } from '@/lib/utils/security';
 
 // PageHeader komponenta
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
@@ -42,9 +45,12 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
   );
 }
 
+const RATE_LIMIT_SECONDS = 60;
+
 // Contact Form komponenta
 function ContactForm() {
   const t = useTranslations();
+  const toast = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -52,19 +58,67 @@ function ContactForm() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const now = Date.now();
+    if (now - lastSubmitTime < RATE_LIMIT_SECONDS * 1000) {
+      toast.error(
+        t('contact.form.rateLimit').replace('{seconds}', RATE_LIMIT_SECONDS.toString())
+      );
+      return;
+    }
+
+    // Validate at least one contact method
+    const hasEmail = formData.email && formData.email.trim().length > 0;
+    const hasPhone = formData.phone && formData.phone.trim().length > 0;
+
+    if (!hasEmail && !hasPhone) {
+      toast.error(t('contact.form.errors.emailOrPhone'));
+      return;
+    }
+
+    // Validate email format if provided
+    if (hasEmail && !validateEmail(formData.email)) {
+      toast.error(t('contact.form.errors.emailFormat'));
+      return;
+    }
+
+    // Validate phone format if provided
+    if (hasPhone && !validatePhone(formData.phone)) {
+      toast.error(t('contact.form.errors.phone'));
+      return;
+    }
+
     setIsSubmitting(true);
-    setSubmitMessage('');
 
-    // API call placeholder
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const supabase = createClient();
+      const sanitizedData = {
+        name: sanitizeInput(formData.name),
+        email: sanitizeInput(formData.email),
+        phone: sanitizeInput(formData.phone),
+        message: sanitizeInput(formData.message),
+        user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : ''
+      };
 
-    setSubmitMessage('Zpráva byla odeslána! Ozveme se vám co nejdříve.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
-    setIsSubmitting(false);
+      const { error } = await supabase
+        .from('contact_forms')
+        .insert([sanitizedData]);
+
+      if (error) throw error;
+
+      setLastSubmitTime(now);
+      toast.success(t('contact.form.success'));
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error(t('contact.form.error'));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -129,14 +183,8 @@ function ContactForm() {
         disabled={isSubmitting}
         className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50"
       >
-        {isSubmitting ? 'Odesílám...' : t('contact.form.send')}
+        {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
       </button>
-
-      {submitMessage && (
-        <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
-          {submitMessage}
-        </div>
-      )}
     </form>
   );
 }

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from '@/contexts/TranslationsContext';
+import { useToast } from '@/contexts/ToastContext';
 import { FormInput } from './ui/FormInput';
 import { FormTextarea } from './ui/FormTextarea';
 import { FormButton } from './ui/FormButton';
@@ -19,19 +20,10 @@ interface FormErrors {
 
 export function Contact() {
   const t = useTranslations('contact.form');
+  const toast = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState<'success' | 'error'>('success');
-
-  const showMessage = (message: string, type: 'success' | 'error') => {
-    setToastMessage(message);
-    setToastType(type);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 5000);
-  };
 
   const validateForm = (formData: FormData): FormErrors => {
     const errors: FormErrors = {};
@@ -75,9 +67,8 @@ export function Contact() {
 
     const now = Date.now();
     if (now - lastSubmitTime < RATE_LIMIT_SECONDS * 1000) {
-      showMessage(
-        t('rateLimit').replace('{seconds}', RATE_LIMIT_SECONDS.toString()),
-        'error'
+      toast.error(
+        t('rateLimit').replace('{seconds}', RATE_LIMIT_SECONDS.toString())
       );
       return;
     }
@@ -110,67 +101,56 @@ export function Contact() {
       if (error) throw error;
 
       setLastSubmitTime(now);
-      showMessage(t('success'), 'success');
+      toast.success(t('success'));
       form.reset();
       setErrors({});
     } catch (error) {
       console.error('Form submission error:', error);
-      showMessage(t('error'), 'error');
+      toast.error(t('error'));
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <FormInput
-          type="text"
-          name="name"
-          label={t('name')}
-          required
-          error={errors.name}
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? "name-error" : undefined}
-        />
-        <FormInput
-          type="email"
-          name="email"
-          label={t('email')}
-          error={errors.email}
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? "email-error" : undefined}
-        />
-        <FormInput
-          type="tel"
-          name="phone"
-          label={t('phone')}
-          error={errors.phone}
-          aria-invalid={!!errors.phone}
-          aria-describedby={errors.phone ? "phone-error" : undefined}
-        />
-        <FormTextarea
-          name="message"
-          rows={4}
-          label={t('message')}
-          required
-          error={errors.message}
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? "message-error" : undefined}
-        />
-        <FormButton type="submit" disabled={isSubmitting}>
-          {isSubmitting ? t('sending') : t('send')}
-        </FormButton>
-      </form>
-
-      {/* Toast notification */}
-      {showToast && (
-        <div className={`fixed bottom-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
-          toastType === 'success' ? 'bg-green-500' : 'bg-red-500'
-        } text-white`}>
-          {toastMessage}
-        </div>
-      )}
-    </>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <FormInput
+        type="text"
+        name="name"
+        label={t('name')}
+        required
+        error={errors.name}
+        aria-invalid={!!errors.name}
+        aria-describedby={errors.name ? "name-error" : undefined}
+      />
+      <FormInput
+        type="email"
+        name="email"
+        label={t('email')}
+        error={errors.email}
+        aria-invalid={!!errors.email}
+        aria-describedby={errors.email ? "email-error" : undefined}
+      />
+      <FormInput
+        type="tel"
+        name="phone"
+        label={t('phone')}
+        error={errors.phone}
+        aria-invalid={!!errors.phone}
+        aria-describedby={errors.phone ? "phone-error" : undefined}
+      />
+      <FormTextarea
+        name="message"
+        rows={4}
+        label={t('message')}
+        required
+        error={errors.message}
+        aria-invalid={!!errors.message}
+        aria-describedby={errors.message ? "message-error" : undefined}
+      />
+      <FormButton type="submit" disabled={isSubmitting}>
+        {isSubmitting ? t('sending') : t('send')}
+      </FormButton>
+    </form>
   );
 }
