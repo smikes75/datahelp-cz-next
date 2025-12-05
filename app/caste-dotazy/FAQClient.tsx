@@ -5,6 +5,7 @@ import { useTranslations } from '@/contexts/TranslationsContext';
 import { ChevronDown, ChevronUp, HelpCircle, Clock, MapPin, Shield, CheckCircle, FileQuestion, AlertCircle, TrendingUp, Award, PackageCheck } from 'lucide-react';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { FAQPageSchema } from '@/components/schema/FAQPageSchema';
 
 // PageHeader komponenta
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
@@ -143,6 +144,12 @@ export function FAQClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <FAQPageSchema
+        faqs={faqs.map(f => ({
+          question: f.question,
+          answer: f.answer
+        }))}
+      />
       <PageHeader
         title={t('faq.title')}
         subtitle={t('faq.subtitle')}

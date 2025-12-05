@@ -10,6 +10,7 @@ import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ServiceSchema } from '@/components/schema/ServiceSchema';
 
 // PageHeader component
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
@@ -74,6 +75,11 @@ export function MobilePhoneRecoveryClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ServiceSchema
+        name={t('services.mobile.title')}
+        description={t('services.mobile.desc')}
+        serviceType="Mobile Phone Data Recovery Service"
+      />
       <PageHeader
         title={t('services.mobile.title')}
         subtitle={t('services.mobile.desc')}
@@ -227,7 +233,7 @@ export function MobilePhoneRecoveryClient() {
             className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-dark transition-colors shadow-lg"
           >
             <Phone className="h-5 w-5" />
-            Objednat bezplatnou diagnostiku
+            {t('hero.orderDiagnostics')}
             <ArrowRight className="h-5 w-5" />
           </Link>
         </div>

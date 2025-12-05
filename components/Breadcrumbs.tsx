@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
+import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 
 interface BreadcrumbItem {
   name: string;
@@ -106,10 +107,17 @@ export function Breadcrumbs({ children, customItems }: BreadcrumbsProps) {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="bg-gray-50 py-3">
-      <div className="container mx-auto px-4">
-        <div className={children ? "flex items-center justify-between" : ""}>
-          <ol className="flex items-center space-x-2 text-sm">
+    <>
+      <BreadcrumbSchema
+        items={breadcrumbs.map(item => ({
+          name: item.name,
+          url: `https://www.datahelp.cz${item.path}`
+        }))}
+      />
+      <nav aria-label="Breadcrumb" className="bg-gray-50 py-3">
+        <div className="container mx-auto px-4">
+          <div className={children ? "flex items-center justify-between" : ""}>
+            <ol className="flex items-center space-x-2 text-sm">
             {breadcrumbs.map((item, idx) => (
               <li key={item.path} className="flex items-center">
                 {idx > 0 && <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />}
@@ -133,5 +141,6 @@ export function Breadcrumbs({ children, customItems }: BreadcrumbsProps) {
         </div>
       </div>
     </nav>
+    </>
   );
 }

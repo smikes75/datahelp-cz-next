@@ -9,6 +9,7 @@ import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ServiceSchema } from '@/components/schema/ServiceSchema';
 
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
   return (
@@ -61,6 +62,11 @@ export function SSDRecoveryClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ServiceSchema
+        name={t('services.ssd.title')}
+        description={t('services.ssd.desc')}
+        serviceType="SSD Data Recovery Service"
+      />
       <PageHeader
         title={t('services.ssd.title')}
         subtitle={t('services.ssd.desc')}

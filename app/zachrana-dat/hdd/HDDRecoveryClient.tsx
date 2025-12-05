@@ -10,6 +10,7 @@ import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ServiceSchema } from '@/components/schema/ServiceSchema';
 
 // PageHeader component
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
@@ -64,6 +65,11 @@ export function HDDRecoveryClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ServiceSchema
+        name={t('services.hdd.title')}
+        description={t('services.hdd.desc')}
+        serviceType="Data Recovery Service"
+      />
       <PageHeader
         title={t('services.hdd.title')}
         subtitle={t('services.hdd.desc')}

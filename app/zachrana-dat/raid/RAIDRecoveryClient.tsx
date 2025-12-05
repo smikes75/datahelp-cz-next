@@ -9,6 +9,7 @@ import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ServiceSchema } from '@/components/schema/ServiceSchema';
 
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
   return (
@@ -61,6 +62,11 @@ export function RAIDRecoveryClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ServiceSchema
+        name={t('services.raid.title')}
+        description={t('services.raid.desc')}
+        serviceType="RAID/NAS Data Recovery Service"
+      />
       <PageHeader
         title={t('services.raid.title')}
         subtitle={t('services.raid.desc')}
