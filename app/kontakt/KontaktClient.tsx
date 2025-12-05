@@ -14,6 +14,9 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { createClient } from '@/lib/supabase/client';
 import { validateEmail, validatePhone, sanitizeInput } from '@/lib/utils/security';
+import { FormInput } from '@/components/ui/FormInput';
+import { FormTextarea } from '@/components/ui/FormTextarea';
+import { FormButton } from '@/components/ui/FormButton';
 
 // PageHeader komponenta
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
@@ -47,18 +50,57 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
 
 const RATE_LIMIT_SECONDS = 60;
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
+
 // Contact Form komponenta
 function ContactForm() {
   const t = useTranslations();
   const toast = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const validateForm = (formData: FormData): FormErrors => {
+    const errors: FormErrors = {};
+    const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
+    const name = formData.get('name') as string;
+    const message = formData.get('message') as string;
+
+    if (!name || name.length < 2) {
+      errors.name = t('contact.form.errors.name');
+    }
+
+    // At least one of email or phone must be provided
+    const hasEmail = email && email.trim().length > 0;
+    const hasPhone = phone && phone.trim().length > 0;
+
+    if (!hasEmail && !hasPhone) {
+      errors.email = t('contact.form.errors.emailOrPhone');
+      errors.phone = t('contact.form.errors.emailOrPhone');
+    } else {
+      // Validate email if provided
+      if (hasEmail && !validateEmail(email)) {
+        errors.email = t('contact.form.errors.emailFormat');
+      }
+
+      // Validate phone if provided
+      if (hasPhone && !validatePhone(phone)) {
+        errors.phone = t('contact.form.errors.phone');
+      }
+    }
+
+    if (!message || message.length < 10) {
+      errors.message = t('contact.form.errors.message');
+    }
+
+    return errors;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,24 +113,12 @@ function ContactForm() {
       return;
     }
 
-    // Validate at least one contact method
-    const hasEmail = formData.email && formData.email.trim().length > 0;
-    const hasPhone = formData.phone && formData.phone.trim().length > 0;
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-    if (!hasEmail && !hasPhone) {
-      toast.error(t('contact.form.errors.emailOrPhone'));
-      return;
-    }
-
-    // Validate email format if provided
-    if (hasEmail && !validateEmail(formData.email)) {
-      toast.error(t('contact.form.errors.emailFormat'));
-      return;
-    }
-
-    // Validate phone format if provided
-    if (hasPhone && !validatePhone(formData.phone)) {
-      toast.error(t('contact.form.errors.phone'));
+    const formErrors = validateForm(formData);
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
       return;
     }
 
@@ -97,10 +127,10 @@ function ContactForm() {
     try {
       const supabase = createClient();
       const sanitizedData = {
-        name: sanitizeInput(formData.name),
-        email: sanitizeInput(formData.email),
-        phone: sanitizeInput(formData.phone),
-        message: sanitizeInput(formData.message),
+        name: sanitizeInput(formData.get('name') as string),
+        email: sanitizeInput(formData.get('email') as string),
+        phone: sanitizeInput(formData.get('phone') as string),
+        message: sanitizeInput(formData.get('message') as string),
         user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : ''
       };
 
@@ -112,7 +142,8 @@ function ContactForm() {
 
       setLastSubmitTime(now);
       toast.success(t('contact.form.success'));
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      form.reset();
+      setErrors({});
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error(t('contact.form.error'));
@@ -123,68 +154,46 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('contact.form.name')} *
-        </label>
-        <input
-          type="text"
-          required
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          placeholder="Jan Novák"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('contact.form.email')} *
-        </label>
-        <input
-          type="email"
-          required
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          placeholder="vas@email.cz"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('contact.form.phone')}
-        </label>
-        <input
-          type="tel"
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          placeholder="+420 xxx xxx xxx"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('contact.form.message')} *
-        </label>
-        <textarea
-          required
-          rows={5}
-          value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          placeholder="Popište váš problém..."
-        />
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50"
-      >
+      <FormInput
+        type="text"
+        name="name"
+        label={t('contact.form.name')}
+        required
+        autoComplete="name"
+        error={errors.name}
+        aria-invalid={!!errors.name}
+        aria-describedby={errors.name ? "name-error" : undefined}
+      />
+      <FormInput
+        type="email"
+        name="email"
+        label={t('contact.form.email')}
+        autoComplete="email"
+        error={errors.email}
+        aria-invalid={!!errors.email}
+        aria-describedby={errors.email ? "email-error" : undefined}
+      />
+      <FormInput
+        type="tel"
+        name="phone"
+        label={t('contact.form.phone')}
+        autoComplete="tel"
+        error={errors.phone}
+        aria-invalid={!!errors.phone}
+        aria-describedby={errors.phone ? "phone-error" : undefined}
+      />
+      <FormTextarea
+        name="message"
+        rows={5}
+        label={t('contact.form.message')}
+        required
+        error={errors.message}
+        aria-invalid={!!errors.message}
+        aria-describedby={errors.message ? "message-error" : undefined}
+      />
+      <FormButton type="submit" disabled={isSubmitting}>
         {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
-      </button>
+      </FormButton>
     </form>
   );
 }
