@@ -26,7 +26,7 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
   const resolvedParams = await params;
   const currentPage = parseInt(resolvedSearchParams.page || '1');
   const category = resolvedSearchParams.category;
-  const articlesPerPage = 6;
+  const articlesPerPage = 20;
 
   const result = await getPaginatedBlogPosts({
     category: category && category !== 'all' ? category : undefined,
