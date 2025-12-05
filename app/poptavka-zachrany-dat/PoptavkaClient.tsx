@@ -39,6 +39,129 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
   );
 }
 
+// Personal Visit Appointment Form Component
+function PersonalVisitForm() {
+  const t = useTranslations('orderDiagnostics.delivery.personal.appointmentForm');
+  const toast = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [appointmentData, setAppointmentData] = useState({
+    name: '',
+    phone: '',
+    message: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setAppointmentData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!appointmentData.name || !appointmentData.phone) {
+      toast.error('Vyplňte prosím jméno a telefon.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const supabase = createClient();
+      const { error } = await supabase
+        .from('contact_forms')
+        .insert([
+          {
+            name: appointmentData.name,
+            phone: appointmentData.phone,
+            email: null,
+            message: `[Osobní návštěva - domluvení termínu] ${appointmentData.message || 'Zákazník chce domluvit termín osobní návštěvy.'}`,
+            user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : ''
+          }
+        ]);
+
+      if (error) throw error;
+
+      toast.success(t('success'));
+
+      setAppointmentData({
+        name: '',
+        phone: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting appointment request:', error);
+      toast.error(t('error'));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="bg-gray-50 rounded-lg p-6">
+      <h4 className="text-xl font-semibold text-primary mb-2">{t('title')}</h4>
+      <p className="text-gray-600 mb-6">{t('subtitle')}</p>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="appointment-name" className="block text-sm font-medium text-gray-700 mb-2">
+            {t('name')} *
+          </label>
+          <input
+            type="text"
+            id="appointment-name"
+            name="name"
+            value={appointmentData.name}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="appointment-phone" className="block text-sm font-medium text-gray-700 mb-2">
+            {t('phone')} *
+          </label>
+          <input
+            type="tel"
+            id="appointment-phone"
+            name="phone"
+            value={appointmentData.phone}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="appointment-message" className="block text-sm font-medium text-gray-700 mb-2">
+            {t('message')}
+          </label>
+          <textarea
+            id="appointment-message"
+            name="message"
+            value={appointmentData.message}
+            onChange={handleInputChange}
+            rows={3}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+            placeholder="Například: Preferuji středu odpoledne"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-white text-primary border-2 border-primary py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? t('submitting') : t('submit')}
+        </button>
+      </form>
+    </div>
+  );
+}
+
 // Main Page Component
 export default function OrderDiagnosticsPage() {
   const t = useTranslations('orderDiagnostics');
@@ -365,12 +488,17 @@ export default function OrderDiagnosticsPage() {
             </h2>
 
             <div className="space-y-4">
-              {/* Shipping Option */}
-              <div id="delivery-shipping" className={`border-2 rounded-lg transition-all ${
+              {/* Shipping Option - HLAVNÍ CTA */}
+              <div id="delivery-shipping" className={`border-2 rounded-lg transition-all relative ${
                 formData.deliveryMethod === 'shipping'
                   ? 'border-primary bg-gray-50'
-                  : 'border-gray-200'
+                  : 'border-primary bg-blue-50/30'
               }`}>
+                <div className="absolute top-3 right-3">
+                  <span className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">
+                    DOPORUČENO
+                  </span>
+                </div>
                 <button
                   type="button"
                   onClick={() => handleDeliveryChange(formData.deliveryMethod === 'shipping' ? '' : 'shipping')}
@@ -378,12 +506,12 @@ export default function OrderDiagnosticsPage() {
                 >
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
-                      <Truck className="h-6 w-6 text-accent" />
-                      <h3 className="text-lg font-semibold text-primary">
+                      <Truck className="h-7 w-7 text-accent" />
+                      <h3 className="text-xl font-bold text-primary">
                         {t('delivery.shipping.title')}
                       </h3>
                     </div>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-700 text-sm font-medium">
                       {t('delivery.shipping.description')}
                     </p>
                   </div>
@@ -412,7 +540,7 @@ export default function OrderDiagnosticsPage() {
                               value={formData.pickupAddress}
                               onChange={handleInputChange}
                               required
-                              placeholder={t('form.streetPlaceholder')}
+                              placeholder="Např. Vinohradská 123"
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                             />
                           </div>
@@ -428,7 +556,7 @@ export default function OrderDiagnosticsPage() {
                                 value={formData.pickupCity}
                                 onChange={handleInputChange}
                                 required
-                                placeholder={t('form.cityPlaceholder')}
+                                placeholder="Např. Praha"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                               />
                             </div>
@@ -443,7 +571,7 @@ export default function OrderDiagnosticsPage() {
                                 value={formData.pickupZip}
                                 onChange={handleInputChange}
                                 required
-                                placeholder={t('form.zipPlaceholder')}
+                                placeholder="Např. 120 00"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                               />
                             </div>
@@ -576,53 +704,54 @@ export default function OrderDiagnosticsPage() {
                       </h3>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      {t('delivery.personal.address')}
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      {t('delivery.personal.hours')}
+                      {t('delivery.personal.description')}
                     </p>
                   </div>
                 </button>
 
                 {formData.deliveryMethod === 'personal' && (
                   <div className="px-6 pb-6">
-                    <div className="border-t border-gray-200 pt-6">
-                      <form onSubmit={handleSubmit} className="space-y-6">
-                        {renderCustomerTypeSelector()}
-                        {renderNameFields()}
-                        {renderContactForm()}
+                    <div className="border-t border-gray-200 pt-6 space-y-6">
+                      {/* Address and Contact Info */}
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <h4 className="font-semibold text-primary">DataHelp s.r.o.</h4>
+                          <p className="text-gray-700">{t('delivery.personal.address')}</p>
 
-                        {/* Terms and Submit inside card */}
-                        <div className="border-t border-gray-200 pt-6">
-                          <label className="flex items-start mb-6 cursor-pointer">
-                            <input
-                              type="checkbox"
-                              checked={agreedToTerms}
-                              onChange={(e) => setAgreedToTerms(e.target.checked)}
-                              className="w-6 h-6 text-primary focus:ring-primary border-gray-300 rounded mt-0.5 flex-shrink-0 cursor-pointer"
-                              required
-                            />
-                            <span className="ml-3 text-gray-700 text-base">
-                              {t('form.terms.text')}{' '}
-                              <a
-                                href="/obchodni-podminky"
-                                onClick={handleTermsLinkClick}
-                                className={`text-accent hover:text-accent/80 font-semibold underline ${termsLinkClicked ? 'animate-pulse' : ''}`}
-                              >
-                                {t('form.terms.link')}
-                              </a>
-                            </span>
-                          </label>
+                          <h4 className="font-semibold text-primary mt-4">Otevírací doba</h4>
+                          <p className="text-gray-700">{t('delivery.personal.hours')}</p>
 
-                          <button
-                            type="submit"
-                            disabled={isSubmitting || !agreedToTerms}
-                            className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                          <h4 className="font-semibold text-primary mt-4">{t('delivery.personal.phoneLabel')}</h4>
+                          <a
+                            href={`tel:${t('delivery.personal.phone')}`}
+                            className="text-accent hover:text-accent/80 font-semibold"
                           >
-                            {isSubmitting ? t('form.submitting') : t('form.submit')}
-                          </button>
+                            {t('delivery.personal.phone')}
+                          </a>
                         </div>
-                      </form>
+
+                        {/* Map */}
+                        <div>
+                          <h4 className="font-semibold text-primary mb-3">Kde nás najdete</h4>
+                          <div className="w-full h-[300px] rounded-lg overflow-hidden border-2 border-gray-200">
+                            <iframe
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.4899373947447!2d14.447864776769673!3d50.09404217152393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94a7f4f7e9bb%3A0x8c8a8d8e8f8e8f8f!2sJirs%C3%ADkova%20541%2F1%2C%20186%2000%20Karl%C3%ADn!5e0!3m2!1scs!2scz!4v1234567890123!5m2!1scs!2scz"
+                              width="100%"
+                              height="100%"
+                              style={{ border: 0 }}
+                              allowFullScreen
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                              title="Mapa - DataHelp.cz"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Optional Appointment Form */}
+                      <div className="border-t border-gray-200 pt-6">
+                        <PersonalVisitForm />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -631,8 +760,8 @@ export default function OrderDiagnosticsPage() {
           </div>
         </div>
 
-        {/* Nonstop Hotline Button - Mobile only */}
-        <div className="md:hidden mt-6 flex justify-center">
+        {/* Nonstop Hotline Button - Desktop only */}
+        <div className="hidden md:flex mt-6 justify-center">
           <a
             href="tel:+420775220440"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent ring-2 ring-primary text-white font-bold text-base rounded-lg transition-all shadow-md hover:scale-105"

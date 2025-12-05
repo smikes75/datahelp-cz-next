@@ -1335,9 +1335,23 @@
     },
     "delivery": {
       "personal": {
-        "title": "Osobně",
-        "address": "Jirsíkova 541/1, 186 00 Praha 8 ",
-        "hours": "Po - Čt: 9:00 - 17:00 | Pá: 8:00 - 15:30"
+        "title": "Osobní předání",
+        "description": "Zastavte se u nás",
+        "address": "Jirsíkova 541/1, 186 00 Praha 8",
+        "hours": "Po - Čt: 9:00 - 17:00 | Pá: 8:00 - 15:30",
+        "phone": "+420 775 220 440",
+        "phoneLabel": "Telefon:",
+        "appointmentForm": {
+          "title": "Chcete si domluvit termín?",
+          "subtitle": "Zavoláme vám zpět",
+          "name": "Jméno",
+          "phone": "Telefon",
+          "message": "Zpráva (volitelné)",
+          "submit": "Zavolejte mi",
+          "submitting": "Odesílám...",
+          "success": "Děkujeme! Brzy se vám ozveme.",
+          "error": "Došlo k chybě. Zkuste to prosím znovu."
+        }
       },
       "shipping": {
         "title": "Objednat svoz zdarma",
