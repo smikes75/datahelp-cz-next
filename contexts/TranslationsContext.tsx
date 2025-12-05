@@ -24,11 +24,22 @@ export function useTranslations(namespace?: string): TranslationFunction {
   const t = useContext(TranslationsContext);
 
   const getValue = (key: string) => {
-    const keys = key.split('.');
-    let value: any = namespace ? (t as any)[namespace] : t;
-    for (const k of keys) {
-      value = value?.[k];
+    let value: any = t;
+
+    // First, navigate through the namespace
+    if (namespace) {
+      const namespaceParts = namespace.split('.');
+      for (const part of namespaceParts) {
+        value = value?.[part];
+      }
     }
+
+    // Then navigate through the key
+    const keyParts = key.split('.');
+    for (const part of keyParts) {
+      value = value?.[part];
+    }
+
     return value;
   };
 
