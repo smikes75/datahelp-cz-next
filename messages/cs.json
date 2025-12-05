@@ -313,6 +313,56 @@
         "description": "Garantujeme maximální bezpečnost a důvěrnost vašich dat během celého procesu obnovy"
       }
     },
+    "mobile": {
+      "title": "Záchrana dat z mobilu",
+      "desc": "Obnova dat z Android zařízení a mobilních telefonů.",
+      "keywords": {
+        "recovery": "záchrana dat mobil, obnova dat android, záchrana dat telefon"
+      },
+      "features": {
+        "encryption": "Šifrovaná data",
+        "encryptionDesc": "Speciální technologie pro dekryptaci dat",
+        "water": "Poškození vodou",
+        "waterDesc": "Obnova dat po namočení nebo vlhkosti",
+        "screen": "Rozbitý displej",
+        "screenDesc": "Obnova dat bez funkčního displeje"
+      },
+      "supported": {
+        "title": "Podporovaná zařízení",
+        "devices": "Typy zařízení",
+        "manufacturers": "Výrobci",
+        "android": "Android telefony",
+        "tablets": "Tablety",
+        "brands": "Všechny značky"
+      },
+      "challenges": {
+        "title": "Technické výzvy",
+        "trim": {
+          "title": "TRIM funkce",
+          "desc": "Při smazání obsahu Android telefonu funkce TRIM automaticky uvolňuje místo kompletním vymazáním paměťových bloků, aby je připravila na nová data. To značně ztěžuje obnovu dat."
+        },
+        "encryption": {
+          "title": "Interní šifrování",
+          "desc": "Interní šifrování chrání uložená data prostřednictvím šifrovacích klíčů. Pokud zařízení ztratí přístup k těmto klíčům, šance na obnovu dat se značně snižují."
+        }
+      },
+      "symptoms": {
+        "title": "Časté příznaky",
+        "charging": "Nefunguje nabíjení/připojení",
+        "bootLoop": "Zaseknutí na Android logu",
+        "noPower": "Nenaběhne",
+        "redScreen": "Červená obrazovka (indikace vlhkosti)",
+        "lines": "Čáry na displeji",
+        "recovery": "Zaseknutí v recovery módu",
+        "update": "Neúspěšná aktualizace OS"
+      },
+      "action": {
+        "title": "Co dělat?",
+        "step1": "Okamžitě vypněte zařízení",
+        "step2": "Objednejte si bezplatnou diagnostiku",
+        "step3": "Naši technici zařízení prohlédnou a navrhnou řešení"
+      }
+    },
     "business": {
       "title": "Partnerský program",
       "desc": "Nabízíme spolupráci IT firmám a servisům",
