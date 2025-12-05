@@ -433,6 +433,13 @@ const nextConfig = {
         destination: '/clanky/',
         permanent: true,
       },
+
+      // === BLOG CATEGORIES - Redirect to main blog ===
+      {
+        source: '/clanky/kategorie/:slug*',
+        destination: '/clanky/',
+        permanent: true,
+      },
     ];
   },
 };
