@@ -72,6 +72,9 @@ export function Header() {
             <Link href="/clanky" className={`${isActive("/clanky")} header-nav-link`}>
               Blog
             </Link>
+            <Link href="/reference" className={`${isActive("/reference")} header-nav-link`}>
+              {t('nav.references')}
+            </Link>
             <Link href="/caste-dotazy" className={`${isActive("/caste-dotazy")} header-nav-link`}>
               FAQ
             </Link>
@@ -106,6 +109,9 @@ export function Header() {
             </Link>
             <Link href="/clanky" className={`block font-bold ${isActive("/clanky")} header-nav-link`}>
               Blog
+            </Link>
+            <Link href="/reference" className={`block font-bold ${isActive("/reference")} header-nav-link`}>
+              {t('nav.references')}
             </Link>
             <Link href="/caste-dotazy" className={`block font-bold ${isActive("/caste-dotazy")} header-nav-link`}>
               FAQ

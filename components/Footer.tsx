@@ -71,6 +71,12 @@ export function Footer() {
               >
                 {t('services.raid.title')}
               </Link>
+              <Link
+                href="/zachrana-dat/mobilni-telefon"
+                className="block hover:text-accent transition-colors"
+              >
+                {t('services.mobile.title')}
+              </Link>
             </div>
 
             {/* Social Media - Desktop only */}
