@@ -44,7 +44,7 @@ export function Hero() {
             <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 whitespace-pre-line">
               {t('title')}
             </h1>
-            <p className="text-lg md:text-xl mb-6 md:mb-8">
+            <p className="text-lg md:text-xl mb-6 md:mb-8 whitespace-pre-line">
               {t('subtitle')}
             </p>
             <div className="flex flex-wrap gap-4 mt-8 md:mt-8">

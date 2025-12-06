@@ -9,7 +9,7 @@ export const siteConfig = {
   contact: {
     phone: '+420 775 220 440',
     email: 'info@datahelp.cz',
-    address: 'Jirsíkova 541/1\n186 00 Praha 8 - Karlín',
+    address: 'Jirsíkova 541/1\nPraha 8, 186 00',
     hours: 'Po-Čt: 09:00-17:00\nPá: 08:00-15:30',
   },
   social: {

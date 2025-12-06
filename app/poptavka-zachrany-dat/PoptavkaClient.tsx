@@ -711,7 +711,7 @@ export default function OrderDiagnosticsPage() {
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-3">
                           <h4 className="font-semibold text-primary">DataHelp s.r.o.</h4>
-                          <p className="text-gray-700">{t('delivery.personal.address')}</p>
+                          <p className="text-gray-700 whitespace-pre-line">{t('delivery.personal.address')}</p>
 
                           <h4 className="font-semibold text-primary mt-4">Otevírací doba</h4>
                           <p className="text-gray-700">{t('delivery.personal.hours')}</p>

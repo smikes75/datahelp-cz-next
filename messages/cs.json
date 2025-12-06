@@ -116,7 +116,7 @@
   },
   "hero": {
     "title": "Obnova dat\npro firmy i jednotlivce",
-    "subtitle": "Specializujeme se na záchranu dat z poškozených médií již více než 25 let. Platíte pouze za úspěšně zachráněná data.",
+    "subtitle": "Specializujeme se na záchranu dat z poškozených médií již více než 25 let.\nPlatíte pouze za úspěšně zachráněná data.",
     "consultation": "Bezplatná konzultace",
     "getPrice": "Zjistit cenu",
     "orderDiagnostics": "Objednat diagnostiku",
@@ -721,7 +721,7 @@
     },
     "info": {
       "title": "Kontaktní informace",
-      "address": "Jirsíkova 541/1\n186 00 Praha 8 ",
+      "address": "Jirsíkova 541/1\nPraha 8, 186 00",
       "hours": "Otevírací doba:\nPo-Pá: 9:00 - 18:00\nPohotovost: 24/7",
       "phone": "+420 775 220 440",
       "email": "info@datahelp.cz",
@@ -1338,7 +1338,7 @@
       "personal": {
         "title": "Osobní předání",
         "description": "Zastavte se u nás",
-        "address": "Jirsíkova 541/1, 186 00 Praha 8",
+        "address": "Jirsíkova 541/1\nPraha 8, 186 00",
         "hours": "Po - Čt: 9:00 - 17:00 | Pá: 8:00 - 15:30",
         "phone": "+420 775 220 440",
         "phoneLabel": "Telefon:",
@@ -1360,7 +1360,7 @@
       },
       "courier": {
         "title": "Vlastní přepravou",
-        "description": "Zašlete médium vlastní přepravou na naši adresu:<br/>DataHelp s.r.o. Jirsíkova 1 Praha 8, 186 00"
+        "description": "Zašlete médium vlastní přepravou na naši adresu:<br/>DataHelp s.r.o. Jirsíkova 1<br/>Praha 8, 186 00"
       }
     },
     "nonstopHotline": "Nonstop hotline"
