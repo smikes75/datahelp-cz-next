@@ -117,7 +117,8 @@ export function Breadcrumbs({ children, customItems }: BreadcrumbsProps) {
       <nav aria-label="Breadcrumb" className="bg-gray-50 py-3">
         <div className="container mx-auto px-4">
           <div className={children ? "flex items-center justify-between" : ""}>
-            <ol className="flex items-center space-x-2 text-sm">
+            {/* Desktop breadcrumbs - zobrazit všechny */}
+            <ol className="hidden md:flex items-center space-x-2 text-sm flex-wrap">
             {breadcrumbs.map((item, idx) => (
               <li key={item.path} className="flex items-center">
                 {idx > 0 && <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />}
@@ -136,6 +137,28 @@ export function Breadcrumbs({ children, customItems }: BreadcrumbsProps) {
                 )}
               </li>
             ))}
+          </ol>
+          {/* Mobile breadcrumbs - zobrazit jen Home a aktuální stránku */}
+          <ol className="flex md:hidden items-center space-x-2 text-sm">
+            <li className="flex items-center">
+              <Home className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0 mt-0.5" />
+              <Link
+                href="/"
+                className="text-primary hover:text-accent transition-colors flex items-center leading-none"
+              >
+                {breadcrumbs[0].name}
+              </Link>
+            </li>
+            {breadcrumbs.length > 1 && (
+              <>
+                <ChevronRight className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                <li className="flex items-center">
+                  <span className="text-gray-900 font-medium flex items-center leading-none truncate" aria-current="page">
+                    {breadcrumbs[breadcrumbs.length - 1].name}
+                  </span>
+                </li>
+              </>
+            )}
           </ol>
           {children}
         </div>

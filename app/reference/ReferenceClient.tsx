@@ -55,18 +55,11 @@ export function ReferenceClient() {
 
   const successStories: SuccessStory[] = [
     {
-      name: 'Ondřej Pýcha',
-      role: 'Fotograf',
-      description: 'Úspěšná záchrana milionových fotografií z 3TB externího disku s nefunkčními čtecími hlavami.',
-      image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80',
-      url: '/clanky/jak-jsme-zachranovali-milionove-fotografie-ondreje-pychy'
-    },
-    {
-      name: 'Check Czech Fashion',
-      role: 'Módní portál',
-      description: 'Záchrana 6 let práce – články, videa a fotografie z 1TB disku po havárii čtecí hlavy.',
-      image: 'https://images.unsplash.com/photo-1558394043-d7e93d0072da?w=600&q=80',
-      url: '/clanky/jak-jsme-zachranovali-cenna-data-check-czech-fashion'
+      name: 'Štěpánka Hilgertová',
+      role: 'Olympijská vítězka',
+      description: 'Záchrana 200 GB fotografií a videí z externího disku s přepsaným souborovým systémem za 3 dny.',
+      image: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&q=80',
+      url: '/clanky/zachranili-jsme-data-stepance-hilgertove'
     },
     {
       name: 'Michal Pavlíček',
@@ -76,18 +69,25 @@ export function ReferenceClient() {
       url: '/clanky/vykouzlili-jsme-usmev-na-tvari-maga-rockove-kytary-michala-pavlicka'
     },
     {
+      name: 'Check Czech Fashion',
+      role: 'Módní portál',
+      description: 'Záchrana 6 let práce – články, videa a fotografie z 1TB disku po havárii čtecí hlavy.',
+      image: 'https://images.unsplash.com/photo-1558394043-d7e93d0072da?w=600&q=80',
+      url: '/clanky/jak-jsme-zachranovali-cenna-data-check-czech-fashion'
+    },
+    {
+      name: 'Ondřej Pýcha',
+      role: 'Fotograf',
+      description: 'Úspěšná záchrana milionových fotografií z 3TB externího disku s nefunkčními čtecími hlavami.',
+      image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80',
+      url: '/clanky/jak-jsme-zachranovali-milionove-fotografie-ondreje-pychy'
+    },
+    {
       name: 'Kamila Špráchalová',
       role: 'Herečka a dabérka',
       description: 'Obnova ztracených vzpomínek – fotografie a nahrávky ze smazaného disku s mechanickými vadami.',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
       url: '/clanky/jak-jsme-obnovili-ztracene-vzpominky-herecky-a-daberky-kamily-sprachalove'
-    },
-    {
-      name: 'Štěpánka Hilgertová',
-      role: 'Olympijská vítězka',
-      description: 'Záchrana 200 GB fotografií a videí z externího disku s přepsaným souborovým systémem za 3 dny.',
-      image: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&q=80',
-      url: '/clanky/zachranili-jsme-data-stepance-hilgertove'
     }
   ];
 
@@ -119,37 +119,37 @@ export function ReferenceClient() {
       <Breadcrumbs />
 
       {/* Statistics Section */}
-      <section className="py-8 bg-white">
+      <section className="py-4 md:py-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="flex justify-center gap-3 md:grid md:grid-cols-3 md:gap-6">
               {/* Rating */}
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-1 mb-3">
+              <div className="text-center flex-1 max-w-[120px] md:max-w-none">
+                <div className="flex items-center justify-center gap-0.5 md:gap-1 mb-1 md:mb-3">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="h-2.5 w-2.5 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <div className="text-3xl font-bold text-primary mb-1">4.9/5</div>
-                <p className="text-sm text-gray-600">Hodnocení zákazníků</p>
+                <div className="text-base md:text-3xl font-bold text-primary mb-0.5 md:mb-1">4.9/5</div>
+                <p className="text-[10px] md:text-sm text-gray-600 leading-tight">Hodnocení</p>
               </div>
 
               {/* Jobs Completed */}
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-3">
-                  <TrendingUp className="h-8 w-8 text-primary/70" />
+              <div className="text-center flex-1 max-w-[120px] md:max-w-none">
+                <div className="flex items-center justify-center mb-1 md:mb-3">
+                  <TrendingUp className="h-4 w-4 md:h-8 md:w-8 text-primary/70" />
                 </div>
-                <div className="text-3xl font-bold text-primary mb-1">55 000+</div>
-                <p className="text-sm text-gray-600">úspěšných zakázek</p>
+                <div className="text-base md:text-3xl font-bold text-primary mb-0.5 md:mb-1">55k+</div>
+                <p className="text-[10px] md:text-sm text-gray-600 leading-tight">zakázek</p>
               </div>
 
               {/* Success Rate */}
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-3">
-                  <Award className="h-8 w-8 text-primary/70" />
+              <div className="text-center flex-1 max-w-[120px] md:max-w-none">
+                <div className="flex items-center justify-center mb-1 md:mb-3">
+                  <Award className="h-4 w-4 md:h-8 md:w-8 text-primary/70" />
                 </div>
-                <div className="text-3xl font-bold text-primary mb-1">95%</div>
-                <p className="text-sm text-gray-600">Úspěšnost záchrany</p>
+                <div className="text-base md:text-3xl font-bold text-primary mb-0.5 md:mb-1">95%</div>
+                <p className="text-[10px] md:text-sm text-gray-600 leading-tight">úspěšnost</p>
               </div>
             </div>
           </div>

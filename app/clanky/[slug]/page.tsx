@@ -11,6 +11,7 @@ import { getBlogPost, getBlogPosts } from '@/lib/utils/blog';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import { Metadata } from 'next';
+import { marked } from 'marked';
 
 // ISR - revalidace každou hodinu (3600 sekund)
 export const revalidate = 3600;
@@ -77,6 +78,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     month: 'long',
     day: 'numeric',
   });
+
+  // Parse Markdown content to HTML
+  const htmlContent = await marked(post.content);
 
   // Build breadcrumbs based on categories
   const breadcrumbs = [
@@ -151,8 +155,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Content */}
           <div
-            className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary hover:prose-a:text-accent prose-strong:text-gray-900 prose-img:rounded-lg"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary hover:prose-a:text-accent prose-strong:text-gray-900 prose-img:rounded-lg [&>h2]:mt-8 [&>h2]:mb-4 [&>h3]:mt-6 [&>h3]:mb-3 [&>p]:mb-4 [&>ul]:mb-4 [&>ol]:mb-4 [&>ul>li]:mb-2 [&>ol>li]:mb-2"
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
 
           {/* Tags */}
