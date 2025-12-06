@@ -312,6 +312,16 @@ const nextConfig = {
         destination: '/clanky/',
         permanent: true,
       },
+      {
+        source: '/zonalni-zapis-na-pevny-disk/',
+        destination: '/clanky/',
+        permanent: true,
+      },
+      {
+        source: '/zonalni-zapis-na-pevny-disk',
+        destination: '/clanky/',
+        permanent: true,
+      },
 
       // === UTILITY STRÁNKY ===
       {
