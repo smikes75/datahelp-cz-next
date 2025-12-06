@@ -1348,7 +1348,7 @@
           "name": "Jméno",
           "phone": "Telefon",
           "message": "Zpráva (volitelné)",
-          "submit": "Zavolejte mi",
+          "submit": "Zavolejte mi zpět",
           "submitting": "Odesílám...",
           "success": "Děkujeme! Brzy se vám ozveme.",
           "error": "Došlo k chybě. Zkuste to prosím znovu."

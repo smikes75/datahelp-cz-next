@@ -18,7 +18,6 @@ export const revalidate = 3600;
 interface BlogPostPageProps {
   params: Promise<{
     slug: string;
-    locale: string;
   }>;
 }
 
@@ -36,7 +35,8 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = await getBlogPost(resolvedParams.slug, resolvedParams.locale);
+  const locale = 'cs'; // Default locale
+  const post = await getBlogPost(resolvedParams.slug, locale);
 
   if (!post) {
     return {
@@ -64,14 +64,15 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const resolvedParams = await params;
-  const post = await getBlogPost(resolvedParams.slug, resolvedParams.locale);
+  const locale = 'cs'; // Default locale
+  const post = await getBlogPost(resolvedParams.slug, locale);
 
   if (!post) {
     notFound();
   }
 
   // Formátovat datum
-  const formattedDate = new Date(post.date).toLocaleDateString(resolvedParams.locale, {
+  const formattedDate = new Date(post.date).toLocaleDateString(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -103,13 +104,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
       <Breadcrumbs customItems={breadcrumbs} />
       <article className="container mx-auto px-4 py-16 max-w-4xl">
-        <Link
-          href="/clanky"
-          className="inline-flex items-center text-primary hover:text-accent mb-8 transition-colors font-medium"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Zpět na blog
-        </Link>
+        <div className="flex items-center gap-4 mb-8">
+          <Link
+            href="/clanky"
+            className="inline-flex items-center text-primary hover:text-accent transition-colors font-medium"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Zpět na blog
+          </Link>
+          <span className="text-gray-300">|</span>
+          <Link
+            href="/reference"
+            className="inline-flex items-center text-primary hover:text-accent transition-colors font-medium"
+          >
+            Naše reference
+          </Link>
+        </div>
 
         {/* Cover Image */}
         <div className="relative w-full h-[400px] rounded-lg shadow-lg mb-8 overflow-hidden">
