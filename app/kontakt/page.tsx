@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import KontaktClient from './KontaktClient';
 
 export const metadata: Metadata = {
-  title: 'Kontakt | DataHelp.cz',
+  title: 'Kontaktujte nás – Praha 8, Karlín | DataHelp.cz',
   description: 'Kontakt DataHelp – Praha 8, Karlín. Volejte 24/7 hotline +420 775 220 440. Bezplatný svoz po celé ČR. Potřebujete pomoct? Jsme tu pro vás nonstop!',
   alternates: {
     canonical: 'https://www.datahelp.cz/kontakt',

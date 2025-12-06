@@ -2,10 +2,10 @@ import { Metadata } from 'next';
 import { ReferenceClient } from './ReferenceClient';
 
 export const metadata: Metadata = {
-  title: 'Reference | DataHelp.cz',
+  title: 'Reference – Spokojení zákazníci, hodnocení 4.9/5 | DataHelp.cz',
   description: 'Reference spokojených zákazníků DataHelp – úspěšné příběhy záchran dat pro firmy i jednotlivce. Hodnocení 4.9/5. Přečtěte si, co o nás píší klienti!',
   alternates: {
-    canonical: '/reference',
+    canonical: 'https://www.datahelp.cz/reference',
   },
   openGraph: {
     title: 'Reference | DataHelp.cz',

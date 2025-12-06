@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Záchrana dat z mobilu | Bezpečná obnova | Android | DataHelp',
   description: 'Záchrana dat z mobilu – Android telefony i tablety. Speciální dekryptace, obnova po poškození. Ztracená data? Zachráníme je. Volejte odborníky 24/7!',
   alternates: {
-    canonical: '/zachrana-dat/mobilni-telefon',
+    canonical: 'https://www.datahelp.cz/zachrana-dat/mobilni-telefon',
   },
   keywords: 'záchrana dat mobil, obnova dat android, záchrana dat telefon, obnova android zařízení',
   openGraph: {

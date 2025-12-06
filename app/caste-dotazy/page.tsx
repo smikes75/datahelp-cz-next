@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { FAQClient } from './FAQClient';
 
 export const metadata: Metadata = {
-  title: 'Časté dotazy | DataHelp.cz',
+  title: 'Časté dotazy o záchraně dat – Ceny, postup | DataHelp.cz',
   description: 'Často kladené dotazy o záchraně dat – postup, ceny, doručení, záruky. Máte otázky? Najděte odpovědi nebo volejte naše odborníky 24/7. Rádi poradíme!',
   alternates: {
     canonical: 'https://www.datahelp.cz/caste-dotazy',

@@ -50,7 +50,7 @@ export async function generateMetadata({
     description: post.excerpt,
     keywords: post.tags?.join(', '),
     alternates: {
-      canonical: `/clanky/${resolvedParams.slug}`,
+      canonical: `https://www.datahelp.cz/clanky/${resolvedParams.slug}`,
     },
     openGraph: {
       title: post.title,
