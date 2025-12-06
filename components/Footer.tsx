@@ -11,7 +11,7 @@ export function Footer() {
   const { openSettings } = useCookieConsent();
 
   return (
-    <footer className="bg-primary text-white py-6 md:py-12 relative">
+    <footer className="bg-primary text-white py-6 md:py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12">
           {/* Column 1 - Legal */}
@@ -22,25 +22,25 @@ export function Footer() {
             <div className="space-y-1.5 md:space-y-3 text-xs md:text-base">
               <Link
                 href="/ochrana-osobnich-udaju"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('footer.privacy')}
               </Link>
               <Link
                 href="/obchodni-podminky"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('footer.terms')}
               </Link>
               <Link
                 href="/informace-o-cookies"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('footer.cookies')}
               </Link>
               <button
                 onClick={openSettings}
-                className="block hover:text-accent transition-colors text-left"
+                className="block hover:text-gray-300 transition-colors text-left"
               >
                 {t('footer.cookieSettings')}
               </button>
@@ -55,25 +55,25 @@ export function Footer() {
             <div className="space-y-1.5 md:space-y-3 text-xs md:text-base">
               <Link
                 href="/zachrana-dat/hdd"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('services.hdd.title')}
               </Link>
               <Link
                 href="/zachrana-dat/ssd"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('services.ssd.title')}
               </Link>
               <Link
                 href="/zachrana-dat/raid"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('services.raid.title')}
               </Link>
               <Link
                 href="/zachrana-dat/mobilni-telefon"
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {t('services.mobile.title')}
               </Link>
@@ -86,7 +86,7 @@ export function Footer() {
                   href={siteConfig.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-white/10 hover:bg-accent hover:scale-105 transition-all p-2.5 rounded-lg"
+                  className="flex items-center justify-center bg-white/10 hover:bg-gray-600 hover:scale-105 transition-all p-2.5 rounded-lg"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
@@ -95,7 +95,7 @@ export function Footer() {
                   href={siteConfig.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-white/10 hover:bg-accent hover:scale-105 transition-all p-2.5 rounded-lg"
+                  className="flex items-center justify-center bg-white/10 hover:bg-gray-600 hover:scale-105 transition-all p-2.5 rounded-lg"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-5 w-5" />
@@ -113,13 +113,13 @@ export function Footer() {
               <p className="whitespace-pre-line">{siteConfig.contact.address}</p>
               <a
                 href={`tel:${siteConfig.contact.phone}`}
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 Tel.: {siteConfig.contact.phone}
               </a>
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="block hover:text-accent transition-colors"
+                className="block hover:text-gray-300 transition-colors"
               >
                 {siteConfig.contact.email}
               </a>
@@ -128,12 +128,12 @@ export function Footer() {
         </div>
 
         {/* Social Media - Mobile only */}
-        <div className="md:hidden absolute bottom-6 right-4 flex gap-3">
+        <div className="md:hidden mt-6 flex justify-end gap-3">
           <a
             href={siteConfig.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center bg-white/10 hover:bg-accent hover:scale-105 transition-all p-2.5 rounded-lg"
+            className="flex items-center justify-center bg-white/10 hover:bg-gray-600 hover:scale-105 transition-all p-2.5 rounded-lg"
             aria-label="Instagram"
           >
             <Instagram className="h-5 w-5" />
@@ -142,7 +142,7 @@ export function Footer() {
             href={siteConfig.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center bg-white/10 hover:bg-accent hover:scale-105 transition-all p-2.5 rounded-lg"
+            className="flex items-center justify-center bg-white/10 hover:bg-gray-600 hover:scale-105 transition-all p-2.5 rounded-lg"
             aria-label="Facebook"
           >
             <Facebook className="h-5 w-5" />

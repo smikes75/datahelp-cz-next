@@ -117,7 +117,7 @@ export function Header() {
               {t('nav.contact')}
             </Link>
             <Link href="/poptavka-zachrany-dat" className="block font-bold text-primary hover:text-accent text-[17px]">
-              Diagnostika zdarma
+              Diagnostika
             </Link>
           </div>
         )}
