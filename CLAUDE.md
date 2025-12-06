@@ -495,3 +495,120 @@ return (
 - `app/[locale]/cenik/page.tsx` - Fixed currency
 - `app/[locale]/layout.tsx` - Removed antialiased class
 - `app/[locale]/objednat-diagnostiku/page.tsx` - **COMPLETE REWRITE** to match oldprototype
+
+---
+
+### December 6, 2024 - Session: Typography Improvements & FAQ Updates
+
+**Goal**: Fine-tune typography and update FAQ content per user requirements.
+
+#### 1. Hero Section Typography Fix
+**Problem**: User requested that "Platíte pouze za úspěšně zachráněná data." should always start on a new line
+
+**Solution**:
+- Added `\n` newline character before the text in `messages/cs.json:119`
+- Added `whitespace-pre-line` CSS class to Hero subtitle to render newlines
+
+```typescript
+// Hero.tsx
+<p className="text-lg md:text-xl mb-6 md:mb-8 whitespace-pre-line">
+  {t('subtitle')}
+</p>
+```
+
+```json
+// messages/cs.json:119
+"subtitle": "Specializujeme se na záchranu dat z poškozených médií již více než 25 let.\nPlatíte pouze za úspěšně zachráněná data."
+```
+
+**Files**:
+- `components/Hero.tsx:47` - Added whitespace-pre-line class
+- `messages/cs.json:119` - Added \n newline
+
+#### 2. Courier Delivery Address Fix
+**Problem**: In "vlastní přepravou" form option, "Praha 8, 186 00" must start on new line
+
+**Solution**:
+- Added `<br/>` HTML break tags in courier description using dangerouslySetInnerHTML
+
+```json
+// messages/cs.json:1363
+"description": "Zašlete médium vlastní přepravou na naši adresu:<br/>DataHelp s.r.o. Jirsíkova 1<br/>Praha 8, 186 00"
+```
+
+**Files**:
+- `messages/cs.json:1363` - Added <br/> tags for line breaks
+
+#### 3. Personal Delivery Address Split
+**Problem**: In "osobní předání" form option, address should be split into two lines:
+- Line 1: "Jirsíkova 541/1"
+- Line 2: "Praha 8, 186 00"
+
+**Solution**:
+- Updated address in three locations with `\n` newline character
+- Added `whitespace-pre-line` class in PoptavkaClient.tsx to render newlines
+
+```typescript
+// app/poptavka-zachrany-dat/PoptavkaClient.tsx:714
+<p className="text-gray-700 whitespace-pre-line">{t('delivery.personal.address')}</p>
+```
+
+**Files**:
+- `config/site.config.ts:12` - Split address with \n
+- `messages/cs.json:724` - Contact info address with \n
+- `messages/cs.json:1341` - Personal delivery address with \n
+- `app/poptavka-zachrany-dat/PoptavkaClient.tsx:714` - Added whitespace-pre-line class
+
+#### 4. Display Issue Resolution
+**Problem**: User reported "nějak tam ty změny nevidim ani v anonymnim okne" (changes not visible even in incognito)
+
+**Root Cause**: Missing `whitespace-pre-line` CSS class in PoptavkaClient.tsx for address display
+
+**Solution**:
+1. Killed all running dev servers
+2. Cleared .next cache (`rm -rf .next`)
+3. Restarted dev server
+4. Added `whitespace-pre-line` class to address paragraph
+
+**Result**: Changes became visible immediately after adding the CSS class
+
+#### 5. FAQ Content Update
+**Problem**: User requested to delete FAQ question "Nabízíte garanci 'Bez dat, bez platby'?" and replace with "Co zahrnuje bezplatná diagnostika?"
+
+**Solution**:
+- Added complete FAQ section to `messages/cs.json` with 10 questions
+- Replaced q2 from guarantee question to diagnostics question
+- Updated oldprototype version to match
+
+**Changes**:
+```json
+// OLD q2:
+"q2": "Nabízíte garanci \"Bez dat, bez platby\"?",
+"a2": "Ano, pokud se nám nepodaří vaše data obnovit, neplatíte za službu obnovy."
+
+// NEW q2:
+"q2": "Co zahrnuje bezplatná diagnostika?",
+"a2": "Bezplatná diagnostika zahrnuje prvotní posouzení média – určíme typ a rozsah poškození a na základě toho vám sdělíme, zda je záchrana dat možná a kolik bude stát. Celý proces je nezávazný a nic neplatíte."
+```
+
+**Files**:
+- `messages/cs.json` - Added complete FAQ section (lines 1391-1416)
+- `oldprototype/src/i18n/locales/cs/faq.ts` - Updated q2, removed duplicate q10
+
+#### Build Status
+✅ All pages building successfully
+✅ Typography changes visible and working
+✅ FAQ page displays correctly at `/caste-dotazy`
+✅ All address formatting correct (Hero, courier, personal delivery)
+✅ Both Next.js and oldprototype versions synchronized
+
+#### Commit
+- Git commit created: "Fix typography in Hero, delivery addresses, and update FAQ question"
+- All changes successfully pushed to repository
+
+**Files Modified in This Session**:
+- `components/Hero.tsx` - Added whitespace-pre-line for subtitle
+- `messages/cs.json` - Hero subtitle newline, courier description, personal/contact addresses, FAQ section
+- `config/site.config.ts` - Split address into two lines
+- `app/poptavka-zachrany-dat/PoptavkaClient.tsx` - Added whitespace-pre-line for address
+- `oldprototype/src/i18n/locales/cs/faq.ts` - Updated q2 and q10
