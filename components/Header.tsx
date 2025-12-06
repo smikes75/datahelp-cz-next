@@ -110,14 +110,14 @@ export function Header() {
             <Link href="/clanky" className={`block font-bold ${isActive("/clanky")} header-nav-link`}>
               Blog
             </Link>
-            <Link href="/reference" className={`block font-bold ${isActive("/reference")} header-nav-link`}>
-              {t('nav.references')}
-            </Link>
             <Link href="/caste-dotazy" className={`block font-bold ${isActive("/caste-dotazy")} header-nav-link`}>
               FAQ
             </Link>
             <Link href="/kontakt" className={`block font-bold ${isActive("/kontakt")} header-nav-link`}>
               {t('nav.contact')}
+            </Link>
+            <Link href="/poptavka-zachrany-dat" className="block font-bold text-primary hover:text-accent text-[17px]">
+              Diagnostika zdarma
             </Link>
           </div>
         )}
