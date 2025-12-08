@@ -67,19 +67,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { password, key, value } = body;
 
-    // Debug: check if env var is loaded
-    const adminPassword = process.env.ADMIN_PASSWORD;
-
-    // Debug endpoint - remove after testing
-    if (key === '_debug') {
-      return NextResponse.json({
-        hasEnvVar: !!adminPassword,
-        envVarLength: adminPassword?.length || 0,
-        passwordLength: password?.length || 0
-      });
-    }
-
     // Ověření hesla
+    const adminPassword = process.env.ADMIN_PASSWORD;
     if (!adminPassword || password !== adminPassword) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
