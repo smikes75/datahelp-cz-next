@@ -2,7 +2,7 @@
 
 
 import { useState } from 'react';
-import { Cpu, Calendar } from 'lucide-react';
+import { Calendar, ChevronDown, Building2, Wrench, Heart } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -157,6 +157,106 @@ function AboutGallery() {
   );
 }
 
+// Accordion Item komponenta
+interface AccordionItemData {
+  key: string;
+  icon: React.ReactNode;
+  title: string;
+  content: string;
+  link?: string;
+  linkText?: string;
+}
+
+function AccordionSection() {
+  const t = useTranslations();
+  const [openItem, setOpenItem] = useState<string | null>(null);
+
+  const items: AccordionItemData[] = [
+    {
+      key: 'company',
+      icon: <Building2 className="h-5 w-5" />,
+      title: t('about.accordion.company.title'),
+      content: t('about.accordion.company.content'),
+    },
+    {
+      key: 'technology',
+      icon: <Wrench className="h-5 w-5" />,
+      title: t('about.accordion.technology.title'),
+      content: t('about.accordion.technology.content'),
+      link: '/technologie',
+      linkText: t('about.accordion.technology.link'),
+    },
+    {
+      key: 'values',
+      icon: <Heart className="h-5 w-5" />,
+      title: t('about.accordion.values.title'),
+      content: t('about.accordion.values.content'),
+    },
+  ];
+
+  const toggleItem = (key: string) => {
+    setOpenItem(openItem === key ? null : key);
+  };
+
+  return (
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-primary mb-4">
+            {t('about.accordion.title')}
+          </h2>
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-4">
+          {items.map((item) => (
+            <div
+              key={item.key}
+              className="border border-gray-200 rounded-lg overflow-hidden shadow-sm"
+            >
+              <button
+                onClick={() => toggleItem(item.key)}
+                className="w-full flex items-center justify-between p-5 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-accent">{item.icon}</span>
+                  <span className="text-lg font-semibold text-primary">{item.title}</span>
+                </div>
+                <ChevronDown
+                  className={`h-5 w-5 text-gray-500 transition-transform duration-300 ${
+                    openItem === item.key ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  openItem === item.key ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="p-5 bg-white">
+                  <p className="text-gray-600 whitespace-pre-line leading-relaxed">
+                    {item.content}
+                  </p>
+                  {item.link && item.linkText && (
+                    <div className="mt-6">
+                      <Link
+                        href={item.link}
+                        className="inline-flex items-center space-x-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-light transition"
+                      >
+                        <Wrench className="h-5 w-5" />
+                        <span>{item.linkText}</span>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // PageHeader komponenta
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
   return (
@@ -280,26 +380,8 @@ export function AboutUsClient() {
         </div>
       </div>
 
-      {/* CTA sekce pro technologie */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="bg-primary/5 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-6 text-primary text-center">
-            {t('techPage.title')}
-          </h2>
-          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-6">
-            {t('techPage.subtitle')}
-          </p>
-          <div className="flex justify-center">
-            <Link
-              href="/technologie"
-              className="inline-flex items-center space-x-2 bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-light transition"
-            >
-              <Cpu className="h-5 w-5" />
-              <span>{t('techPage.learnMore')}</span>
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* Accordion sekce s detaily o firmě - pod galerií odborníků */}
+      <AccordionSection />
     </div>
   );
 }

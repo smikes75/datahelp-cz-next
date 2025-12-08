@@ -235,6 +235,22 @@
           "description": "Jeden ze zakladatelů společnosti, software developer a CAD specialista"
         }
       ]
+    },
+    "accordion": {
+      "title": "Více o nás",
+      "company": {
+        "title": "O společnosti",
+        "content": "Jsme společnost DataHelp s.r.o., specializující se na záchranu dat ze všech typů datových nosičů. Díky více než 25 letům zkušeností a nejmodernějším technologiím pomáháme našim zákazníkům bezpečně obnovit jejich ztracená data. Bez ohledu na to, zda se jedná o poškozený pevný disk, SSD, RAID pole nebo mobilní zařízení, jsme tu, abychom vám poskytli spolehlivé a profesionální řešení.\n\nSpolečnost byla založena Mgr. Štěpánem Mikešem a Alešem Wagnerem s cílem poskytovat profesionální a spolehlivé služby v oblasti obnovy a záchrany dat. Od svého vzniku se zaměřujeme na široké spektrum zařízení, od paměťových karet a mobilních telefonů přes pevné disky až po náročné systémy jako jsou RAID pole."
+      },
+      "technology": {
+        "title": "Technologické zázemí",
+        "content": "Pravidelně investujeme do nejmodernějších technologií, abychom mohli poskytovat špičkové služby v oblasti záchrany dat. Spolupracujeme s technologickým lídrem ACELab Europe a využíváme nástroje jako PC-3000, které nám umožňují provádět zásahy na úrovni firmwaru a zvládat i složité případy obnovy dat z pevných disků a RAID polí.\n\nPro záchranu dat z mobilních zařízení využíváme profesionální nástroje od společností Cellebrite a Mobil Edit. Pro obnovu dat z poškozených USB disků a paměťových karet používáme Visual NAND Reconstructor od společnosti Rusolut. Při manipulaci s plotnami poškozených disků využíváme laminární boxy zajišťující kontrolované prostředí nezbytné pro maximální úspěšnost záchrany.\n\nNaše pracoviště disponuje vybavením pro pokročilé pájení – od mikropájek a horkovzdušných stanic až po IR pájení a rework stanice, doplněné o mikroskopy s vysokým rozlišením. Pomocí CAD softwaru navrhujeme vlastní přípravky pro manipulaci s mechanickými částmi disků, které vyrábíme pomocí 3D tisku.\n\nVyvíjíme také vlastní software pro třídění a kontrolu dat a systém správy zakázek. Díky rozsáhlému skladu s více než 10 000 unikátními díly – od nejstarších 20MB MFM disků až po nejmodernější 20TB disky – můžeme výrazně zkrátit dobu záchrany dat.",
+        "link": "Zjistit více"
+      },
+      "values": {
+        "title": "Přístup a hodnoty",
+        "content": "Naší prioritou je poskytovat profesionální a spolehlivé služby v oblasti záchrany dat, což vychází z našich klíčových hodnot: odbornost, inovace a zákaznický přístup. Věříme, že data jsou pro naše zákazníky nenahraditelná, a proto se vždy snažíme nabídnout co nejefektivnější řešení pro obnovu dat.\n\nNeustále investujeme do vzdělávání našich odborníků a do nejmodernějších technologií, abychom drželi krok s nejnovějšími trendy v oboru a mohli poskytovat služby nejvyšší kvality.\n\nZákaznická spokojenost je pro nás zásadní. Klademe důraz na individuální přístup a transparentní komunikaci během celého procesu obnovy dat. Každý případ je pro nás jedinečnou výzvou a naši specialisté jsou připraveni udělat maximum pro úspěšnou záchranu dat. Dodržujeme přísné bezpečnostní standardy a dbáme na ochranu osobních údajů našich klientů."
+      }
     }
   },
   "services": {
