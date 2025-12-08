@@ -209,7 +209,7 @@ export default function AdminBannerPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <label className="font-medium text-gray-900">Zobrazit animovaný banner</label>
-                  <p className="text-sm text-gray-500">Pokud je vypnuto, zobrazí se statický kontaktní banner</p>
+                  <p className="text-sm text-gray-500">Animovaný banner se zobrazí pod kontaktním bannerem</p>
                 </div>
                 <button
                   onClick={() => setSettings({ ...settings, enabled: !settings.enabled })}
@@ -304,7 +304,8 @@ export default function AdminBannerPage() {
               <h3 className="font-semibold mb-2">Jak to funguje:</h3>
               <ul className="list-disc list-inside space-y-1">
                 <li>Změny se projeví okamžitě po uložení (není potřeba redeploy)</li>
-                <li>Pokud je animovaný banner vypnutý, zobrazí se statický kontaktní banner</li>
+                <li>Kontaktní banner (telefon, email) je vždy viditelný nahoře</li>
+                <li>Animovaný banner se zobrazí pod kontaktním (pokud je zapnutý)</li>
                 <li>Text se scrolluje zleva doprava v nekonečné smyčce</li>
               </ul>
             </div>

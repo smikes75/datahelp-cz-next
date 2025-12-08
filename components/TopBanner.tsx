@@ -1,9 +1,8 @@
 'use client';
 
 /**
- * Top Banner - Dynamicky přepíná mezi statickým a animovaným bannerem
+ * Top Banner - Zobrazuje kontaktní banner a volitelně animovaný banner pod ním
  * Nastavení se načítá z Supabase (site_settings tabulka)
- * Fallback: statický kontaktní banner pokud DB není dostupná
  */
 
 import { useEffect, useState } from 'react';
@@ -49,16 +48,15 @@ export function TopBanner() {
     fetchSettings();
   }, []);
 
-  // Před načtením zobraz kontaktní banner (SSR fallback)
-  if (!loaded) {
-    return <ContactBanner />;
-  }
+  return (
+    <>
+      {/* Vždy zobrazit kontaktní banner nahoře */}
+      <ContactBanner />
 
-  // Pokud je animovaný banner zapnutý, zobraz ho
-  if (settings.enabled) {
-    return <DynamicAnnouncementBanner text={settings.text} bgColor={settings.bgColor} />;
-  }
-
-  // Jinak zobraz statický kontaktní banner
-  return <ContactBanner />;
+      {/* Pokud je animovaný banner zapnutý, zobraz ho pod kontaktním */}
+      {loaded && settings.enabled && (
+        <DynamicAnnouncementBanner text={settings.text} bgColor={settings.bgColor} />
+      )}
+    </>
+  );
 }
