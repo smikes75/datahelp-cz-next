@@ -271,7 +271,7 @@ export default function KalkulackaClient() {
                     }`}
                   >
                     <div className="flex flex-col items-center text-center">
-                      <div className={`mb-4 ${calculator.deviceType === device.id ? 'text-primary' : 'text-gray-400'}`}>
+                      <div className={`mb-4 ${calculator.deviceType === device.id ? 'text-primary' : 'text-accent'}`}>
                         {device.icon}
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{device.title}</h3>
