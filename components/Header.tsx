@@ -63,8 +63,8 @@ export function Header() {
             <Link href="/" className={`${isActive("/")} header-nav-link`}>
               {t('nav.home')}
             </Link>
-            <Link href="/o-nas" className={`${isActive("/o-nas")} header-nav-link`}>
-              {t('nav.about')}
+            <Link href="/zachrana-dat" className={`${isActive("/zachrana-dat")} header-nav-link`}>
+              {t('nav.services')}
             </Link>
             <Link href="/cenik-zachrany-dat" className={`${isActive("/cenik-zachrany-dat")} header-nav-link`}>
               {t('nav.pricing')}
@@ -101,8 +101,8 @@ export function Header() {
             <Link href="/" className={`block font-bold ${isActive("/")} header-nav-link`}>
               {t('nav.home')}
             </Link>
-            <Link href="/o-nas" className={`block font-bold ${isActive("/o-nas")} header-nav-link`}>
-              {t('nav.about')}
+            <Link href="/zachrana-dat" className={`block font-bold ${isActive("/zachrana-dat")} header-nav-link`}>
+              {t('nav.services')}
             </Link>
             <Link href="/cenik-zachrany-dat" className={`block font-bold ${isActive("/cenik-zachrany-dat")} header-nav-link`}>
               {t('nav.pricing')}
