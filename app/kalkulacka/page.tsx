@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import KalkulackaClient from './KalkulackaClient';
 
 export const metadata: Metadata = {
@@ -18,5 +19,9 @@ export const metadata: Metadata = {
 };
 
 export default function KalkulackaPage() {
-  return <KalkulackaClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50" />}>
+      <KalkulackaClient />
+    </Suspense>
+  );
 }
