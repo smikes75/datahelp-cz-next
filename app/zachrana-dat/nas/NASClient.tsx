@@ -1,11 +1,11 @@
 'use client';
 
 /**
- * SSD Data Recovery stránka
- * Obsah identický s datahelp.cz/zachrana-dat/ssd
+ * NAS - Data Recovery stránka
+ * Obsah identický s datahelp.cz/zachrana-dat/nas
  */
 
-import { Cpu, HardDrive, AlertTriangle, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
+import { Server, Database, HardDrive, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,6 +30,7 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
           }}
         />
       </div>
+
       <div className="relative z-10 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
@@ -45,10 +46,10 @@ function ServiceTabs() {
   const tabs = [
     { name: 'Pevný disk', href: '/zachrana-dat/hdd', active: false },
     { name: 'Externí disk', href: '/zachrana-dat/externi-disk', active: false },
-    { name: 'SSD', href: '/zachrana-dat/ssd', active: true },
+    { name: 'SSD', href: '/zachrana-dat/ssd', active: false },
     { name: 'SD karta', href: '/zachrana-dat/sd-karta', active: false },
     { name: 'USB Flash', href: '/zachrana-dat/usb-flash', active: false },
-    { name: 'NAS', href: '/zachrana-dat/nas', active: false },
+    { name: 'NAS', href: '/zachrana-dat/nas', active: true },
     { name: 'RAID', href: '/zachrana-dat/raid', active: false },
     { name: 'Apple', href: '/zachrana-dat/apple', active: false },
     { name: 'Android', href: '/zachrana-dat/mobilni-telefon', active: false },
@@ -86,90 +87,52 @@ function ServiceTabs() {
   );
 }
 
-export function SSDRecoveryClient() {
+export function NASClient() {
   const t = useTranslations();
 
   const softwareIssues = [
     {
-      title: 'Smazaná data',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Nemohu najít svá data',
-        'Soubory mají nulovou velikost',
-        'Složky jsou prázdné',
-        'Programy hlásí poškozené soubory'
-      ]
+      title: 'Softwarové závady',
+      symptoms: ['Smazaná data, rozpadlý operační systém, rozpadlý souborový systém, napadení kryptovirem.', 'Nedostupná data.', 'Nespuštění NAS.']
     },
     {
-      title: 'Zformátování',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Médium se tváří jako prázdné',
-        'Diskový oddíl je na pohled prázdný',
-        'Systém mě nutí provést zformátování',
-        'Po instalaci OS je disk nebo oddíl prázdný'
-      ]
-    },
-    {
-      title: 'Reinstalace operačního systému a zformátování disku',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Neopatrností při instalaci/opravě spouštění OS.',
-        'Část dat již bývá přepsána OS.'
-      ]
-    },
-    {
-      title: 'Po nákaze virem',
-      cause: 'Průnik zvenčí',
-      symptoms: [
-        'Antivirus odhalil hrozby a od té doby nemohu nalézt důležitá data.',
-        'Počítač se chová "jinak", data mizí sama od sebe.'
-      ]
+      title: 'Ztráta konfigurace disků',
+      symptoms: ['Nenaběhnutí operačního systému; nepřístupná síťová jednotka; nejde webové rozhraní.']
     }
   ];
 
   const hardwareIssues = [
     {
-      title: 'Vadný paměťový řadič',
-      symptoms: [
-        'Disk se nedetekuje v zařízení. Disk hlásí jinou kapacitu.',
-        'Hlásí jiný název a sériové číslo.'
-      ]
+      title: 'Závada na diskovém řadiči',
+      symptoms: ['Nenaběhnutí operačního systému; nepřístupná síťová jednotka; nejde webové rozhraní.']
     },
     {
-      title: 'Vadné paměťové bloky',
-      symptoms: [
-        'Disk není přístupný. Nelze číst ani zapisovat žádná data, disk vrací chyby čtení nebo zápisu.'
-      ]
-    },
-    {
-      title: 'Chyba ve firmware',
-      symptoms: [
-        'Disk hlásí jinou kapacitu, jiný název.'
-      ]
+      title: 'Vadný jeden či více pevných disků',
+      symptoms: ['Utržené čtecí hlavy, spálená řídící elektronika, poškození záznamové plotny disku.', 'Nedostupná data.', 'Nespuštění NAS.']
     }
   ];
 
-  const interfaces = [
-    'SATA (Serial ATA)',
-    'PCIe (Peripheral Component Interconnect Express)',
-    'NVMe (Non-Volatile Memory Express)',
-    'M.2'
+  const raidTypes = [
+    { type: 'RAID 0 (striping)', desc: 'Nabízí rychlý přístup k datům, ale bez redundance.' },
+    { type: 'RAID 1 (mirroring)', desc: 'Zrcadlí data pro vyšší bezpečnost, chrání před selháním jednoho disku.' },
+    { type: 'RAID 5', desc: 'Využívá striping s paritou, což umožňuje obnovení dat při selhání jednoho disku a poskytuje rovnováhu mezi kapacitou a ochranou.' },
+    { type: 'RAID 6', desc: 'Dvojitá parita umožňuje obnovu při selhání až dvou disků, vhodné pro větší pole disků.' },
+    { type: 'RAID 10 (1+0)', desc: 'Kombinuje zrcadlení a striping, poskytuje vysoký výkon a ochranu dat, ale vyžaduje minimálně čtyři disky.' }
   ];
 
-  const fileSystems = ['Windows', 'Apple Mac', 'Linux', 'FreeBSD', 'OpenBSD', 'Novell', 'OS/2'];
+  const fileSystems = ['EXT4', 'Btrfs', 'NTFS', 'ZFS', 'APFS'];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <ServiceSchema
-        name={t('services.ssd.title')}
-        description={t('services.ssd.desc')}
-        serviceType="SSD Data Recovery Service"
+        name="Záchrana dat z NAS serveru"
+        description="Profesionální záchrana dat z NAS serverů a RAID diskových polí. Bezplatná diagnostika. Více než 20 let zkušeností."
+        serviceType="Data Recovery Service"
       />
       <PageHeader
-        title="SSD disk"
-        subtitle="Přišli jste o data z SSD disku? Nemusíte se bát, vaše soubory lze obnovit. Specializujeme se na záchranu dat z SSD, ať už jde o selhání paměti, firmwaru nebo elektroniky. Kontaktujte nás a my vám pomůžeme vrátit ztracená data zpět."
-        backgroundImage="ssd-recovery.webp"
+        title="NAS"
+        subtitle="Máte problém s NAS serverem? Ať už jde o softwarové potíže nebo fyzické poškození, náš tým s dlouholetými zkušenostmi je připraven bezpečně obnovit vaše cenná data."
+        backgroundImage="raid-recovery.webp"
       />
       <ServiceTabs />
       <Breadcrumbs />
@@ -178,43 +141,21 @@ export function SSDRecoveryClient() {
         {/* Main Intro Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-            Přišli jste o data z SSD disku?
+            Záchrana dat z NAS zařízení – bezpečně a efektivně
           </h2>
           <div className="prose prose-lg max-w-none text-gray-700">
             <p className="mb-4">
-              Nemějte obavy, i když se SSD disk tváří jako nedostupný, vaše data nemusí být ztracena navždy. Naše služby pro{' '}
-              <strong>záchranu dat z SSD disků</strong> vám pomohou získat zpět důležité soubory, ať už šlo o{' '}
-              <strong>osobní dokumenty, fotografie nebo firemní data</strong>.
+              Má váš NAS server problémy se softwarem nebo utrpěl fyzické poškození? Náš odborně vyškolený tým a špičkové laboratorní vybavení jsou připraveny bezpečně a efektivně řešit různé závady, včetně mechanických a elektronických problémů na NAS serverech.
             </p>
             <p className="mb-4">
-              SSD disky mají odlišnou architekturu než tradiční pevné disky, což vyžaduje{' '}
-              <strong>speciální přístup</strong> při jejich obnově. Naši specialisté jsou vybaveni pokročilými technologiemi, které umožňují{' '}
-              <strong>obnovu dat i z nefunkčních SSD disků</strong>, a to bez ohledu na to, zda došlo{' '}
-              <strong>k selhání paměťových čipů, chybnému firmwaru nebo elektronickému poškození</strong>.
+              Poskytneme vám <strong>bezplatnou diagnostiku</strong> problému a po pečlivém posouzení rozsahu poškození stanovíme cenu za obnovu dat. S více než <strong>20 lety zkušeností</strong> a certifikovanými nástroji, jako jsou <strong>ACELab a Cellebrite</strong>, zvládáme i komplikované případy.
             </p>
             <p className="mb-4">
-              Nezáleží na tom, zda používáte SSD disk od výrobce{' '}
-              <strong>Samsung, Intel, Kingston, Crucial, Corsair</strong> nebo jiné značky. Jsme připraveni vám pomoci s{' '}
-              <strong>obnovou dat z jakéhokoli typu SSD disku</strong>.
+              Naše služby obnovy dat z NAS jsou dostupné nepřetržitě, a to pro všechna běžná i specifická zařízení, včetně <strong>RAID polí</strong>.
             </p>
-          </div>
-        </div>
-
-        {/* Warning Section */}
-        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 mb-8">
-          <div className="flex items-start gap-4">
-            <AlertTriangle className="h-8 w-8 text-red-500 flex-shrink-0 mt-1" />
-            <div>
-              <p className="text-gray-700 leading-relaxed">
-                Pro úspěšnou záchranu dat je důležité, abyste v případě poškození SSD disku okamžitě{' '}
-                <strong>vypnuli zařízení</strong>, <strong>odpojili disk</strong> a doručili ho k nám na{' '}
-                <strong>bezplatnou diagnostiku</strong>. Další používání nebo zapnutí disku by mohlo vést k nenávratnému poškození vašich dat.
-              </p>
-              <p className="text-gray-700 mt-4">
-                <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">Kontaktujte nás</Link>{' '}
-                co nejdříve a my provedeme důkladnou <strong>diagnostiku</strong>, abychom zjistili nejlepší možnosti pro záchranu vašich dat.
-              </p>
-            </div>
+            <p>
+              Pokud máte <strong>poškozené NAS zařízení</strong>, doporučujeme jej dále nezapínat a neprovádět na něm žádné změny – tím se snižuje riziko ztráty dat. <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">Kontaktujte nás co nejdříve</Link>, abychom mohli situaci odborně posoudit a navrhnout nejlepší řešení pro záchranu vašich dat.
+            </p>
           </div>
         </div>
 
@@ -240,7 +181,6 @@ export function SSDRecoveryClient() {
                       {issue.title}
                     </td>
                     <td className="p-3 border-b text-gray-700">
-                      <div className="font-medium text-primary mb-2">{issue.cause}</div>
                       <ul className="list-disc list-inside space-y-1">
                         {issue.symptoms.map((symptom, i) => (
                           <li key={i}>{symptom}</li>
@@ -282,44 +222,35 @@ export function SSDRecoveryClient() {
           </div>
         </div>
 
-        {/* Supported Types Section */}
+        {/* RAID and File Systems Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-primary mb-6">
-            Provádíme záchranu dat ze všech typů SSD disků
-          </h2>
+          <div className="flex items-center gap-3 mb-6">
+            <Database className="h-7 w-7 text-accent" />
+            <h2 className="text-2xl font-bold text-primary">
+              Záchrana dat z NAS úložišť všech konfigurací a souborových systémů
+            </h2>
+          </div>
+          <div className="prose prose-lg max-w-none text-gray-700 mb-8">
+            <p>
+              Dokážeme sestavit a spravovat běžné i pokročilé konfigurace pro NAS zařízení, včetně <strong>RAID 0, RAID 1, RAID 5, RAID 6 a RAID 10</strong>. Každý z těchto typů nabízí specifické výhody a stupně ochrany dat:
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Interfaces */}
-            <div>
-              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <Cpu className="h-5 w-5 text-accent" />
-                Rozhraní:
-              </h3>
-              <ul className="space-y-2">
-                {interfaces.map((iface, index) => (
-                  <li key={index} className="flex items-start gap-2 text-gray-700">
-                    <span className="text-accent mt-1">•</span>
-                    <span>{iface}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <ul className="space-y-4 mb-8">
+            {raidTypes.map((raid, index) => (
+              <li key={index} className="flex items-start gap-3 text-gray-700">
+                <span className="text-accent font-bold mt-1">•</span>
+                <div>
+                  <strong className="text-primary">{raid.type}</strong>: {raid.desc}
+                </div>
+              </li>
+            ))}
+          </ul>
 
-            {/* File Systems */}
-            <div>
-              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <HardDrive className="h-5 w-5 text-accent" />
-                Souborové systémy následujících platforem:
-              </h3>
-              <ul className="space-y-2">
-                {fileSystems.map((fs, index) => (
-                  <li key={index} className="flex items-center gap-2 text-gray-700">
-                    <span className="text-accent">•</span>
-                    <span>{fs}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="prose prose-lg max-w-none text-gray-700">
+            <p>
+              Kromě RAID konfigurací podporujeme různé souborové systémy, které NAS zařízení obvykle používají, jako jsou <strong>{fileSystems.join(', ')}</strong>. Tato variabilita nám umožňuje flexibilně reagovat na různé typy závad a obnovovat data z široké škály NAS zařízení.
+            </p>
           </div>
         </div>
 

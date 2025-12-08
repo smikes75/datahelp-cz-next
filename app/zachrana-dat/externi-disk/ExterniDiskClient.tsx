@@ -1,11 +1,11 @@
 'use client';
 
 /**
- * HDD Data Recovery stránka
- * Obsah identický s datahelp.cz/zachrana-dat/pevny-disk
+ * Externí disk - Data Recovery stránka
+ * Obsah identický s datahelp.cz/zachrana-dat/externi-disk
  */
 
-import { HardDrive, Shield, AlertTriangle, ArrowRight, Phone, Mail, ExternalLink, ChevronRight } from 'lucide-react';
+import { HardDrive, Usb, AlertTriangle, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -44,8 +44,8 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
 // Navigation tabs component for service pages
 function ServiceTabs() {
   const tabs = [
-    { name: 'Pevný disk', href: '/zachrana-dat/hdd', active: true },
-    { name: 'Externí disk', href: '/zachrana-dat/externi-disk', active: false },
+    { name: 'Pevný disk', href: '/zachrana-dat/hdd', active: false },
+    { name: 'Externí disk', href: '/zachrana-dat/externi-disk', active: true },
     { name: 'SSD', href: '/zachrana-dat/ssd', active: false },
     { name: 'SD karta', href: '/zachrana-dat/sd-karta', active: false },
     { name: 'USB Flash', href: '/zachrana-dat/usb-flash', active: false },
@@ -87,7 +87,7 @@ function ServiceTabs() {
   );
 }
 
-export function HDDRecoveryClient() {
+export function ExterniDiskClient() {
   const t = useTranslations();
 
   const softwareIssues = [
@@ -199,10 +199,11 @@ export function HDDRecoveryClient() {
   ];
 
   const interfaces = [
-    'SATA 2/3',
-    'M2, SATA/NVMe',
-    'včetně zastaralých technologií - IDE, ATA',
-    'včetně serverových disků - SCSI (SAS)'
+    'klasické rozhraní - USB 2.0/3.0',
+    'FireWire - IEEE-1394',
+    'eSata',
+    'připojené síťově - LAN, WiFi',
+    'Thunderbolt'
   ];
 
   const formFactors = ['5,25"', '3,5"', '2,5"', '1,8"'];
@@ -212,13 +213,13 @@ export function HDDRecoveryClient() {
   return (
     <div className="min-h-screen bg-gray-50">
       <ServiceSchema
-        name={t('services.hdd.title')}
-        description={t('services.hdd.desc')}
+        name="Záchrana dat z externího disku"
+        description="Profesionální záchrana dat z externích disků všech typů a značek. Řešíme softwarové i hardwarové závady."
         serviceType="Data Recovery Service"
       />
       <PageHeader
-        title="Pevný disk"
-        subtitle="Máte poškozený pevný disk? Naši technici provedou bezplatnou diagnostiku, identifikují závadu a nabídnou vám řešení. S využitím moderních technologií zajistíme bezpečnou a spolehlivou obnovu vašich dat."
+        title="Externí disk"
+        subtitle="Váš externí disk přestal fungovat a máte obavy o svá důležitá data? Nemusíte se bát – i z těžce poškozeného disku dokážeme data obnovit. Naši specialisté se postarají o bezpečnou obnovu vašich souborů."
         backgroundImage="hdd-recovery.webp"
       />
       <ServiceTabs />
@@ -228,30 +229,30 @@ export function HDDRecoveryClient() {
         {/* Main Intro Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-            Záchrana dat z pevného disku – rychlá a bezpečná obnova HDD
+            Váš externí disk přestal fungovat a vy se obáváte o svá důležitá data?
           </h2>
           <div className="prose prose-lg max-w-none text-gray-700">
             <p className="mb-4">
-              Společnost DataHelp s.r.o. má více než 25 let zkušeností se záchranou dat z různých typů{' '}
-              <strong>pevných disků</strong> (HDD) od předních světových výrobců. Úspěšně obnovujeme data z disků různých značek, jako jsou například{' '}
-              <strong>Seagate, Western Digital, Samsung, Toshiba a Hitachi</strong>, stejně tak z méně známých, nebo starších disků od výrobců jako{' '}
-              <strong>Fujitsu, Quantum, Maxtor a Transcend</strong>.
+              <strong>Nemějte obavy</strong> – jsme tady, abychom vám pomohli! I v případě <strong>vážného poškození externího disku</strong> je často možné provést <strong>obnovu dat z HDD</strong>, a my jsme připraveni vám s tím pomoci.
             </p>
             <p className="mb-4">
-              Kromě toho máme bohaté zkušenosti se záchranou dat z disků používaných ve firemních prostředích, včetně produktů od{' '}
-              <strong>IBM, HP, Intel, DELL</strong> a dalších. Bez ohledu na výrobce nebo typ disku jsme tu pro vás – ať už jde o mechanické poškození, selhání firmwaru nebo chyby v souborovém systému, dokážeme vaše data obnovit spolehlivě a rychle.
+              Vaše <strong>fotografie, hudba, důležité osobní nebo firemní dokumenty</strong> uložené na externím disku <strong>nejsou ztraceny navždy</strong>. Jsme <strong>specialisté na obnovu dat ze všech typů externích HDD</strong> – ať už má disk plotny o průměru 2,5", 3,5" nebo jiný rozměr. <strong>Typ disku ani rozsah poškození pro nás nepředstavují překážku</strong> – poradíme si s mechanickým i elektronickým poškozením, včetně problémů s <strong>plotnami</strong> či <strong>čtecími hlavami</strong>.
+            </p>
+            <p className="mb-4">
+              Pokud používáte externí disky značek <strong>Western Digital</strong> nebo <strong>Seagate</strong>, jsme připraveni na jejich diagnostiku a záchranu dat – jedná se o <strong>nejčastější značky</strong>, se kterými se setkáváme. Zkušenosti však máme také s dalšími výrobci, jako jsou <strong>Toshiba, Samsung</strong> či <strong>Hitachi</strong>.
             </p>
             <p>
+              <strong>Bezpečná záchrana dat</strong> je pro nás prioritou, proto používáme <strong>moderní technologie</strong> k dosažení <strong>maximální úspěšnosti</strong>.{' '}
               <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">Kontaktujte nás</Link>{' '}
-              co nejdříve, zdarma provedeme <strong>odbornou diagnostiku</strong> a navrhneme nejlepší řešení pro záchranu vašich dat.
+              co nejdříve, provedeme odbornou <strong>diagnostiku</strong> zdarma a navrhneme nejlepší <strong>postup</strong> pro záchranu vašich dat.
             </p>
           </div>
         </div>
 
-        {/* Software Issues Section */}
+        {/* Issues Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-primary mb-6">
-            Příčiny ztráty dat na HDD: softwarové vs. mechanické poškození
+            Přehled běžných závad:
           </h2>
 
           <h3 className="text-xl font-bold text-primary mb-4">Softwarové závady</h3>
@@ -316,7 +317,7 @@ export function HDDRecoveryClient() {
         {/* Repairs vs Data Recovery Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-primary mb-6">
-            Opravy disků a záchrana dat - co je důležité vědět
+            Opravy disků a záchrana dat: Co je důležité vědět
           </h2>
           <div className="prose prose-lg max-w-none text-gray-700">
             <p className="mb-4">
@@ -344,8 +345,8 @@ export function HDDRecoveryClient() {
             {/* Interfaces */}
             <div>
               <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <HardDrive className="h-5 w-5 text-accent" />
-                Interní rozhraní:
+                <Usb className="h-5 w-5 text-accent" />
+                Externí rozhraní:
               </h3>
               <ul className="space-y-2">
                 {interfaces.map((iface, index) => (
@@ -359,7 +360,10 @@ export function HDDRecoveryClient() {
 
             {/* Form Factors */}
             <div>
-              <h3 className="text-lg font-bold text-primary mb-4">Rozměrové formáty</h3>
+              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+                <HardDrive className="h-5 w-5 text-accent" />
+                Rozměrové formáty:
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {formFactors.map((size, index) => (
                   <span key={index} className="px-4 py-2 bg-gray-100 rounded-lg text-gray-700 font-medium">
@@ -371,7 +375,7 @@ export function HDDRecoveryClient() {
 
             {/* File Systems */}
             <div>
-              <h3 className="text-lg font-bold text-primary mb-4">Souborové systémy následujících platforem</h3>
+              <h3 className="text-lg font-bold text-primary mb-4">Souborové systémy následujících platforem:</h3>
               <ul className="space-y-2">
                 {fileSystems.map((fs, index) => (
                   <li key={index} className="flex items-center gap-2 text-gray-700">
@@ -381,42 +385,6 @@ export function HDDRecoveryClient() {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-
-        {/* Warning Section */}
-        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 mb-8">
-          <div className="flex items-start gap-4">
-            <AlertTriangle className="h-8 w-8 text-red-500 flex-shrink-0 mt-1" />
-            <div>
-              <h2 className="text-2xl font-bold text-red-700 mb-4">
-                Zabraňte dalšímu používání poškozeného disku
-              </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Pokud váš systém začne vykazovat neobvyklé chování, například se nenačítá (může se objevit modrá obrazovka v případě operačního systému Windows) nebo počítač dokonce nerozpozná pevný disk, může být příčinou jeho porucha. V takovém případě může další pokus o zápis na disk vést k přepsání dat, což by výrazně snížilo šanci na jejich úspěšnou obnovu. Proto doporučujeme okamžitě počítač vypnout a obrátit se na nás pro odbornou pomoc při řešení této závady.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Why Choose DataHelp Section */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold text-primary mb-6">
-            Proč si vybrat DataHelp pro záchranu dat?
-          </h2>
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="mb-4">
-              <strong>Obnova dat z pevného disku (HDD)</strong> je velmi složitý a technicky náročný proces, který závisí na typu a rozsahu poškození. U mechanických problémů, jako je <strong>utržená čtecí hlava</strong> nebo <strong>poškození ploten</strong>, je klíčové provést opravu v <strong>čistém prostředí</strong>, kde se minimalizuje riziko dalšího poškození dat. Výměna čtecích hlav je jedním z nejnáročnějších úkonů, protože <strong>při nesprávné manipulaci může dojít k trvalé ztrátě dat</strong>.
-            </p>
-            <p className="mb-4">
-              Další častou příčinou selhání pevných disků je vadná <strong>vnitřní elektronika</strong>, která může způsobit problémy s načítáním dat nebo úplné selhání disku. Nesprávné zapínání disku v takovém stavu může vést k <strong>nevratnému poškození ploten</strong>, čímž se výrazně snižují šance na <strong>obnovu dat</strong>.
-            </p>
-            <p className="mb-4">
-              Svěřením disku odborníkům zajistíte, že disk bude analyzován a obnoven pomocí <strong>specializovaných nástrojů</strong>, které minimalizují riziko trvalé ztráty dat.
-            </p>
-            <p>
-              <strong>Nepokoušejte se o opravu sami</strong> – laické zásahy často vedou k dalšímu poškození. Naši <strong>specialisté</strong> disponují odbornými zkušenostmi, čistými prostory a specializovanými nástroji pro obnovu dat, které jsou nezbytné pro manipulaci s poškozenými disky, a mají hluboké znalosti pro opravu hardwarových i elektronických problémů disku.
-            </p>
           </div>
         </div>
 

@@ -1,11 +1,11 @@
 'use client';
 
 /**
- * SSD Data Recovery stránka
- * Obsah identický s datahelp.cz/zachrana-dat/ssd
+ * USB Flash - Data Recovery stránka
+ * Obsah identický s datahelp.cz/zachrana-dat/usb-flash
  */
 
-import { Cpu, HardDrive, AlertTriangle, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
+import { Usb, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,6 +30,7 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
           }}
         />
       </div>
+
       <div className="relative z-10 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
@@ -45,9 +46,9 @@ function ServiceTabs() {
   const tabs = [
     { name: 'Pevný disk', href: '/zachrana-dat/hdd', active: false },
     { name: 'Externí disk', href: '/zachrana-dat/externi-disk', active: false },
-    { name: 'SSD', href: '/zachrana-dat/ssd', active: true },
+    { name: 'SSD', href: '/zachrana-dat/ssd', active: false },
     { name: 'SD karta', href: '/zachrana-dat/sd-karta', active: false },
-    { name: 'USB Flash', href: '/zachrana-dat/usb-flash', active: false },
+    { name: 'USB Flash', href: '/zachrana-dat/usb-flash', active: true },
     { name: 'NAS', href: '/zachrana-dat/nas', active: false },
     { name: 'RAID', href: '/zachrana-dat/raid', active: false },
     { name: 'Apple', href: '/zachrana-dat/apple', active: false },
@@ -86,89 +87,61 @@ function ServiceTabs() {
   );
 }
 
-export function SSDRecoveryClient() {
+export function USBFlashClient() {
   const t = useTranslations();
 
   const softwareIssues = [
     {
-      title: 'Smazaná data',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Nemohu najít svá data',
-        'Soubory mají nulovou velikost',
-        'Složky jsou prázdné',
-        'Programy hlásí poškozené soubory'
-      ]
+      title: 'Smazaná data uživatelem',
+      symptoms: ['Nechtěné uvedení do továrního nastavení/nechtěné smazání.', 'Nedostupná data.']
     },
     {
       title: 'Zformátování',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Médium se tváří jako prázdné',
-        'Diskový oddíl je na pohled prázdný',
-        'Systém mě nutí provést zformátování',
-        'Po instalaci OS je disk nebo oddíl prázdný'
-      ]
+      symptoms: ['Nechtěné zformátování.', 'Nedostupná data.']
     },
     {
-      title: 'Reinstalace operačního systému a zformátování disku',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Neopatrností při instalaci/opravě spouštění OS.',
-        'Část dat již bývá přepsána OS.'
-      ]
-    },
-    {
-      title: 'Po nákaze virem',
-      cause: 'Průnik zvenčí',
-      symptoms: [
-        'Antivirus odhalil hrozby a od té doby nemohu nalézt důležitá data.',
-        'Počítač se chová "jinak", data mizí sama od sebe.'
-      ]
+      title: 'Poškozený souborový systém',
+      symptoms: ['Nedokončení zápisu při kopírování – brzké vyjmutí.']
     }
   ];
 
   const hardwareIssues = [
     {
       title: 'Vadný paměťový řadič',
-      symptoms: [
-        'Disk se nedetekuje v zařízení. Disk hlásí jinou kapacitu.',
-        'Hlásí jiný název a sériové číslo.'
-      ]
+      symptoms: ['Zařízení se nehlásí.', 'Flash disk udává jinou kapacitu úložného prostoru, než by měl.']
     },
     {
       title: 'Vadné paměťové bloky',
-      symptoms: [
-        'Disk není přístupný. Nelze číst ani zapisovat žádná data, disk vrací chyby čtení nebo zápisu.'
-      ]
+      symptoms: ['Data nepřístupná, flash disk chce formátovat.']
     },
     {
-      title: 'Chyba ve firmware',
-      symptoms: [
-        'Disk hlásí jinou kapacitu, jiný název.'
-      ]
+      title: 'Ulomený konektor',
+      symptoms: ['Médium se nehlásí, viditelné mechanické poškození.']
     }
   ];
 
   const interfaces = [
-    'SATA (Serial ATA)',
-    'PCIe (Peripheral Component Interconnect Express)',
-    'NVMe (Non-Volatile Memory Express)',
-    'M.2'
+    'USB 2.0 Micro-B',
+    'USB 2.0 Type-A',
+    'USB 3.0/3.1 Gen 1 Type-A',
+    'USB 3.1 Gen 2 Type-A',
+    'USB 3.1 Type-C',
+    'USB 3.2 Gen 2x2 Type-C',
+    'Thunderbolt 3/4',
+    'Wi-Fi',
+    'Lightning'
   ];
-
-  const fileSystems = ['Windows', 'Apple Mac', 'Linux', 'FreeBSD', 'OpenBSD', 'Novell', 'OS/2'];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <ServiceSchema
-        name={t('services.ssd.title')}
-        description={t('services.ssd.desc')}
-        serviceType="SSD Data Recovery Service"
+        name="Záchrana dat z USB flash disku"
+        description="Profesionální záchrana dat z USB flash disků všech typů a značek. Bezplatná diagnostika a svoz."
+        serviceType="Data Recovery Service"
       />
       <PageHeader
-        title="SSD disk"
-        subtitle="Přišli jste o data z SSD disku? Nemusíte se bát, vaše soubory lze obnovit. Specializujeme se na záchranu dat z SSD, ať už jde o selhání paměti, firmwaru nebo elektroniky. Kontaktujte nás a my vám pomůžeme vrátit ztracená data zpět."
+        title="USB Flash"
+        subtitle="Ztratili jste data z flash disku? V DataHelpu nabízíme profesionální záchranu dat z poškozených nebo nefunkčních flash pamětí pomocí pokročilých technologií a algoritmů, které umožňují obnovu dat i z těch nejsložitějších případů."
         backgroundImage="ssd-recovery.webp"
       />
       <ServiceTabs />
@@ -178,43 +151,21 @@ export function SSDRecoveryClient() {
         {/* Main Intro Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-            Přišli jste o data z SSD disku?
+            Ztratili jste data z flash disku?
           </h2>
           <div className="prose prose-lg max-w-none text-gray-700">
             <p className="mb-4">
-              Nemějte obavy, i když se SSD disk tváří jako nedostupný, vaše data nemusí být ztracena navždy. Naše služby pro{' '}
-              <strong>záchranu dat z SSD disků</strong> vám pomohou získat zpět důležité soubory, ať už šlo o{' '}
-              <strong>osobní dokumenty, fotografie nebo firemní data</strong>.
+              V DataHelpu nabízíme špičkové služby pro obnovu dat z jakéhokoli typu flash pamětí. Máme dlouholeté zkušenosti s různými výrobci, jako jsou <strong>ADATA, Kingston, Corsair, Sandisk, Verbatim, Patriot, Transcend, Silicon Power, Samsung, Leef, EMTEC, Pitaka</strong> a další.
             </p>
             <p className="mb-4">
-              SSD disky mají odlišnou architekturu než tradiční pevné disky, což vyžaduje{' '}
-              <strong>speciální přístup</strong> při jejich obnově. Naši specialisté jsou vybaveni pokročilými technologiemi, které umožňují{' '}
-              <strong>obnovu dat i z nefunkčních SSD disků</strong>, a to bez ohledu na to, zda došlo{' '}
-              <strong>k selhání paměťových čipů, chybnému firmwaru nebo elektronickému poškození</strong>.
+              Flash disky mohou selhat z mnoha důvodů, ať už se jedná o <strong>selhání řídícího čipu</strong>, <strong>poškození paměťových buněk</strong>, nebo <strong>chybu souborového systému</strong>. Často se setkáváme také s případy, kdy je disk mechanicky poškozen nebo je nutné jej formátovat. V takových případech je klíčové neprovádět další pokusy o připojení zařízení – každý další zásah může snížit šance na úspěšnou <strong>záchranu dat</strong>.
             </p>
             <p className="mb-4">
-              Nezáleží na tom, zda používáte SSD disk od výrobce{' '}
-              <strong>Samsung, Intel, Kingston, Crucial, Corsair</strong> nebo jiné značky. Jsme připraveni vám pomoci s{' '}
-              <strong>obnovou dat z jakéhokoli typu SSD disku</strong>.
+              Naše technologie a vybavení umožňují obnovit data i z těch nejkomplikovanějších situací. Díky použití pokročilých algoritmů jsme schopni rekonstruovat poškozené souborové systémy a obnovit vaše soubory do původního stavu.
             </p>
-          </div>
-        </div>
-
-        {/* Warning Section */}
-        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 mb-8">
-          <div className="flex items-start gap-4">
-            <AlertTriangle className="h-8 w-8 text-red-500 flex-shrink-0 mt-1" />
-            <div>
-              <p className="text-gray-700 leading-relaxed">
-                Pro úspěšnou záchranu dat je důležité, abyste v případě poškození SSD disku okamžitě{' '}
-                <strong>vypnuli zařízení</strong>, <strong>odpojili disk</strong> a doručili ho k nám na{' '}
-                <strong>bezplatnou diagnostiku</strong>. Další používání nebo zapnutí disku by mohlo vést k nenávratnému poškození vašich dat.
-              </p>
-              <p className="text-gray-700 mt-4">
-                <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">Kontaktujte nás</Link>{' '}
-                co nejdříve a my provedeme důkladnou <strong>diagnostiku</strong>, abychom zjistili nejlepší možnosti pro záchranu vašich dat.
-              </p>
-            </div>
+            <p>
+              S naším týmem odborníků, dlouholetými zkušenostmi a nejmodernějšími metodami máte jistotu, že vaše data budou v bezpečí. <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">Kontaktujte nás</Link>, a my provedeme bezplatnou diagnostiku a navrhneme nejvhodnější postup pro <strong>záchranu vašich dat</strong>.
+            </p>
           </div>
         </div>
 
@@ -240,7 +191,6 @@ export function SSDRecoveryClient() {
                       {issue.title}
                     </td>
                     <td className="p-3 border-b text-gray-700">
-                      <div className="font-medium text-primary mb-2">{issue.cause}</div>
                       <ul className="list-disc list-inside space-y-1">
                         {issue.symptoms.map((symptom, i) => (
                           <li key={i}>{symptom}</li>
@@ -282,44 +232,37 @@ export function SSDRecoveryClient() {
           </div>
         </div>
 
-        {/* Supported Types Section */}
+        {/* USB Interfaces Section */}
+        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Usb className="h-7 w-7 text-accent" />
+            <h2 className="text-2xl font-bold text-primary">Typy rozhraní</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {interfaces.map((iface, index) => (
+              <div key={index} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                <span className="text-accent font-bold">•</span>
+                <span className="text-gray-700">{iface}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Recovery Process Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-primary mb-6">
-            Provádíme záchranu dat ze všech typů SSD disků
+            Jak data z flash disku obnovujeme?
           </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Interfaces */}
-            <div>
-              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <Cpu className="h-5 w-5 text-accent" />
-                Rozhraní:
-              </h3>
-              <ul className="space-y-2">
-                {interfaces.map((iface, index) => (
-                  <li key={index} className="flex items-start gap-2 text-gray-700">
-                    <span className="text-accent mt-1">•</span>
-                    <span>{iface}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* File Systems */}
-            <div>
-              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <HardDrive className="h-5 w-5 text-accent" />
-                Souborové systémy následujících platforem:
-              </h3>
-              <ul className="space-y-2">
-                {fileSystems.map((fs, index) => (
-                  <li key={index} className="flex items-center gap-2 text-gray-700">
-                    <span className="text-accent">•</span>
-                    <span>{fs}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="prose prose-lg max-w-none text-gray-700">
+            <p className="mb-4">
+              Při obnově dat z flash disků se pomocí speciálních nástrojů vytváří <strong>obrazy vašeho média</strong>, se kterými následně pracujeme. Tento proces zahrnuje rekonstrukci souborového systému a obnovu jednotlivých souborů. Na rozdíl od jiných typů médií, kde často dochází k mechanickému poškození, jsou flash disky méně náchylné na mechanické poruchy, což zjednodušuje a zrychluje proces <strong>záchrany dat</strong>.
+            </p>
+            <p className="mb-4">
+              I přes menší kapacitu u některých flash disků se však setkáváme s různými problémy, jako je <strong>selhání řídícího čipu</strong> nebo <strong>poškození paměťových buněk</strong>, které vyžadují odborný zásah.
+            </p>
+            <p>
+              Kromě toho je při obnově dat klíčové zachovat <strong>strukturu souborového systému</strong>, aby bylo možné data plně zrekonstruovat. Problémy s poškozeným souborovým systémem nebo mechanickým poškozením konektoru mohou zkomplikovat přístup k datům, avšak díky pokročilým technikám a vybavení jsme schopni dosáhnout <strong>vysoké úspěšnosti obnovy</strong>.
+            </p>
           </div>
         </div>
 

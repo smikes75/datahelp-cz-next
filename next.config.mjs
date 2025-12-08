@@ -50,59 +50,6 @@ const nextConfig = {
         destination: '/zachrana-dat/hdd/',
         permanent: true,
       },
-      {
-        source: '/zachrana-dat/externi-disk/',
-        destination: '/zachrana-dat/hdd/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/externi-disk',
-        destination: '/zachrana-dat/hdd/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/nas/',
-        destination: '/zachrana-dat/raid/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/nas',
-        destination: '/zachrana-dat/raid/',
-        permanent: true,
-      },
-
-      // === SLUŽBY - Redirect na parent (nemají vlastní stránku) ===
-      {
-        source: '/zachrana-dat/sd-karta/',
-        destination: '/zachrana-dat/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/sd-karta',
-        destination: '/zachrana-dat/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/usb-flash/',
-        destination: '/zachrana-dat/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/usb-flash',
-        destination: '/zachrana-dat/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/apple/',
-        destination: '/zachrana-dat/ssd/',
-        permanent: true,
-      },
-      {
-        source: '/zachrana-dat/apple',
-        destination: '/zachrana-dat/ssd/',
-        permanent: true,
-      },
-
       // === STANDALONE STRÁNKY ===
       {
         source: '/zachrana-dat-po-cele-cr/',

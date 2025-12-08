@@ -1,11 +1,11 @@
 'use client';
 
 /**
- * SSD Data Recovery stránka
- * Obsah identický s datahelp.cz/zachrana-dat/ssd
+ * SD Karta - Data Recovery stránka
+ * Obsah identický s datahelp.cz/zachrana-dat/sd-karta
  */
 
-import { Cpu, HardDrive, AlertTriangle, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
+import { CreditCard, ArrowRight, Phone, Mail, ChevronRight } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,6 +30,7 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
           }}
         />
       </div>
+
       <div className="relative z-10 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">{title}</h1>
@@ -45,8 +46,8 @@ function ServiceTabs() {
   const tabs = [
     { name: 'Pevný disk', href: '/zachrana-dat/hdd', active: false },
     { name: 'Externí disk', href: '/zachrana-dat/externi-disk', active: false },
-    { name: 'SSD', href: '/zachrana-dat/ssd', active: true },
-    { name: 'SD karta', href: '/zachrana-dat/sd-karta', active: false },
+    { name: 'SSD', href: '/zachrana-dat/ssd', active: false },
+    { name: 'SD karta', href: '/zachrana-dat/sd-karta', active: true },
     { name: 'USB Flash', href: '/zachrana-dat/usb-flash', active: false },
     { name: 'NAS', href: '/zachrana-dat/nas', active: false },
     { name: 'RAID', href: '/zachrana-dat/raid', active: false },
@@ -86,89 +87,45 @@ function ServiceTabs() {
   );
 }
 
-export function SSDRecoveryClient() {
+export function SDKartaClient() {
   const t = useTranslations();
 
   const softwareIssues = [
     {
-      title: 'Smazaná data',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Nemohu najít svá data',
-        'Soubory mají nulovou velikost',
-        'Složky jsou prázdné',
-        'Programy hlásí poškozené soubory'
-      ]
+      title: 'Smazaná data uživatelem',
+      symptoms: ['Nechtěné uvedení do továrního nastavení/nechtěné smazání.', 'Nedostupná data.']
     },
     {
       title: 'Zformátování',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Médium se tváří jako prázdné',
-        'Diskový oddíl je na pohled prázdný',
-        'Systém mě nutí provést zformátování',
-        'Po instalaci OS je disk nebo oddíl prázdný'
-      ]
+      symptoms: ['Nechtěné zformátování.', 'Nedostupná data.']
     },
     {
-      title: 'Reinstalace operačního systému a zformátování disku',
-      cause: 'Zavinění uživatelem, softwarová chyba',
-      symptoms: [
-        'Neopatrností při instalaci/opravě spouštění OS.',
-        'Část dat již bývá přepsána OS.'
-      ]
-    },
-    {
-      title: 'Po nákaze virem',
-      cause: 'Průnik zvenčí',
-      symptoms: [
-        'Antivirus odhalil hrozby a od té doby nemohu nalézt důležitá data.',
-        'Počítač se chová "jinak", data mizí sama od sebe.'
-      ]
+      title: 'Poškozený souborový systém',
+      symptoms: ['Nedokončení zápisu při kopírování – brzké vyjmutí karty.']
     }
   ];
 
   const hardwareIssues = [
     {
       title: 'Vadný paměťový řadič',
-      symptoms: [
-        'Disk se nedetekuje v zařízení. Disk hlásí jinou kapacitu.',
-        'Hlásí jiný název a sériové číslo.'
-      ]
+      symptoms: ['Zařízení se nehlásí.', 'Karta udává jinou kapacitu úložného prostoru, než by měla.', 'U micro SD karet se jedná o tzv. monolitický čip – záchrana dat je obtížnější.']
     },
     {
       title: 'Vadné paměťové bloky',
-      symptoms: [
-        'Disk není přístupný. Nelze číst ani zapisovat žádná data, disk vrací chyby čtení nebo zápisu.'
-      ]
-    },
-    {
-      title: 'Chyba ve firmware',
-      symptoms: [
-        'Disk hlásí jinou kapacitu, jiný název.'
-      ]
+      symptoms: ['Data nepřístupná, karta chce formátovat.']
     }
   ];
-
-  const interfaces = [
-    'SATA (Serial ATA)',
-    'PCIe (Peripheral Component Interconnect Express)',
-    'NVMe (Non-Volatile Memory Express)',
-    'M.2'
-  ];
-
-  const fileSystems = ['Windows', 'Apple Mac', 'Linux', 'FreeBSD', 'OpenBSD', 'Novell', 'OS/2'];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <ServiceSchema
-        name={t('services.ssd.title')}
-        description={t('services.ssd.desc')}
-        serviceType="SSD Data Recovery Service"
+        name="Záchrana dat z SD karty"
+        description="Profesionální záchrana dat z paměťových karet všech typů - SD, microSD, Compact Flash, XQD a dalších. Bezplatná diagnostika."
+        serviceType="Data Recovery Service"
       />
       <PageHeader
-        title="SSD disk"
-        subtitle="Přišli jste o data z SSD disku? Nemusíte se bát, vaše soubory lze obnovit. Specializujeme se na záchranu dat z SSD, ať už jde o selhání paměti, firmwaru nebo elektroniky. Kontaktujte nás a my vám pomůžeme vrátit ztracená data zpět."
+        title="SD karta"
+        subtitle="Máte nedostupná data na paměťové kartě? V DataHelpu se specializujeme na obnovu dat z různých typů karet, včetně MicroSD, Compact Flash a XQD. Bez ohledu na povahu poškození či výrobce vám naši specialisté pomohou obnovit vaše data."
         backgroundImage="ssd-recovery.webp"
       />
       <ServiceTabs />
@@ -178,43 +135,21 @@ export function SSDRecoveryClient() {
         {/* Main Intro Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-            Přišli jste o data z SSD disku?
+            Poškodila se Vám paměťová karta?
           </h2>
           <div className="prose prose-lg max-w-none text-gray-700">
             <p className="mb-4">
-              Nemějte obavy, i když se SSD disk tváří jako nedostupný, vaše data nemusí být ztracena navždy. Naše služby pro{' '}
-              <strong>záchranu dat z SSD disků</strong> vám pomohou získat zpět důležité soubory, ať už šlo o{' '}
-              <strong>osobní dokumenty, fotografie nebo firemní data</strong>.
+              V DataHelpu se specializujeme na záchranu dat z <strong>MicroSD karet</strong>, stejně jako z dalších typů <strong>SD karet</strong>. Pokud vaše karta přestala fungovat, data jsou nedostupná nebo poškozená, nabízíme profesionální <strong>obnovu dat z poškozených paměťových karet</strong>. Pracujeme s širokou škálou značek, jako jsou <strong>Kingston, SanDisk, Samsung, ADATA, Transcend, Toshiba, Lexar, Tretec, Sony</strong> a další.
             </p>
             <p className="mb-4">
-              SSD disky mají odlišnou architekturu než tradiční pevné disky, což vyžaduje{' '}
-              <strong>speciální přístup</strong> při jejich obnově. Naši specialisté jsou vybaveni pokročilými technologiemi, které umožňují{' '}
-              <strong>obnovu dat i z nefunkčních SSD disků</strong>, a to bez ohledu na to, zda došlo{' '}
-              <strong>k selhání paměťových čipů, chybnému firmwaru nebo elektronickému poškození</strong>.
+              Naše služby zahrnují i rychlou obnovu smazaných dat z paměťových karet používaných v <strong>digitálních fotoaparátech a kamerách</strong>. V případě ztráty dat doporučujeme okamžitě vypnout zařízení a kartu dále nepoužívat, aby nedošlo k trvalému poškození dat. Jakékoli pokusy o domácí opravu mohou vést k jejich nevratné ztrátě.
             </p>
             <p className="mb-4">
-              Nezáleží na tom, zda používáte SSD disk od výrobce{' '}
-              <strong>Samsung, Intel, Kingston, Crucial, Corsair</strong> nebo jiné značky. Jsme připraveni vám pomoci s{' '}
-              <strong>obnovou dat z jakéhokoli typu SSD disku</strong>.
+              Naše laboratoř je vybavena špičkovými technologiemi, které nám umožňují fyzicky přistupovat k poškozeným čipům a rekonstruovat data i z těch nejkomplikovanějších případů. Každá karta má svůj specifický <strong>řídící čip a paměťové bloky</strong>, které vyžadují odbornou analýzu.
             </p>
-          </div>
-        </div>
-
-        {/* Warning Section */}
-        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-8 mb-8">
-          <div className="flex items-start gap-4">
-            <AlertTriangle className="h-8 w-8 text-red-500 flex-shrink-0 mt-1" />
-            <div>
-              <p className="text-gray-700 leading-relaxed">
-                Pro úspěšnou záchranu dat je důležité, abyste v případě poškození SSD disku okamžitě{' '}
-                <strong>vypnuli zařízení</strong>, <strong>odpojili disk</strong> a doručili ho k nám na{' '}
-                <strong>bezplatnou diagnostiku</strong>. Další používání nebo zapnutí disku by mohlo vést k nenávratnému poškození vašich dat.
-              </p>
-              <p className="text-gray-700 mt-4">
-                <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">Kontaktujte nás</Link>{' '}
-                co nejdříve a my provedeme důkladnou <strong>diagnostiku</strong>, abychom zjistili nejlepší možnosti pro záchranu vašich dat.
-              </p>
-            </div>
+            <p>
+              Nabízíme <strong>bezplatnou diagnostiku paměťových karet</strong> a platíte pouze za zachráněná data. Pokud potřebujete záchranu dat z paměťových karet, <Link href="/poptavka-zachrany-dat" className="text-accent font-semibold hover:underline">kontaktujte nás</Link>. Zajistíme diagnostiku zdarma a navrhneme nejvhodnější postup pro obnovu vašich dat.
+            </p>
           </div>
         </div>
 
@@ -240,7 +175,6 @@ export function SSDRecoveryClient() {
                       {issue.title}
                     </td>
                     <td className="p-3 border-b text-gray-700">
-                      <div className="font-medium text-primary mb-2">{issue.cause}</div>
                       <ul className="list-disc list-inside space-y-1">
                         {issue.symptoms.map((symptom, i) => (
                           <li key={i}>{symptom}</li>
@@ -282,44 +216,24 @@ export function SSDRecoveryClient() {
           </div>
         </div>
 
-        {/* Supported Types Section */}
+        {/* Why Recovery is Complex Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-2xl font-bold text-primary mb-6">
-            Provádíme záchranu dat ze všech typů SSD disků
+            Proč je obnova dat z paměťových karet tak náročná?
           </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Interfaces */}
-            <div>
-              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <Cpu className="h-5 w-5 text-accent" />
-                Rozhraní:
-              </h3>
-              <ul className="space-y-2">
-                {interfaces.map((iface, index) => (
-                  <li key={index} className="flex items-start gap-2 text-gray-700">
-                    <span className="text-accent mt-1">•</span>
-                    <span>{iface}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* File Systems */}
-            <div>
-              <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <HardDrive className="h-5 w-5 text-accent" />
-                Souborové systémy následujících platforem:
-              </h3>
-              <ul className="space-y-2">
-                {fileSystems.map((fs, index) => (
-                  <li key={index} className="flex items-center gap-2 text-gray-700">
-                    <span className="text-accent">•</span>
-                    <span>{fs}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="prose prose-lg max-w-none text-gray-700">
+            <p className="mb-4">
+              Záchrana dat z paměťových karet je složitý proces kvůli <strong>technologii flash pamětí</strong>, které jsou náchylné k poruchám podobně jako USB disky, flash disky nebo SSD disky. Nejčastější příčinou selhání je <strong>porucha řídícího čipu</strong>, který obsahuje algoritmus pro správu dat v paměťových buňkách. Tento algoritmus je klíčový pro správnou rekonstrukci dat, což činí proces obnovy dat výpočetně náročným.
+            </p>
+            <p className="mb-4">
+              Kromě poruchy čipu je obnova dat z paměťových karet náročná také z důvodu <strong>omezené životnosti paměťových buněk</strong>, které mají daný počet zápisů. Zásadním problémem je rekonstrukce dat z celého souboru paměťového média, která vyžaduje velký datový prostor a technické vybavení laboratoře.
+            </p>
+            <p className="mb-4">
+              Při obnově dat z paměťových karet je zásadní, že nelze pracovat pouze s částí paměťového média – je nutné zpracovat jeho <strong>kompletní obraz</strong>. To znamená, že například u 128 GB paměťové karty je potřeba pracovat s celým 128 GB souborem, což vyžaduje nejen velký výpočetní výkon, ale i dostatek času na podrobnou analýzu.
+            </p>
+            <p>
+              Aby bylo možné efektivně vyhledat a obnovit potřebná data, je nutné mít k dispozici <strong>datový prostor</strong>, který je mnohonásobně větší než samotná kapacita karty. Tento prostor umožňuje bezpečné zpracování a rekonstrukci dat v plném rozsahu. Pokud vaše paměťová karta přestala fungovat, je pravděpodobné, že se jedná o poruchu řídícího čipu. V takovém případě je nezbytné využít profesionální služby pro záchranu dat, která má k dispozici <strong>špičkové vybavení pro rekonstrukci dat z flash pamětí</strong>.
+            </p>
           </div>
         </div>
 

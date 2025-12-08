@@ -1,7 +1,34 @@
 'use client';
 
 import { useState } from 'react';
-import { HardDrive, Smartphone, Database, Handshake, Check, ChevronRight, Clock, TrendingUp, Layers } from 'lucide-react';
+import {
+  HardDrive,
+  Smartphone,
+  Database,
+  Cpu,
+  CreditCard,
+  Usb,
+  Server,
+  Apple,
+  Clock,
+  Zap,
+  Timer,
+  Leaf,
+  Package,
+  Search,
+  FileCheck,
+  Shield,
+  CheckCircle,
+  Send,
+  AlertTriangle,
+  Settings,
+  Bug,
+  Trash2,
+  RefreshCw,
+  Flame,
+  Droplets,
+  ChevronRight
+} from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -40,263 +67,339 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
 // Hlavní stránka služeb
 export function ServicesClient() {
   const t = useTranslations();
-  const [activeRow, setActiveRow] = useState<string | null>(null);
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [expandedProcess, setExpandedProcess] = useState(false);
 
+  // 9 kategorií služeb podle datahelp.cz
   const services = [
     {
-      icon: <HardDrive className="h-16 w-16 text-accent" />,
-      title: t('services.hdd.title'),
-      description: t('services.hdd.desc'),
-      link: '/zachrana-dat/hdd',
-      features: [
-        t('services.hdd.features.mechanical'),
-        t('services.hdd.features.electronic'),
-        t('services.hdd.features.logical')
-      ],
-      stats: {
-        successRate: '95%',
-        avgTime: '2-5 days',
-        startPrice: '8 750 Kč'
-      }
+      icon: <HardDrive className="h-12 w-12" />,
+      title: 'Pevné disky',
+      description: 'Záchrana dat z HDD všech výrobců - Seagate, WD, Samsung, Toshiba',
+      link: '/zachrana-dat/hdd'
     },
     {
-      icon: <Smartphone className="h-16 w-16 text-accent" />,
-      title: t('services.ssd.title'),
-      description: t('services.ssd.desc'),
-      link: '/zachrana-dat/ssd',
-      features: [
-        t('services.ssd.features.controller'),
-        t('services.ssd.features.firmware'),
-        t('services.ssd.features.flash')
-      ],
-      stats: {
-        successRate: '85%',
-        avgTime: '3-7 days',
-        startPrice: '6 250 Kč'
-      }
+      icon: <HardDrive className="h-12 w-12" />,
+      title: 'Externí disky',
+      description: 'Obnova dat z externích USB disků 2.5" a 3.5"',
+      link: '/zachrana-dat/externi-disk'
     },
     {
-      icon: <Database className="h-16 w-16 text-accent" />,
-      title: t('services.raid.title'),
-      description: t('services.raid.desc'),
-      link: '/zachrana-dat/raid',
-      features: [
-        t('services.raid.features.hardware'),
-        t('services.raid.features.software'),
-        t('services.raid.features.virtual')
-      ],
-      stats: {
-        successRate: '90%',
-        avgTime: '5-10 days',
-        startPrice: '12 500 Kč'
-      }
+      icon: <Cpu className="h-12 w-12" />,
+      title: 'SSD disky',
+      description: 'Specializovaná záchrana dat z SSD, M.2, NVMe disků',
+      link: '/zachrana-dat/ssd'
     },
     {
-      icon: <Handshake className="h-16 w-16 text-accent" />,
-      title: t('services.business.title'),
-      description: t('services.business.desc'),
-      link: '/zachrana-dat/firmy',
-      features: [
-        t('services.business.features.support'),
-        t('services.business.features.security'),
-        t('services.business.features.priority')
-      ],
-      stats: {
-        successRate: t('services.card.individualApproach'),
-        avgTime: 'Priority',
-        startPrice: 'Custom'
-      }
+      icon: <CreditCard className="h-12 w-12" />,
+      title: 'SD karty',
+      description: 'Obnova dat z paměťových karet SD, microSD, CF, XQD',
+      link: '/zachrana-dat/sd-karta'
+    },
+    {
+      icon: <Usb className="h-12 w-12" />,
+      title: 'USB flash disky',
+      description: 'Záchrana dat z USB flash disků všech typů',
+      link: '/zachrana-dat/usb-flash'
+    },
+    {
+      icon: <Server className="h-12 w-12" />,
+      title: 'NAS servery',
+      description: 'Obnova dat z NAS zařízení Synology, QNAP, WD a dalších',
+      link: '/zachrana-dat/nas'
+    },
+    {
+      icon: <Database className="h-12 w-12" />,
+      title: 'RAID pole',
+      description: 'Rekonstrukce RAID 0, 1, 5, 6, 10 a dalších konfigurací',
+      link: '/zachrana-dat/raid'
+    },
+    {
+      icon: <Apple className="h-12 w-12" />,
+      title: 'Apple zařízení',
+      description: 'Záchrana dat z iPhone, iPad, MacBook, iMac',
+      link: '/zachrana-dat/apple'
+    },
+    {
+      icon: <Smartphone className="h-12 w-12" />,
+      title: 'Mobilní telefony',
+      description: 'Obnova dat z Android telefonů a tabletů',
+      link: '/zachrana-dat/mobilni-telefon'
     }
   ];
 
-  const comparisonFeatures = [
-    { key: 'recoveryTime', label: t('services.comparison.features.recoveryTime'), icon: <Clock className="h-5 w-5" /> },
-    { key: 'successRate', label: t('services.comparison.features.successRate'), icon: <TrendingUp className="h-5 w-5" /> },
-    { key: 'complexity', label: t('services.comparison.features.complexity'), icon: <Layers className="h-5 w-5" /> },
-    { key: 'startingPrice', label: t('services.comparison.features.startingPrice'), icon: <Database className="h-5 w-5" /> },
-    { key: 'commonIssues', label: t('services.comparison.features.commonIssues'), icon: <Check className="h-5 w-5" /> },
-    { key: 'dataTypes', label: t('services.comparison.features.dataTypes'), icon: <HardDrive className="h-5 w-5" /> }
+  // 6-krokový proces záchrany dat
+  const processSteps = [
+    {
+      icon: <Package className="h-8 w-8" />,
+      title: 'Bezplatný svoz',
+      description: 'Vyzvedneme vaše médium kdekoliv v ČR zdarma, nebo jej můžete přinést osobně.'
+    },
+    {
+      icon: <Search className="h-8 w-8" />,
+      title: 'Diagnostika',
+      description: 'Do 24-48 hodin provedeme bezplatnou diagnostiku a sdělíme vám rozsah poškození.'
+    },
+    {
+      icon: <FileCheck className="h-8 w-8" />,
+      title: 'Cenová nabídka',
+      description: 'Obdržíte přesnou cenovou nabídku. Bez vašeho souhlasu nezačínáme.'
+    },
+    {
+      icon: <Shield className="h-8 w-8" />,
+      title: 'Záchrana dat',
+      description: 'Naši specialisté provedou záchranu dat v čisté laboratoři.'
+    },
+    {
+      icon: <CheckCircle className="h-8 w-8" />,
+      title: 'Ověření',
+      description: 'Zkontrolujete seznam zachráněných souborů před finálním předáním.'
+    },
+    {
+      icon: <Send className="h-8 w-8" />,
+      title: 'Předání dat',
+      description: 'Data vám předáme na novém médiu. Platíte pouze za úspěšnou záchranu.'
+    }
   ];
 
-  const serviceTypes = ['hdd', 'ssd', 'raid'];
+  // Rychlosti zpracování
+  const speeds = [
+    {
+      icon: <Zap className="h-8 w-8" />,
+      title: 'Express',
+      time: '12-48 hodin',
+      price: '+100%',
+      color: 'bg-red-500'
+    },
+    {
+      icon: <Timer className="h-8 w-8" />,
+      title: 'Priority',
+      time: '24-72 hodin',
+      price: '+50%',
+      color: 'bg-orange-500'
+    },
+    {
+      icon: <Clock className="h-8 w-8" />,
+      title: 'Standard',
+      time: '3-21 dní',
+      price: 'Základní cena',
+      color: 'bg-primary'
+    },
+    {
+      icon: <Leaf className="h-8 w-8" />,
+      title: 'EcoHelp',
+      time: '4-8 týdnů',
+      price: '-20%',
+      color: 'bg-green-500'
+    }
+  ];
 
-  const timelineSteps = [
-    { key: 'before', phase: 'start' },
-    { key: 'diagnosis', phase: 'middle' },
-    { key: 'approval', phase: 'middle' },
-    { key: 'recovery', phase: 'middle' },
-    { key: 'verification', phase: 'middle' },
-    { key: 'after', phase: 'end' }
+  // Příčiny ztráty dat - Hardware
+  const hardwareCauses = [
+    { icon: <Settings className="h-6 w-6" />, title: 'Výrobní vady', desc: 'Poruchy z výroby' },
+    { icon: <Zap className="h-6 w-6" />, title: 'Přepětí', desc: 'Výpadky elektřiny' },
+    { icon: <Flame className="h-6 w-6" />, title: 'Přehřátí', desc: 'Tepelné poškození' },
+    { icon: <Droplets className="h-6 w-6" />, title: 'Kapaliny', desc: 'Zalití vodou' },
+    { icon: <AlertTriangle className="h-6 w-6" />, title: 'Mechanické', desc: 'Pády a nárazy' },
+    { icon: <Flame className="h-6 w-6" />, title: 'Požár/povodeň', desc: 'Přírodní katastrofy' }
+  ];
+
+  // Příčiny ztráty dat - Software
+  const softwareCauses = [
+    { icon: <AlertTriangle className="h-6 w-6" />, title: 'Selhání OS', desc: 'Porucha systému' },
+    { icon: <Bug className="h-6 w-6" />, title: 'Chyby aplikací', desc: 'Softwarové chyby' },
+    { icon: <Trash2 className="h-6 w-6" />, title: 'Smazání', desc: 'Nechtěné smazání' },
+    { icon: <Bug className="h-6 w-6" />, title: 'Malware', desc: 'Viry a ransomware' },
+    { icon: <RefreshCw className="h-6 w-6" />, title: 'Aktualizace', desc: 'Nepovedené update' },
+    { icon: <Database className="h-6 w-6" />, title: 'Souborový systém', desc: 'Poškozená struktura' }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
-        title={t('services.title')}
-        subtitle={t('services.subtitle')}
+        title="Záchrana dat"
+        subtitle="Profesionální obnova dat z poškozených médií s více než 25 lety zkušeností"
         backgroundImage="services-bg.webp"
       />
       <Breadcrumbs />
 
-      <div className="container mx-auto px-4 py-16">
-        {/* Služby grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {services.map((service, index) => (
-            <Link
-              key={index}
-              href={service.link}
-              className="group bg-gradient-to-br from-white via-white to-primary/5 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
-            >
-              <div className="p-8">
-                <div className="flex justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+      <div className="container mx-auto px-4 py-12">
+
+        {/* 9 kategorií služeb */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">
+            Z jakého zařízení potřebujete zachránit data?
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
+            {services.map((service, index) => (
+              <Link
+                key={index}
+                href={service.link}
+                className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center"
+              >
+                <div className="flex justify-center mb-4 text-accent group-hover:text-primary transition-colors">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-center mb-4 text-primary group-hover:text-accent transition-colors">
+                <h3 className="text-lg font-semibold text-primary mb-2 group-hover:text-accent transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-center mb-6">{service.description}</p>
-
-                <div className="space-y-2 mb-6">
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center space-x-2 text-sm">
-                      <div className="w-2 h-2 bg-accent rounded-full"></div>
-                      <span className="text-gray-600">{feature}</span>
-                    </div>
-                  ))}
+                <p className="text-sm text-gray-600 hidden md:block">
+                  {service.description}
+                </p>
+                <div className="mt-4 flex items-center justify-center text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-sm font-medium">Více info</span>
+                  <ChevronRight className="h-4 w-4 ml-1" />
                 </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-                <div className="border-t pt-4 space-y-2">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-500">{index === 3 ? '' : t('services.card.successRate')}</span>
-                    <span className={`font-semibold ${index === 3 ? 'text-accent' : 'text-primary'}`}>{service.stats.successRate}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-500">{t('services.card.avgTime')}</span>
-                    <span className="font-semibold text-primary">{service.stats.avgTime}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-500">{t('services.card.from')}</span>
-                    <span className="font-bold text-accent">{service.stats.startPrice}</span>
-                  </div>
-                </div>
+        {/* 6-krokový proces */}
+        <section className="mb-16 bg-white rounded-lg shadow-lg p-8">
+          <h2 className="text-3xl font-bold text-primary text-center mb-2">
+            Postup záchrany dat
+          </h2>
+          <p className="text-center text-gray-600 mb-8">
+            Jak probíhá záchrana dat od převzetí po předání
+          </p>
 
-                <div className="mt-6 flex items-center justify-center text-accent group-hover:translate-x-2 transition-transform">
-                  <span className="font-semibold">{t('services.card.learnMore')}</span>
-                  <ChevronRight className="h-5 w-5 ml-1" />
+          {/* Desktop - vždy viditelné */}
+          <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {processSteps.map((step, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  {step.icon}
                 </div>
+                <div className="text-2xl font-bold text-accent mb-1">{index + 1}</div>
+                <h3 className="font-semibold text-primary mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-600">{step.description}</p>
               </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Srovnávací tabulka */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-primary mb-2">{t('services.comparison.title')}</h2>
-            <p className="text-gray-600">{t('services.comparison.subtitle')}</p>
+            ))}
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b-2 border-gray-200">
-                  <th className="text-left py-4 px-4 text-gray-600 font-semibold">{t('services.comparison.featureLabel')}</th>
-                  {serviceTypes.map((type) => (
-                    <th key={type} className="text-center py-4 px-4">
-                      <div className="flex flex-col items-center">
-                        {type === 'hdd' && <HardDrive className="h-8 w-8 text-accent mb-2" />}
-                        {type === 'ssd' && <Smartphone className="h-8 w-8 text-accent mb-2" />}
-                        {type === 'raid' && <Database className="h-8 w-8 text-accent mb-2" />}
-                        <span className="font-bold text-primary">{t(`services.${type}.title`)}</span>
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonFeatures.map((feature) => (
-                  <tr
-                    key={feature.key}
-                    className={`border-b border-gray-100 transition-all duration-200 ${
-                      activeRow === feature.key ? 'bg-accent/5 scale-[1.02]' : 'hover:bg-gray-50'
-                    }`}
-                    onMouseEnter={() => setActiveRow(feature.key)}
-                    onMouseLeave={() => setActiveRow(null)}
-                  >
-                    <td className="py-4 px-4">
-                      <div className="flex items-center space-x-3">
-                        <div className={`${activeRow === feature.key ? 'text-accent' : 'text-gray-400'}`}>
-                          {feature.icon}
-                        </div>
-                        <span className="font-medium text-gray-700">{feature.label}</span>
-                      </div>
-                    </td>
-                    {serviceTypes.map((type) => (
-                      <td key={type} className="text-center py-4 px-4">
-                        <span className={`${activeRow === feature.key ? 'font-semibold text-primary' : 'text-gray-600'}`}>
-                          {t(`services.comparison.values.${type}.${feature.key}`)}
-                        </span>
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Timeline proces */}
-        <div className="bg-gray-50 py-6 md:py-12 -mx-4 md:-mx-8 mb-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-primary mb-2">{t('services.timeline.title')}</h2>
-              <p className="text-gray-600">{t('services.timeline.subtitle')}</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {timelineSteps.map((step, idx) => {
-                const stepData = t.raw(`services.timeline.steps.${step.key}`) as { title: string; description: string };
-                const stepNumber = idx + 1;
-
-                return (
-                  <div
-                    key={step.key}
-                    className="relative bg-white rounded-lg shadow-lg p-4 transition-all duration-300 hover:shadow-xl"
-                    onMouseEnter={() => setActiveStep(idx)}
-                    onMouseLeave={() => setActiveStep(null)}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className="relative z-10 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 bg-primary">
-                        <span className="text-white font-bold text-lg">{stepNumber}</span>
-                      </div>
-                      <h3 className="text-lg font-semibold text-primary">
-                        {stepData.title}
-                      </h3>
+          {/* Mobile - skrytý s tlačítkem */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setExpandedProcess(!expandedProcess)}
+              className="w-full py-3 px-4 bg-primary/10 rounded-lg text-primary font-semibold flex items-center justify-center"
+            >
+              {expandedProcess ? 'Skrýt postup' : 'Zobrazit postup'}
+              <ChevronRight className={`h-5 w-5 ml-2 transition-transform ${expandedProcess ? 'rotate-90' : ''}`} />
+            </button>
+            {expandedProcess && (
+              <div className="mt-4 space-y-4">
+                {processSteps.map((step, index) => (
+                  <div key={index} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="w-12 h-12 flex-shrink-0 rounded-full bg-primary flex items-center justify-center text-white font-bold">
+                      {index + 1}
                     </div>
-                    <div className={`transition-all duration-300 ${
-                      activeStep === idx ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0'
-                    } overflow-hidden mt-2`}>
-                      <p className="text-base text-gray-600">
-                        {stepData.description}
-                      </p>
+                    <div>
+                      <h3 className="font-semibold text-primary">{step.title}</h3>
+                      <p className="text-sm text-gray-600">{step.description}</p>
                     </div>
                   </div>
-                );
-              })}
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Rychlosti zpracování */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-primary text-center mb-2">
+            Rychlost zpracování
+          </h2>
+          <p className="text-center text-gray-600 mb-8">
+            Vyberte si rychlost podle vašich potřeb
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {speeds.map((speed, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow"
+              >
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${speed.color} flex items-center justify-center text-white`}>
+                  {speed.icon}
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-2">{speed.title}</h3>
+                <p className="text-gray-600 mb-2">{speed.time}</p>
+                <p className={`font-semibold ${speed.color === 'bg-green-500' ? 'text-green-600' : speed.color === 'bg-primary' ? 'text-primary' : 'text-accent'}`}>
+                  {speed.price}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Příčiny ztráty dat */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">
+            Příčiny ztráty dat
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Hardware */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-bold text-primary mb-4 flex items-center">
+                <HardDrive className="h-6 w-6 mr-2 text-accent" />
+                Hardwarové příčiny
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                {hardwareCauses.map((cause, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="text-accent flex-shrink-0">{cause.icon}</div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">{cause.title}</h4>
+                      <p className="text-sm text-gray-600">{cause.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Software */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-bold text-primary mb-4 flex items-center">
+                <Bug className="h-6 w-6 mr-2 text-accent" />
+                Softwarové příčiny
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                {softwareCauses.map((cause, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="text-accent flex-shrink-0">{cause.icon}</div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">{cause.title}</h4>
+                      <p className="text-sm text-gray-600">{cause.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* CTA kalkulačka */}
-        <div className="text-center">
-          <Link
-            href="/kalkulacka"
-            className="inline-flex items-center space-x-2 accent-background text-white px-8 py-3 font-semibold hover:shadow-xl transition-shadow"
-          >
-            <span>{t('hero.getPrice')}</span>
-          </Link>
-        </div>
+        {/* CTA sekce */}
+        <section className="text-center bg-primary rounded-lg p-8 text-white">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Potřebujete zachránit data?
+          </h2>
+          <p className="text-lg mb-6 opacity-90">
+            Diagnostika a svoz po celé ČR zdarma. Platíte pouze za úspěšnou záchranu.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/poptavka-zachrany-dat"
+              className="inline-flex items-center justify-center px-8 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+            >
+              Objednat diagnostiku
+            </Link>
+            <Link
+              href="/kalkulacka"
+              className="inline-flex items-center justify-center px-8 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Zjistit orientační cenu
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );
