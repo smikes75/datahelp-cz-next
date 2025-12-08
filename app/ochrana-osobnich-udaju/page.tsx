@@ -8,13 +8,13 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
-  description: 'Informace o zpracování osobních údajů v souladu s GDPR.',
+  description: 'Zásady ochrany osobních údajů společnosti DataHelp s.r.o. Informace o zpracování, uchování a zabezpečení vašich dat v souladu s nařízením GDPR.',
   alternates: {
     canonical: 'https://www.datahelp.cz/ochrana-osobnich-udaju',
   },
   openGraph: {
     title: 'Ochrana osobních údajů (GDPR) | DataHelp.cz',
-    description: 'Informace o zpracování osobních údajů v souladu s GDPR.',
+    description: 'Zásady ochrany osobních údajů společnosti DataHelp s.r.o. Informace o zpracování, uchování a zabezpečení vašich dat v souladu s nařízením GDPR.',
     url: 'https://www.datahelp.cz/ochrana-osobnich-udaju',
     siteName: 'DataHelp.cz',
     locale: 'cs_CZ',

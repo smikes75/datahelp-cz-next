@@ -8,13 +8,13 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Obchodní podmínky | DataHelp.cz',
-  description: 'Všeobecné obchodní podmínky poskytování služeb záchrany dat.',
+  description: 'Všeobecné obchodní podmínky společnosti DataHelp s.r.o. pro služby profesionální záchrany dat z pevných disků, SSD, RAID a dalších datových nosičů.',
   alternates: {
     canonical: 'https://www.datahelp.cz/obchodni-podminky',
   },
   openGraph: {
     title: 'Obchodní podmínky | DataHelp.cz',
-    description: 'Všeobecné obchodní podmínky poskytování služeb záchrany dat.',
+    description: 'Všeobecné obchodní podmínky společnosti DataHelp s.r.o. pro služby profesionální záchrany dat z pevných disků, SSD, RAID a dalších datových nosičů.',
     url: 'https://www.datahelp.cz/obchodni-podminky',
     siteName: 'DataHelp.cz',
     locale: 'cs_CZ',

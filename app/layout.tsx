@@ -4,6 +4,7 @@ import { CookieConsentWrapper } from '@/components/CookieConsentWrapper';
 import { TranslationsProvider } from '@/contexts/TranslationsContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
+import { WebSiteSchema } from '@/components/schema/WebSiteSchema';
 import './globals.css';
 
 export const metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="cs">
       <body>
         <LocalBusinessSchema />
+        <WebSiteSchema />
         <TranslationsProvider>
           <ToastProvider>
             <CookieConsentWrapper>

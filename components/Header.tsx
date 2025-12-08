@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from '@/contexts/TranslationsContext';
@@ -11,7 +11,8 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
   const pathname = usePathname();
   const t = useTranslations();
 
@@ -20,26 +21,35 @@ export function Header() {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // Scroll handling - skrytí/zobrazení headeru
+  // Throttled scroll handler for better performance (INP optimization)
+  const updateHeader = useCallback(() => {
+    const currentScrollY = window.scrollY;
+
+    setIsScrolled(currentScrollY > 0);
+
+    // Skryje header při scrollu dolů, zobrazí při scrollu nahoru
+    if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+
+    lastScrollY.current = currentScrollY;
+    ticking.current = false;
+  }, []);
+
+  // Scroll handling - skrytí/zobrazení headeru s throttlingem
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      setIsScrolled(currentScrollY > 0);
-
-      // Skryje header při scrollu dolů, zobrazí při scrollu nahoru
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
+      if (!ticking.current) {
+        requestAnimationFrame(updateHeader);
+        ticking.current = true;
       }
-
-      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [updateHeader]);
 
   const isActive = (path: string) => {
     // usePathname z next-intl vrací cestu bez locale prefixu
