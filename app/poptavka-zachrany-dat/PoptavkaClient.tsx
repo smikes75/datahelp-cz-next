@@ -47,7 +47,8 @@ function PersonalVisitForm() {
   const [appointmentData, setAppointmentData] = useState({
     name: '',
     phone: '',
-    message: ''
+    message: '',
+    website: '' // Honeypot field
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -60,6 +61,13 @@ function PersonalVisitForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check - if filled, silently reject (bot detected)
+    if (appointmentData.website) {
+      console.warn('Honeypot triggered - spam submission blocked');
+      toast.success(t('success')); // Fake success to not alert bot
+      return;
+    }
 
     if (!appointmentData.name || !appointmentData.phone) {
       toast.error('Vyplňte prosím jméno a telefon.');
@@ -89,7 +97,8 @@ function PersonalVisitForm() {
       setAppointmentData({
         name: '',
         phone: '',
-        message: ''
+        message: '',
+        website: ''
       });
     } catch (error) {
       console.error('Error submitting appointment request:', error);
@@ -105,6 +114,20 @@ function PersonalVisitForm() {
       <p className="text-gray-600 mb-6">{t('subtitle')}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Honeypot field - hidden from users, visible to bots */}
+        <div className="absolute left-[-9999px]" aria-hidden="true">
+          <label htmlFor="appointment-website">Website</label>
+          <input
+            type="text"
+            id="appointment-website"
+            name="website"
+            value={appointmentData.website}
+            onChange={handleInputChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div>
           <label htmlFor="appointment-name" className="block text-sm font-medium text-gray-700 mb-2">
             {t('name')} *
@@ -179,7 +202,8 @@ export default function OrderDiagnosticsPage() {
     deliveryMethod: 'personal' as '' | 'personal' | 'shipping' | 'courier',
     pickupAddress: '',
     pickupCity: '',
-    pickupZip: ''
+    pickupZip: '',
+    website: '' // Honeypot field - should remain empty
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -233,6 +257,13 @@ export default function OrderDiagnosticsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check - if filled, silently reject (bot detected)
+    if (formData.website) {
+      console.warn('Honeypot triggered - spam submission blocked');
+      toast.success(t('form.success')); // Fake success to not alert bot
+      return;
+    }
 
     if (!formData.deliveryMethod) {
       toast.error(t('form.errors.deliveryMethod'));
@@ -288,7 +319,8 @@ export default function OrderDiagnosticsPage() {
         deliveryMethod: '',
         pickupAddress: '',
         pickupCity: '',
-        pickupZip: ''
+        pickupZip: '',
+        website: ''
       });
       setAgreedToTerms(false);
     } catch (error) {
@@ -410,6 +442,19 @@ export default function OrderDiagnosticsPage() {
 
   const renderContactForm = () => (
     <div className="space-y-6">
+      {/* Honeypot field - hidden from users, visible to bots */}
+      <div className="absolute left-[-9999px]" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          value={formData.website}
+          onChange={handleInputChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <div>

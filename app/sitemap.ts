@@ -147,17 +147,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Fetch blog posts from Supabase
+  // Fetch blog posts from Supabase with timeout
   let blogPosts: MetadataRoute.Sitemap = [];
   try {
     const supabase = createStaticClient();
-    const { data: posts, error } = await supabase
-      .from('blog_posts')
-      .select('slug, updated_at, created_at')
-      .eq('status', 'published')
-      .order('created_at', { ascending: false });
 
-    if (!error && posts) {
+    // Create a timeout promise (5 seconds)
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      setTimeout(() => reject(new Error('Supabase query timeout')), 5000);
+    });
+
+    // Race between the query and timeout
+    const { data: posts, error } = await Promise.race([
+      supabase
+        .from('blog_posts')
+        .select('slug, updated_at, created_at')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false }),
+      timeoutPromise,
+    ]);
+
+    if (error) {
+      console.error('Supabase error fetching blog posts for sitemap:', error.message);
+    } else if (posts) {
       blogPosts = posts.map((post) => ({
         url: `${baseUrl}/clanky/${post.slug}`,
         lastModified: new Date(post.updated_at || post.created_at),
@@ -166,8 +178,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }));
     }
   } catch (error) {
-    console.error('Error fetching blog posts for sitemap:', error);
-    // Continue without blog posts if there's an error
+    // Log error but continue - sitemap should always return static pages at minimum
+    console.error('Error fetching blog posts for sitemap:', error instanceof Error ? error.message : 'Unknown error');
   }
 
   return [...staticPages, ...blogPosts];
