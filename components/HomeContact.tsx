@@ -8,6 +8,7 @@
 import { useTranslations, useLocale } from '@/contexts/TranslationsContext';
 import { Phone } from 'lucide-react';
 import { Contact } from './Contact';
+import { LazyGoogleMap } from './LazyGoogleMap';
 
 export function HomeContact() {
   const t = useTranslations('contact');
@@ -33,14 +34,10 @@ export function HomeContact() {
                 <h2 className="text-2xl font-bold text-primary mb-6">
                   Kde nás najdete
                 </h2>
-                {/* CLS-safe map container with fixed aspect ratio */}
+                {/* CLS-safe map container with fixed aspect ratio - lazy loaded */}
                 <div className="aspect-[4/3] rounded-lg overflow-hidden md:mb-4">
-                  <iframe
+                  <LazyGoogleMap
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.4899373947447!2d14.447864776769673!3d50.09404217152393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94a7f4f7e9bb%3A0x8c8a8d8e8f8e8f8f!2sJirs%C3%ADkova%20541%2F1%2C%20186%2000%20Karl%C3%ADn!5e0!3m2!1scs!2scz!4v1234567890123!5m2!1scs!2scz"
-                    className="w-full h-full border-0"
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
                     title="DataHelp.cz Location"
                   />
                 </div>
