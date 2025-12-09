@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { createStaticClient } from '@/lib/supabase/server';
+import { getKrajskaMesta } from '@/mesta';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.datahelp.cz';
@@ -195,6 +196,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // City landing pages (14 regional capitals)
+  const krajskaMesta = getKrajskaMesta();
+  const cityPages: MetadataRoute.Sitemap = krajskaMesta.map((mesto) => ({
+    url: `${baseUrl}/zachrana-dat/${mesto.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   // Fetch blog posts from Supabase with timeout
   let blogPosts: MetadataRoute.Sitemap = [];
   try {
@@ -230,5 +240,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error fetching blog posts for sitemap:', error instanceof Error ? error.message : 'Unknown error');
   }
 
-  return [...staticPages, ...blogPosts];
+  return [...staticPages, ...cityPages, ...blogPosts];
 }

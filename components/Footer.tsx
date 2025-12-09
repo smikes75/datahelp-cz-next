@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="bg-primary text-white py-6 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
           {/* Column 1 - Legal */}
           <div>
             <h3 className="text-base md:text-xl font-semibold mb-4 md:mb-6">
@@ -110,7 +110,30 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 3 - Contact (desktop only) */}
+          {/* Column 3 - Cities (desktop only) */}
+          <div className="hidden md:block">
+            <h3 className="text-base md:text-xl font-semibold mb-3 md:mb-6">
+              {t('footer.cities')}
+            </h3>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs md:text-base">
+              <Link href="/zachrana-dat/praha" className="hover:text-gray-300 transition-colors">Praha</Link>
+              <Link href="/zachrana-dat/brno" className="hover:text-gray-300 transition-colors">Brno</Link>
+              <Link href="/zachrana-dat/ostrava" className="hover:text-gray-300 transition-colors">Ostrava</Link>
+              <Link href="/zachrana-dat/plzen" className="hover:text-gray-300 transition-colors">Plzeň</Link>
+              <Link href="/zachrana-dat/liberec" className="hover:text-gray-300 transition-colors">Liberec</Link>
+              <Link href="/zachrana-dat/olomouc" className="hover:text-gray-300 transition-colors">Olomouc</Link>
+              <Link href="/zachrana-dat/ceske-budejovice" className="hover:text-gray-300 transition-colors">Č. Budějovice</Link>
+              <Link href="/zachrana-dat/hradec-kralove" className="hover:text-gray-300 transition-colors">Hradec Králové</Link>
+              <Link href="/zachrana-dat/pardubice" className="hover:text-gray-300 transition-colors">Pardubice</Link>
+              <Link href="/zachrana-dat/usti-nad-labem" className="hover:text-gray-300 transition-colors">Ústí n. L.</Link>
+              <Link href="/zachrana-dat/zlin" className="hover:text-gray-300 transition-colors">Zlín</Link>
+              <Link href="/zachrana-dat/kladno" className="hover:text-gray-300 transition-colors">Kladno</Link>
+              <Link href="/zachrana-dat/karlovy-vary" className="hover:text-gray-300 transition-colors">Karlovy Vary</Link>
+              <Link href="/zachrana-dat/jihlava" className="hover:text-gray-300 transition-colors">Jihlava</Link>
+            </div>
+          </div>
+
+          {/* Column 4 - Contact (desktop only) */}
           <div className="hidden md:block">
             <h3 className="text-base md:text-xl font-semibold mb-3 md:mb-6">
               {t('nav.contact')}
