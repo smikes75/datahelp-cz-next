@@ -8,7 +8,7 @@
  * Přijímá obrázky jako props ze server komponenty (SSR)
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations, useLocale } from '@/contexts/TranslationsContext';
 import Image from 'next/image';
 
@@ -48,21 +48,24 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
   const locale = useLocale();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [showSlider, setShowSlider] = useState(false);
-  const [sliderIndex, setSliderIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  // Minimum swipe distance (in px)
-  const minSwipeDistance = 50;
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   // Handle grid image click - expand that image, then transition to slider
   const handleGridClick = (index: number) => {
     setExpandedIndex(index);
-    setSliderIndex(index);
+    setCurrentSlide(index);
     // After expand animation completes, show slider
     setTimeout(() => {
       setShowSlider(true);
-    }, 400); // Match animation duration
+      // Scroll to the clicked image
+      setTimeout(() => {
+        if (sliderRef.current) {
+          const slideWidth = sliderRef.current.offsetWidth;
+          sliderRef.current.scrollTo({ left: index * slideWidth, behavior: 'auto' });
+        }
+      }, 50);
+    }, 400);
   };
 
   // Close expanded view - return to grid
@@ -71,29 +74,15 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
     setExpandedIndex(null);
   };
 
-  // Touch handlers for swipe
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) {
-      // Swipe left - next image
-      setSliderIndex((prev) => (prev < 3 ? prev + 1 : 0));
-    } else if (isRightSwipe) {
-      // Swipe right - previous image
-      setSliderIndex((prev) => (prev > 0 ? prev - 1 : 3));
+  // Track current slide on scroll
+  const handleScroll = () => {
+    if (sliderRef.current) {
+      const slideWidth = sliderRef.current.offsetWidth;
+      const scrollLeft = sliderRef.current.scrollLeft;
+      const newSlide = Math.round(scrollLeft / slideWidth);
+      if (newSlide !== currentSlide && newSlide >= 0 && newSlide < 4) {
+        setCurrentSlide(newSlide);
+      }
     }
   };
 
@@ -140,30 +129,47 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
             transformOrigin: getTransformOrigin(expandedIndex),
           }}
         >
-          {/* Slider view after expansion - swipe to navigate */}
+          {/* Slider view after expansion - native horizontal scroll */}
           {showSlider ? (
-            <div
-              className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              <Image
-                src={imageList[sliderIndex].url}
-                alt={imageList[sliderIndex].alt}
-                fill
-                className="object-cover transition-opacity duration-300"
-                sizes="100vw"
-                priority
-              />
+            <div className="w-full h-full bg-white rounded-lg">
+              <div
+                ref={sliderRef}
+                className="w-full h-full flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1"
+                onScroll={handleScroll}
+                style={{
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                  transform: 'translateZ(0)',
+                  willChange: 'scroll-position',
+                  backfaceVisibility: 'hidden'
+                }}
+              >
+                {imageList.map((image, idx) => (
+                  <div
+                    key={idx}
+                    className="relative flex-shrink-0 w-[calc(100%-8px)] h-full snap-center rounded-lg overflow-hidden shadow-2xl"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
+                  >
+                    <Image
+                      src={image.url}
+                      alt={image.alt}
+                      fill
+                      className="object-cover"
+                      sizes="100vw"
+                      priority
+                    />
+                  </div>
+                ))}
+              </div>
               {/* Subtle indicator dots */}
-              <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+              <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 pointer-events-none">
                 {imageList.map((_, idx) => (
                   <div
                     key={idx}
                     className={`w-2 h-2 rounded-full transition-colors ${
-                      idx === sliderIndex ? 'bg-white' : 'bg-white/40'
+                      idx === currentSlide ? 'bg-white' : 'bg-white/40'
                     }`}
                   />
                 ))}
