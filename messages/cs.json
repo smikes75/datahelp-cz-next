@@ -116,7 +116,9 @@
   },
   "hero": {
     "title": "Obnova dat\npro firmy i jednotlivce",
+    "titleMobile": "Záchrana dat",
     "subtitle": "Specializujeme se na záchranu dat z poškozených médií již více než 25 let.\nPlatíte pouze za úspěšně zachráněná data.",
+    "subtitleMobile": "25 let zkušeností\nBezplatné posouzení",
     "consultation": "Bezplatná konzultace",
     "getPrice": "Zjistit cenu",
     "orderDiagnostics": "Objednat diagnostiku",

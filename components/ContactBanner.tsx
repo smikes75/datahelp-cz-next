@@ -46,15 +46,7 @@ export function ContactBanner() {
           </div>
         </div>
 
-        {/* Mobile Version - Only Hotline */}
-        <div className="md:hidden text-center text-white text-sm" style={{ height: '40px', lineHeight: '40px' }}>
-          <a
-            href="tel:+420775220440"
-            className="font-semibold hover:text-gray-200 transition-colors"
-          >
-            {t('hotline')}
-          </a>
-        </div>
+        {/* Mobile Version - Hidden (phone icon is in header instead) */}
       </div>
     </div>
   );

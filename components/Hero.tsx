@@ -41,11 +41,19 @@ export function Hero() {
       <div className="relative z-10 text-white py-8 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 whitespace-pre-line">
+            {/* Desktop title & subtitle */}
+            <h1 className="hidden md:block text-5xl font-bold mb-6 whitespace-pre-line">
               {t('title')}
             </h1>
-            <p className="text-lg md:text-xl mb-6 md:mb-8 whitespace-pre-line">
+            <p className="hidden md:block text-xl mb-8 whitespace-pre-line">
               {t('subtitle')}
+            </p>
+            {/* Mobile title & subtitle - shorter */}
+            <h1 className="block md:hidden text-3xl font-bold mb-4">
+              {t('titleMobile')}
+            </h1>
+            <p className="block md:hidden text-lg mb-6 whitespace-pre-line">
+              {t('subtitleMobile')}
             </p>
             <div className="flex flex-wrap gap-4 mt-8 md:mt-8">
               <Link

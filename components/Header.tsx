@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -96,14 +96,21 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile: Phone icon + Menu Button */}
+          <div className="md:hidden flex items-center gap-4">
+            <a
+              href="tel:+420775220440"
+              aria-label={t('accessibility.callHotline')}
+              className="text-primary hover:text-accent transition-colors flex items-center justify-center"
+            >
+              <Phone className="h-6 w-6" />
+            </a>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={t('accessibility.toggleMenu')}
-              className="text-primary hover:text-accent transition-colors"
+              className="text-primary hover:text-accent transition-colors flex items-center justify-center"
             >
-              {isMenuOpen ? <X /> : <Menu />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
