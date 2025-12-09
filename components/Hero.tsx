@@ -38,7 +38,7 @@ export function Hero() {
       </div>
 
       {/* Obsah */}
-      <div className="relative z-10 text-white py-8 md:py-16">
+      <div className="relative z-10 text-white py-6 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             {/* Desktop title & subtitle */}
