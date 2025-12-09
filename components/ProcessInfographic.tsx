@@ -59,7 +59,7 @@ export function ProcessInfographic() {
           <h2 className="text-3xl font-bold text-primary mb-2">
             {t('title')}
           </h2>
-          <div className="flex items-center justify-center space-x-2 text-accent">
+          <div className="flex items-center justify-center space-x-2 text-gray-700">
             <ShieldCheck className="h-5 w-5" />
             <p className="text-sm">{t('guarantee')}</p>
           </div>

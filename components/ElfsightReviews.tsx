@@ -71,7 +71,7 @@ export function ElfsightReviews() {
   return (
     <section className="pt-8 pb-4 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-primary text-center mb-6 md:mb-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-6 md:mb-12">
           {t('title')}
         </h2>
         <div
