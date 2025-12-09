@@ -47,29 +47,35 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2 - Services */}
+          {/* Column 2 - More */}
           <div>
             <h3 className="text-base md:text-xl font-semibold mb-4 md:mb-6">
-              {t('nav.services')}
+              {t('footer.more')}
             </h3>
             <div className="space-y-1.5 md:space-y-3 text-xs md:text-base">
               <Link
-                href="/zachrana-dat/hdd"
+                href="/zachrana-dat"
                 className="block hover:text-gray-300 transition-colors"
               >
-                {t('services.hdd.title')}
+                {t('nav.services')}
               </Link>
               <Link
-                href="/zachrana-dat/ssd"
+                href="/technologie"
                 className="block hover:text-gray-300 transition-colors"
               >
-                {t('services.ssd.title')}
+                {t('nav.technology')}
               </Link>
               <Link
-                href="/zachrana-dat/raid"
+                href="/reference"
                 className="block hover:text-gray-300 transition-colors"
               >
-                {t('services.raid.title')}
+                {t('nav.references')}
+              </Link>
+              <Link
+                href="/clanky"
+                className="block hover:text-gray-300 transition-colors"
+              >
+                Blog
               </Link>
               <Link
                 href="/partnersky-program"

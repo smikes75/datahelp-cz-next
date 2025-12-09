@@ -114,20 +114,11 @@ export function Header() {
             <Link href="/" className={`block font-bold ${isActive("/")} header-nav-link`}>
               {t('nav.home')}
             </Link>
-            <Link href="/zachrana-dat" className={`block font-bold ${isActive("/zachrana-dat")} header-nav-link`}>
-              {t('nav.services')}
-            </Link>
             <Link href="/cenik-zachrany-dat" className={`block font-bold ${isActive("/cenik-zachrany-dat")} header-nav-link`}>
               {t('nav.pricing')}
             </Link>
-            <Link href="/clanky" className={`block font-bold ${isActive("/clanky")} header-nav-link`}>
-              Blog
-            </Link>
             <Link href="/o-nas" className={`block font-bold ${isActive("/o-nas")} header-nav-link`}>
               {t('nav.about')}
-            </Link>
-            <Link href="/reference" className={`block font-bold ${isActive("/reference")} header-nav-link`}>
-              {t('nav.references')}
             </Link>
             <Link href="/caste-dotazy" className={`block font-bold ${isActive("/caste-dotazy")} header-nav-link`}>
               FAQ
