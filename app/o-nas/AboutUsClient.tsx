@@ -1,12 +1,22 @@
 'use client';
 
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, ChevronDown, Building2, Wrench, Heart } from 'lucide-react';
-import { useTranslations } from '@/contexts/TranslationsContext';
+import { useTranslations, useLocale } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+
+// Typ pro obrázky z Cloudinary
+interface GalleryImage {
+  id: string;
+  cloudinary_url: string;
+  alt_cs: string | null;
+  alt_en: string | null;
+  width: number | null;
+  height: number | null;
+}
 
 // Typy pro timeline položky
 interface TimelineItem {
@@ -64,18 +74,78 @@ function TimelineSection({ timelineItems }: { timelineItems: TimelineItem[] }) {
   );
 }
 
-// Galerie komponenta - zjednodušená verze
+// Fallback statické obrázky pro AboutGallery
+const ABOUT_GALLERY_FALLBACK = [
+  { url: "/images/about-gallery/team.webp", altKey: 'aboutTeam' },
+  { url: "/images/about-gallery/workspace.webp", altKey: 'aboutWorkspace' },
+  { url: "/images/about-gallery/technology.webp", altKey: 'aboutTechnology' },
+  { url: "/images/about-gallery/lab.webp", altKey: 'aboutLab' },
+  { url: "/images/about-gallery/expertise.webp", altKey: 'aboutExpertise' }
+];
+
+// Galerie komponenta - s Cloudinary podporou
 function AboutGallery() {
   const t = useTranslations('gallery');
+  const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [useFallback, setUseFallback] = useState(false);
 
-  const images = [
-    { url: "/images/about-gallery/team.webp", alt: t('aboutTeam') },
-    { url: "/images/about-gallery/workspace.webp", alt: t('aboutWorkspace') },
-    { url: "/images/about-gallery/technology.webp", alt: t('aboutTechnology') },
-    { url: "/images/about-gallery/lab.webp", alt: t('aboutLab') },
-    { url: "/images/about-gallery/expertise.webp", alt: t('aboutExpertise') }
-  ];
+  // Načtení obrázků z API
+  useEffect(() => {
+    async function loadImages() {
+      try {
+        const response = await fetch('/api/galleries/images?gallery=o-nas-galerie');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch images');
+        }
+
+        const data = await response.json();
+
+        if (data.images && data.images.length > 0) {
+          setImages(data.images);
+        } else {
+          setUseFallback(true);
+        }
+      } catch (error) {
+        console.warn('AboutGallery: Using fallback images', error);
+        setUseFallback(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadImages();
+  }, []);
+
+  // Helper pro alt text podle jazyka
+  const getAlt = (image: GalleryImage) => {
+    return locale === 'en' ? (image.alt_en || image.alt_cs || '') : (image.alt_cs || '');
+  };
+
+  // Zobrazované obrázky (dynamické nebo fallback)
+  const displayImages = useFallback
+    ? ABOUT_GALLERY_FALLBACK.map(img => ({ url: img.url, alt: t(img.altKey) }))
+    : images.map(img => ({ url: img.cloudinary_url, alt: getAlt(img) }));
+
+  // Loading stav
+  if (loading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-primary mb-4">{t('aboutTitle')}</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">{t('aboutDescription')}</p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <div className="aspect-video bg-gray-200 rounded-xl animate-pulse" />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-gray-50">
@@ -88,7 +158,7 @@ function AboutGallery() {
         {/* Desktop slideshow */}
         <div className="hidden md:block relative max-w-5xl mx-auto">
           <div className="relative aspect-video overflow-hidden rounded-xl shadow-2xl">
-            {images.map((image, index) => (
+            {displayImages.map((image, index) => (
               <div
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-700 ${
@@ -101,13 +171,14 @@ function AboutGallery() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 1280px) 100vw, 1280px"
+                  priority={index === 0}
                 />
               </div>
             ))}
           </div>
 
           <div className="flex justify-center gap-1.5 mt-4">
-            {images.map((_, index) => (
+            {displayImages.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
@@ -116,7 +187,7 @@ function AboutGallery() {
                     ? 'w-6 bg-primary'
                     : 'w-1.5 bg-gray-300 hover:bg-gray-400'
                 }`}
-                aria-label={`Přejít na obrázek ${index + 1}`}
+                aria-label={`Go to image ${index + 1}`}
               />
             ))}
           </div>
@@ -128,7 +199,7 @@ function AboutGallery() {
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {images.map((image, index) => (
+            {displayImages.map((image, index) => (
               <div key={index} className="flex-shrink-0 w-[85vw] snap-center">
                 <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
                   <Image
@@ -144,7 +215,7 @@ function AboutGallery() {
           </div>
 
           <div className="flex justify-center gap-1.5 mt-4">
-            {images.map((_, index) => (
+            {displayImages.map((_, index) => (
               <div
                 key={index}
                 className="h-1.5 w-1.5 rounded-full bg-gray-300"
@@ -154,6 +225,135 @@ function AboutGallery() {
         </div>
       </div>
     </section>
+  );
+}
+
+// Fallback statické obrázky pro TeamMembers
+const TEAM_FALLBACK_IMAGES = [
+  '/images/team/member-1.webp',
+  '/images/team/member-2.webp',
+  '/images/team/member-3.webp'
+];
+
+// TeamMembers sekce s Cloudinary podporou
+function TeamMembersSection({ teamMembers }: { teamMembers: TeamMember[] }) {
+  const t = useTranslations();
+  const [teamImages, setTeamImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [useFallback, setUseFallback] = useState(false);
+
+  // Načtení obrázků týmu z API
+  useEffect(() => {
+    async function loadTeamImages() {
+      try {
+        const response = await fetch('/api/galleries/images?gallery=tym');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch team images');
+        }
+
+        const data = await response.json();
+
+        if (data.images && data.images.length > 0) {
+          setTeamImages(data.images);
+        } else {
+          setUseFallback(true);
+        }
+      } catch (error) {
+        console.warn('TeamMembers: Using fallback images', error);
+        setUseFallback(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTeamImages();
+  }, []);
+
+  // Helper pro získání URL obrázku pro člena týmu
+  const getTeamMemberImage = (index: number): string => {
+    if (useFallback || loading) {
+      return TEAM_FALLBACK_IMAGES[index] || TEAM_FALLBACK_IMAGES[0];
+    }
+    // Pokud máme obrázky z Cloudinary, použij je podle indexu
+    if (teamImages[index]) {
+      return teamImages[index].cloudinary_url;
+    }
+    // Fallback pokud není dostatek obrázků
+    return TEAM_FALLBACK_IMAGES[index] || TEAM_FALLBACK_IMAGES[0];
+  };
+
+  return (
+    <div className="bg-gray-50 py-16">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-primary mb-4">
+            {t('about.teamSection.title')}
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            {t('about.teamSection.subtitle')}
+          </p>
+        </div>
+
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {teamMembers.map((member, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition group">
+              <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center relative">
+                <Image
+                  src={getTeamMemberImage(index)}
+                  alt={member.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition duration-300"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-primary mb-3">{member.name}</h3>
+                <p className="text-sm font-semibold text-gray-700 mb-2">{member.specialization}</p>
+                <p className="text-sm text-gray-600">{member.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="md:hidden overflow-hidden">
+          <div
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {teamMembers.map((member, index) => (
+              <div key={index} className="flex-shrink-0 w-[80vw] snap-center">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+                  <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center relative">
+                    <Image
+                      src={getTeamMemberImage(index)}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      sizes="80vw"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-primary mb-3">{member.name}</h3>
+                    <p className="text-sm font-semibold text-gray-700 mb-2">{member.specialization}</p>
+                    <p className="text-sm text-gray-600">{member.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center gap-1.5 mt-4">
+            {teamMembers.map((_, index) => (
+              <div
+                key={index}
+                className="h-1.5 w-1.5 rounded-full bg-gray-300"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -308,77 +508,8 @@ export function AboutUsClient() {
         <AboutGallery />
       </div>
 
-      {/* Sekce týmu */}
-      <div className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-primary mb-4">
-              {t('about.teamSection.title')}
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              {t('about.teamSection.subtitle')}
-            </p>
-          </div>
-
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition group">
-                <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center relative">
-                  <Image
-                    src={`/images/team/member-${index + 1}.webp`}
-                    alt={member.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-primary mb-3">{member.name}</h3>
-                  <p className="text-sm font-semibold text-gray-700 mb-2">{member.specialization}</p>
-                  <p className="text-sm text-gray-600">{member.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="md:hidden overflow-hidden">
-            <div
-              className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              {teamMembers.map((member, index) => (
-                <div key={index} className="flex-shrink-0 w-[80vw] snap-center">
-                  <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full">
-                    <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center relative">
-                      <Image
-                        src={`/images/team/member-${index + 1}.webp`}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                        sizes="80vw"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold text-primary mb-3">{member.name}</h3>
-                      <p className="text-sm font-semibold text-gray-700 mb-2">{member.specialization}</p>
-                      <p className="text-sm text-gray-600">{member.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex justify-center gap-1.5 mt-4">
-              {teamMembers.map((_, index) => (
-                <div
-                  key={index}
-                  className="h-1.5 w-1.5 rounded-full bg-gray-300"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Sekce týmu s Cloudinary podporou */}
+      <TeamMembersSection teamMembers={teamMembers} />
 
       {/* Accordion sekce s detaily o firmě - pod galerií odborníků */}
       <AccordionSection />
