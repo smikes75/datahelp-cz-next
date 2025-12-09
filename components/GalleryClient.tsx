@@ -134,23 +134,15 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
             <div className="w-full h-full bg-white rounded-lg">
               <div
                 ref={sliderRef}
-                className="w-full h-full flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1"
+                className="w-full h-full flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1 touch-pan-x"
                 onScroll={handleScroll}
-                style={{
-                  scrollbarWidth: 'none',
-                  msOverflowStyle: 'none',
-                  WebkitOverflowScrolling: 'touch',
-                  transform: 'translateZ(0)',
-                  willChange: 'scroll-position',
-                  backfaceVisibility: 'hidden'
-                }}
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {imageList.map((image, idx) => (
                   <div
                     key={idx}
                     className="relative flex-shrink-0 w-[calc(100%-8px)] h-full snap-center rounded-lg overflow-hidden shadow-2xl"
                     onClick={(e) => e.stopPropagation()}
-                    style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
                   >
                     <Image
                       src={image.url}
