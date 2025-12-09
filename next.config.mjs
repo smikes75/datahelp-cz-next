@@ -316,16 +316,7 @@ const nextConfig = {
         destination: '/kontakt/',
         permanent: true,
       },
-      {
-        source: '/partnersky-program/',
-        destination: '/kontakt/',
-        permanent: true,
-      },
-      {
-        source: '/partnersky-program',
-        destination: '/kontakt/',
-        permanent: true,
-      },
+      // Partnerský program nyní má vlastní stránku - redirect odstraněn
       {
         source: '/likvidace-dat/',
         destination: '/zachrana-dat/',
@@ -347,55 +338,66 @@ const nextConfig = {
         permanent: true,
       },
 
-      // === CENÍKOVÉ PODSTRÁNKY ===
+      // === CENÍKOVÉ PODSTRÁNKY - Redirecty ze starého webu na nové stránky ===
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-flash-disky-pametove-karty-mobily/',
-        destination: '/cenik-zachrany-dat/#flash',
+        destination: '/cenik-zachrany-dat/flash',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-flash-disky-pametove-karty-mobily',
-        destination: '/cenik-zachrany-dat/#flash',
+        destination: '/cenik-zachrany-dat/flash',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-nas-datova-uloziste/',
-        destination: '/cenik-zachrany-dat/#nas',
+        destination: '/cenik-zachrany-dat/nas',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-nas-datova-uloziste',
-        destination: '/cenik-zachrany-dat/#nas',
+        destination: '/cenik-zachrany-dat/nas',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-raid-pole/',
-        destination: '/cenik-zachrany-dat/#raid',
+        destination: '/cenik-zachrany-dat/raid',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-raid-pole',
-        destination: '/cenik-zachrany-dat/#raid',
+        destination: '/cenik-zachrany-dat/raid',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-ssd-disk-solid-state-disk/',
-        destination: '/cenik-zachrany-dat/#ssd',
+        destination: '/cenik-zachrany-dat/ssd',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-ssd-disk-solid-state-disk',
-        destination: '/cenik-zachrany-dat/#ssd',
+        destination: '/cenik-zachrany-dat/ssd',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-z-mobilu-os-android-ios/',
-        destination: '/cenik-zachrany-dat/#mobil',
+        destination: '/cenik-zachrany-dat/mobil',
         permanent: true,
       },
       {
         source: '/cenik-zachrany-dat/cenik-zachrany-dat-z-mobilu-os-android-ios',
-        destination: '/cenik-zachrany-dat/#mobil',
+        destination: '/cenik-zachrany-dat/mobil',
+        permanent: true,
+      },
+      // Další varianty starých URL
+      {
+        source: '/pevny-disk-externi-disk/cenik/',
+        destination: '/cenik-zachrany-dat/hdd',
+        permanent: true,
+      },
+      {
+        source: '/pevny-disk-externi-disk/cenik',
+        destination: '/cenik-zachrany-dat/hdd',
         permanent: true,
       },
 

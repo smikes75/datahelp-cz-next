@@ -3,11 +3,11 @@
 
 /**
  * Ceník - Price list stránka
- * Device cards s rozbalovacími detaily, FAQ, Service list
+ * Device cards s rozbalovacími detaily, FAQ
  */
 
 import React, { useState, useRef } from 'react';
-import { HardDrive, Smartphone, Database, Cpu, ChevronDown, ChevronUp, Wrench, AlertCircle, ClipboardList, Calculator, Microscope, Clock, Zap } from 'lucide-react';
+import { HardDrive, Smartphone, Database, Cpu, ChevronDown, ChevronUp, Wrench, AlertCircle, ClipboardList } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -43,84 +43,10 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
   );
 }
 
-// Service Price List komponenta
-interface PriceItem {
-  title: string;
-  price: string;
-}
-
-interface PriceSection {
-  icon: React.ReactNode;
-  title: string;
-  items: PriceItem[];
-}
-
-function ServicePriceList({ sections }: { sections: PriceSection[] }) {
-  const [expandedSections, setExpandedSections] = useState<number[]>([]);
-
-  const toggleSection = (index: number) => {
-    setExpandedSections(prev =>
-      prev.includes(index)
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
-  };
-
-  return (
-    <div className="mt-4">
-      <div className="grid gap-4">
-        {sections.map((section, index) => {
-          const isExpanded = expandedSections.includes(index);
-
-          return (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <button
-                onClick={() => toggleSection(index)}
-                className="faq-button w-full p-6 flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none"
-              >
-                <div className="flex items-center space-x-3 flex-1 min-w-0">
-                  <div className="flex-shrink-0">{section.icon}</div>
-                  <h3 className="text-xl font-semibold text-primary">{section.title}</h3>
-                </div>
-                {isExpanded ? (
-                  <ChevronUp className="h-6 w-6 text-primary flex-shrink-0 ml-4" />
-                ) : (
-                  <ChevronDown className="h-6 w-6 text-primary flex-shrink-0 ml-4" />
-                )}
-              </button>
-
-              <div className={`transition-all duration-300 overflow-hidden ${
-                isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-              }`}>
-                <div className="px-6 pb-6 pt-2 space-y-3">
-                  {section.items.map((item, itemIndex) => (
-                    <div
-                      key={itemIndex}
-                      className="flex justify-between items-center py-3 border-b border-gray-100 last:border-0"
-                    >
-                      <span className="text-gray-700">{item.title}</span>
-                      <div className="flex-shrink-0 ml-4">
-                        <span className="font-bold text-primary bg-primary/5 px-3 py-1 rounded-full whitespace-nowrap">
-                          {item.price}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 // Hlavní stránka ceníku
 export function PricingClient() {
   const t = useTranslations();
   const [expandedCards, setExpandedCards] = useState<number[]>([]);
-  const [isServiceListExpanded, setIsServiceListExpanded] = useState(false);
   const [expandedFaqItems, setExpandedFaqItems] = useState<number[]>([]);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -151,32 +77,6 @@ export function PricingClient() {
         ? []
         : [index]
     );
-  };
-
-  const priceUnit = 'Kč';
-  const hourlyUnit = 'Kč/hod';
-
-  const prices = {
-    basicDiagnostics: `0 ${priceUnit}`,
-    detailedDiagnostics: `1 250 ${priceUnit}`,
-    deletedRecovery: `1 000 ${hourlyUnit}`,
-    filesystemRecovery: `1 250 ${hourlyUnit}`,
-    compressedRecovery: `1 125 ${hourlyUnit}`,
-    raidRecovery: `1 500 ${hourlyUnit}`,
-    databaseRecovery: `1 375 ${hourlyUnit}`,
-    electronicsRepair: `1 750 ${hourlyUnit}`,
-    headsReplacement: `2 500 ${hourlyUnit}`,
-    mechanicsRepair: `2 250 ${hourlyUnit}`,
-    bgaRepair: `2 750 ${hourlyUnit}`,
-    romEmulator: `2 375 ${hourlyUnit}`,
-    serviceArea: `2 625 ${hourlyUnit}`,
-    pc3000Work: `2 250 ${hourlyUnit}`,
-    nandReconstruction: `2 500 ${hourlyUnit}`,
-    securityChips: `3 000 ${hourlyUnit}`,
-    mcmtTables: `2 750 ${hourlyUnit}`,
-    firmwareAnalysis: `2 625 ${hourlyUnit}`,
-    reverseEngineering: `2 375 ${hourlyUnit}`,
-    damagedService: `2 750 ${hourlyUnit}`
   };
 
   const deviceCards = [
@@ -251,61 +151,6 @@ export function PricingClient() {
         description: 'Kombinace softwarového a hardwarového poškození více disků',
         priceFrom: '19 000 Kč'
       }
-    }
-  ];
-
-  const servicePriceSections: PriceSection[] = [
-    {
-      icon: <Microscope className="h-6 w-6 text-accent" />,
-      title: 'Diagnostika',
-      items: [
-        { title: 'Základní diagnostika', price: prices.basicDiagnostics },
-        { title: 'Diagnostika s protokolem', price: prices.detailedDiagnostics }
-      ]
-    },
-    {
-      icon: <Cpu className="h-6 w-6 text-accent" />,
-      title: 'Softwarové závady',
-      items: [
-        { title: 'Obnova smazaných dat', price: prices.deletedRecovery },
-        { title: 'Oprava souborového systému', price: prices.filesystemRecovery },
-        { title: 'Obnova komprimovaných dat', price: prices.compressedRecovery },
-        { title: 'Rekonstrukce RAID/NAS', price: prices.raidRecovery },
-        { title: 'Obnova databází', price: prices.databaseRecovery }
-      ]
-    },
-    {
-      icon: <Wrench className="h-6 w-6 text-accent" />,
-      title: 'Hardwarové chyby ',
-      items: [
-        { title: 'Závada elektroniky', price: prices.electronicsRepair },
-        { title: 'Výměna hlav', price: prices.headsReplacement },
-        { title: 'Závada mechaniky', price: prices.mechanicsRepair },
-        { title: 'BGA přepájení', price: prices.bgaRepair },
-        { title: 'ROM emulátor', price: prices.romEmulator },
-        { title: 'Servisní zóna', price: prices.serviceArea }
-      ]
-    },
-    {
-      icon: <Zap className="h-6 w-6 text-accent" />,
-      title: 'Specializované služby',
-      items: [
-        { title: 'Práce s PC-3000', price: prices.pc3000Work },
-        { title: 'Rekonstrukce NAND', price: prices.nandReconstruction },
-        { title: 'Bezpečnostní čipy', price: prices.securityChips },
-        { title: 'MCMT tabulky', price: prices.mcmtTables },
-        { title: 'Analýza firmware', price: prices.firmwareAnalysis },
-        { title: 'Reverzní inženýrství', price: prices.reverseEngineering },
-        { title: 'Poškozená servisní zóna', price: prices.damagedService }
-      ]
-    },
-    {
-      icon: <Clock className="h-6 w-6 text-accent" />,
-      title: 'Expresní služby',
-      items: [
-        { title: 'Bez ohledu na pracovní dobu, Nonstop', price: '+100%' },
-        { title: 'Přednostní řešení', price: '+50%' }
-      ]
     }
   ];
 
@@ -484,49 +329,61 @@ export function PricingClient() {
           </div>
         </div>
 
-        {/* Service Price List - Wrapped in Accordion */}
+        {/* Quick links to all pricing pages */}
         <div className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <button
-              onClick={() => setIsServiceListExpanded(!isServiceListExpanded)}
-              className="faq-button w-full p-4 sm:p-5 flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none"
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">
+            Detailní ceníky
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-5xl mx-auto">
+            <Link
+              href="/cenik-zachrany-dat/hdd"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
             >
-              <div className="flex-1 min-w-0">
-                <h2 className="text-lg sm:text-xl font-bold text-primary mb-1">
-                  Detailní položkový ceník
-                </h2>
-                <p className="text-gray-600 text-xs sm:text-sm">
-                  Pro firmy a IT specialisty
-                </p>
-              </div>
-              {isServiceListExpanded ? (
-                <ChevronUp className="h-5 w-5 text-primary flex-shrink-0 ml-3" />
-              ) : (
-                <ChevronDown className="h-5 w-5 text-primary flex-shrink-0 ml-3" />
-              )}
-            </button>
-
-            <div className={`transition-all duration-300 overflow-hidden ${
-              isServiceListExpanded ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'
-            }`}>
-              <div className="px-6 pb-6">
-                <ServicePriceList sections={servicePriceSections} />
-
-                {/* Price Calculator CTA */}
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  <Link
-                    href="/kalkulacka"
-                    className="block bg-white border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-200 flex items-center justify-center space-x-3 max-w-md mx-auto"
-                  >
-                    <Calculator className="h-6 w-6" />
-                    <span className="text-lg">Cenová kalkulačka</span>
-                  </Link>
-                  <p className="text-center text-gray-600 text-sm mt-3">
-                    Spočítejte si orientační cenu pro váš případ
-                  </p>
-                </div>
-              </div>
-            </div>
+              <HardDrive className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">HDD</span>
+            </Link>
+            <Link
+              href="/cenik-zachrany-dat/ssd"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+            >
+              <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">SSD</span>
+            </Link>
+            <Link
+              href="/cenik-zachrany-dat/flash"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+            >
+              <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">Flash</span>
+            </Link>
+            <Link
+              href="/cenik-zachrany-dat/mobil"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+            >
+              <Smartphone className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">Mobily</span>
+            </Link>
+            <Link
+              href="/cenik-zachrany-dat/nas"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+            >
+              <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">NAS</span>
+            </Link>
+            <Link
+              href="/cenik-zachrany-dat/raid"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+            >
+              <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">RAID</span>
+            </Link>
+            <Link
+              href="/cenik-zachrany-dat/sluzby"
+              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+            >
+              <Wrench className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+              <span className="font-semibold text-gray-800 group-hover:text-primary">Služby</span>
+            </Link>
           </div>
         </div>
       </div>

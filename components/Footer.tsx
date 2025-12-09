@@ -72,10 +72,10 @@ export function Footer() {
                 {t('services.raid.title')}
               </Link>
               <Link
-                href="/zachrana-dat/mobilni-telefon"
+                href="/partnersky-program"
                 className="block hover:text-gray-300 transition-colors"
               >
-                {t('services.mobile.title')}
+                {t('footer.partnerProgram')}
               </Link>
             </div>
 

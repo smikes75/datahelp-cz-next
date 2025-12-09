@@ -89,6 +89,9 @@ export function Breadcrumbs({ children, customItems }: BreadcrumbsProps) {
         case 'obchodni-podminky':
           name = t('footer.terms');
           break;
+        case 'partnersky-program':
+          name = t('footer.partnerProgram');
+          break;
         default:
           name = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
       }
