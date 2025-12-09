@@ -58,13 +58,13 @@ export function Hero() {
             <div className="flex flex-wrap gap-4 mt-8 md:mt-8">
               <Link
                 href="/cenik-zachrany-dat"
-                className="accent-background text-white text-lg px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center"
+                className="accent-background text-white text-sm md:text-lg px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-semibold inline-flex items-center justify-center"
               >
                 Ceník
               </Link>
               <Link
                 href="/poptavka-zachrany-dat"
-                className="bg-white text-primary text-lg px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100 transition-colors"
+                className="bg-white text-primary text-sm md:text-lg px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100 transition-colors"
               >
                 {t('orderDiagnostics')}
               </Link>
