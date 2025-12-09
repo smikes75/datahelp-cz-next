@@ -74,7 +74,7 @@ export function ProcessInfographic() {
               style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
             >
               <div className="text-center mb-2">
-                <h2 className="text-3xl font-bold text-primary">
+                <h2 className="text-2xl font-bold text-primary">
                   {t('title')}
                 </h2>
               </div>
