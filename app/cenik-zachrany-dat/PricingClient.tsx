@@ -48,6 +48,7 @@ export function PricingClient() {
   const t = useTranslations();
   const [expandedCards, setExpandedCards] = useState<number[]>([]);
   const [expandedFaqItems, setExpandedFaqItems] = useState<number[]>([]);
+  const [isDetailedPricingExpanded, setIsDetailedPricingExpanded] = useState(false);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const toggleCard = (index: number) => {
@@ -173,7 +174,7 @@ export function PricingClient() {
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title="Ceník"
-        subtitle="Ceny bez skrytých poplatků. Platíte pouze za úspěšně zachráněná data."
+        subtitle="Platíte pouze za úspěšně zachráněná data."
         backgroundImage="pricing-bg.webp"
       />
       <Breadcrumbs />
@@ -331,59 +332,132 @@ export function PricingClient() {
 
         {/* Quick links to all pricing pages */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-primary text-center mb-8">
-            Detailní ceníky
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-5xl mx-auto">
-            <Link
-              href="/cenik-zachrany-dat/hdd"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+          {/* Desktop version - always visible */}
+          <div className="hidden md:block">
+            <h2 className="text-3xl font-bold text-primary text-center mb-8">
+              Detailní ceníky
+            </h2>
+            <div className="grid grid-cols-4 lg:grid-cols-7 gap-4 max-w-5xl mx-auto">
+              <Link
+                href="/cenik-zachrany-dat/hdd"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <HardDrive className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">HDD</span>
+              </Link>
+              <Link
+                href="/cenik-zachrany-dat/ssd"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">SSD</span>
+              </Link>
+              <Link
+                href="/cenik-zachrany-dat/flash"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">Flash</span>
+              </Link>
+              <Link
+                href="/cenik-zachrany-dat/mobil"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <Smartphone className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">Mobily</span>
+              </Link>
+              <Link
+                href="/cenik-zachrany-dat/nas"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">NAS</span>
+              </Link>
+              <Link
+                href="/cenik-zachrany-dat/raid"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">RAID</span>
+              </Link>
+              <Link
+                href="/cenik-zachrany-dat/sluzby"
+                className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+              >
+                <Wrench className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                <span className="font-semibold text-gray-800 group-hover:text-primary">Služby</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile version - collapsible */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsDetailedPricingExpanded(!isDetailedPricingExpanded)}
+              className="w-full p-4 rounded-lg border-2 border-gray-200 bg-white flex items-center justify-between hover:border-primary transition-colors"
+              style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
             >
-              <HardDrive className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">HDD</span>
-            </Link>
-            <Link
-              href="/cenik-zachrany-dat/ssd"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
-            >
-              <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">SSD</span>
-            </Link>
-            <Link
-              href="/cenik-zachrany-dat/flash"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
-            >
-              <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">Flash</span>
-            </Link>
-            <Link
-              href="/cenik-zachrany-dat/mobil"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
-            >
-              <Smartphone className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">Mobily</span>
-            </Link>
-            <Link
-              href="/cenik-zachrany-dat/nas"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
-            >
-              <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">NAS</span>
-            </Link>
-            <Link
-              href="/cenik-zachrany-dat/raid"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
-            >
-              <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">RAID</span>
-            </Link>
-            <Link
-              href="/cenik-zachrany-dat/sluzby"
-              className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
-            >
-              <Wrench className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
-              <span className="font-semibold text-gray-800 group-hover:text-primary">Služby</span>
-            </Link>
+              <span className="text-xl font-bold text-primary">Detailní ceníky</span>
+              {isDetailedPricingExpanded ? (
+                <ChevronUp className="h-6 w-6 text-primary" />
+              ) : (
+                <ChevronDown className="h-6 w-6 text-primary" />
+              )}
+            </button>
+
+            {isDetailedPricingExpanded && (
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <Link
+                  href="/cenik-zachrany-dat/hdd"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+                >
+                  <HardDrive className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">HDD</span>
+                </Link>
+                <Link
+                  href="/cenik-zachrany-dat/ssd"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+                >
+                  <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">SSD</span>
+                </Link>
+                <Link
+                  href="/cenik-zachrany-dat/flash"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+                >
+                  <Cpu className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">Flash</span>
+                </Link>
+                <Link
+                  href="/cenik-zachrany-dat/mobil"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+                >
+                  <Smartphone className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">Mobily</span>
+                </Link>
+                <Link
+                  href="/cenik-zachrany-dat/nas"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+                >
+                  <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">NAS</span>
+                </Link>
+                <Link
+                  href="/cenik-zachrany-dat/raid"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group"
+                >
+                  <Database className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">RAID</span>
+                </Link>
+                <Link
+                  href="/cenik-zachrany-dat/sluzby"
+                  className="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg transition-shadow group col-span-2"
+                >
+                  <Wrench className="h-8 w-8 mx-auto mb-2 text-primary group-hover:text-accent transition-colors" />
+                  <span className="font-semibold text-gray-800 group-hover:text-primary">Služby</span>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
