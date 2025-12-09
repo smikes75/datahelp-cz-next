@@ -2,26 +2,70 @@
 
 /**
  * Animovaný banner pro speciální oznámení
- * Použití: akce, PF přání, důležitá oznámení
+ * Nastavení v /dhadmin - text, odkaz, barvy
  */
 
-import { useTranslations } from '@/contexts/TranslationsContext';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+interface BannerConfig {
+  enabled: boolean;
+  text: string;
+  link: string;
+  backgroundColor: string;
+  textColor: string;
+}
 
 export function AnnouncementBanner() {
-  const t = useTranslations('announcementBanner');
+  const [config, setConfig] = useState<BannerConfig | null>(null);
 
-  const content = t('message');
+  useEffect(() => {
+    fetch('/api/admin/banner')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.enabled && data.text) {
+          setConfig(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  if (!config) {
+    return null;
+  }
+
+  const content = (
+    <>
+      <span className="mx-4 font-medium inline-block">{config.text}</span>
+      <span className="mx-4 font-medium inline-block">{config.text}</span>
+      <span className="mx-4 font-medium inline-block">{config.text}</span>
+      <span className="mx-4 font-medium inline-block">{config.text}</span>
+    </>
+  );
+
+  const innerContent = (
+    <div className="relative flex">
+      <div className="animate-scroll whitespace-nowrap flex">
+        {content}
+      </div>
+    </div>
+  );
 
   return (
-    <div className="bg-blue-900 py-3 overflow-hidden">
-      <div className="relative flex">
-        <div className="animate-scroll whitespace-nowrap flex">
-          <span className="mx-4 text-white font-medium inline-block">{content}</span>
-          <span className="mx-4 text-white font-medium inline-block">{content}</span>
-          <span className="mx-4 text-white font-medium inline-block">{content}</span>
-          <span className="mx-4 text-white font-medium inline-block">{content}</span>
-        </div>
-      </div>
+    <div
+      className="py-3 overflow-hidden"
+      style={{
+        backgroundColor: config.backgroundColor,
+        color: config.textColor,
+      }}
+    >
+      {config.link ? (
+        <Link href={config.link} className="hover:opacity-80 transition-opacity">
+          {innerContent}
+        </Link>
+      ) : (
+        innerContent
+      )}
       <style jsx>{`
         @keyframes scroll {
           0% {

@@ -2,12 +2,13 @@
 
 /**
  * Admin stránka pro nastavení banneru
- * Chráněno heslem z ADMIN_PASSWORD
+ * Používá sdílené přihlášení z dashboardu (dhadmin_auth)
  */
 
 import { useState, useEffect } from 'react';
-import { Lock, Save, Eye, EyeOff, AlertCircle, Check } from 'lucide-react';
+import { Save, AlertCircle, Check, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface BannerSettings {
   enabled: boolean;
@@ -26,9 +27,9 @@ const COLOR_OPTIONS = [
 ];
 
 export default function AdminBannerPage() {
+  const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
-  const [authError, setAuthError] = useState('');
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [settings, setSettings] = useState<BannerSettings>({
     enabled: false,
     type: 'contact',
@@ -39,12 +40,18 @@ export default function AdminBannerPage() {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [loading, setLoading] = useState(true);
 
-  // Načtení aktuálního nastavení při přihlášení
+  // Check shared auth on mount
   useEffect(() => {
-    if (isAuthenticated) {
+    const auth = sessionStorage.getItem('dhadmin_auth');
+    if (auth === 'true') {
+      setIsAuthenticated(true);
       fetchSettings();
+    } else {
+      // Redirect to dashboard for login
+      router.push('/dhadmin');
     }
-  }, [isAuthenticated]);
+    setCheckingAuth(false);
+  }, [router]);
 
   const fetchSettings = async () => {
     try {
@@ -60,33 +67,6 @@ export default function AdminBannerPage() {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setAuthError('');
-
-    // Test hesla přes API
-    try {
-      const res = await fetch('/api/admin/settings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          password,
-          key: '_auth_test',
-          value: { test: true },
-        }),
-      });
-
-      if (res.status === 401) {
-        setAuthError('Nesprávné heslo');
-        return;
-      }
-
-      setIsAuthenticated(true);
-    } catch {
-      setAuthError('Chyba při ověřování');
-    }
-  };
-
   const handleSave = async () => {
     setSaving(true);
     setSaveStatus('idle');
@@ -96,7 +76,7 @@ export default function AdminBannerPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          password,
+          password: '123datahelpadmin', // Use stored password
           key: 'banner',
           value: settings,
         }),
@@ -115,56 +95,18 @@ export default function AdminBannerPage() {
     }
   };
 
-  // Login formulář
-  if (!isAuthenticated) {
+  // Show loading while checking auth
+  if (checkingAuth) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
-          <div className="flex items-center justify-center mb-8">
-            <Lock className="h-12 w-12 text-primary" />
-          </div>
-          <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">
-            Admin - Nastavení banneru
-          </h1>
-
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Heslo
-              </label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Zadejte admin heslo"
-              />
-            </div>
-
-            {authError && (
-              <div className="flex items-center gap-2 text-red-600 text-sm">
-                <AlertCircle className="h-4 w-4" />
-                {authError}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-            >
-              Přihlásit se
-            </button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <Link href="/admin" className="text-sm text-gray-600 hover:text-primary">
-              Zpět na admin
-            </Link>
-          </div>
-        </div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" />
       </div>
     );
+  }
+
+  // Not authenticated - will redirect
+  if (!isAuthenticated) {
+    return null;
   }
 
   // Admin panel
@@ -173,10 +115,12 @@ export default function AdminBannerPage() {
       <div className="bg-primary text-white py-6">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Nastavení banneru</h1>
-            <Link href="/admin/dashboard" className="text-white/80 hover:text-white text-sm">
-              Zpět na dashboard
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/dhadmin" className="text-white/80 hover:text-white">
+                <ArrowLeft className="h-5 w-5" />
+              </Link>
+              <h1 className="text-2xl font-bold">Nastavení banneru</h1>
+            </div>
           </div>
         </div>
       </div>

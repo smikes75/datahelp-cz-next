@@ -1,5 +1,10 @@
 'use client';
 
+/**
+ * Správa galerií - admin stránka
+ * Používá sdílené přihlášení z dashboardu (dhadmin_auth)
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Image from 'next/image';
@@ -17,6 +22,7 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface GalleryImage {
   id: string;
@@ -41,8 +47,9 @@ interface Gallery {
 }
 
 export default function AdminGalleriesPage() {
+  const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [galleries, setGalleries] = useState<Gallery[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -55,13 +62,17 @@ export default function AdminGalleriesPage() {
 
   const supabase = createClient();
 
-  // Check auth on mount
+  // Check shared auth on mount
   useEffect(() => {
-    const saved = sessionStorage.getItem('admin_galleries_auth');
-    if (saved === 'true') {
+    const auth = sessionStorage.getItem('dhadmin_auth');
+    if (auth === 'true') {
       setIsAuthenticated(true);
+    } else {
+      // Redirect to dashboard for login
+      router.push('/dhadmin');
     }
-  }, []);
+    setCheckingAuth(false);
+  }, [router]);
 
   // Load galleries
   const loadGalleries = useCallback(async () => {
@@ -97,16 +108,6 @@ export default function AdminGalleriesPage() {
     loadGalleries();
   }, [loadGalleries]);
 
-  // Handle login
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD || password === '123datahelpadmin') {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('admin_galleries_auth', 'true');
-    } else {
-      setError('Nesprávné heslo');
-    }
-  };
 
   // Create new gallery
   const handleCreateGallery = async (e: React.FormEvent) => {
@@ -286,38 +287,18 @@ export default function AdminGalleriesPage() {
     }
   };
 
-  // Login form
-  if (!isAuthenticated) {
+  // Show loading while checking auth
+  if (checkingAuth) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-          <h1 className="text-2xl font-bold text-primary mb-6 text-center">
-            Správa galerií
-          </h1>
-          <form onSubmit={handleLogin}>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Heslo</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="Zadejte heslo"
-              />
-            </div>
-            {error && (
-              <p className="text-red-500 mb-4">{error}</p>
-            )}
-            <button
-              type="submit"
-              className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition"
-            >
-              Přihlásit
-            </button>
-          </form>
-        </div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" />
       </div>
     );
+  }
+
+  // Not authenticated - will redirect
+  if (!isAuthenticated) {
+    return null;
   }
 
   // Selected gallery detail view
@@ -497,11 +478,15 @@ export default function AdminGalleriesPage() {
     <div className="min-h-screen bg-gray-100 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-primary">Správa galerií</h1>
-          <Link href="/" className="text-gray-500 hover:text-primary">
-            Zpět na web
-          </Link>
+        <div className="bg-primary text-white py-6 -mx-4 md:-mx-8 px-4 md:px-8 mb-6 -mt-4 md:-mt-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link href="/dhadmin" className="text-white/80 hover:text-white">
+                <ArrowLeft className="h-5 w-5" />
+              </Link>
+              <h1 className="text-2xl font-bold">Správa galerií</h1>
+            </div>
+          </div>
         </div>
 
         {/* Error message */}
