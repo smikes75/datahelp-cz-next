@@ -293,6 +293,12 @@ export default async function MestoPage({ params }: { params: Promise<{ mesto: s
                   Objednat bezplatný svoz
                 </Link>
               </div>
+              <p className="mt-4 text-white/70 text-sm">
+                nebo{' '}
+                <Link href="/partneri" className="text-white underline hover:text-accent transition-colors">
+                  kontaktujte lokálního partnera
+                </Link>
+              </p>
             </div>
           </div>
         </section>
