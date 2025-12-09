@@ -75,7 +75,7 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
             {fallbackImages.map((image, index) => (
               <div
                 key={index}
-                className="relative flex-shrink-0 w-[85vw] aspect-square overflow-hidden rounded-lg shadow-lg snap-center"
+                className="relative flex-shrink-0 w-[85vw] aspect-video overflow-hidden rounded-lg shadow-lg snap-center"
               >
                 <Image
                   src={image.url}
@@ -145,7 +145,7 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
           {images.map((image, index) => (
             <div
               key={image.id}
-              className="relative flex-shrink-0 w-[85vw] aspect-square overflow-hidden rounded-lg shadow-lg snap-center"
+              className="relative flex-shrink-0 w-[85vw] aspect-video overflow-hidden rounded-lg shadow-lg snap-center"
             >
               <Image
                 src={image.cloudinary_url}
