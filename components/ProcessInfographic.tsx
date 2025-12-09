@@ -71,19 +71,22 @@ export function ProcessInfographic() {
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="w-full py-3 px-4 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors text-left"
+              style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
             >
               <div className="text-center mb-2">
-                <h2 className="text-3xl font-bold text-primary mb-2">
+                <h2 className="text-3xl font-bold text-primary">
                   {t('title')}
                 </h2>
-                <div className="flex items-center justify-center space-x-2 text-accent">
-                  <ShieldCheck className="h-5 w-5" />
-                  <p className="text-sm">{t('guarantee')}</p>
-                </div>
               </div>
-              <div className="flex items-center justify-center gap-2 text-primary font-semibold mt-3">
-                <span>{isExpanded ? 'Skrýt postup' : 'Zobrazit postup'}</span>
-                <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+              {/* 6 icons in a row instead of "Zobrazit postup" text */}
+              <div className="flex items-center justify-center gap-3 mt-3">
+                <Package className="h-6 w-6 text-accent" />
+                <Search className="h-6 w-6 text-accent" />
+                <ThumbsUp className="h-6 w-6 text-accent" />
+                <HardDrive className="h-6 w-6 text-accent" />
+                <CheckCircle className="h-6 w-6 text-accent" />
+                <Send className="h-6 w-6 text-accent" />
+                <ChevronDown className={`h-5 w-5 text-primary ml-2 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
               </div>
             </button>
 
