@@ -209,8 +209,8 @@ function AboutGallery() {
         </div>
 
         {/* Desktop slideshow */}
-        <div className="hidden md:block relative max-w-5xl mx-auto">
-          <div className="relative aspect-video overflow-hidden rounded-xl shadow-2xl">
+        <div className="hidden md:block relative max-w-3xl mx-auto">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-2xl">
             {displayImages.map((image, index) => (
               <div
                 key={index}
@@ -254,7 +254,7 @@ function AboutGallery() {
           >
             {displayImages.map((image, index) => (
               <div key={index} className="flex-shrink-0 w-[85vw] snap-center">
-                <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-lg">
                   <Image
                     src={image.url}
                     alt={image.alt}
