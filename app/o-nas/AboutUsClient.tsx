@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from 'react';
-import { Calendar, ChevronDown, Building2, Wrench, Heart } from 'lucide-react';
+import { ChevronDown, Building2, Wrench, Heart } from 'lucide-react';
 import { useTranslations, useLocale } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -33,41 +33,94 @@ interface TeamMember {
   description: string;
 }
 
-// Timeline sekce komponenta
+// Timeline sekce komponenta - zigzag design (matching screenshot)
 function TimelineSection({ timelineItems }: { timelineItems: TimelineItem[] }) {
   const t = useTranslations();
-  const [activeStep, setActiveStep] = useState<number | null>(null);
 
   return (
-    <section className="py-6 md:py-12 bg-white">
+    <section className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-0 md:mb-8">
-          <h2 className="text-3xl font-bold text-primary mb-2">
-            {t('about.timeline.title')}
-          </h2>
-          <p className="text-gray-600">{t('about.timeline.subtitle')}</p>
+        <h2 className="text-3xl font-bold text-primary text-center mb-2">
+          {t('about.timeline.title')}
+        </h2>
+        <p className="text-gray-600 text-center mb-8 md:mb-12">
+          {t('about.timeline.subtitle')}
+        </p>
+
+        {/* Mobile: Horizontal dots + stacked cards below */}
+        <div className="md:hidden">
+          {/* Horizontal timeline with dots */}
+          <div className="relative mb-6">
+            {/* Horizontal line */}
+            <div className="absolute top-4 left-4 right-4 h-0.5 bg-gray-200" />
+
+            {/* Year dots */}
+            <div className="flex justify-between relative px-2">
+              {timelineItems.map((item) => (
+                <div key={item.year} className="flex flex-col items-center">
+                  {/* Donut circle */}
+                  <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center z-10">
+                    <div className="w-3 h-3 bg-white rounded-full" />
+                  </div>
+                  {/* Year label */}
+                  <span className="text-sm font-bold text-accent mt-2">{item.year}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile cards - stacked below */}
+          <div className="space-y-4">
+            {timelineItems.map((item) => (
+              <div key={item.year} className="bg-[#F8FAFC] rounded-lg p-5 border border-gray-100">
+                <div className="text-2xl font-bold text-accent mb-1">{item.year}</div>
+                <h3 className="text-base font-bold text-primary mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 max-w-6xl mx-auto">
-          {timelineItems.map((item, index) => (
-            <div
-              key={index}
-              className="relative bg-gray-50 rounded-lg shadow-lg p-4 transition-all duration-300 hover:shadow-xl"
-              onMouseEnter={() => setActiveStep(index)}
-              onMouseLeave={() => setActiveStep(null)}
-            >
-              <div className="flex items-center space-x-3 mb-2">
-                <Calendar className="h-6 w-6 text-accent flex-shrink-0" />
-                <span className="text-2xl font-bold text-accent">{item.year}</span>
-              </div>
-              <h3 className="text-lg font-semibold text-primary mb-2">{item.title}</h3>
-              <div className={`transition-all duration-300 ${
-                activeStep === index ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0'
-              } overflow-hidden`}>
-                <p className="text-gray-600 text-sm">{item.description}</p>
-              </div>
-            </div>
-          ))}
+        {/* Desktop: Zigzag timeline with vertical line */}
+        <div className="hidden md:block max-w-5xl mx-auto">
+          <div className="relative">
+            {/* Vertical timeline line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 transform -translate-x-1/2" />
+
+            {timelineItems.map((item, index) => {
+              const isLeft = index % 2 === 0;
+              return (
+                <div
+                  key={item.year}
+                  className={`relative flex items-start mb-16 last:mb-0 ${
+                    isLeft ? 'flex-row' : 'flex-row-reverse'
+                  }`}
+                >
+                  {/* Donut circle on timeline */}
+                  <div className="absolute left-1/2 w-6 h-6 bg-accent rounded-full flex items-center justify-center transform -translate-x-1/2 z-10 mt-6">
+                    <div className="w-2.5 h-2.5 bg-white rounded-full" />
+                  </div>
+
+                  {/* Content card */}
+                  <div className={`w-[45%] ${isLeft ? 'pr-8' : 'pl-8'}`}>
+                    <div className={`bg-[#F8FAFC] rounded-xl p-6 shadow-sm ${isLeft ? 'text-right' : 'text-left'}`}>
+                      <div className="text-2xl font-bold text-accent mb-1">{item.year}</div>
+                      <h3 className="text-xl font-bold text-primary mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

@@ -16,23 +16,27 @@ export function Hero() {
   const t = useTranslations('hero');
 
   return (
-    <div className="relative">
-      {/* Background image - mobile i desktop */}
+    <div className="relative bg-primary">
+      {/* Background image - positioned on right half like datahelp.eu */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <Image
-          src={backgroundImages.home}
-          alt=""
-          fill
-          className="object-cover"
-          style={{
-            objectPosition: '55% center'
-          }}
-          priority
-        />
+        {/* Image only on right 50% */}
+        <div className="absolute top-0 right-0 bottom-0 w-1/2">
+          <Image
+            src={backgroundImages.home}
+            alt=""
+            fill
+            className="object-cover"
+            style={{
+              objectPosition: 'left center'
+            }}
+            priority
+          />
+        </div>
+        {/* Gradient overlay from left (solid blue) to right (transparent) */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(to right, rgba(27, 56, 122, 1) 0%, rgba(27, 56, 122, 0.95) 40%, rgba(27, 56, 122, 0.3) 70%, rgba(27, 56, 122, 0) 100%)'
+            background: 'linear-gradient(to right, rgb(27, 56, 122) 50%, rgba(27, 56, 122, 0) 100%)'
           }}
         ></div>
       </div>

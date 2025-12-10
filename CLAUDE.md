@@ -250,6 +250,21 @@ Check:
 2. `messages/[locale].json` files exist
 3. `NextIntlClientProvider` wraps the app
 
+### Screenshots with spaces or diacritics in filenames
+macOS screenshots often have Czech characters and spaces in names (e.g., "Snímek obrazovky 2025-12-10 v 10.28.10.png"). The Read tool may fail to read these files.
+
+**Solution**: Always rename screenshots to simple format first:
+```bash
+# In the screenshots folder, rename to screenXXX.png format
+cd screenshots
+for f in *; do cp "$f" "screen$(echo $f | grep -o '[0-9]*\.[0-9]*\.[0-9]*' | tr '.' '_').png"; done
+```
+
+Or manually copy with wildcards:
+```bash
+cp "Snímek obrazovky"*10.28* screen_10_28.png
+```
+
 ## 🎯 Success Criteria
 
 1. ✅ All pages from original site work in Next.js

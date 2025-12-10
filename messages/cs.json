@@ -161,38 +161,23 @@
       "items": [
         {
           "year": "1998",
-          "title": "Začátek v oboru",
-          "description": "První kroky v oblasti záchrany dat"
+          "title": "Založení společnosti",
+          "description": "DataHelp byla založena v Praze se zaměřením na profesionální služby záchrany dat."
         },
         {
           "year": "2005",
-          "title": "Rozšíření služeb",
-          "description": "Profesionalizace a růst v oboru obnovy dat"
-        },
-        {
-          "year": "2007",
-          "title": "První PC-3K recovery systém",
-          "description": "3 zaměstnanci, první profesionální stanice"
-        },
-        {
-          "year": "2010",
           "title": "Rozšíření laboratoře",
-          "description": "5 zaměstnanců, větší prostory"
+          "description": "Otevření první ISO Class 100 čisté místnosti pro pokročilou obnovu dat z HDD."
         },
         {
-          "year": "2017",
-          "title": "15 PC-3K stanic",
-          "description": "11 zaměstnanců, expanze do zahraničí"
-        },
-        {
-          "year": "2020",
-          "title": "35,000+ zakázek",
-          "description": "Více než 35 tisíc úspěšně vyřešených případů"
+          "year": "2015",
+          "title": "Evropská expanze",
+          "description": "Rozšíření služeb po celé Evropě prostřednictvím certifikované partnerské sítě."
         },
         {
           "year": "2024",
-          "title": "Založení DataHelp s.r.o.",
-          "description": "Nová kapitola s více jak 55 tisíc úspěšně vyřešených zakázek"
+          "title": "55 000+ zakázek",
+          "description": "Dosažení milníku více než 55 000 úspěšně vyřešených případů záchrany dat."
         }
       ]
     },
