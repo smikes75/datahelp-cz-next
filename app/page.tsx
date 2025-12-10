@@ -29,7 +29,7 @@ export default function HomePage() {
       <TopBanner />
       <Gallery />
       <ProcessInfographic />
-      <ElfsightReviews />
+      {/* <ElfsightReviews /> */}
       <HomeContact />
     </div>
   );

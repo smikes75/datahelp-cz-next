@@ -16,7 +16,7 @@ export function HomeContact() {
   const showMap = locale === 'cs';
 
   return (
-    <section className="py-16 pb-8 md:pb-16 bg-gray-50">
+    <section className="pt-6 pb-8 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className={`${showMap ? 'max-w-7xl' : 'max-w-2xl'} mx-auto`}>
           <div className={`${showMap ? 'grid md:grid-cols-2 gap-8' : ''}`}>

@@ -52,7 +52,7 @@ export function ProcessInfographic() {
   ];
 
   return (
-    <section className="py-6 md:py-12 bg-gray-50">
+    <section className="pt-6 pb-3 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Desktop header - hidden on mobile Czech */}
         <div className={`text-center mb-0 md:mb-8 ${isCzech ? 'hidden md:block' : ''}`}>
