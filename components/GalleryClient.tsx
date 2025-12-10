@@ -70,12 +70,12 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
           {/* Mobile Horizontal Scroll */}
           <div
             ref={scrollContainerRef}
-            className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 -mx-4"
+            className="md:hidden flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-8 -mx-8"
           >
             {fallbackImages.map((image, index) => (
               <div
                 key={index}
-                className="relative flex-shrink-0 w-[85vw] aspect-[4/3] overflow-hidden rounded-lg shadow-lg snap-center"
+                className="relative flex-shrink-0 w-[85vw] aspect-[4/3] overflow-hidden rounded-lg shadow-lg snap-center first:ml-6 last:mr-8"
               >
                 <Image
                   src={image.url}
@@ -140,12 +140,12 @@ export function GalleryClient({ images, fallbackImages, useFallback }: GalleryCl
         {/* Mobile Horizontal Scroll */}
         <div
           ref={scrollContainerRef}
-          className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 -mx-4"
+          className="md:hidden flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-8 -mx-8"
         >
           {images.map((image, index) => (
             <div
               key={image.id}
-              className="relative flex-shrink-0 w-[85vw] aspect-[4/3] overflow-hidden rounded-lg shadow-lg snap-center"
+              className="relative flex-shrink-0 w-[85vw] aspect-[4/3] overflow-hidden rounded-lg shadow-lg snap-center first:ml-6 last:mr-8"
             >
               <Image
                 src={image.cloudinary_url}
