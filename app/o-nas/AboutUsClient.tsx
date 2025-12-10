@@ -63,7 +63,7 @@ function TimelineSection({ timelineItems }: { timelineItems: TimelineItem[] }) {
                     <div className="w-3 h-3 bg-white rounded-full" />
                   </div>
                   {/* Year label */}
-                  <span className="text-sm font-bold text-accent mt-2">{item.year}</span>
+                  <span className="text-sm font-bold text-primary mt-2">{item.year}</span>
                 </div>
               ))}
             </div>
