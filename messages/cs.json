@@ -1295,10 +1295,10 @@
   },
   "orderDiagnostics": {
     "title": "Bezplatné vyzvednutí a diagnostika",
-    "subtitle": "Svoz a diagnostika po celé ČR zdarma",
+    "subtitle": "Svoz a diagnostika po celé ČR",
     "description": "Objednejte si bezplatné vyzvednutí a diagnostiku vašeho úložného zařízení",
     "sections": {
-      "delivery": "Vyberte způsob dopravy média",
+      "delivery": "Vyberte způsob dopravy",
       "contact": "Kontaktní údaje a popis problému",
       "submit": "Dokončit objednávku",
       "contactForm": {
@@ -1361,12 +1361,65 @@
         }
       },
       "shipping": {
-        "title": "Objednat svoz zdarma",
-        "description": "Médium vyzvedne přepravní služba DPD, po diagnostice vás budeme informovat"
+        "title": "Objednat svoz",
+        "description": "Médium vyzvedne přepravní služba DPD, po diagnostice vás budeme informovat",
+        "warning": "Médium zabalte do měkkého materiálu a vložte do pevné krabice. Nikdy neposílejte médium v obálce."
       },
       "courier": {
         "title": "Vlastní přepravou",
         "description": "Zašlete médium vlastní přepravou na naši adresu:<br/>DataHelp s.r.o. Jirsíkova 1<br/>Praha 8, 186 00"
+      },
+      "ppl": {
+        "title": "PPL Parcelbox",
+        "subtitle": "Zdarma",
+        "description": "Vložte balíček do PPL Parcelboxu nebo Parcelshop – bez tiskárny, dostupné 24/7",
+        "badge": "Novinka",
+        "howItWorks": {
+          "title": "Jak to funguje?",
+          "warning": "Médium zabalte do měkkého materiálu a vložte do pevné krabice. Nikdy neposílejte médium v obálce.",
+          "steps": {
+            "step1": {
+              "title": "Vyplňte formulář",
+              "description": "Zadejte své kontaktní údaje a popis problému"
+            },
+            "step2": {
+              "title": "Obdržíte kód",
+              "description": "Na e-mail vám přijde 6místný SmartPIN kód"
+            },
+            "step3": {
+              "title": "Vložte do Parcelboxu",
+              "description": "Napište kód na balík a vložte do nejbližšího PPL Parcelboxu nebo Parcelshop"
+            }
+          }
+        },
+        "benefits": {
+          "title": "Výhody PPL Parcelbox",
+          "noPrinter": "Bez tiskárny – stačí napsat kód na balík",
+          "available247": "Dostupné 24/7 – přes 2 000 Parcelboxů v ČR",
+          "free": "Přepravu hradíme my",
+          "tracking": "Sledování zásilky v reálném čase",
+          "insurance": "Pojištění do 50 000 Kč v ceně"
+        },
+        "findParcelbox": "Najít nejbližší Parcelbox",
+        "parcelboxMapTitle": "Mapa PPL míst",
+        "packagingTips": {
+          "title": "Tipy pro balení",
+          "tip1": "Použijte antistatický sáček nebo alufolii",
+          "tip2": "Disk zabalte do bublinkové fólie",
+          "tip3": "Vložte do pevné krabice s výplní",
+          "tip4": "Na balík napište SmartPIN kód"
+        },
+        "form": {
+          "title": "Objednat PPL svoz",
+          "deviceType": "Typ zařízení",
+          "deviceTypes": {
+            "hdd": "Pevný disk (HDD)",
+            "ssd": "SSD disk",
+            "flash": "Flash disk / SD karta",
+            "raid": "RAID / NAS",
+            "other": "Jiné"
+          }
+        }
       }
     },
     "nonstopHotline": "Nonstop hotline"

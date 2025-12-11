@@ -6,7 +6,7 @@ import { useToast } from '@/contexts/ToastContext';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Home, Truck, Package, Phone } from 'lucide-react';
+import { Home, Truck, Package, Phone, Box, MapPin, Check, ExternalLink } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
 // PageHeader component
@@ -199,7 +199,8 @@ export default function OrderDiagnosticsPage() {
     phone: '',
     email: '',
     description: '',
-    deliveryMethod: 'personal' as '' | 'personal' | 'shipping' | 'courier',
+    deliveryMethod: '' as '' | 'personal' | 'shipping' | 'courier' | 'ppl',
+    deviceType: '' as '' | 'hdd' | 'ssd' | 'flash' | 'raid' | 'other',
     pickupAddress: '',
     pickupCity: '',
     pickupZip: '',
@@ -233,7 +234,7 @@ export default function OrderDiagnosticsPage() {
     }));
   };
 
-  const handleDeliveryChange = (method: '' | 'personal' | 'shipping' | 'courier') => {
+  const handleDeliveryChange = (method: '' | 'personal' | 'shipping' | 'courier' | 'ppl') => {
     setFormData(prev => ({
       ...prev,
       deliveryMethod: method
@@ -293,6 +294,7 @@ export default function OrderDiagnosticsPage() {
             description: formData.description,
             is_partner: false,
             delivery_method: formData.deliveryMethod,
+            device_type: formData.deliveryMethod === 'ppl' ? formData.deviceType : null,
             pickup_address: formData.deliveryMethod === 'shipping' ? formData.pickupAddress : null,
             pickup_city: formData.deliveryMethod === 'shipping' ? formData.pickupCity : null,
             pickup_zip: formData.deliveryMethod === 'shipping' ? formData.pickupZip : null,
@@ -317,6 +319,7 @@ export default function OrderDiagnosticsPage() {
         email: '',
         description: '',
         deliveryMethod: '',
+        deviceType: '',
         pickupAddress: '',
         pickupCity: '',
         pickupZip: '',
@@ -532,12 +535,188 @@ export default function OrderDiagnosticsPage() {
               {t('sections.delivery')}
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-4 mt-4">
+              {/* PPL Parcelbox Option - First */}
+              <div id="delivery-ppl" className={`border-2 rounded-lg transition-all relative ${
+                formData.deliveryMethod === 'ppl'
+                  ? 'border-primary bg-gray-50'
+                  : 'border-gray-200'
+              }`}>
+                {/* Novinka badge */}
+                <div className="absolute -top-3 left-4 bg-[#c00f0f] text-white text-xs font-bold px-3 py-1 rounded-full">
+                  {t('delivery.ppl.badge')}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleDeliveryChange(formData.deliveryMethod === 'ppl' ? '' : 'ppl')}
+                  className="w-full flex items-start p-6 text-left"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-3 mb-2">
+                      <Image
+                        src="/images/ppl-logo.svg"
+                        alt="PPL"
+                        width={48}
+                        height={24}
+                        className="h-6 w-auto"
+                      />
+                      <h3 className="text-lg font-semibold text-primary">
+                        {t('delivery.ppl.title')}
+                      </h3>
+                      <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">
+                        {t('delivery.ppl.subtitle')}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {t('delivery.ppl.description')}
+                    </p>
+                  </div>
+                </button>
+
+                {formData.deliveryMethod === 'ppl' && (
+                  <div className="px-6 pb-6">
+                    <div className="border-t border-gray-200 pt-6">
+                      {/* How it works - 3 steps */}
+                      <div className="mb-8">
+                        <h4 className="font-semibold text-primary mb-2 flex items-center">
+                          <Box className="h-5 w-5 mr-2 text-accent" />
+                          {t('delivery.ppl.howItWorks.title')}
+                        </h4>
+                        <p className="font-semibold text-gray-800 mb-4">
+                          {t('delivery.ppl.howItWorks.warning')}
+                        </p>
+                        <div className="grid grid-cols-3 gap-4">
+                          {[1, 2, 3].map((step) => (
+                            <div key={step} className="text-center">
+                              <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
+                                {step}
+                              </div>
+                              <h5 className="font-medium text-sm text-gray-900 mb-1">
+                                {t(`delivery.ppl.howItWorks.steps.step${step}.title`)}
+                              </h5>
+                              <p className="text-xs text-gray-600">
+                                {t(`delivery.ppl.howItWorks.steps.step${step}.description`)}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Benefits */}
+                      <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h4 className="font-semibold text-primary mb-3">
+                          {t('delivery.ppl.benefits.title')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li className="flex items-start text-sm">
+                            <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                            <span>{t('delivery.ppl.benefits.noPrinter')}</span>
+                          </li>
+                          <li className="flex items-start text-sm">
+                            <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                            <span>{t('delivery.ppl.benefits.available247')}</span>
+                          </li>
+                          <li className="flex items-start text-sm">
+                            <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                            <span>{t('delivery.ppl.benefits.free')}</span>
+                          </li>
+                          <li className="flex items-start text-sm">
+                            <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                            <span>{t('delivery.ppl.benefits.tracking')}</span>
+                          </li>
+                          <li className="flex items-start text-sm">
+                            <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                            <span>{t('delivery.ppl.benefits.insurance')}</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Find Parcelbox link */}
+                      <div className="mb-6">
+                        <a
+                          href="https://www.ppl.cz/mapa-vydejnich-mist"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-accent hover:text-accent/80 font-medium"
+                        >
+                          <MapPin className="h-4 w-4 mr-2" />
+                          {t('delivery.ppl.findParcelbox')}
+                          <ExternalLink className="h-3 w-3 ml-1" />
+                        </a>
+                      </div>
+
+                      {/* Form */}
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        {renderCustomerTypeSelector()}
+                        {renderNameFields()}
+
+                        {/* Device Type Selector for PPL */}
+                        <div className="mb-6">
+                          <label className="block text-sm font-medium text-gray-700 mb-3">
+                            {t('delivery.ppl.form.deviceType')}
+                          </label>
+                          <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                            {(['hdd', 'ssd', 'flash', 'raid', 'other'] as const).map((type) => (
+                              <button
+                                key={type}
+                                type="button"
+                                onClick={() => setFormData(prev => ({ ...prev, deviceType: type }))}
+                                className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                                  formData.deviceType === type
+                                    ? 'border-primary bg-blue-50 text-primary'
+                                    : 'border-gray-200 hover:border-gray-300'
+                                }`}
+                              >
+                                {t(`delivery.ppl.form.deviceTypes.${type}`)}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {renderContactForm()}
+
+                        {/* Terms and Submit */}
+                        <div className="border-t border-gray-200 pt-6">
+                          <label className="flex items-start mb-6 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={agreedToTerms}
+                              onChange={(e) => setAgreedToTerms(e.target.checked)}
+                              className="w-6 h-6 text-primary focus:ring-primary border-gray-300 rounded mt-0.5 flex-shrink-0 cursor-pointer"
+                              required
+                            />
+                            <span className="ml-3 text-gray-700 text-base">
+                              {t('form.terms.text')}{' '}
+                              <a
+                                href="/obchodni-podminky"
+                                onClick={handleTermsLinkClick}
+                                className={`text-accent hover:text-accent/80 font-semibold underline ${termsLinkClicked ? 'animate-pulse' : ''}`}
+                              >
+                                {t('form.terms.link')}
+                              </a>
+                            </span>
+                          </label>
+
+                          <button
+                            type="submit"
+                            disabled={isSubmitting || !agreedToTerms}
+                            className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isSubmitting ? t('form.submitting') : t('form.submit')}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* Shipping Option */}
               <div id="delivery-shipping" className={`border-2 rounded-lg transition-all ${
                 formData.deliveryMethod === 'shipping'
                   ? 'border-primary bg-gray-50'
-                  : 'border-primary'
+                  : 'border-gray-200'
               }`}>
                 <button
                   type="button"
@@ -545,11 +724,20 @@ export default function OrderDiagnosticsPage() {
                   className="w-full flex items-start p-6 text-left"
                 >
                   <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <Truck className="h-6 w-6 text-accent" />
+                    <div className="flex items-center space-x-3 mb-2">
+                      <Image
+                        src="/images/dpd-logo.svg"
+                        alt="DPD"
+                        width={48}
+                        height={24}
+                        className="h-6 w-auto"
+                      />
                       <h3 className="text-lg font-semibold text-primary">
                         {t('delivery.shipping.title')}
                       </h3>
+                      <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">
+                        Zdarma
+                      </span>
                     </div>
                     <p className="text-gray-600 text-sm">
                       {t('delivery.shipping.description')}
@@ -560,6 +748,11 @@ export default function OrderDiagnosticsPage() {
                 {formData.deliveryMethod === 'shipping' && (
                   <div className="px-6 pb-6">
                     <div className="border-t border-gray-200 pt-6">
+                      {/* Warning */}
+                      <p className="font-semibold text-gray-800 mb-6">
+                        {t('delivery.shipping.warning')}
+                      </p>
+
                       <form onSubmit={handleSubmit} className="space-y-6">
                         {renderCustomerTypeSelector()}
                         {renderNameFields()}
@@ -788,6 +981,7 @@ export default function OrderDiagnosticsPage() {
                   </div>
                 )}
               </div>
+
             </div>
           </div>
         </div>
