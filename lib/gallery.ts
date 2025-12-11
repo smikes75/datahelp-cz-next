@@ -1,9 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Server-side Supabase client
+// Server-side Supabase client (realtime disabled for bundle size optimization)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  {
+    realtime: {
+      params: {
+        eventsPerSecond: -1
+      }
+    }
+  }
 );
 
 export interface GalleryImage {

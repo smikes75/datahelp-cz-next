@@ -2,10 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { uploadImage } from '@/lib/cloudinary';
 import { createClient } from '@supabase/supabase-js';
 
-// Create Supabase client for server-side
+// Create Supabase client for server-side (realtime disabled for bundle size)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  {
+    realtime: {
+      params: {
+        eventsPerSecond: -1
+      }
+    }
+  }
 );
 
 export async function POST(request: NextRequest) {

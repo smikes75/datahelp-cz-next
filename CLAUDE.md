@@ -1,5 +1,24 @@
 # DataHelp.cz - Next.js Migration Project
 
+## ⚠️ SEO-FIRST PRIORITY
+
+**DŮLEŽITÉ: Všechny změny na webu musí primárně brát ohled na SEO a výkon.**
+
+Před implementací jakékoli změny zvažte:
+1. **Lighthouse Performance** - Cíl: 90%+ (ideálně 100%)
+2. **Core Web Vitals** - LCP, FID, CLS musí být v zelené zóně
+3. **Google penalizace** - Upozorni na cokoliv, co by mohlo být penalizováno:
+   - Skrytý text nebo odkazy
+   - Keyword stuffing
+   - Duplicitní obsah
+   - Pomalé načítání
+   - Špatná mobilní zkušenost
+   - Broken links
+4. **Obrázky** - Vždy s `priority` pro LCP, správné `sizes`, optimalizované formáty
+5. **JavaScript** - Minimalizovat client-side JS, preferovat SSR
+
+**Pokud uživatel požaduje změnu, která by snížila výkon nebo mohla být penalizována z pohledu Google, UPOZORNI HO na rizika před implementací.**
+
 ## 🎯 Project Goal
 Migrate the DataHelp.cz website from Vite+React to Next.js 14 with App Router for better SEO, performance, and scalability.
 

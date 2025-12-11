@@ -6,6 +6,8 @@ import { cookies } from 'next/headers';
  * Supabase client pro použití v Server Components (SSR)
  * Používá cookies pro správu auth session
  * Použití: import { createClient } from '@/lib/supabase/server'
+ *
+ * Realtime je vypnutý pro snížení velikosti bundlu (~200KB úspora)
  */
 export async function createClient() {
   const cookieStore = await cookies();
@@ -28,6 +30,11 @@ export async function createClient() {
           }
         },
       },
+      realtime: {
+        params: {
+          eventsPerSecond: -1
+        }
+      }
     }
   );
 }
@@ -36,10 +43,19 @@ export async function createClient() {
  * Supabase client pro statickou generaci (bez cookies)
  * Použití během generateStaticParams a build time
  * Nepoužívá cookies - vhodné pro veřejná data
+ *
+ * Realtime je vypnutý pro snížení velikosti bundlu (~200KB úspora)
  */
 export function createStaticClient() {
   return createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      realtime: {
+        params: {
+          eventsPerSecond: -1
+        }
+      }
+    }
   );
 }
