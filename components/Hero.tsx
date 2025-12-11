@@ -30,6 +30,7 @@ export function Hero() {
               objectPosition: 'left center'
             }}
             priority
+            fetchPriority="high"
           />
         </div>
         {/* Gradient overlay from left (solid blue) to right (transparent) */}
