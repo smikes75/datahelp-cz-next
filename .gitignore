@@ -48,4 +48,6 @@ next-env.d.ts
 src-backup/
 public-backup/
 package-original.json
-oldprototype/
+
+# Project resources (reference files, screenshots, etc.)
+podklady/

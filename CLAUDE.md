@@ -24,7 +24,13 @@ Migrate the DataHelp.cz website from Vite+React to Next.js 14 with App Router fo
 
 ## 📁 Project Structure
 
-### Source Files (DO NOT MODIFY)
+### Reference Files (DO NOT MODIFY - in `podklady/` folder)
+- `podklady/oldprototype/` - Finální polished verze Vite prototypu (referenční)
+- `podklady/dhcz/` - HTML exporty z produkčního webu datahelp.cz
+- `podklady/screenshots/` - Screenshoty pro porovnání a referenci
+- `podklady/reference/` - Další referenční materiály
+
+### Legacy Backup Files (DO NOT MODIFY)
 - `./src-backup/` - Original React components and pages from Vite project
 - `./public-backup/` - Original static files
 - `./package-original.json` - Original dependencies reference
