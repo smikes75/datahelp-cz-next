@@ -638,9 +638,9 @@ export default function OrderDiagnosticsPage() {
                           href="https://www.ppl.cz/mapa-vydejnich-mist"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-accent hover:text-accent/80 font-medium"
+                          className="inline-flex items-center text-primary hover:text-primary/80 font-medium"
                         >
-                          <MapPin className="h-4 w-4 mr-2" />
+                          <MapPin className="h-4 w-4 mr-2 text-accent" />
                           {t('delivery.ppl.findParcelbox')}
                           <ExternalLink className="h-3 w-3 ml-1" />
                         </a>
@@ -650,30 +650,6 @@ export default function OrderDiagnosticsPage() {
                       <form onSubmit={handleSubmit} className="space-y-6">
                         {renderCustomerTypeSelector()}
                         {renderNameFields()}
-
-                        {/* Device Type Selector for PPL */}
-                        <div className="mb-6">
-                          <label className="block text-sm font-medium text-gray-700 mb-3">
-                            {t('delivery.ppl.form.deviceType')}
-                          </label>
-                          <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                            {(['hdd', 'ssd', 'flash', 'raid', 'other'] as const).map((type) => (
-                              <button
-                                key={type}
-                                type="button"
-                                onClick={() => setFormData(prev => ({ ...prev, deviceType: type }))}
-                                className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
-                                  formData.deviceType === type
-                                    ? 'border-primary bg-blue-50 text-primary'
-                                    : 'border-gray-200 hover:border-gray-300'
-                                }`}
-                              >
-                                {t(`delivery.ppl.form.deviceTypes.${type}`)}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
                         {renderContactForm()}
 
                         {/* Terms and Submit */}
