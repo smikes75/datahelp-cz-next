@@ -528,9 +528,9 @@ export default function OrderDiagnosticsPage() {
 
       <Breadcrumbs />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-2 md:px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+          <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 mb-8">
             <h2 className="text-2xl font-bold text-primary mb-6">
               {t('sections.delivery')}
             </h2>
@@ -575,7 +575,7 @@ export default function OrderDiagnosticsPage() {
                 </button>
 
                 {formData.deliveryMethod === 'ppl' && (
-                  <div className="px-6 pb-6">
+                  <div className="px-3 pb-4 md:px-6 md:pb-6">
                     <div className="border-t border-gray-200 pt-6">
                       {/* How it works - 3 steps */}
                       <div className="mb-8">
@@ -746,7 +746,7 @@ export default function OrderDiagnosticsPage() {
                 </button>
 
                 {formData.deliveryMethod === 'shipping' && (
-                  <div className="px-6 pb-6">
+                  <div className="px-3 pb-4 md:px-6 md:pb-6">
                     <div className="border-t border-gray-200 pt-6">
                       {/* Warning */}
                       <p className="font-semibold text-gray-800 mb-6">
@@ -875,7 +875,7 @@ export default function OrderDiagnosticsPage() {
                 </button>
 
                 {formData.deliveryMethod === 'courier' && (
-                  <div className="px-6 pb-6">
+                  <div className="px-3 pb-4 md:px-6 md:pb-6">
                     <div className="border-t border-gray-200 pt-6">
                       <form onSubmit={handleSubmit} className="space-y-6">
                         {renderCustomerTypeSelector()}
@@ -943,7 +943,7 @@ export default function OrderDiagnosticsPage() {
                 </button>
 
                 {formData.deliveryMethod === 'personal' && (
-                  <div className="px-6 pb-6">
+                  <div className="px-3 pb-4 md:px-6 md:pb-6">
                     <div className="border-t border-gray-200 pt-6 space-y-6">
                       {/* Address and Contact Info */}
                       <div className="grid md:grid-cols-2 gap-6">
