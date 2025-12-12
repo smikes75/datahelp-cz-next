@@ -1,5 +1,55 @@
 # DataHelp.cz - Next.js Migration Project
 
+## 🔐 SECURITY-FIRST - KRITICKÉ PRAVIDLO
+
+**NIKDY NECOMMITUJ SOUBORY S TAJNÝMI KLÍČI DO GITU!**
+
+### Před každým `git add` nebo `git commit` ZKONTROLUJ:
+1. **NIKDY nepřidávej soubory obsahující:**
+   - API klíče (Resend, Packeta, Cloudinary, atd.)
+   - Databázové credentials (Supabase Service Role Key)
+   - Hesla nebo tokeny
+   - Soubory s příponami: `.env`, `.env.local`, `*.env`, `secrets.*`, `credentials.*`
+
+2. **Před commitem vždy spusť:**
+   ```bash
+   git status  # Zkontroluj co se přidává
+   git diff --staged  # Zkontroluj obsah staged souborů
+   ```
+
+3. **Pokud uživatel požádá o vytvoření souboru s klíči pro Vercel/deployment:**
+   - NEVYTVÁŘEJ soubor v projektu
+   - Místo toho vytvoř instrukce pro ruční zadání do Vercel dashboard
+   - Nebo vytvoř soubor MIMO git repozitář (např. na Desktop)
+
+### Aktuální API klíče (rotovat při kompromitaci):
+| Služba | Dashboard URL | Poznámka |
+|--------|---------------|----------|
+| Resend | https://resend.com/api-keys | Email API |
+| Packeta | Klientská sekce Zásilkovny | Přeprava |
+| Supabase | Project Settings → API | Service Role Key |
+| Cloudinary | https://cloudinary.com/console | Obrázky |
+
+### Jak rotovat kompromitované klíče:
+
+#### 1. Resend (Email)
+1. Jdi na https://resend.com/api-keys
+2. Klikni "Create API Key" → vytvoř nový
+3. Smaž starý klíč
+4. Aktualizuj `.env.local` a Vercel
+
+#### 2. Supabase Service Role Key
+1. Jdi do Supabase Dashboard → Settings → API
+2. Klikni "Generate new key" u Service Role
+3. Aktualizuj `.env.local` a Vercel
+
+#### 3. Packeta
+1. Kontaktuj podporu Zásilkovny nebo v klientské sekci
+2. Požádej o nové API heslo
+3. Aktualizuj `.env.local` a Vercel
+
+---
+
 ## ⚠️ SEO-FIRST PRIORITY
 
 **DŮLEŽITÉ: Všechny změny na webu musí primárně brát ohled na SEO a výkon.**
