@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import { useToast } from '@/contexts/ToastContext';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
@@ -210,6 +210,17 @@ export default function OrderDiagnosticsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [packetaResult, setPacketaResult] = useState<{ password: string; barcode: string } | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to result when packetaResult changes
+  useEffect(() => {
+    if (packetaResult && resultRef.current) {
+      // Small delay to ensure DOM is updated
+      setTimeout(() => {
+        resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }, [packetaResult]);
 
   const handleTermsLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -311,14 +322,11 @@ export default function OrderDiagnosticsPage() {
           throw new Error(packetaData.error || 'Packeta error');
         }
 
-        // Show password to user
+        // Show password to user (scroll is handled by useEffect)
         setPacketaResult({
           password: packetaData.password,
           barcode: packetaData.barcode,
         });
-
-        // Scroll to top to show result
-        window.scrollTo({ top: 0, behavior: 'smooth' });
 
         // Reset form
         setFormData({
@@ -592,7 +600,7 @@ export default function OrderDiagnosticsPage() {
 
       {/* Packeta Success Result */}
       {packetaResult && (
-        <div className="container mx-auto px-2 md:px-4 py-8">
+        <div ref={resultRef} className="container mx-auto px-2 md:px-4 py-8">
           <div className="max-w-2xl mx-auto">
             <div className="bg-green-50 border-2 border-green-300 rounded-xl p-6 md:p-8">
               <div className="flex items-center gap-3 mb-6">

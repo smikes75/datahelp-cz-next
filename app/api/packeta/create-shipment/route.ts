@@ -109,92 +109,128 @@ function generateFallbackPassword(): string {
   return Math.random().toString().slice(2, 10);
 }
 
-// Email templates
+// Email templates - using inline styles for maximum email client compatibility
 function generateCustomerEmail({ name, password, barcode }: { name: string; password: string; barcode: string }) {
   return `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.8; color: #333; font-size: 18px; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: #1B387A; color: white; padding: 25px; text-align: center; }
-    .header h1 { font-size: 28px; margin: 0 0 5px 0; }
-    .header p { font-size: 16px; margin: 0; }
-    .content { padding: 25px; background: #f9f9f9; font-size: 18px; }
-    .content h2 { font-size: 24px; color: #1B387A; }
-    .password-box { background: white; border: 3px solid #1B387A; border-radius: 12px; padding: 25px; text-align: center; margin: 25px 0; }
-    .password-label { margin: 0 0 10px 0; color: #666; font-size: 18px; }
-    .password { font-size: 42px; font-family: monospace; font-weight: bold; color: #1B387A; letter-spacing: 6px; }
-    .steps { background: white; padding: 25px; border-radius: 12px; margin: 25px 0; }
-    .steps h3 { font-size: 22px; color: #1B387A; margin-top: 0; }
-    .steps ol { padding-left: 25px; font-size: 18px; }
-    .steps li { margin-bottom: 15px; line-height: 1.6; }
-    .warning { background: #E8F4FD; border: 2px solid #1B387A; border-radius: 12px; padding: 20px; margin: 25px 0; font-size: 18px; }
-    .warning strong { color: #1B387A; }
-    .warning ul { margin: 15px 0 0 0; padding-left: 25px; }
-    .warning li { margin-bottom: 10px; }
-    .footer { text-align: center; padding: 25px; color: #666; font-size: 16px; }
-    .btn { display: inline-block; background: #1B387A; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>DataHelp</h1>
-      <p>Profesionální záchrana dat</p>
-    </div>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.8; color: #333333; font-size: 18px; background-color: #ffffff;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td align="center" style="padding: 20px;">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; width: 100%;">
 
-    <div class="content">
-      <h2>Dobrý den, ${name},</h2>
+          <!-- Header -->
+          <tr>
+            <td style="background-color: #1B387A; color: #ffffff; padding: 25px; text-align: center;">
+              <h1 style="font-size: 28px; margin: 0 0 5px 0; color: #ffffff;">DataHelp</h1>
+              <p style="font-size: 16px; margin: 0; color: #ffffff;">Profesionální záchrana dat</p>
+            </td>
+          </tr>
 
-      <p>děkujeme za váš zájem o služby DataHelp. Připravili jsme pro vás zásilku pro bezplatné odeslání vašeho zařízení k diagnostice.</p>
+          <!-- Content -->
+          <tr>
+            <td style="padding: 25px; background-color: #f9f9f9; font-size: 18px;">
+              <h2 style="font-size: 24px; color: #1B387A; margin: 0 0 20px 0;">Dobrý den, ${name},</h2>
 
-      <div class="password-box">
-        <p class="password-label">Vaše podací heslo:</p>
-        <div class="password">${password}</div>
-      </div>
+              <p style="font-size: 18px; line-height: 1.8; margin: 0 0 20px 0;">děkujeme za váš zájem o služby DataHelp. Připravili jsme pro vás zásilku pro bezplatné odeslání vašeho zařízení k diagnostice.</p>
 
-      <div class="steps">
-        <h3>Jak postupovat:</h3>
-        <ol>
-          <li><strong>Zabalte zařízení</strong> do antistatického obalu a pevné krabice s výplní</li>
-          <li><strong>Navštivte nejbližší podací místo Zásilkovny</strong> (ne Z-BOX!)</li>
-          <li><strong>Nahlaste obsluze podací heslo</strong> uvedené výše</li>
-          <li>Obsluha vytiskne štítek a převezme zásilku</li>
-        </ol>
+              <!-- Password Box -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 25px 0;">
+                <tr>
+                  <td style="background-color: #ffffff; border: 3px solid #1B387A; border-radius: 12px; padding: 25px; text-align: center;">
+                    <p style="margin: 0 0 10px 0; color: #666666; font-size: 18px;">Vaše podací heslo:</p>
+                    <p style="font-size: 42px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #1B387A; letter-spacing: 6px; margin: 0;">${password}</p>
+                  </td>
+                </tr>
+              </table>
 
-        <p style="text-align: center; margin-top: 25px;">
-          <a href="https://www.zasilkovna.cz/pobocky" class="btn">Najít nejbližší podací místo →</a>
-        </p>
-      </div>
+              <!-- Steps -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 25px 0;">
+                <tr>
+                  <td style="background-color: #ffffff; padding: 25px; border-radius: 12px;">
+                    <h3 style="font-size: 22px; color: #1B387A; margin: 0 0 15px 0;">Jak postupovat:</h3>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="padding: 0 0 15px 0; font-size: 18px; line-height: 1.6;">
+                          <strong>1.</strong> <strong>Zabalte zařízení</strong> do antistatického obalu a pevné krabice s výplní
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0 0 15px 0; font-size: 18px; line-height: 1.6;">
+                          <strong>2.</strong> <strong>Navštivte nejbližší podací místo Zásilkovny</strong> (ne Z-BOX!)
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0 0 15px 0; font-size: 18px; line-height: 1.6;">
+                          <strong>3.</strong> <strong>Nahlaste obsluze podací heslo</strong> uvedené výše
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0 0 15px 0; font-size: 18px; line-height: 1.6;">
+                          <strong>4.</strong> Obsluha vytiskne štítek a převezme zásilku
+                        </td>
+                      </tr>
+                    </table>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top: 25px;">
+                      <tr>
+                        <td align="center">
+                          <a href="https://www.zasilkovna.cz/pobocky" style="display: inline-block; background-color: #1B387A; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px;">Najít nejbližší podací místo →</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
 
-      <div class="warning">
-        <strong>⚠️ Důležité:</strong>
-        <ul>
-          <li>Podací heslo platí <strong>14 dní</strong></li>
-          <li>Zásilku lze podat <strong>POUZE na podacím místě s obsluhou</strong> (ne do Z-BOXu)</li>
-          <li>Číslo zásilky pro sledování: <strong>${barcode}</strong></li>
-        </ul>
-      </div>
+              <!-- Warning -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 25px 0;">
+                <tr>
+                  <td style="background-color: #E8F4FD; border: 2px solid #1B387A; border-radius: 12px; padding: 20px;">
+                    <p style="font-size: 18px; margin: 0 0 15px 0;"><strong style="color: #1B387A;">⚠️ Důležité:</strong></p>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="padding: 0 0 10px 0; font-size: 18px;">• Podací heslo platí <strong style="color: #1B387A;">14 dní</strong></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0 0 10px 0; font-size: 18px;">• Zásilku lze podat <strong style="color: #1B387A;">POUZE na podacím místě s obsluhou</strong> (ne do Z-BOXu)</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0; font-size: 18px;">• Číslo zásilky pro sledování: <strong style="color: #1B387A;">${barcode}</strong></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
 
-      <p>Po přijetí vašeho zařízení vás budeme kontaktovat s výsledky bezplatné diagnostiky a cenovou nabídkou na záchranu dat.</p>
+              <p style="font-size: 18px; line-height: 1.8; margin: 0 0 20px 0;">Po přijetí vašeho zařízení vás budeme kontaktovat s výsledky bezplatné diagnostiky a cenovou nabídkou na záchranu dat.</p>
 
-      <p>Přeprava je <strong>zdarma</strong> – náklady hradí DataHelp.</p>
+              <p style="font-size: 18px; line-height: 1.8; margin: 0 0 20px 0;">Přeprava je <strong>zdarma</strong> – náklady hradí DataHelp.</p>
 
-      <p>S pozdravem,<br>
-      <strong>Tým DataHelp</strong></p>
-    </div>
+              <p style="font-size: 18px; line-height: 1.8; margin: 0;">S pozdravem,<br>
+              <strong>Tým DataHelp</strong></p>
+            </td>
+          </tr>
 
-    <div class="footer">
-      <p>
-        DataHelp s.r.o. | Jirsíkova 541/1, Praha 8<br>
-        Tel: +420 775 220 440 | info@datahelp.cz<br>
-        <a href="https://www.datahelp.cz">www.datahelp.cz</a>
-      </p>
-    </div>
-  </div>
+          <!-- Footer -->
+          <tr>
+            <td style="text-align: center; padding: 25px; color: #666666; font-size: 16px;">
+              <p style="margin: 0;">
+                DataHelp s.r.o. | Jirsíkova 541/1, Praha 8<br>
+                Tel: +420 775 220 440 | info@datahelp.cz<br>
+                <a href="https://www.datahelp.cz" style="color: #1B387A;">www.datahelp.cz</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
   `;
