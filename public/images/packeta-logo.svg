@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+  <defs>
+    <style>
+      .packeta-red { fill: #BA1A1A; }
+      .packeta-text { fill: #BA1A1A; font-family: Arial, sans-serif; font-weight: bold; }
+    </style>
+  </defs>
+  <!-- Packeta/Zásilkovna simplified logo -->
+  <rect x="0" y="10" width="30" height="30" rx="4" class="packeta-red"/>
+  <text x="40" y="35" class="packeta-text" font-size="24">Zásilkovna</text>
+</svg>

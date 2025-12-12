@@ -1631,5 +1631,69 @@
       "calculateAgain": "Vypočítat znovu",
       "moreServices": "Více o službách"
     }
+  },
+  "packeta": {
+    "form": {
+      "name": "Jméno",
+      "namePlaceholder": "Jan",
+      "surname": "Příjmení",
+      "surnamePlaceholder": "Novák",
+      "email": "Email",
+      "emailPlaceholder": "jan.novak@email.cz",
+      "phone": "Telefon",
+      "phonePlaceholder": "+420 123 456 789",
+      "street": "Ulice a číslo",
+      "streetPlaceholder": "Hlavní 123",
+      "city": "Město",
+      "cityPlaceholder": "Praha",
+      "zip": "PSČ",
+      "deviceType": "Typ zařízení",
+      "deviceHdd": "Pevný disk (HDD)",
+      "deviceSsd": "SSD disk",
+      "deviceRaid": "RAID / NAS",
+      "deviceFlash": "Flash disk / SD karta",
+      "deviceOther": "Jiné",
+      "problemDescription": "Popis problému (nepovinné)",
+      "problemPlaceholder": "Popište, co se stalo s vaším zařízením...",
+      "consentText": "Souhlasím se",
+      "privacyLink": "zpracováním osobních údajů",
+      "and": "a",
+      "termsLink": "obchodními podmínkami",
+      "submit": "Odeslat zásilku zdarma",
+      "submitting": "Odesílám...",
+      "freeShipping": "Přepravu hradí DataHelp. Diagnostika je zdarma a nezávazná."
+    },
+    "errors": {
+      "nameRequired": "Zadejte jméno",
+      "surnameRequired": "Zadejte příjmení",
+      "emailRequired": "Zadejte email",
+      "emailInvalid": "Neplatný formát emailu",
+      "phoneRequired": "Zadejte telefon",
+      "phoneInvalid": "Neplatný formát telefonu",
+      "streetRequired": "Zadejte ulici a číslo",
+      "cityRequired": "Zadejte město",
+      "zipRequired": "Zadejte PSČ",
+      "zipInvalid": "PSČ musí být ve formátu 123 45",
+      "consentRequired": "Musíte souhlasit s podmínkami",
+      "submitFailed": "Nepodařilo se vytvořit zásilku. Zkuste to prosím znovu.",
+      "networkError": "Chyba připojení. Zkontrolujte internet a zkuste to znovu."
+    },
+    "success": {
+      "title": "Zásilka připravena!",
+      "description": "Na váš email jsme odeslali podrobné instrukce k odeslání zařízení.",
+      "passwordLabel": "Vaše podací heslo:",
+      "instructionsTitle": "Jak postupovat:",
+      "step1": "Zabalte zařízení do antistatického obalu a pevné krabice",
+      "step2": "Navštivte nejbližší podací místo Zásilkovny (ne Z-BOX!)",
+      "step3": "Nahlaste obsluze podací heslo uvedené výše",
+      "step4": "Obsluha vytiskne štítek a převezme zásilku",
+      "findLocation": "Najít podací místo",
+      "trackShipment": "Sledovat zásilku",
+      "emailSent": "Podrobné instrukce jsme také odeslali na váš email."
+    },
+    "error": {
+      "title": "Něco se pokazilo",
+      "tryAgain": "Zkusit znovu"
+    }
   }
 }
