@@ -117,18 +117,26 @@ function generateCustomerEmail({ name, password, barcode }: { name: string; pass
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: Arial, sans-serif; line-height: 1.8; color: #333; font-size: 18px; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: #1B387A; color: white; padding: 20px; text-align: center; }
-    .content { padding: 20px; background: #f9f9f9; }
-    .password-box { background: white; border: 2px solid #F49E00; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0; }
-    .password { font-size: 32px; font-family: monospace; font-weight: bold; color: #1B387A; letter-spacing: 4px; }
-    .steps { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
-    .steps ol { padding-left: 20px; }
-    .steps li { margin-bottom: 10px; }
-    .warning { background: #FFF3CD; border: 1px solid #F49E00; border-radius: 8px; padding: 15px; margin: 20px 0; }
-    .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
-    .btn { display: inline-block; background: #F49E00; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; }
+    .header { background: #1B387A; color: white; padding: 25px; text-align: center; }
+    .header h1 { font-size: 28px; margin: 0 0 5px 0; }
+    .header p { font-size: 16px; margin: 0; }
+    .content { padding: 25px; background: #f9f9f9; font-size: 18px; }
+    .content h2 { font-size: 24px; color: #1B387A; }
+    .password-box { background: white; border: 3px solid #1B387A; border-radius: 12px; padding: 25px; text-align: center; margin: 25px 0; }
+    .password-label { margin: 0 0 10px 0; color: #666; font-size: 18px; }
+    .password { font-size: 42px; font-family: monospace; font-weight: bold; color: #1B387A; letter-spacing: 6px; }
+    .steps { background: white; padding: 25px; border-radius: 12px; margin: 25px 0; }
+    .steps h3 { font-size: 22px; color: #1B387A; margin-top: 0; }
+    .steps ol { padding-left: 25px; font-size: 18px; }
+    .steps li { margin-bottom: 15px; line-height: 1.6; }
+    .warning { background: #E8F4FD; border: 2px solid #1B387A; border-radius: 12px; padding: 20px; margin: 25px 0; font-size: 18px; }
+    .warning strong { color: #1B387A; }
+    .warning ul { margin: 15px 0 0 0; padding-left: 25px; }
+    .warning li { margin-bottom: 10px; }
+    .footer { text-align: center; padding: 25px; color: #666; font-size: 16px; }
+    .btn { display: inline-block; background: #1B387A; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; }
   </style>
 </head>
 <body>
@@ -144,7 +152,7 @@ function generateCustomerEmail({ name, password, barcode }: { name: string; pass
       <p>děkujeme za váš zájem o služby DataHelp. Připravili jsme pro vás zásilku pro bezplatné odeslání vašeho zařízení k diagnostice.</p>
 
       <div class="password-box">
-        <p style="margin: 0 0 10px 0; color: #666;">Vaše podací heslo:</p>
+        <p class="password-label">Vaše podací heslo:</p>
         <div class="password">${password}</div>
       </div>
 
@@ -157,14 +165,14 @@ function generateCustomerEmail({ name, password, barcode }: { name: string; pass
           <li>Obsluha vytiskne štítek a převezme zásilku</li>
         </ol>
 
-        <p style="text-align: center; margin-top: 20px;">
+        <p style="text-align: center; margin-top: 25px;">
           <a href="https://www.zasilkovna.cz/pobocky" class="btn">Najít nejbližší podací místo →</a>
         </p>
       </div>
 
       <div class="warning">
         <strong>⚠️ Důležité:</strong>
-        <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+        <ul>
           <li>Podací heslo platí <strong>14 dní</strong></li>
           <li>Zásilku lze podat <strong>POUZE na podacím místě s obsluhou</strong> (ne do Z-BOXu)</li>
           <li>Číslo zásilky pro sledování: <strong>${barcode}</strong></li>
@@ -282,8 +290,11 @@ export async function POST(request: NextRequest) {
 
     let packetaResponse: { packetId: string; barcode: string; password: string };
 
-    // Check if Packeta API is configured
-    if (PACKETA_API_PASSWORD) {
+    // TODO: Enable real Packeta API when account is approved
+    // For now, use mock mode until Packeta account is activated
+    const USE_MOCK_MODE = true; // Set to false when Packeta account is approved
+
+    if (!USE_MOCK_MODE && PACKETA_API_PASSWORD) {
       // Create shipment in Packeta
       packetaResponse = await createPacketaShipment({
         name: body.customerName,
@@ -295,8 +306,8 @@ export async function POST(request: NextRequest) {
         zip: body.customerZip.replace(/\s/g, ''),
       });
     } else {
-      // Development mode - generate mock data
-      console.warn('Packeta API not configured, using mock data');
+      // Mock mode - generate test data
+      console.log('Using mock mode for Packeta shipment');
       packetaResponse = {
         packetId: `MOCK-${Date.now()}`,
         barcode: `Z${Date.now().toString().slice(-10)}`,
@@ -337,7 +348,7 @@ export async function POST(request: NextRequest) {
       // Email to customer
       try {
         await resend.emails.send({
-          from: 'DataHelp <noreply@datahelp.cz>',
+          from: 'DataHelp <info@datahelp.cz>',
           to: body.customerEmail,
           subject: 'Instrukce k odeslání vašeho zařízení – DataHelp',
           html: generateCustomerEmail({
@@ -349,7 +360,7 @@ export async function POST(request: NextRequest) {
 
         // Email to DataHelp admin
         await resend.emails.send({
-          from: 'Web DataHelp <noreply@datahelp.cz>',
+          from: 'Web DataHelp <info@datahelp.cz>',
           to: 'info@datahelp.cz',
           subject: `📦 Nová Packeta zásilka: ${body.customerName} ${body.customerSurname}`,
           html: generateAdminEmail({

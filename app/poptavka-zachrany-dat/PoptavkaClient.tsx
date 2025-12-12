@@ -199,7 +199,7 @@ export default function OrderDiagnosticsPage() {
     phone: '',
     email: '',
     description: '',
-    deliveryMethod: '' as '' | 'personal' | 'shipping' | 'courier' | 'ppl',
+    deliveryMethod: '' as '' | 'personal' | 'shipping' | 'courier' | 'packeta',
     deviceType: '' as '' | 'hdd' | 'ssd' | 'flash' | 'raid' | 'other',
     pickupAddress: '',
     pickupCity: '',
@@ -209,6 +209,7 @@ export default function OrderDiagnosticsPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [packetaResult, setPacketaResult] = useState<{ password: string; barcode: string } | null>(null);
 
   const handleTermsLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -234,7 +235,7 @@ export default function OrderDiagnosticsPage() {
     }));
   };
 
-  const handleDeliveryChange = (method: '' | 'personal' | 'shipping' | 'courier' | 'ppl') => {
+  const handleDeliveryChange = (method: '' | 'personal' | 'shipping' | 'courier' | 'packeta') => {
     setFormData(prev => ({
       ...prev,
       deliveryMethod: method
@@ -279,6 +280,68 @@ export default function OrderDiagnosticsPage() {
     setIsSubmitting(true);
 
     try {
+      // If Packeta is selected, call Packeta API first
+      if (formData.deliveryMethod === 'packeta') {
+        const customerName = formData.customerType === 'company'
+          ? formData.contactPerson.split(' ')[0] || formData.companyName
+          : formData.firstName;
+        const customerSurname = formData.customerType === 'company'
+          ? formData.contactPerson.split(' ').slice(1).join(' ') || ''
+          : formData.lastName;
+
+        const packetaResponse = await fetch('/api/packeta/create-shipment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customerName,
+            customerSurname,
+            customerEmail: formData.email,
+            customerPhone: formData.phone,
+            customerStreet: '-', // Not required in this form
+            customerCity: '-',
+            customerZip: '00000',
+            deviceType: 'other',
+            problemDescription: formData.description,
+          }),
+        });
+
+        const packetaData = await packetaResponse.json();
+
+        if (!packetaData.success) {
+          throw new Error(packetaData.error || 'Packeta error');
+        }
+
+        // Show password to user
+        setPacketaResult({
+          password: packetaData.password,
+          barcode: packetaData.barcode,
+        });
+
+        // Scroll to top to show result
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Reset form
+        setFormData({
+          customerType: 'individual',
+          companyName: '',
+          contactPerson: '',
+          firstName: '',
+          lastName: '',
+          phone: '',
+          email: '',
+          description: '',
+          deliveryMethod: '',
+          deviceType: '',
+          pickupAddress: '',
+          pickupCity: '',
+          pickupZip: '',
+          website: ''
+        });
+        setAgreedToTerms(false);
+        return;
+      }
+
+      // For other delivery methods, save to diagnostic_orders
       const supabase = createClient();
       const { error } = await supabase
         .from('diagnostic_orders')
@@ -294,7 +357,6 @@ export default function OrderDiagnosticsPage() {
             description: formData.description,
             is_partner: false,
             delivery_method: formData.deliveryMethod,
-            device_type: formData.deliveryMethod === 'ppl' ? formData.deviceType : null,
             pickup_address: formData.deliveryMethod === 'shipping' ? formData.pickupAddress : null,
             pickup_city: formData.deliveryMethod === 'shipping' ? formData.pickupCity : null,
             pickup_zip: formData.deliveryMethod === 'shipping' ? formData.pickupZip : null,
@@ -528,6 +590,67 @@ export default function OrderDiagnosticsPage() {
 
       <Breadcrumbs />
 
+      {/* Packeta Success Result */}
+      {packetaResult && (
+        <div className="container mx-auto px-2 md:px-4 py-8">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-green-50 border-2 border-green-300 rounded-xl p-6 md:p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Check className="h-8 w-8 text-green-600" />
+                <h3 className="text-xl md:text-2xl font-bold text-primary">
+                  Zásilka byla vytvořena!
+                </h3>
+              </div>
+
+              <p className="text-gray-700 mb-6">
+                Na váš email jsme odeslali instrukce. Níže najdete vaše podací heslo pro Zásilkovnu.
+              </p>
+
+              <div className="bg-white rounded-xl p-6 text-center mb-6 border-2 border-primary">
+                <p className="text-sm text-gray-600 mb-2">Vaše podací heslo:</p>
+                <p className="text-4xl md:text-5xl font-mono font-bold text-primary tracking-wider">
+                  {packetaResult.password}
+                </p>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <h4 className="font-semibold text-primary mb-2">Jak postupovat:</h4>
+                <ol className="list-decimal list-inside space-y-2 text-gray-700 text-sm">
+                  <li>Zabalte zařízení do antistatického obalu a pevné krabice</li>
+                  <li>Navštivte nejbližší podací místo Zásilkovny (ne Z-BOX!)</li>
+                  <li>Nahlaste obsluze podací heslo uvedené výše</li>
+                  <li>Obsluha vytiskne štítek a převezme zásilku</li>
+                </ol>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://www.zasilkovna.cz/pobocky"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
+                >
+                  <MapPin className="h-5 w-5" />
+                  Najít nejbližší pobočku
+                </a>
+                <Link
+                  href="/"
+                  className="flex-1 bg-white text-primary border-2 border-primary py-3 px-6 rounded-lg font-semibold text-center hover:bg-blue-50 transition-colors"
+                >
+                  Zpět na úvodní stránku
+                </Link>
+              </div>
+
+              <p className="text-sm text-gray-500 mt-6 text-center">
+                Podací heslo platí 14 dní. Číslo zásilky: {packetaResult.barcode}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Form - hide when showing Packeta result */}
+      {!packetaResult && (
       <div className="container mx-auto px-2 md:px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 mb-8">
@@ -536,112 +659,132 @@ export default function OrderDiagnosticsPage() {
             </h2>
 
             <div className="space-y-4 mt-4">
-              {/* PPL Parcelbox Option - First */}
-              <div id="delivery-ppl" className={`border-2 rounded-lg transition-all relative ${
-                formData.deliveryMethod === 'ppl'
+              {/* Zásilkovna/Packeta Option - First */}
+              <div id="delivery-packeta" className={`border-2 rounded-lg transition-all relative ${
+                formData.deliveryMethod === 'packeta'
                   ? 'border-primary bg-gray-50'
                   : 'border-gray-200'
               }`}>
                 {/* Novinka badge */}
                 <div className="absolute -top-3 left-4 bg-[#c00f0f] text-white text-xs font-bold px-3 py-1 rounded-full">
-                  {t('delivery.ppl.badge')}
+                  Novinka
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => handleDeliveryChange(formData.deliveryMethod === 'ppl' ? '' : 'ppl')}
+                  onClick={() => handleDeliveryChange(formData.deliveryMethod === 'packeta' ? '' : 'packeta')}
                   className="w-full flex items-start p-6 text-left"
                 >
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
                       <Image
-                        src="/images/ppl-logo.svg"
-                        alt="PPL"
+                        src="/images/packeta-logo.svg"
+                        alt="Zásilkovna"
                         width={48}
                         height={24}
                         className="h-6 w-auto"
                       />
                       <h3 className="text-lg font-semibold text-primary">
-                        {t('delivery.ppl.title')}
+                        Zásilkovna
                       </h3>
                       <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">
-                        {t('delivery.ppl.subtitle')}
+                        Zdarma
                       </span>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      {t('delivery.ppl.description')}
+                      Podejte balíček na kterékoliv pobočce Zásilkovny – přes 10 000 míst v ČR
                     </p>
                   </div>
                 </button>
 
-                {formData.deliveryMethod === 'ppl' && (
+                {formData.deliveryMethod === 'packeta' && (
                   <div className="px-3 pb-4 md:px-6 md:pb-6">
                     <div className="border-t border-gray-200 pt-6">
                       {/* How it works - 3 steps */}
                       <div className="mb-8">
                         <h4 className="font-semibold text-primary mb-2 flex items-center">
                           <Box className="h-5 w-5 mr-2 text-accent" />
-                          {t('delivery.ppl.howItWorks.title')}
+                          Jak to funguje?
                         </h4>
                         <p className="font-semibold text-gray-800 mb-4">
-                          {t('delivery.ppl.howItWorks.warning')}
+                          ⚠️ Zásilku lze podat pouze na podacím místě s obsluhou (ne Z-BOX nebo automat)
                         </p>
                         <div className="grid grid-cols-3 gap-4">
-                          {[1, 2, 3].map((step) => (
-                            <div key={step} className="text-center">
-                              <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
-                                {step}
-                              </div>
-                              <h5 className="font-medium text-sm text-gray-900 mb-1">
-                                {t(`delivery.ppl.howItWorks.steps.step${step}.title`)}
-                              </h5>
-                              <p className="text-xs text-gray-600">
-                                {t(`delivery.ppl.howItWorks.steps.step${step}.description`)}
-                              </p>
+                          <div className="text-center">
+                            <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
+                              1
                             </div>
-                          ))}
+                            <h5 className="font-medium text-sm text-gray-900 mb-1">
+                              Vyplňte formulář
+                            </h5>
+                            <p className="text-xs text-gray-600">
+                              Zadejte kontaktní údaje
+                            </p>
+                          </div>
+                          <div className="text-center">
+                            <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
+                              2
+                            </div>
+                            <h5 className="font-medium text-sm text-gray-900 mb-1">
+                              Obdržíte heslo
+                            </h5>
+                            <p className="text-xs text-gray-600">
+                              8-místné podací heslo na email
+                            </p>
+                          </div>
+                          <div className="text-center">
+                            <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
+                              3
+                            </div>
+                            <h5 className="font-medium text-sm text-gray-900 mb-1">
+                              Podejte zásilku
+                            </h5>
+                            <p className="text-xs text-gray-600">
+                              Na pobočce nahlaste heslo obsluze
+                            </p>
+                          </div>
                         </div>
                       </div>
 
                       {/* Benefits */}
                       <div className="bg-gray-50 rounded-lg p-4 mb-6">
                         <h4 className="font-semibold text-primary mb-3">
-                          {t('delivery.ppl.benefits.title')}
+                          Výhody služby
                         </h4>
                         <ul className="space-y-2">
                           <li className="flex items-start text-sm">
                             <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                            <span>{t('delivery.ppl.benefits.noPrinter')}</span>
+                            <span>Bez tiskárny – stačí nahlásit heslo</span>
                           </li>
                           <li className="flex items-start text-sm">
                             <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                            <span>{t('delivery.ppl.benefits.available247')}</span>
+                            <span>Přes 10 000 podacích míst v ČR</span>
                           </li>
                           <li className="flex items-start text-sm">
                             <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                            <span>{t('delivery.ppl.benefits.free')}</span>
+                            <span>Přeprava zdarma – hradí DataHelp</span>
                           </li>
                           <li className="flex items-start text-sm">
                             <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                            <span>{t('delivery.ppl.benefits.tracking')}</span>
+                            <span>Sledování zásilky online</span>
                           </li>
                           <li className="flex items-start text-sm">
                             <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                            <span>{t('delivery.ppl.benefits.insurance')}</span>
+                            <span>Zásilka je pojištěna</span>
                           </li>
                         </ul>
                       </div>
 
-                      {/* Find Parcelbox link */}
+                      {/* Find Zásilkovna link */}
                       <div className="mb-6">
                         <a
-                          href="https://www.ppl.cz/mapa-vydejnich-mist"
+                          href="https://www.zasilkovna.cz/pobocky"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center text-primary hover:text-primary/80 font-medium"
                         >
                           <MapPin className="h-4 w-4 mr-2 text-accent" />
-                          {t('delivery.ppl.findParcelbox')}
+                          Najít nejbližší pobočku Zásilkovny
                           <ExternalLink className="h-3 w-3 ml-1" />
                         </a>
                       </div>
@@ -963,6 +1106,7 @@ export default function OrderDiagnosticsPage() {
         </div>
 
       </div>
+      )}
     </div>
   );
 }
