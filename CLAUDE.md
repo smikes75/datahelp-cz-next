@@ -28,7 +28,12 @@ Migrate the DataHelp.cz website from Vite+React to Next.js 14 with App Router fo
 - `podklady/oldprototype/` - Finální polished verze Vite prototypu (referenční)
 - `podklady/dhcz/` - HTML exporty z produkčního webu datahelp.cz
 - `podklady/screenshots/` - Screenshoty pro porovnání a referenci
-- `podklady/reference/` - Další referenční materiály
+- `podklady/reference/` - Materiály pro sekci Reference:
+  - `reference_implementation.md` - Implementační guide (komponenta, CSS, právní poznámky)
+  - `references_data.json` - Strukturovaná data referencí (25+ institucí, kategorie, loga)
+  - `jmena firem.csv` - Seznam skutečných klientů z databáze
+  - `obchodni_podminky_reference.txt` - Text pro obchodní podmínky (souhlas s uvedením v referencích)
+  - `download_logos.sh` - Bash script pro stažení log z Wikimedia
 
 ### Legacy Backup Files (DO NOT MODIFY)
 - `./src-backup/` - Original React components and pages from Vite project

@@ -127,8 +127,8 @@ export function Header() {
             <Link href="/o-nas" className={`block font-bold ${isActive("/o-nas")} header-nav-link`}>
               {t('nav.about')}
             </Link>
-            <Link href="/caste-dotazy" className={`block font-bold ${isActive("/caste-dotazy")} header-nav-link`}>
-              FAQ
+            <Link href="/reference" className={`block font-bold ${isActive("/reference")} header-nav-link`}>
+              {t('nav.references')}
             </Link>
             <Link href="/kontakt" className={`block font-bold ${isActive("/kontakt")} header-nav-link`}>
               {t('nav.contact')}

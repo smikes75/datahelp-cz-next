@@ -1,10 +1,10 @@
 'use client';
 
-import { Star, ArrowRight, Quote, TrendingUp, Award } from 'lucide-react';
 import { useTranslations } from '@/contexts/TranslationsContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import Script from 'next/script';
 
 interface SuccessStory {
   name: string;
@@ -14,11 +14,18 @@ interface SuccessStory {
   url: string;
 }
 
-interface CustomerQuote {
-  text: string;
-  author: string;
-  company: string;
-}
+
+// Logo references with actual SVG files
+const logoReferences = [
+  { name: 'ČVUT v Praze', src: '/images/references/cvut.svg', height: 60 },
+  { name: 'Univerzita Karlova', src: '/images/references/uk.svg', height: 60 },
+  { name: 'České dráhy', src: '/images/references/cd.svg', height: 30 },
+  { name: 'Akademie věd ČR', src: '/images/references/avcr.svg', height: 50 },
+  { name: 'AERO Vodochody', src: '/images/references/aero.svg', height: 35 },
+  { name: 'Česká spořitelna', src: '/images/references/csas.svg', height: 40 },
+  { name: 'Česká geologická služba', src: '/images/references/cgs.svg', height: 45 },
+];
+
 
 // PageHeader komponenta
 function PageHeader({ title, subtitle, backgroundImage }: { title: string; subtitle?: string; backgroundImage: string }) {
@@ -91,23 +98,6 @@ export function ReferenceClient() {
     }
   ];
 
-  const customerQuotes: CustomerQuote[] = [
-    {
-      text: 'Vynikající firma co se týká komunikace, spolehlivosti a rychlosti. Moc jim děkuji za záchranu dat z poškozeného disku. Překvapila mě i rychlost a to do 24 hodin. Vřele doporučuji!',
-      author: 'Karel Dolejš',
-      company: 'Záchrana z HDD'
-    },
-    {
-      text: 'Na dovolené jsme utopili fotoaparát a všechny fotky byly uložené jen na jeho paměti. Zachránili nám všechny vzpomínky z dovolené! Oceňuji rychlé vyřízení, milý přístup slečny na recepci i pana technika.',
-      author: 'Eva Vášová',
-      company: 'Záchrana z paměťové karty'
-    },
-    {
-      text: 'Po povodních 2024 jsem měl RAID disky kompletně zatopené vodou. Byl jsem přesvědčený, že data jsou ztracena, ale tým z DataHelp odvedl úžasnou práci. Podařilo se jim vrátit všechna důležitá data. Jednoznačně doporučuji!',
-      author: 'Eduard Kopl',
-      company: 'Záchrana z RAID po povodni'
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
@@ -118,49 +108,53 @@ export function ReferenceClient() {
       />
       <Breadcrumbs />
 
-      {/* Statistics Section */}
-      <section className="py-4 md:py-8 bg-white">
+      {/* Logo Strip Section */}
+      <section className="py-6 md:py-10 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex justify-center gap-3 md:grid md:grid-cols-3 md:gap-6">
-              {/* Rating */}
-              <div className="text-center flex-1 max-w-[120px] md:max-w-none">
-                <div className="flex items-center justify-center gap-0.5 md:gap-1 mb-1 md:mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-2.5 w-2.5 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
-                  ))}
+          <div className="max-w-6xl mx-auto">
+            <p className="text-center text-sm text-gray-500 mb-8">Důvěřují nám přední české instituce a firmy</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+              {logoReferences.map((logo) => (
+                <div
+                  key={logo.name}
+                  className="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+                  title={logo.name}
+                >
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    width={logo.height * 2}
+                    height={logo.height}
+                    className="w-auto object-contain"
+                    style={{ height: logo.height }}
+                  />
                 </div>
-                <div className="text-base md:text-3xl font-bold text-primary mb-0.5 md:mb-1">4.9/5</div>
-                <p className="text-[10px] md:text-sm text-gray-600 leading-tight">Hodnocení</p>
-              </div>
-
-              {/* Jobs Completed */}
-              <div className="text-center flex-1 max-w-[120px] md:max-w-none">
-                <div className="flex items-center justify-center mb-1 md:mb-3">
-                  <TrendingUp className="h-4 w-4 md:h-8 md:w-8 text-primary/70" />
-                </div>
-                <div className="text-base md:text-3xl font-bold text-primary mb-0.5 md:mb-1">55k+</div>
-                <p className="text-[10px] md:text-sm text-gray-600 leading-tight">zakázek</p>
-              </div>
-
-              {/* Success Rate */}
-              <div className="text-center flex-1 max-w-[120px] md:max-w-none">
-                <div className="flex items-center justify-center mb-1 md:mb-3">
-                  <Award className="h-4 w-4 md:h-8 md:w-8 text-primary/70" />
-                </div>
-                <div className="text-base md:text-3xl font-bold text-primary mb-0.5 md:mb-1">95%</div>
-                <p className="text-[10px] md:text-sm text-gray-600 leading-tight">úspěšnost</p>
-              </div>
+              ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Text References Section */}
+      <section className="py-6 md:py-8 bg-gray-50 border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              <span className="font-medium text-gray-700">A další:</span>{' '}
+              Ministerstvo financí, Český telekomunikační úřad, Hasičský záchranný sbor hl. m. Prahy,
+              Městská policie hl. m. Prahy, VŠCHT Praha, Univerzita Pardubice, Národní galerie v Praze,
+              Fyzikální ústav AV ČR, Ústav organické chemie a biochemie AV ČR, T-Mobile, O2,
+              Škoda Auto, ČEZ a stovky dalších firem a soukromých osob...
+            </p>
           </div>
         </div>
       </section>
 
       {/* Success Stories Section */}
       <section className="py-12 md:py-20 bg-gradient-to-br from-primary/5 to-accent/5">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 md:px-4 max-md:px-0">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 max-md:px-4">
               <h2 className="text-3xl font-bold text-primary mb-4">
                 Příběhy úspěchu
               </h2>
@@ -169,7 +163,44 @@ export function ReferenceClient() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {/* Mobile: Horizontal swipeable gallery */}
+            <div className="md:hidden overflow-x-auto scrollbar-hide -mx-0 px-4">
+              <div className="flex gap-4 pb-4" style={{ width: 'max-content' }}>
+                {successStories.map((story, index) => (
+                  <Link
+                    key={index}
+                    href={story.url}
+                    className="group bg-white rounded-lg overflow-hidden shadow-md flex-shrink-0"
+                    style={{ width: '280px' }}
+                  >
+                    <div className="relative h-40 overflow-hidden">
+                      <Image
+                        src={story.image}
+                        alt={story.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-3 left-3 text-white">
+                        <h3 className="text-lg font-bold">{story.name}</h3>
+                        <p className="text-xs text-gray-200">{story.role}</p>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
+                        {story.description}
+                      </p>
+                      <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+                        Číst příběh →
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: Grid layout */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
               {successStories.map((story, index) => (
                 <Link
                   key={index}
@@ -204,55 +235,21 @@ export function ReferenceClient() {
         </div>
       </section>
 
-      {/* Customer Quotes Section */}
-      <section className="py-12 md:py-20 bg-white">
+      {/* Elfsight Google Reviews Widget */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-primary mb-4">
                 Co říkají naši klienti
               </h2>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {customerQuotes.map((quote, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg p-6 shadow-md"
-                >
-                  <Quote className="h-8 w-8 text-accent mb-4" />
-                  <p className="text-gray-700 mb-4 italic">
-                    &quot;{quote.text}&quot;
-                  </p>
-                  <div className="border-t pt-4">
-                    <p className="font-semibold text-primary">{quote.author}</p>
-                    <p className="text-sm text-gray-600">{quote.company}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center p-8 bg-white rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Potřebujete zachránit data?
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Kontaktujte nás ještě dnes a získejte profesionální pomoc
-              </p>
-              <Link
-                href="/poptavka-zachrany-dat"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
-              >
-                Objednat diagnostiku zdarma →
-              </Link>
-            </div>
+            {/* Elfsight Google Reviews Widget */}
+            <div
+              className="elfsight-app-d4a576be-88da-4007-8183-5e430e73c73c"
+              data-elfsight-app-lazy
+            />
+            <Script src="https://static.elfsight.com/platform/platform.js" strategy="lazyOnload" />
           </div>
         </div>
       </section>

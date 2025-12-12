@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "src-backup", "public-backup", "oldprototype"]
+  "exclude": ["node_modules", "src-backup", "public-backup", "oldprototype", "podklady"]
 }
