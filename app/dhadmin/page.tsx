@@ -6,12 +6,19 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Lock, Megaphone, Image, Home, AlertCircle } from 'lucide-react';
+import { Lock, Megaphone, Image, Home, AlertCircle, FileText } from 'lucide-react';
 import Link from 'next/link';
 
 const ADMIN_PASSWORD = '123datahelpadmin';
 
 const adminTools = [
+  {
+    href: '/dhadmin/clanky',
+    label: 'Sprava clanku',
+    description: 'Vytvareni a editace blog clanku',
+    icon: FileText,
+    color: 'bg-green-500',
+  },
   {
     href: '/dhadmin/banner',
     label: 'Nastaveni banneru',
