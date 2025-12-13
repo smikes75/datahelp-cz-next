@@ -44,7 +44,8 @@ export default function ArticlesListPage() {
   const [filter, setFilter] = useState({
     status: 'all',
     category: 'all',
-    search: ''
+    search: '',
+    sort: 'created_at' as 'created_at' | 'title' | 'published_at'
   });
   const [deleting, setDeleting] = useState<string | null>(null);
   const [editingCategory, setEditingCategory] = useState<string | null>(null);
@@ -179,29 +180,48 @@ export default function ArticlesListPage() {
   };
 
   // Filter articles
-  const filteredArticles = articles.filter(article => {
-    // Status filter
-    if (filter.status === 'published' && !article.is_published) return false;
-    if (filter.status === 'draft' && article.is_published) return false;
-    if (filter.status === 'pillar' && !article.is_pillar) return false;
+  const filteredArticles = articles
+    .filter(article => {
+      // Status filter
+      if (filter.status === 'published' && !article.is_published) return false;
+      if (filter.status === 'draft' && article.is_published) return false;
+      if (filter.status === 'pillar' && !article.is_pillar) return false;
 
-    // Category filter
-    if (filter.category !== 'all') {
-      const articleCats = getArticleCategories(article.id);
-      if (!articleCats.some(c => c.slug === filter.category)) return false;
-    }
-
-    // Search filter
-    if (filter.search) {
-      const search = filter.search.toLowerCase();
-      if (!article.title_cs?.toLowerCase().includes(search) &&
-          !article.slug?.toLowerCase().includes(search)) {
-        return false;
+      // Category filter
+      if (filter.category !== 'all') {
+        const articleCats = getArticleCategories(article.id);
+        if (!articleCats.some(c => c.slug === filter.category)) return false;
       }
-    }
 
-    return true;
-  });
+      // Search filter
+      if (filter.search) {
+        const search = filter.search.toLowerCase();
+        if (!article.title_cs?.toLowerCase().includes(search) &&
+            !article.slug?.toLowerCase().includes(search)) {
+          return false;
+        }
+      }
+
+      return true;
+    })
+    .sort((a, b) => {
+      // When filtering by category, show pillar pages first
+      if (filter.category !== 'all') {
+        if (a.is_pillar && !b.is_pillar) return -1;
+        if (!a.is_pillar && b.is_pillar) return 1;
+      }
+
+      // Then sort by selected field
+      switch (filter.sort) {
+        case 'title':
+          return (a.title_cs || '').localeCompare(b.title_cs || '', 'cs');
+        case 'published_at':
+          return new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime();
+        case 'created_at':
+        default:
+          return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
+      }
+    });
 
   // Group articles by category for display
   const getCategoryStats = () => {
@@ -325,6 +345,17 @@ export default function ArticlesListPage() {
               <option value="published">Publikovane</option>
               <option value="draft">Drafty</option>
               <option value="pillar">Pillar pages</option>
+            </select>
+
+            {/* Sort */}
+            <select
+              value={filter.sort}
+              onChange={(e) => setFilter(f => ({ ...f, sort: e.target.value as 'created_at' | 'title' | 'published_at' }))}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+              <option value="created_at">Nejnovejsi (vytvoreni)</option>
+              <option value="published_at">Nejnovejsi (publikace)</option>
+              <option value="title">Podle nazvu A-Z</option>
             </select>
 
             {/* Stats */}
