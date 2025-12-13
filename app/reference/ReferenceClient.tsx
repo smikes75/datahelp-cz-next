@@ -57,46 +57,12 @@ function PageHeader({ title, subtitle, backgroundImage }: { title: string; subti
   );
 }
 
-export function ReferenceClient() {
-  const t = useTranslations('reference');
+interface ReferenceClientProps {
+  successStories: SuccessStory[];
+}
 
-  const successStories: SuccessStory[] = [
-    {
-      name: 'Štěpánka Hilgertová',
-      role: 'Olympijská vítězka',
-      description: 'Záchrana 200 GB fotografií a videí z externího disku s přepsaným souborovým systémem za 3 dny.',
-      image: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600&q=80',
-      url: '/clanky/zachranili-jsme-data-stepance-hilgertove'
-    },
-    {
-      name: 'Michal Pavlíček',
-      role: 'Legendární kytarista',
-      description: 'Záchrana hudebních projektů ze dvou disků s kompletně poškozenou elektronikou.',
-      image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80',
-      url: '/clanky/vykouzlili-jsme-usmev-na-tvari-maga-rockove-kytary-michala-pavlicka'
-    },
-    {
-      name: 'Check Czech Fashion',
-      role: 'Módní portál',
-      description: 'Záchrana 6 let práce – články, videa a fotografie z 1TB disku po havárii čtecí hlavy.',
-      image: 'https://images.unsplash.com/photo-1558394043-d7e93d0072da?w=600&q=80',
-      url: '/clanky/jak-jsme-zachranovali-cenna-data-check-czech-fashion'
-    },
-    {
-      name: 'Ondřej Pýcha',
-      role: 'Fotograf',
-      description: 'Úspěšná záchrana milionových fotografií z 3TB externího disku s nefunkčními čtecími hlavami.',
-      image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80',
-      url: '/clanky/jak-jsme-zachranovali-milionove-fotografie-ondreje-pychy'
-    },
-    {
-      name: 'Kamila Špráchalová',
-      role: 'Herečka a dabérka',
-      description: 'Obnova ztracených vzpomínek – fotografie a nahrávky ze smazaného disku s mechanickými vadami.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
-      url: '/clanky/jak-jsme-obnovili-ztracene-vzpominky-herecky-a-daberky-kamily-sprachalove'
-    }
-  ];
+export function ReferenceClient({ successStories }: ReferenceClientProps) {
+  const t = useTranslations('reference');
 
 
   return (
