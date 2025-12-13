@@ -103,6 +103,24 @@ export default function ImportArticlesPage() {
     }
   };
 
+  // Validate internal links - should be /clanky/[slug] not /clanky/category/slug
+  const validateInternalLinks = (content: string): string[] => {
+    const warnings: string[] = [];
+    // Match markdown links like [text](/clanky/something/something/)
+    const linkRegex = /\[([^\]]+)\]\(\/clanky\/([^)]+)\)/g;
+    let match;
+    while ((match = linkRegex.exec(content)) !== null) {
+      const path = match[2];
+      // If path contains more than one segment (e.g., category/slug), it's wrong
+      if (path.includes('/') && !path.endsWith('/')) {
+        warnings.push(`Špatný odkaz: /clanky/${path} - měl by být /clanky/[slug]`);
+      } else if (path.split('/').filter(Boolean).length > 1) {
+        warnings.push(`Špatný odkaz: /clanky/${path} - měl by být /clanky/[slug]`);
+      }
+    }
+    return warnings;
+  };
+
   // Parse JSON input
   const parseJson = (json: string) => {
     setParseError(null);
@@ -116,43 +134,87 @@ export default function ImportArticlesPage() {
     try {
       const parsed = JSON.parse(json);
 
+      // Support both array format and object with "articles" key
+      let articles = parsed;
       if (!Array.isArray(parsed)) {
-        setParseError('JSON musí být pole článků (začínat [ a končit ])');
-        return;
+        if (parsed.articles && Array.isArray(parsed.articles)) {
+          articles = parsed.articles;
+        } else {
+          setParseError('JSON musí být pole článků nebo objekt s polem "articles"');
+          return;
+        }
       }
 
       // Validate each article
       const validArticles: ImportArticle[] = [];
       const errors: string[] = [];
+      const warnings: string[] = [];
 
-      parsed.forEach((article, index) => {
+      articles.forEach((article: Record<string, unknown>, index: number) => {
+        const articleNum = index + 1;
+
+        // Required fields
         if (!article.title_cs) {
-          errors.push(`Článek #${index + 1}: chybí title_cs`);
+          errors.push(`Článek #${articleNum}: chybí title_cs`);
           return;
         }
         if (!article.content_cs) {
-          errors.push(`Článek #${index + 1}: chybí content_cs`);
+          errors.push(`Článek #${articleNum}: chybí content_cs`);
           return;
         }
 
+        // Validate slug format
+        const slug = (article.slug as string) || slugify(article.title_cs as string);
+        if (slug.includes('/')) {
+          errors.push(`Článek #${articleNum}: slug nesmí obsahovat lomítka (${slug})`);
+          return;
+        }
+
+        // Validate internal links in content
+        const linkWarnings = validateInternalLinks(article.content_cs as string);
+        if (linkWarnings.length > 0) {
+          warnings.push(`Článek #${articleNum} (${slug}):`);
+          linkWarnings.forEach(w => warnings.push(`  - ${w}`));
+        }
+
+        // Validate excerpt length
+        if (article.excerpt_cs && (article.excerpt_cs as string).length > 300) {
+          warnings.push(`Článek #${articleNum}: excerpt_cs je příliš dlouhý (${(article.excerpt_cs as string).length} znaků, max 300)`);
+        }
+
         validArticles.push({
-          title_cs: article.title_cs,
-          slug: article.slug || slugify(article.title_cs),
-          excerpt_cs: article.excerpt_cs || '',
-          content_cs: article.content_cs,
-          author: article.author || 'DataHelp Team',
-          image_url: article.image_url || '',
-          is_published: article.is_published ?? false,
-          published_at: article.published_at || new Date().toISOString().split('T')[0],
-          categories: article.categories || []
+          title_cs: article.title_cs as string,
+          slug,
+          excerpt_cs: (article.excerpt_cs as string) || '',
+          content_cs: article.content_cs as string,
+          author: (article.author as string) || 'DataHelp Team',
+          image_url: (article.image_url as string) || '',
+          is_published: (article.is_published as boolean) ?? false,
+          published_at: (article.published_at as string) || new Date().toISOString().split('T')[0],
+          categories: (article.categories as string[]) || (article.category_slugs as string[]) || []
         });
       });
 
+      // Combine errors and warnings
+      const allMessages: string[] = [];
       if (errors.length > 0) {
-        setParseError(errors.join('\n'));
+        allMessages.push('CHYBY (import nebude proveden):');
+        allMessages.push(...errors);
+      }
+      if (warnings.length > 0) {
+        if (allMessages.length > 0) allMessages.push('');
+        allMessages.push('VAROVÁNÍ (lze importovat, ale doporučujeme opravit):');
+        allMessages.push(...warnings);
       }
 
-      setParsedArticles(validArticles);
+      if (allMessages.length > 0) {
+        setParseError(allMessages.join('\n'));
+      }
+
+      // Only set valid articles if no errors (warnings are OK)
+      if (errors.length === 0) {
+        setParsedArticles(validArticles);
+      }
     } catch (e) {
       setParseError(`Neplatný JSON: ${(e as Error).message}`);
     }

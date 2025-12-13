@@ -91,27 +91,24 @@ export default function ArticlesListPage() {
 
     setDeleting(id);
     try {
-      const supabase = createClient();
+      // Use API endpoint which bypasses RLS
+      const response = await fetch(`/api/admin/articles/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'x-admin-auth': 'dhadmin'
+        }
+      });
 
-      // First delete category associations
-      await supabase
-        .from('blog_post_categories')
-        .delete()
-        .eq('post_id', id);
-
-      // Then delete the post
-      const { error } = await supabase
-        .from('blog_posts')
-        .delete()
-        .eq('id', id);
-
-      if (error) throw error;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Chyba pri mazani');
+      }
 
       // Refresh list
       fetchArticles();
     } catch (error) {
       console.error('Error deleting article:', error);
-      alert('Chyba pri mazani clanku');
+      alert('Chyba pri mazani clanku: ' + (error as Error).message);
     } finally {
       setDeleting(null);
     }

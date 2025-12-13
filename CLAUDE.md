@@ -176,9 +176,13 @@ Create TWO Supabase clients:
 
 ## 🌍 Internationalization (i18n)
 
+### ⚠️ DŮLEŽITÉ: Web je POUZE v češtině
+**Tento web je výhradně česky. Nepočítá se s anglickou ani jinou cizojazyčnou verzí.**
+
+I když je v kódu next-intl infrastruktura, web běží pouze v českém jazyce.
+
 ### Languages
-- `cs` - Czech (default)
-- `en` - English
+- `cs` - Czech (jediný jazyk)
 
 ### Setup with next-intl
 ```typescript
@@ -707,3 +711,48 @@ return (
 - `config/site.config.ts` - Split address into two lines
 - `app/poptavka-zachrany-dat/PoptavkaClient.tsx` - Added whitespace-pre-line for address
 - `oldprototype/src/i18n/locales/cs/faq.ts` - Updated q2 and q10
+
+---
+
+### December 13, 2024 - Session: Blog Admin Interface
+
+**Goal**: Create admin interface for managing blog articles.
+
+#### Blog Admin Interface (`/dhadmin/clanky`)
+
+**Implemented Features**:
+- ✅ Seznam článků s filtrováním a vyhledáváním
+- ✅ Vytváření nových článků (`/dhadmin/clanky/novy`)
+- ✅ Editace existujících článků (`/dhadmin/clanky/[slug]`)
+- ✅ Auto-generování slug z titulku (s odstraněním diakritiky)
+- ✅ Markdown editor s náhledem
+- ✅ Počítadlo znaků pro excerpt (max 160)
+- ✅ Multi-select kategorií
+- ✅ Automatický výpočet doby čtení
+- ✅ Validace unikátního slug
+- ✅ Mazání článků s potvrzením
+- ✅ Statistiky (celkem, publikovaných, draftů, zobrazení)
+
+**Implementovaná rozšíření**:
+- ✅ Nahrávání obrázků do Cloudinary (drag&drop + URL)
+- ✅ Autosave do localStorage (každých 30s, obnovení konceptu)
+- ✅ SEO náhled (Google search preview, délka title/description)
+- ✅ Plánované publikování (scheduled_at s date/time picker)
+
+**Files Created**:
+- `app/dhadmin/clanky/page.tsx` - Seznam článků
+- `app/dhadmin/clanky/novy/page.tsx` - Nový článek
+- `app/dhadmin/clanky/[slug]/page.tsx` - Editace článku
+- `supabase/add_blog_categories.sql` - SQL pro přidání kategorií
+- `supabase/add_scheduled_publishing.sql` - SQL pro scheduled_at sloupec
+- `app/api/upload/route.ts` - API endpoint pro Cloudinary upload
+- `components/admin/ImageUpload.tsx` - Komponenta pro upload obrázků (drag&drop + URL)
+- `components/admin/AutosaveIndicator.tsx` - Indikátor stavu autosave
+- `components/admin/SeoPreview.tsx` - SEO náhled pro Google search
+- `components/admin/SchedulePublish.tsx` - Plánování publikace
+- `hooks/useAutosave.ts` - Hook pro automatické ukládání do localStorage
+
+**Database Tables**:
+- `blog_posts` - Články (title_cs, content_cs, excerpt_cs, slug, author, etc.)
+- `blog_categories` - Kategorie (slug, name_cs, name_en)
+- `blog_post_categories` - Vazební tabulka (post_id, category_id)
