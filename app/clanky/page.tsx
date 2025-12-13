@@ -6,7 +6,7 @@
 import { ArticleCard } from '@/components/ArticleCard';
 import { NewsCard } from '@/components/NewsCard';
 import { PageHeader } from '@/components/PageHeader';
-import { getPaginatedBlogPosts } from '@/lib/utils/blog';
+import { getPaginatedBlogPosts, getBlogCategoriesWithCount } from '@/lib/utils/blog';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Pagination } from '@/components/Pagination';
 import { Metadata } from 'next';
@@ -47,6 +47,9 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
   const category = resolvedSearchParams.category;
   const articlesPerPage = 20;
 
+  // Fetch categories from database
+  const dbCategories = await getBlogCategoriesWithCount('cs');
+
   const result = await getPaginatedBlogPosts({
     category: category && category !== 'all' ? category : undefined,
     page: currentPage,
@@ -54,13 +57,12 @@ export default async function BlogPage({ searchParams, params }: BlogPageProps) 
     locale: resolvedParams.locale
   });
 
+  // Build categories list dynamically - only show categories with posts
   const categories = [
     { id: 'all', name: 'Vše' },
-    { id: 'zalohovani-dat', name: 'Zálohování dat' },
-    { id: 'prvni-pomoc', name: 'První pomoc' },
-    { id: 'technologie', name: 'Technologie' },
-    { id: 'nase-aktivity', name: 'Naše aktivity' },
-    { id: 'novinky', name: 'Novinky' }
+    ...dbCategories
+      .filter(cat => cat.postCount > 0)
+      .map(cat => ({ id: cat.slug, name: cat.name_cs }))
   ];
 
   const activeCategory = category || 'all';

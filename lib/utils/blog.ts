@@ -19,10 +19,12 @@ const getPostTags = async (_postId: string, _locale: string): Promise<string[]> 
 export const getBlogPosts = async (locale: string): Promise<BlogPost[]> => {
   try {
     const supabase = createStaticClient();
+    const now = new Date().toISOString();
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*')
       .eq('is_published', true)
+      .lte('published_at', now) // Only show articles with published_at <= now
       .order('published_at', { ascending: false });
 
     if (error) throw error;
@@ -167,10 +169,13 @@ export const getPaginatedBlogPosts = async (filter: BlogFilter): Promise<Paginat
     const to = from + limit - 1;
 
     const supabase = createStaticClient();
+    const now = new Date().toISOString();
+
     let query = supabase
       .from('blog_posts')
       .select('*', { count: 'exact' })
-      .eq('is_published', true);
+      .eq('is_published', true)
+      .lte('published_at', now); // Only show articles with published_at <= now
 
     // Filtrování podle kategorie
     if (category && category !== 'all') {
