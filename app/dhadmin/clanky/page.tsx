@@ -363,7 +363,9 @@ export default function ArticlesListPage() {
                       <td className="px-4 py-4">
                         <div className="flex items-start gap-2">
                           {article.is_pillar && (
-                            <Star className="h-4 w-4 text-yellow-500 flex-shrink-0 mt-1" title="Pillar page" />
+                            <span title="Pillar page">
+                              <Star className="h-4 w-4 text-yellow-500 flex-shrink-0 mt-1" />
+                            </span>
                           )}
                           <div>
                             <p className="font-medium text-gray-900 line-clamp-1">
