@@ -20,6 +20,10 @@ interface ImportArticle {
   is_published?: boolean;
   published_at?: string;
   categories?: string[]; // slugy kategorii
+  // Content hub fields
+  reading_time_minutes?: number;
+  is_pillar?: boolean;
+  parent_slug?: string;
 }
 
 interface ImportResult {
@@ -182,6 +186,26 @@ export default function ImportArticlesPage() {
           warnings.push(`Článek #${articleNum}: excerpt_cs je příliš dlouhý (${(article.excerpt_cs as string).length} znaků, max 300)`);
         }
 
+        // Validate content hub fields
+        if (article.is_pillar !== undefined && typeof article.is_pillar !== 'boolean') {
+          warnings.push(`Článek #${articleNum}: is_pillar musí být boolean`);
+        }
+        if (article.reading_time_minutes !== undefined) {
+          if (!Number.isInteger(article.reading_time_minutes) || (article.reading_time_minutes as number) < 1) {
+            warnings.push(`Článek #${articleNum}: reading_time_minutes musí být kladné celé číslo`);
+          }
+        }
+        if (article.parent_slug && (article.parent_slug as string).includes('/')) {
+          errors.push(`Článek #${articleNum}: parent_slug nesmí obsahovat lomítka`);
+          return;
+        }
+
+        // Parse published_at - support both ISO 8601 and short format
+        let publishedAt = (article.published_at as string) || new Date().toISOString().split('T')[0];
+        if (publishedAt.includes('T')) {
+          publishedAt = new Date(publishedAt).toISOString().split('T')[0];
+        }
+
         validArticles.push({
           title_cs: article.title_cs as string,
           slug,
@@ -190,8 +214,12 @@ export default function ImportArticlesPage() {
           author: (article.author as string) || 'DataHelp Team',
           image_url: (article.image_url as string) || '',
           is_published: (article.is_published as boolean) ?? false,
-          published_at: (article.published_at as string) || new Date().toISOString().split('T')[0],
-          categories: (article.categories as string[]) || (article.category_slugs as string[]) || []
+          published_at: publishedAt,
+          categories: (article.categories as string[]) || (article.category_slugs as string[]) || [],
+          // Content hub fields
+          reading_time_minutes: (article.reading_time_minutes as number) || undefined,
+          is_pillar: (article.is_pillar as boolean) ?? false,
+          parent_slug: (article.parent_slug as string) || undefined
         });
       });
 
@@ -276,7 +304,10 @@ export default function ImportArticlesPage() {
                 author: article.author,
                 image_url: article.image_url || null,
                 is_published: article.is_published,
-                published_at: article.is_published ? article.published_at : null
+                published_at: article.is_published ? article.published_at : null,
+                reading_time_minutes: article.reading_time_minutes || Math.max(1, Math.ceil(article.content_cs.split(/\s+/).length / 200)),
+                is_pillar: article.is_pillar ?? false,
+                parent_slug: article.parent_slug || null
               })
               .eq('id', existing.id);
 
@@ -307,8 +338,10 @@ export default function ImportArticlesPage() {
             image_url: article.image_url || null,
             is_published: article.is_published,
             published_at: article.is_published ? article.published_at : null,
-            reading_time_minutes: Math.max(1, Math.ceil(article.content_cs.split(/\s+/).length / 200)),
-            view_count: 0
+            reading_time_minutes: article.reading_time_minutes || Math.max(1, Math.ceil(article.content_cs.split(/\s+/).length / 200)),
+            view_count: 0,
+            is_pillar: article.is_pillar ?? false,
+            parent_slug: article.parent_slug || null
           })
           .select('id')
           .single();
@@ -458,6 +491,9 @@ export default function ImportArticlesPage() {
                 <li><code>image_url</code> - URL obrazku</li>
                 <li><code>is_published</code> - true/false</li>
                 <li><code>categories</code> - pole slug kategorii</li>
+                <li><code>reading_time_minutes</code> - doba cteni v minutach</li>
+                <li><code>is_pillar</code> - true = hlavni clanek (pillar page)</li>
+                <li><code>parent_slug</code> - slug nadrazeneho pillar clanku</li>
               </ul>
               <button
                 type="button"

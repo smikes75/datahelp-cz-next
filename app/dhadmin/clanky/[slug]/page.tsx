@@ -32,6 +32,8 @@ interface FormData {
   published_at: string;
   reading_time_minutes: number;
   view_count: number;
+  is_pillar: boolean;
+  parent_slug: string;
 }
 
 function slugify(text: string): string {
@@ -76,7 +78,9 @@ export default function EditArticlePage({ params }: PageProps) {
     is_published: false,
     published_at: new Date().toISOString().split('T')[0],
     reading_time_minutes: 1,
-    view_count: 0
+    view_count: 0,
+    is_pillar: false,
+    parent_slug: ''
   });
 
   // Check auth
@@ -125,7 +129,9 @@ export default function EditArticlePage({ params }: PageProps) {
         is_published: article.is_published,
         published_at: article.published_at ? article.published_at.split('T')[0] : new Date().toISOString().split('T')[0],
         reading_time_minutes: article.reading_time_minutes || 1,
-        view_count: article.view_count || 0
+        view_count: article.view_count || 0,
+        is_pillar: article.is_pillar || false,
+        parent_slug: article.parent_slug || ''
       });
 
       // Fetch article categories
@@ -263,7 +269,9 @@ export default function EditArticlePage({ params }: PageProps) {
           image_url: formData.image_url || null,
           is_published: formData.is_published,
           published_at: formData.is_published ? formData.published_at : null,
-          reading_time_minutes: formData.reading_time_minutes
+          reading_time_minutes: formData.reading_time_minutes,
+          is_pillar: formData.is_pillar,
+          parent_slug: formData.parent_slug || null
         })
         .eq('id', formData.id);
 
@@ -625,6 +633,45 @@ export default function EditArticlePage({ params }: PageProps) {
                 onChange={handleInputChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
+            </div>
+
+            {/* Content Hub */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="font-semibold text-gray-900 mb-4">Content Hub</h3>
+              <div className="space-y-4">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="is_pillar"
+                    checked={formData.is_pillar}
+                    onChange={handleInputChange}
+                    className="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded"
+                  />
+                  <div>
+                    <span className="text-gray-700 font-medium">Pillar page</span>
+                    <p className="text-sm text-gray-500">Hlavni clanek kategorie</p>
+                  </div>
+                </label>
+
+                {!formData.is_pillar && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Nadrazeny pillar clanek (slug)
+                    </label>
+                    <input
+                      type="text"
+                      name="parent_slug"
+                      value={formData.parent_slug}
+                      onChange={handleInputChange}
+                      placeholder="napr. zachrana-dat-raid"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <p className="text-sm text-gray-500 mt-1">
+                      Slug pillar clanku, ke kteremu tento clanek patri
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Image */}
