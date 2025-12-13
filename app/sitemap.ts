@@ -222,11 +222,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     // Race between the query and timeout
+    const now = new Date().toISOString();
     const { data: posts, error } = await Promise.race([
       supabase
         .from('blog_posts')
         .select('slug, updated_at, created_at')
-        .eq('status', 'published')
+        .eq('is_published', true)
+        .lte('published_at', now)
         .order('created_at', { ascending: false }),
       timeoutPromise,
     ]);
